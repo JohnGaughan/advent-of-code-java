@@ -14,15 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2020.day3;
+package net.johngaughan.advent;
 
 import java.nio.file.Path;
 
-import net.johngaughan.advent.y2020.AdventProblem;
-
 /**
  * <p>
- * Day Three, Part One.
+ * This is the common interface for all advent of code programs. By implementing a common interface, it maintains
+ * consistency and makes them easier to read.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
@@ -30,14 +29,13 @@ import net.johngaughan.advent.y2020.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Day3Part1
-implements AdventProblem {
+public interface AdventProblem {
 
-  /** {@inheritDoc} */
-  @Override
-  public long calculate(final Path path) {
-    final Slope slope = new Parser().parse(path);
-    return slope.countTrees(1, 3);
-  }
-
+  /**
+   * Calculate the solution to the specific Advent of Code problem.
+   *
+   * @param path the path to the file containing the input data.
+   * @return the numerical solution to the problem.
+   */
+  long calculate(Path path);
 }

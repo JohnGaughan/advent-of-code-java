@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import net.johngaughan.advent.y2020.Utils;
+import net.johngaughan.advent.Utils;
 
 /**
  * <p>

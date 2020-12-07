@@ -24,7 +24,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import net.johngaughan.advent.y2020.AdventProblem;
+import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
@@ -36,7 +36,7 @@ import net.johngaughan.advent.y2020.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Day4Part1
+public final class Year2020Day4Part1
 implements AdventProblem {
 
   private static final class Validator

@@ -20,7 +20,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
-import net.johngaughan.advent.y2020.AdventProblem;
+import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
@@ -32,7 +32,7 @@ import net.johngaughan.advent.y2020.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Day2Part2
+public final class Year2020Day2Part2
 implements AdventProblem {
 
   private static final class PolicyTester

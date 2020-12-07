@@ -14,15 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2020.day5;
+package net.johngaughan.advent.y2015.day1;
 
 import java.nio.file.Path;
 
-import net.johngaughan.advent.y2020.AdventProblem;
+import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
- * Day five, part one.
+ * Day one, part two.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
@@ -30,13 +30,27 @@ import net.johngaughan.advent.y2020.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Day5Part1
+public class Year2015Day1Part2
 implements AdventProblem {
 
   /** {@inheritDoc} */
   @Override
   public long calculate(final Path path) {
-    return new Parser().parse(path).last();
+    String input = new Parser().parse(path);
+    for (int i = 0, floor = 0; i < input.length(); ++i) {
+      char ch = input.charAt(i);
+      if (ch == '(') {
+        ++floor;
+      }
+      else if (ch == ')') {
+        --floor;
+      }
+      if (floor < 0) {
+        // Answer expects one-based index.
+        return i + 1;
+      }
+    }
+    return Long.MIN_VALUE;
   }
 
 }

@@ -14,16 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2020.day1;
+package net.johngaughan.advent.y2015.day1;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
-
-import net.johngaughan.advent.y2020.AdventProblem;
 
 /**
  * <p>
- * Day One, Part One.
+ * File parser for day one.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
@@ -31,26 +29,18 @@ import net.johngaughan.advent.y2020.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Day1Part1
-implements AdventProblem {
+final class Parser {
 
-  /** {@inheritDoc} */
-  @Override
-  public long calculate(final Path path) {
-    final List<Integer> values = new Parser().parse(path);
-    for (int i = 0; i < values.size(); ++i) {
-      final int i1 = values.get(i).intValue();
-      for (int j = i + 1; j < values.size(); ++j) {
-        final int j1 = values.get(j).intValue();
-        if ((i1 + j1) == 2020) {
-          return i1 * j1;
-        }
-        else if ((i1 + j1) > 2020) {
-          continue;
-        }
-      }
+  public String parse(final Path path) {
+    try {
+      return Files.readString(path);
     }
-    return -1;
+    catch (RuntimeException ex) {
+      throw ex;
+    }
+    catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
 }

@@ -14,14 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2020;
+package net.johngaughan.advent.y2020.day1;
 
 import java.nio.file.Path;
+import java.util.List;
+
+import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
- * This is the common interface for all advent of code programs. By implementing a common interface, it maintains
- * consistency and makes them easier to read.
+ * Day One, Part One.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
@@ -29,13 +31,26 @@ import java.nio.file.Path;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public interface AdventProblem {
+public final class Year2020Day1Part1
+implements AdventProblem {
 
-  /**
-   * Calculate the solution to the specific Advent of Code problem.
-   *
-   * @param path the path to the file containing the input data.
-   * @return the numerical solution to the problem.
-   */
-  long calculate(Path path);
+  /** {@inheritDoc} */
+  @Override
+  public long calculate(final Path path) {
+    final List<Integer> values = new Parser().parse(path);
+    for (int i = 0; i < values.size(); ++i) {
+      final int i1 = values.get(i).intValue();
+      for (int j = i + 1; j < values.size(); ++j) {
+        final int j1 = values.get(j).intValue();
+        if ((i1 + j1) == 2020) {
+          return i1 * j1;
+        }
+        else if ((i1 + j1) > 2020) {
+          continue;
+        }
+      }
+    }
+    return -1;
+  }
+
 }

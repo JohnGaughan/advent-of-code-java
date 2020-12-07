@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import net.johngaughan.advent.y2020.AdventProblem;
+import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
@@ -35,7 +35,7 @@ import net.johngaughan.advent.y2020.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public class Day6Part2
+public final class Year2020Day6Part2
 implements AdventProblem {
 
   /** Make a new set containing all possible responses. */
