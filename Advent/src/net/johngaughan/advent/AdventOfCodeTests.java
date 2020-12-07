@@ -24,6 +24,10 @@ import org.junit.Test;
 
 import net.johngaughan.advent.y2015.day1.Year2015Day1Part1;
 import net.johngaughan.advent.y2015.day1.Year2015Day1Part2;
+import net.johngaughan.advent.y2015.day2.Year2015Day2Part1;
+import net.johngaughan.advent.y2015.day2.Year2015Day2Part2;
+import net.johngaughan.advent.y2015.day3.Year2015Day3Part1;
+import net.johngaughan.advent.y2015.day3.Year2015Day3Part2;
 import net.johngaughan.advent.y2020.day1.Year2020Day1Part1;
 import net.johngaughan.advent.y2020.day1.Year2020Day1Part2;
 import net.johngaughan.advent.y2020.day2.Year2020Day2Part1;
@@ -67,6 +71,30 @@ public class AdventOfCodeTests {
   public void year2015day1part2() {
     long answer = new Year2015Day1Part2().calculate(getInput(2015, 1));
     assertEquals(1771, answer);
+  }
+
+  @Test
+  public void year2015day2part1() {
+    long answer = new Year2015Day2Part1().calculate(getInput(2015, 2));
+    assertEquals(1588178, answer);
+  }
+
+  @Test
+  public void year2015day2part2() {
+    long answer = new Year2015Day2Part2().calculate(getInput(2015, 2));
+    assertEquals(3783758, answer);
+  }
+
+  @Test
+  public void year2015day3part1() {
+    long answer = new Year2015Day3Part1().calculate(getInput(2015, 3));
+    assertEquals(2592, answer);
+  }
+
+  @Test
+  public void year2015day3part2() {
+    long answer = new Year2015Day3Part2().calculate(getInput(2015, 3));
+    assertEquals(2360, answer);
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////

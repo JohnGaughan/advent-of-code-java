@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2015.day1;
+package net.johngaughan.advent.y2015.day2;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -23,7 +23,7 @@ import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
- * Day one, part two.
+ * Year 2015, day 1, part 1.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
@@ -31,28 +31,32 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2015Day1Part2
+public final class Year2015Day2Part1
 implements AdventProblem {
 
   /** {@inheritDoc} */
   @Override
   public long calculate(final Path path) {
-    final List<Direction> input = new Parser().parse(path);
-    int floor = 0;
-    int step = 1;
-    for (Direction d : input) {
-      if (d == Direction.UP) {
-        ++floor;
-      }
-      else {
-        --floor;
-      }
-      if (floor < 0) {
-        return step;
-      }
-      ++step;
+    long totalArea = 0;
+    for (final List<Long> dimensions : new Parser().parse(path)) {
+      totalArea += calculate(dimensions);
     }
-    return Long.MIN_VALUE;
+    return totalArea;
+  }
+
+  /** Calculate the area needed by a single box. */
+  private long calculate(final List<Long> dimensions) {
+    final long x = dimensions.get(0);
+    final long y = dimensions.get(1);
+    final long z = dimensions.get(2);
+
+    // Total surface area of the box.
+    long area = 2 * ((x * y) + (x * z) + (y * z));
+
+    // Add the extra area for slack.
+    area += ((x * y * z) / Math.max(x, Math.max(y, z)));
+
+    return area;
   }
 
 }

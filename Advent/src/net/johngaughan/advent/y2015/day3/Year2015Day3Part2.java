@@ -14,16 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2015.day1;
+package net.johngaughan.advent.y2015.day3;
 
 import java.nio.file.Path;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
- * Day one, part two.
+ * Year 2015, day 3, part 2.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
@@ -31,28 +32,42 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2015Day1Part2
+public final class Year2015Day3Part2
 implements AdventProblem {
 
   /** {@inheritDoc} */
   @Override
   public long calculate(final Path path) {
-    final List<Direction> input = new Parser().parse(path);
-    int floor = 0;
-    int step = 1;
-    for (Direction d : input) {
-      if (d == Direction.UP) {
-        ++floor;
+    final Set<Coordinates> visited = new HashSet<>();
+    int x[] = new int[2];
+    int y[] = new int[2];
+    int visitor = 0;
+
+    // Visit the first house.
+    visited.add(new Coordinates(0, 0));
+
+    // Now travel around and visit other houses.
+    for (Direction d : new Parser().parse(path)) {
+      if (Direction.UP == d) {
+        ++x[visitor];
+      }
+      else if (Direction.DOWN == d) {
+        --x[visitor];
+      }
+      else if (Direction.LEFT == d) {
+        --y[visitor];
+      }
+      else if (Direction.RIGHT == d) {
+        ++y[visitor];
       }
       else {
-        --floor;
+        throw new AssertionError("Unknown direction [" + d + "]");
       }
-      if (floor < 0) {
-        return step;
-      }
-      ++step;
+      visited.add(new Coordinates(x[visitor], y[visitor]));
+      visitor = (visitor + 1) % 2;
     }
-    return Long.MIN_VALUE;
+
+    return visited.size();
   }
 
 }

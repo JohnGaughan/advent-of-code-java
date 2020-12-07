@@ -14,16 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2015.day1;
-
-import java.nio.file.Path;
-import java.util.List;
-
-import net.johngaughan.advent.AdventProblem;
+package net.johngaughan.advent.y2015.day3;
 
 /**
  * <p>
- * Day one, part two.
+ * Enumeration of movement directions.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
@@ -31,28 +26,37 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2015Day1Part2
-implements AdventProblem {
+enum Direction {
 
-  /** {@inheritDoc} */
-  @Override
-  public long calculate(final Path path) {
-    final List<Direction> input = new Parser().parse(path);
-    int floor = 0;
-    int step = 1;
-    for (Direction d : input) {
-      if (d == Direction.UP) {
-        ++floor;
+                UP('^'),
+                DOWN('v'),
+                LEFT('<'),
+                RIGHT('>');
+
+  /** Get whether the provided direction character correlates with an instance of this enum. */
+  public static boolean isValid(final char ch) {
+    for (Direction d : values()) {
+      if (d.character == ch) {
+        return true;
       }
-      else {
-        --floor;
-      }
-      if (floor < 0) {
-        return step;
-      }
-      ++step;
     }
-    return Long.MIN_VALUE;
+    return false;
+  }
+
+  public static Direction valueOf(final char ch) {
+    for (Direction d : values()) {
+      if (d.character == ch) {
+        return d;
+      }
+    }
+    throw new IllegalArgumentException(
+      "Input character [" + ch + "] does not correlate with any instance of this enum");
+  }
+
+  private final char character;
+
+  Direction(final char ch) {
+    this.character = ch;
   }
 
 }

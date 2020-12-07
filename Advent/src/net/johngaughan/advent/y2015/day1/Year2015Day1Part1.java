@@ -17,6 +17,7 @@
 package net.johngaughan.advent.y2015.day1;
 
 import java.nio.file.Path;
+import java.util.List;
 
 import net.johngaughan.advent.AdventProblem;
 
@@ -36,9 +37,9 @@ implements AdventProblem {
   /** {@inheritDoc} */
   @Override
   public long calculate(final Path path) {
-    String input = new Parser().parse(path);
-    long ups = input.chars().filter(c -> c == '(').count();
-    long downs = input.chars().filter(c -> c == ')').count();
+    final List<Direction> input = new Parser().parse(path);
+    long ups = input.stream().filter(c -> c == Direction.UP).count();
+    long downs = input.stream().filter(c -> c == Direction.DOWN).count();
     return ups - downs;
   }
 

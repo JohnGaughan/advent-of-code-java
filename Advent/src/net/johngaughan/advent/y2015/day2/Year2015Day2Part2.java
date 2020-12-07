@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2015.day1;
+package net.johngaughan.advent.y2015.day2;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -23,7 +23,7 @@ import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
- * Day one, part two.
+ * Year 2015, day 1, part 2.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
@@ -31,28 +31,37 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2015Day1Part2
+public final class Year2015Day2Part2
 implements AdventProblem {
 
   /** {@inheritDoc} */
   @Override
   public long calculate(final Path path) {
-    final List<Direction> input = new Parser().parse(path);
-    int floor = 0;
-    int step = 1;
-    for (Direction d : input) {
-      if (d == Direction.UP) {
-        ++floor;
-      }
-      else {
-        --floor;
-      }
-      if (floor < 0) {
-        return step;
-      }
-      ++step;
+    long totalLength = 0;
+    for (final List<Long> dimensions : new Parser().parse(path)) {
+      totalLength += calculate(dimensions);
     }
-    return Long.MIN_VALUE;
+    return totalLength;
+  }
+
+  /** Calculate the ribbon length needed by a single box. */
+  private long calculate(final List<Long> dimensions) {
+    final long x = dimensions.get(0);
+    final long y = dimensions.get(1);
+    final long z = dimensions.get(2);
+
+    // Perimeters
+    final long p1 = (2 * x) + (2 * y);
+    final long p2 = (2 * x) + (2 * z);
+    final long p3 = (2 * y) + (2 * z);
+
+    // Shortest perimeter
+    long length = Math.min(p1, Math.min(p2, p3));
+
+    // Extra for the bow
+    length += x * y * z;
+
+    return length;
   }
 
 }

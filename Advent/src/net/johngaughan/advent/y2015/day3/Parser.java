@@ -14,16 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2015.day1;
+package net.johngaughan.advent.y2015.day3;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
-
-import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
- * Day one, part two.
+ * File parser for year 2015 day 3.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
@@ -31,28 +31,25 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2015Day1Part2
-implements AdventProblem {
+final class Parser {
 
-  /** {@inheritDoc} */
-  @Override
-  public long calculate(final Path path) {
-    final List<Direction> input = new Parser().parse(path);
-    int floor = 0;
-    int step = 1;
-    for (Direction d : input) {
-      if (d == Direction.UP) {
-        ++floor;
+  public List<Direction> parse(final Path path) {
+    try {
+      final String input = Files.readString(path);
+      final List<Direction> directions = new ArrayList<>(input.length());
+      for (char ch : input.toCharArray()) {
+        if (Direction.isValid(ch)) {
+          directions.add(Direction.valueOf(ch));
+        }
       }
-      else {
-        --floor;
-      }
-      if (floor < 0) {
-        return step;
-      }
-      ++step;
+      return directions;
     }
-    return Long.MIN_VALUE;
+    catch (RuntimeException ex) {
+      throw ex;
+    }
+    catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
 }

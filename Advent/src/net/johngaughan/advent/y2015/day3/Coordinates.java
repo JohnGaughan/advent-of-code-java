@@ -14,16 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2015.day1;
+package net.johngaughan.advent.y2015.day3;
 
-import java.nio.file.Path;
-import java.util.List;
-
-import net.johngaughan.advent.AdventProblem;
+import java.util.Objects;
 
 /**
  * <p>
- * Day one, part two.
+ * Represents a single pair of coordinates.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
@@ -31,28 +28,45 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2015Day1Part2
-implements AdventProblem {
+final class Coordinates {
+
+  private final int _x;
+
+  private final int _y;
+
+  private final int hashCode;
+
+  /** Constructs a <code>Coordinates</code>. */
+  public Coordinates(final int x, final int y) {
+    this._x = x;
+    this._y = y;
+    this.hashCode = Objects.hash(this._x, this._y);
+  }
 
   /** {@inheritDoc} */
   @Override
-  public long calculate(final Path path) {
-    final List<Direction> input = new Parser().parse(path);
-    int floor = 0;
-    int step = 1;
-    for (Direction d : input) {
-      if (d == Direction.UP) {
-        ++floor;
-      }
-      else {
-        --floor;
-      }
-      if (floor < 0) {
-        return step;
-      }
-      ++step;
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
     }
-    return Long.MIN_VALUE;
+    else if (!(obj instanceof Coordinates)) {
+      return false;
+    }
+    else {
+      Coordinates o = (Coordinates) obj;
+      return (this._x == o._x) && (this._y == o._y);
+    }
   }
 
+  /** {@inheritDoc} */
+  @Override
+  public int hashCode() {
+    return this.hashCode;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public String toString() {
+    return "(" + this._x + "," + this._y + ")";
+  }
 }

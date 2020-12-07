@@ -18,6 +18,8 @@ package net.johngaughan.advent.y2015.day1;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * <p>
@@ -31,9 +33,18 @@ import java.nio.file.Path;
  */
 final class Parser {
 
-  public String parse(final Path path) {
+  public List<Direction> parse(final Path path) {
     try {
-      return Files.readString(path);
+      List<Direction> directions = new LinkedList<>();
+      for (char ch : Files.readString(path).toCharArray()) {
+        if (ch == '(') {
+          directions.add(Direction.UP);
+        }
+        else if (ch == ')') {
+          directions.add(Direction.DOWN);
+        }
+      }
+      return directions;
     }
     catch (RuntimeException ex) {
       throw ex;

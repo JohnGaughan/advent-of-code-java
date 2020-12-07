@@ -14,16 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2015.day1;
+package net.johngaughan.advent.y2015.day2;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
-
-import net.johngaughan.advent.AdventProblem;
+import java.util.regex.Pattern;
 
 /**
  * <p>
- * Day one, part two.
+ * File parser for year 2015, day 1.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
@@ -31,28 +32,31 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2015Day1Part2
-implements AdventProblem {
+final class Parser {
 
-  /** {@inheritDoc} */
-  @Override
-  public long calculate(final Path path) {
-    final List<Direction> input = new Parser().parse(path);
-    int floor = 0;
-    int step = 1;
-    for (Direction d : input) {
-      if (d == Direction.UP) {
-        ++floor;
+  private static final Pattern SPLIT = Pattern.compile("x");
+
+  public List<List<Long>> parse(final Path path) {
+    try {
+      final List<String> lines = Files.readAllLines(path);
+      final List<List<Long>> dimensions = new ArrayList<>(lines.size());
+      for (String line : lines) {
+        final List<Long> box = new ArrayList<>();
+        if (!line.isBlank()) {
+          for (String dimension : SPLIT.split(line)) {
+            box.add(Long.parseLong(dimension));
+          }
+        }
+        dimensions.add(box);
       }
-      else {
-        --floor;
-      }
-      if (floor < 0) {
-        return step;
-      }
-      ++step;
+      return dimensions;
     }
-    return Long.MIN_VALUE;
+    catch (RuntimeException ex) {
+      throw ex;
+    }
+    catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
 }
