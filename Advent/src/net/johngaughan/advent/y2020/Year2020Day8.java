@@ -29,7 +29,14 @@ import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
- * <a href="https://adventofcode.com/2020/day/8">Year 2020, day 8</a>.
+ * <a href="https://adventofcode.com/2020/day/8">Year 2020, day 8</a>. Today's problem asks us to run a simple virtual
+ * machine that executes three types of instructions. The program as given does not halt: it has an infinite loop. Part
+ * one asks us to determine the value in the VM's sole register (accumulator) when it first loops over an instruction it
+ * already ran. Part two says that modifying a single instruction can cause the program to halt, and to find that
+ * instruction and the value of the accumulator when it does halt.
+ * </p>
+ * <p>
+ * This is a simple VM implementation: so simple it doesn't even need any complex state, just a few local variables.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
