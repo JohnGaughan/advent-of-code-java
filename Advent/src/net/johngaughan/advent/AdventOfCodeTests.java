@@ -22,32 +22,20 @@ import java.nio.file.Path;
 
 import org.junit.Test;
 
-import net.johngaughan.advent.y2015.day1.Year2015Day1Part1;
-import net.johngaughan.advent.y2015.day1.Year2015Day1Part2;
-import net.johngaughan.advent.y2015.day2.Year2015Day2Part1;
-import net.johngaughan.advent.y2015.day2.Year2015Day2Part2;
-import net.johngaughan.advent.y2015.day3.Year2015Day3Part1;
-import net.johngaughan.advent.y2015.day3.Year2015Day3Part2;
-import net.johngaughan.advent.y2015.day4.Year2015Day4Part1;
-import net.johngaughan.advent.y2015.day4.Year2015Day4Part2;
-import net.johngaughan.advent.y2015.day5.Year2015Day5Part1;
-import net.johngaughan.advent.y2015.day5.Year2015Day5Part2;
-import net.johngaughan.advent.y2015.day6.Year2015Day6Part1;
-import net.johngaughan.advent.y2015.day6.Year2015Day6Part2;
-import net.johngaughan.advent.y2020.day1.Year2020Day1Part1;
-import net.johngaughan.advent.y2020.day1.Year2020Day1Part2;
-import net.johngaughan.advent.y2020.day2.Year2020Day2Part1;
-import net.johngaughan.advent.y2020.day2.Year2020Day2Part2;
-import net.johngaughan.advent.y2020.day3.Year2020Day3Part1;
-import net.johngaughan.advent.y2020.day3.Year2020Day3Part2;
-import net.johngaughan.advent.y2020.day4.Year2020Day4Part1;
-import net.johngaughan.advent.y2020.day4.Year2020Day4Part2;
-import net.johngaughan.advent.y2020.day5.Year2020Day5Part1;
-import net.johngaughan.advent.y2020.day5.Year2020Day5Part2;
-import net.johngaughan.advent.y2020.day6.Year2020Day6Part1;
-import net.johngaughan.advent.y2020.day6.Year2020Day6Part2;
-import net.johngaughan.advent.y2020.day7.Year2020Day7Part1;
-import net.johngaughan.advent.y2020.day7.Year2020Day7Part2;
+import net.johngaughan.advent.y2015.Year2015Day1;
+import net.johngaughan.advent.y2015.Year2015Day2;
+import net.johngaughan.advent.y2015.Year2015Day3;
+import net.johngaughan.advent.y2015.Year2015Day4;
+import net.johngaughan.advent.y2015.Year2015Day5;
+import net.johngaughan.advent.y2015.Year2015Day6;
+import net.johngaughan.advent.y2015.Year2015Day7;
+import net.johngaughan.advent.y2020.Year2020Day1;
+import net.johngaughan.advent.y2020.Year2020Day2;
+import net.johngaughan.advent.y2020.Year2020Day3;
+import net.johngaughan.advent.y2020.Year2020Day4;
+import net.johngaughan.advent.y2020.Year2020Day5;
+import net.johngaughan.advent.y2020.Year2020Day6;
+import net.johngaughan.advent.y2020.Year2020Day7;
 
 /**
  * <p>
@@ -71,74 +59,86 @@ public class AdventOfCodeTests {
 
   @Test
   public void year2015day1part1() {
-    long answer = new Year2015Day1Part1().calculate(getInput(2015, 1));
+    final long answer = new Year2015Day1().calculatePart1(getInput(2015, 1));
     assertEquals(138, answer);
   }
 
   @Test
   public void year2015day1part2() {
-    long answer = new Year2015Day1Part2().calculate(getInput(2015, 1));
+    final long answer = new Year2015Day1().calculatePart2(getInput(2015, 1));
     assertEquals(1771, answer);
   }
 
   @Test
   public void year2015day2part1() {
-    long answer = new Year2015Day2Part1().calculate(getInput(2015, 2));
+    final long answer = new Year2015Day2().calculatePart1(getInput(2015, 2));
     assertEquals(1588178, answer);
   }
 
   @Test
   public void year2015day2part2() {
-    long answer = new Year2015Day2Part2().calculate(getInput(2015, 2));
+    final long answer = new Year2015Day2().calculatePart2(getInput(2015, 2));
     assertEquals(3783758, answer);
   }
 
   @Test
   public void year2015day3part1() {
-    long answer = new Year2015Day3Part1().calculate(getInput(2015, 3));
+    final long answer = new Year2015Day3().calculatePart1(getInput(2015, 3));
     assertEquals(2592, answer);
   }
 
   @Test
   public void year2015day3part2() {
-    long answer = new Year2015Day3Part2().calculate(getInput(2015, 3));
+    final long answer = new Year2015Day3().calculatePart2(getInput(2015, 3));
     assertEquals(2360, answer);
   }
 
   @Test
   public void year2015day4part1() {
-    long answer = new Year2015Day4Part1().calculate(getInput(2015, 4));
+    final long answer = new Year2015Day4().calculatePart1(getInput(2015, 4));
     assertEquals(117946, answer);
   }
 
   @Test
   public void year2015day4part2() {
-    long answer = new Year2015Day4Part2().calculate(getInput(2015, 4));
+    final long answer = new Year2015Day4().calculatePart2(getInput(2015, 4));
     assertEquals(3938038, answer);
   }
 
   @Test
   public void year2015day5part1() {
-    long answer = new Year2015Day5Part1().calculate(getInput(2015, 5));
+    final long answer = new Year2015Day5().calculatePart1(getInput(2015, 5));
     assertEquals(238, answer);
   }
 
   @Test
   public void year2015day5part2() {
-    long answer = new Year2015Day5Part2().calculate(getInput(2015, 5));
+    final long answer = new Year2015Day5().calculatePart2(getInput(2015, 5));
     assertEquals(69, answer);
   }
 
   @Test
   public void year2015day6part1() {
-    long answer = new Year2015Day6Part1().calculate(getInput(2015, 6));
+    final long answer = new Year2015Day6().calculatePart1(getInput(2015, 6));
     assertEquals(377891, answer);
   }
 
   @Test
   public void year2015day6part2() {
-    long answer = new Year2015Day6Part2().calculate(getInput(2015, 6));
+    final long answer = new Year2015Day6().calculatePart2(getInput(2015, 6));
     assertEquals(14110788, answer);
+  }
+
+  @Test
+  public void year2015day7part1() {
+    final long answer = new Year2015Day7().calculatePart1(getInput(2015, 7));
+    assertEquals(16076, answer);
+  }
+
+  @Test
+  public void year2015day7part2() {
+    final long answer = new Year2015Day7().calculatePart2(getInput(2015, 7));
+    assertEquals(2797, answer);
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -147,85 +147,85 @@ public class AdventOfCodeTests {
 
   @Test
   public void year2020day1part1() {
-    long answer = new Year2020Day1Part1().calculate(getInput(2020, 1));
+    final long answer = new Year2020Day1().calculatePart1(getInput(2020, 1));
     assertEquals(1014624, answer);
   }
 
   @Test
   public void year2020day1part2() {
-    long answer = new Year2020Day1Part2().calculate(getInput(2020, 1));
+    final long answer = new Year2020Day1().calculatePart2(getInput(2020, 1));
     assertEquals(80072256, answer);
   }
 
   @Test
   public void year2020day2part1() {
-    long answer = new Year2020Day2Part1().calculate(getInput(2020, 2));
+    final long answer = new Year2020Day2().calculatePart1(getInput(2020, 2));
     assertEquals(445, answer);
   }
 
   @Test
   public void year2020day2part2() {
-    long answer = new Year2020Day2Part2().calculate(getInput(2020, 2));
+    final long answer = new Year2020Day2().calculatePart2(getInput(2020, 2));
     assertEquals(491, answer);
   }
 
   @Test
   public void year2020day3part1() {
-    long answer = new Year2020Day3Part1().calculate(getInput(2020, 3));
+    final long answer = new Year2020Day3().calculatePart1(getInput(2020, 3));
     assertEquals(191, answer);
   }
 
   @Test
   public void year2020day3part2() {
-    long answer = new Year2020Day3Part2().calculate(getInput(2020, 3));
+    final long answer = new Year2020Day3().calculatePart2(getInput(2020, 3));
     assertEquals(1478615040, answer);
   }
 
   @Test
   public void year2020day4part1() {
-    long answer = new Year2020Day4Part1().calculate(getInput(2020, 4));
+    final long answer = new Year2020Day4().calculatePart1(getInput(2020, 4));
     assertEquals(260, answer);
   }
 
   @Test
   public void year2020day4part2() {
-    long answer = new Year2020Day4Part2().calculate(getInput(2020, 4));
+    final long answer = new Year2020Day4().calculatePart2(getInput(2020, 4));
     assertEquals(153, answer);
   }
 
   @Test
   public void year2020day5part1() {
-    long answer = new Year2020Day5Part1().calculate(getInput(2020, 5));
+    final long answer = new Year2020Day5().calculatePart1(getInput(2020, 5));
     assertEquals(880, answer);
   }
 
   @Test
   public void year2020day5part2() {
-    long answer = new Year2020Day5Part2().calculate(getInput(2020, 5));
+    final long answer = new Year2020Day5().calculatePart2(getInput(2020, 5));
     assertEquals(731, answer);
   }
 
   @Test
   public void year2020day6part1() {
-    long answer = new Year2020Day6Part1().calculate(getInput(2020, 6));
+    final long answer = new Year2020Day6().calculatePart1(getInput(2020, 6));
     assertEquals(6291, answer);
   }
 
   @Test
   public void year2020day6part2() {
-    long answer = new Year2020Day6Part2().calculate(getInput(2020, 6));
+    final long answer = new Year2020Day6().calculatePart2(getInput(2020, 6));
     assertEquals(3052, answer);
   }
 
   @Test
   public void year2020day7part1() {
-    long answer = new Year2020Day7Part1().calculate(getInput(2020, 7));
+    final long answer = new Year2020Day7().calculatePart1(getInput(2020, 7));
     assertEquals(348, answer);
   }
 
   @Test
   public void year2020day7part2() {
-    long answer = new Year2020Day7Part2().calculate(getInput(2020, 7));
+    final long answer = new Year2020Day7().calculatePart2(getInput(2020, 7));
     assertEquals(18885, answer);
   }
 

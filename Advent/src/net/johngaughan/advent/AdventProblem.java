@@ -37,5 +37,13 @@ public interface AdventProblem {
    * @param path the path to the file containing the input data.
    * @return the numerical solution to the problem.
    */
-  long calculate(Path path);
+  long calculatePart1(Path path);
+
+  /**
+   * Calculate the solution to the specific Advent of Code problem.
+   *
+   * @param path the path to the file containing the input data.
+   * @return the numerical solution to the problem.
+   */
+  long calculatePart2(Path path);
 }
