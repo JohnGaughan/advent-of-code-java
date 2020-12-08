@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2020;
+package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,8 +24,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
@@ -43,13 +41,10 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2020Day7
-implements AdventProblem {
+public final class Year2020Day07 {
 
   private static final String SEARCH_NEEDLE = "shiny gold";
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart1(final Path path) {
     final Map<String, Map<String, Integer>> rules = parse(path);
     final Set<String> colors = getColors(rules);
@@ -97,8 +92,6 @@ implements AdventProblem {
     return positives.contains(currentColor);
   }
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart2(final Path path) {
     final Map<String, Map<String, Integer>> rules = parse(path);
     // Don't count the shiny gold bag itself.

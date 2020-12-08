@@ -14,14 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2015;
+package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.charset.Charset;
-import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
@@ -41,15 +38,12 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2015Day4
-implements AdventProblem {
+public final class Year2015Day04 {
 
   /** The prefix for each plaintext to digest. */
   private static final String PLAINTEXT_PREFIX = "ckczppom";
 
-  /** {@inheritDoc} */
-  @Override
-  public long calculatePart1(final Path path) {
+  public long calculatePart1() {
     for (long i = 0; i <= Long.MAX_VALUE; ++i) {
       final String plaintext = PLAINTEXT_PREFIX + i;
       final byte[] cipher = MD5.digest(plaintext.getBytes(ASCII));
@@ -61,9 +55,7 @@ implements AdventProblem {
     return Long.MIN_VALUE;
   }
 
-  /** {@inheritDoc} */
-  @Override
-  public long calculatePart2(final Path path) {
+  public long calculatePart2() {
     for (long i = 0; i <= Long.MAX_VALUE; ++i) {
       final String plaintext = PLAINTEXT_PREFIX + i;
       final byte[] cipher = MD5.digest(plaintext.getBytes(ASCII));

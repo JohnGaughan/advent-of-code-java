@@ -14,14 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2015;
+package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
@@ -41,11 +39,8 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2015Day1
-implements AdventProblem {
+public final class Year2015Day01 {
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart1(final Path path) {
     final List<Direction> input = parse(path);
     final long ups = input.stream().filter(d -> d == Direction.UP).count();
@@ -53,8 +48,6 @@ implements AdventProblem {
     return ups - downs;
   }
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart2(final Path path) {
     int floor = 0;
     int step = 1;

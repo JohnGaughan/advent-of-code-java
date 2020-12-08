@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2020;
+package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,8 +23,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import net.johngaughan.advent.AdventProblem;
-import net.johngaughan.advent.Utils;
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -43,17 +42,12 @@ import net.johngaughan.advent.Utils;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2020Day6
-implements AdventProblem {
+public final class Year2020Day06 {
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart1(final Path path) {
     return parse(path).stream().map(l -> union(l)).mapToLong(s -> s.size()).sum();
   }
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart2(final Path path) {
     return parse(path).stream().map(l -> intersection(l)).mapToLong(s -> s.size()).sum();
   }

@@ -14,15 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2020;
+package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
@@ -42,11 +40,8 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2020Day2
-implements AdventProblem {
+public final class Year2020Day02 {
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart1(final Path path) {
     return parse(path).stream().filter(t -> {
       final long count = t.password.chars().filter(c -> c == t.ch).count();
@@ -54,8 +49,6 @@ implements AdventProblem {
     }).count();
   }
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart2(final Path path) {
     return parse(path).stream().filter(
       t -> (t.password.charAt(t.n1 - 1) == t.ch) ^ (t.password.charAt(t.n2 - 1) == t.ch)).count();

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2015;
+package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,8 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
-
-import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
@@ -59,18 +57,13 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2015Day9
-implements AdventProblem {
+public final class Year2015Day09 {
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart1(final Path path) {
     final Map<String, Map<String, Long>> distances = parse(path);
     return calculateDistances(distances).stream().mapToLong(l -> l).min().getAsLong();
   }
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart2(final Path path) {
     final Map<String, Map<String, Long>> distances = parse(path);
     return calculateDistances(distances).stream().mapToLong(l -> l).max().getAsLong();

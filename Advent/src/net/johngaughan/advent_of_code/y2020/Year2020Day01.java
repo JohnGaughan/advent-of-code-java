@@ -14,14 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2020;
+package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
@@ -39,11 +37,8 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2020Day1
-implements AdventProblem {
+public final class Year2020Day01 {
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart1(final Path path) {
     final List<Integer> values = parse(path);
     for (int i = 0; i < values.size(); ++i) {
@@ -62,8 +57,6 @@ implements AdventProblem {
     return -1;
   }
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart2(final Path path) {
     final List<Integer> values = parse(path);
     for (int i = 0; i < values.size(); ++i) {

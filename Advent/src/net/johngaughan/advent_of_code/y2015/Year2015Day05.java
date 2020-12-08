@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2015;
+package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,8 +23,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
@@ -44,11 +42,8 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2015Day5
-implements AdventProblem {
+public final class Year2015Day05 {
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart1(final Path path) {
     return parse(path).stream().filter(s -> isNicePart1(s)).count();
   }
@@ -79,8 +74,6 @@ implements AdventProblem {
     return (vowels >= 3) && repeated;
   }
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart2(final Path path) {
     return parse(path).stream().filter(s -> isNicePart2(s)).count();
   }

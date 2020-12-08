@@ -14,15 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.johngaughan.advent.y2015;
+package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import net.johngaughan.advent.AdventProblem;
 
 /**
  * <p>
@@ -41,11 +39,8 @@ import net.johngaughan.advent.AdventProblem;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public final class Year2015Day2
-implements AdventProblem {
+public final class Year2015Day02 {
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart1(final Path path) {
     return parse(path).stream().mapToLong(l -> calculateWrappingPaperArea(l)).sum();
   }
@@ -59,8 +54,6 @@ implements AdventProblem {
     return area + ((d.x * d.y * d.z) / Math.max(d.x, Math.max(d.y, d.z)));
   }
 
-  /** {@inheritDoc} */
-  @Override
   public long calculatePart2(final Path path) {
     return parse(path).stream().mapToLong(l -> calculateRibbonLength(l)).sum();
   }
