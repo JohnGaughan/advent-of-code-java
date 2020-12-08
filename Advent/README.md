@@ -18,8 +18,15 @@ This is an Eclipse project. I know people love to hate on it, but modern version
 
 I settled on Java 11. It is a recent-enough LTS release that is widely supported.
 
-The programs are implemented as separate Java classes implementing a common interface. Each year has its own JUnit test harness, with a Test-annotated method
-for each individual problem. To run the code, simply run the test harness as a JUnit test.
+The programs are implemented as separate Java classes implementing a common interface. There is a common JUnit test harness, with a Test-annotated method for
+each individual problem. To run the code, simply run the test harness as a JUnit test.
+
+Each day of two problems is in a self-contained Java class, possibly with nested classes. This does clutter the code a little, but I think the tradeoff of
+having the entire program just a scroll wheel away actually makes it _more_ readable.
+
+Programs only rely on core Java, with a small number relying on one utility method included in this project related to input parsing. My goal is to avoid having
+any of the solution logic outside of the program itself beyond the bare minimum: things like Java containers and streams, or JUnit which manages running the
+various programs and validating their answers.
 
 ## Licenses
 
