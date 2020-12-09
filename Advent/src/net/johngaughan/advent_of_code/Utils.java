@@ -17,7 +17,10 @@
 package net.johngaughan.advent_of_code;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -67,6 +70,41 @@ public final class Utils {
     }
 
     return lineGroups;
+  }
+
+  /**
+   * Calculate all of the permutations of the provided items. Each permutation will be stored in a list that conveys the
+   * ordering of the items, with all permutations in a set that enforces uniqueness among orderings.
+   *
+   * @param <T> the type of item being processed.
+   * @param items the items for which to find all permutations.
+   * @return a set containing all unique permutations.
+   */
+  public static <T> Set<List<T>> permutations(final Collection<T> items) {
+    if (items instanceof List) {
+      return permutations((List<T>) items, new ArrayList<>());
+    }
+    return permutations(new ArrayList<>(items), new ArrayList<>());
+  }
+
+  private static <T> Set<List<T>> permutations(final List<T> items, final List<T> permutations) {
+    final Set<List<T>> results = new HashSet<>();
+    // Tail case
+    if (items.isEmpty()) {
+      results.add(new ArrayList<>(permutations));
+    }
+    // Recursive case
+    else {
+      for (int i = 0; i < items.size(); ++i) {
+        final List<T> newLocations = new ArrayList<>();
+        newLocations.addAll(items.subList(0, i));
+        newLocations.addAll(items.subList(i + 1, items.size()));
+        final List<T> newPermutations = new ArrayList<>(permutations);
+        newPermutations.add(items.get(i));
+        results.addAll(permutations(newLocations, newPermutations));
+      }
+    }
+    return results;
   }
 
 }

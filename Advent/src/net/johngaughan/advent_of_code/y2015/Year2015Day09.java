@@ -26,6 +26,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import net.johngaughan.advent_of_code.Utils;
+
 /**
  * <p>
  * <a href="https://adventofcode.com/2015/day/9">Year 2015, day 9</a>. This problem states that Santa wants to visit
@@ -71,7 +73,7 @@ public final class Year2015Day09 {
 
   /** Calculate all unique distances. */
   private Set<Long> calculateDistances(final Map<String, Map<String, Long>> distances) {
-    final Set<List<String>> routes = permutations(new ArrayList<>(distances.keySet()), new ArrayList<>());
+    final Set<List<String>> routes = Utils.permutations(new ArrayList<>(distances.keySet()));
     final Set<Long> results = new HashSet<>();
     for (final List<String> route : routes) {
       results.add(calculateDistance(route, distances));
@@ -90,27 +92,6 @@ public final class Year2015Day09 {
       previousLocation = location;
     }
     return distance;
-  }
-
-  /** Calculate the permutations of all locations. */
-  private Set<List<String>> permutations(final List<String> locations, final List<String> permutations) {
-    final Set<List<String>> results = new HashSet<>();
-    // Tail case
-    if (locations.isEmpty()) {
-      results.add(new ArrayList<>(permutations));
-    }
-    // Recursive case
-    else {
-      for (int i = 0; i < locations.size(); ++i) {
-        final List<String> newLocations = new ArrayList<>();
-        newLocations.addAll(locations.subList(0, i));
-        newLocations.addAll(locations.subList(i + 1, locations.size()));
-        final List<String> newPermutations = new ArrayList<>(permutations);
-        newPermutations.add(locations.get(i));
-        results.addAll(permutations(newLocations, newPermutations));
-      }
-    }
-    return results;
   }
 
   private static Pattern SPLIT = Pattern.compile(" (=|to) ");
