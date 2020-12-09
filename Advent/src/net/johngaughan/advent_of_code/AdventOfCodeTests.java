@@ -198,25 +198,25 @@ public class AdventOfCodeTests {
 
   @Test
   public void year2015day13part1() {
-    final int answer = new Year2015Day13().calculatePart1(getInput(2015, 13));
+    final long answer = new Year2015Day13().calculatePart1(getInput(2015, 13));
     assertEquals(733, answer);
   }
 
   @Test
   public void year2015day13part2() {
-    final int answer = new Year2015Day13().calculatePart2(getInput(2015, 13));
+    final long answer = new Year2015Day13().calculatePart2(getInput(2015, 13));
     assertEquals(725, answer);
   }
 
   @Test
   public void year2015day14part1() {
-    final int answer = new Year2015Day14().calculatePart1(getInput(2015, 14));
+    final long answer = new Year2015Day14().calculatePart1(getInput(2015, 14));
     assertEquals(2696, answer);
   }
 
   @Test
   public void year2015day14part2() {
-    final int answer = new Year2015Day14().calculatePart2(getInput(2015, 14));
+    final long answer = new Year2015Day14().calculatePart2(getInput(2015, 14));
     assertEquals(1084, answer);
   }
 
