@@ -184,6 +184,18 @@ public class AdventOfCodeTests {
     assertEquals("vzcaabcc", answer);
   }
 
+  @Test
+  public void year2015day12part1() {
+    final long answer = new Year2015Day12().calculatePart1(getInput(2015, 12));
+    assertEquals(191164, answer);
+  }
+
+  @Test
+  public void year2015day12part2() {
+    final long answer = new Year2015Day12().calculatePart2(getInput(2015, 12));
+    assertEquals(87842, answer);
+  }
+
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // 2020
   /////////////////////////////////////////////////////////////////////////////////////////////////
