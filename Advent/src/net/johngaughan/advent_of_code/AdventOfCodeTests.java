@@ -45,7 +45,7 @@ import net.johngaughan.advent_of_code.y2020.Year2020Day08;
 public class AdventOfCodeTests {
 
   private static Path getInput(final int year, final int day) {
-    return Path.of("input", Integer.toString(year), "day" + day + ".txt");
+    return Path.of("input", Integer.toString(year), "day" + (day < 10 ? "0" + day : day) + ".txt");
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
