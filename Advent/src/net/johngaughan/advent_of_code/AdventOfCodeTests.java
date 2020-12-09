@@ -42,7 +42,7 @@ import net.johngaughan.advent_of_code.y2020.Year2020Day08;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public class AdventOfCodeTests {
+public final class AdventOfCodeTests {
 
   private static Path getInput(final int year, final int day) {
     return Path.of("input", Integer.toString(year), "day" + (day < 10 ? "0" + day : day) + ".txt");
