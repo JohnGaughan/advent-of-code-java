@@ -48,7 +48,7 @@ package net.johngaughan.advent_of_code.y2015;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public class Year2015Day11 {
+public final class Year2015Day11 {
 
   private static final int[] INPUT = valueOf("vzbxkghb");
 

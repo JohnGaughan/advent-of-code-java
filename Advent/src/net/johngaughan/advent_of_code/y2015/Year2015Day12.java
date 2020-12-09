@@ -43,7 +43,7 @@ import org.json.JSONTokener;
  *
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
-public class Year2015Day12 {
+public final class Year2015Day12 {
 
   public long calculatePart1(final Path path) {
     return extractNumbers(parse(path), false).stream().mapToLong(l -> l).sum();
