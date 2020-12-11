@@ -22,7 +22,14 @@ import java.util.Arrays;
 
 /**
  * <p>
- * <a href="https://adventofcode.com/2015/day/11">Year 2015, day 11</a>.
+ * <a href="https://adventofcode.com/2015/day/11">Year 2015, day 11</a>. This problem is another variation on Conway's
+ * Game of Life that pops up in this challenge regularly. This time, there are grid elements that are ignored. Part one
+ * is an ordinary variation, while part two considers a neighbor to be a seat in any of the eight directions that is
+ * visible across floor elements.
+ * </p>
+ * <p>
+ * Nothing really to say about this one, other than it was easy but tedious to type out and ensure all those array
+ * subscripts were not fat-fingered.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
