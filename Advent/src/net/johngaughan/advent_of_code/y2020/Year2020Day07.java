@@ -45,7 +45,7 @@ public final class Year2020Day07 {
 
   private static final String SEARCH_NEEDLE = "shiny gold";
 
-  public long calculatePart1(final Path path) {
+  public int calculatePart1(final Path path) {
     final Map<String, Map<String, Integer>> rules = parse(path);
     final Set<String> colors = getColors(rules);
     return colors.size();
@@ -92,22 +92,22 @@ public final class Year2020Day07 {
     return positives.contains(currentColor);
   }
 
-  public long calculatePart2(final Path path) {
+  public int calculatePart2(final Path path) {
     final Map<String, Map<String, Integer>> rules = parse(path);
     // Don't count the shiny gold bag itself.
     return countBagAndChildren(SEARCH_NEEDLE, rules, new HashMap<>()) - 1;
   }
 
   /** Count the number of bags contained by the given color of bag, including the bag itself. */
-  private long countBagAndChildren(final String color, final Map<String, Map<String, Integer>> rules, final Map<String, Long> memoizer) {
+  private int countBagAndChildren(final String color, final Map<String, Map<String, Integer>> rules, final Map<String, Integer> memoizer) {
     if (memoizer.containsKey(color)) {
       return memoizer.get(color);
     }
 
-    long count = 1;
+    int count = 1;
     for (final Map.Entry<String, Integer> child : rules.get(color).entrySet()) {
       final String childColor = child.getKey();
-      final long childCount = child.getValue();
+      final int childCount = child.getValue();
       count += (childCount * countBagAndChildren(childColor, rules, memoizer));
     }
     memoizer.put(color, count);
@@ -144,7 +144,7 @@ public final class Year2020Day07 {
         final int space = element.indexOf(' ');
 
         // Number is everything up to the first space
-        final Integer value = Integer.parseInt(element.substring(0, space));
+        final Integer value = Integer.valueOf(element.substring(0, space));
 
         // Color is everything after the first space up until "bag" or "bags"
         final int bag = element.indexOf(" bag");

@@ -114,7 +114,7 @@ public final class Year2020Day09 {
   private List<Long> parse(final Path path) {
     try {
       // Note: numbers are not sorted here or in the input file.
-      return Files.readAllLines(path).stream().map(s -> Long.valueOf(s)).collect(Collectors.toList());
+      return Files.readAllLines(path).stream().map(Long::valueOf).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

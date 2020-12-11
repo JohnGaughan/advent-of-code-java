@@ -44,12 +44,12 @@ import net.johngaughan.advent_of_code.Utils;
  */
 public final class Year2020Day06 {
 
-  public long calculatePart1(final Path path) {
-    return parse(path).stream().map(l -> union(l)).mapToLong(s -> s.size()).sum();
+  public int calculatePart1(final Path path) {
+    return parse(path).stream().map(l -> union(l)).mapToInt(s -> s.size()).sum();
   }
 
-  public long calculatePart2(final Path path) {
-    return parse(path).stream().map(l -> intersection(l)).mapToLong(s -> s.size()).sum();
+  public int calculatePart2(final Path path) {
+    return parse(path).stream().map(l -> intersection(l)).mapToInt(s -> s.size()).sum();
   }
 
   /** Reduces a single group of passenger answers by calculating the union. */

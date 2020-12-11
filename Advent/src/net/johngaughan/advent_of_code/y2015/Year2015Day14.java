@@ -80,7 +80,7 @@ public final class Year2015Day14 {
         }
       }
     }
-    return points.values().stream().mapToInt(i -> i).max().getAsInt();
+    return points.values().stream().mapToInt(Integer::intValue).max().getAsInt();
   }
 
   /** Get a reindeer's position after a given amount of elapsed time. */
@@ -93,7 +93,7 @@ public final class Year2015Day14 {
   /** Parse the file located at the provided path location. */
   private Collection<Rule> parse(final Path path) {
     try {
-      return Files.readAllLines(path).stream().map(s -> new Rule(s)).collect(Collectors.toList());
+      return Files.readAllLines(path).stream().map(Rule::new).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

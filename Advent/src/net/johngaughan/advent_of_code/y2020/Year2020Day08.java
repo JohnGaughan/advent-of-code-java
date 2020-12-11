@@ -124,9 +124,9 @@ public final class Year2020Day08 {
       mapping.put(i, new HashSet<>());
     }
     for (Map.Entry<Integer, Instruction> entry : instructions.entrySet()) {
-      final int instructionNumber = entry.getKey();
+      final Integer instructionNumber = entry.getKey();
       final Instruction instruction = entry.getValue();
-      final int target;
+      final Integer target;
       if ((instruction.op == Operation.acc) || (instruction.op == Operation.nop)) {
         target = instructionNumber + 1;
       }
@@ -139,7 +139,7 @@ public final class Year2020Day08 {
   }
 
   /** Get the number of all instructions that are terminal, meaning they lead to the program halting. */
-  private Set<Integer> getTerminalInstructions(final int instruction, final Map<Integer, Instruction> instructions, final Map<Integer, Set<Integer>> instructionMapping) {
+  private Set<Integer> getTerminalInstructions(final Integer instruction, final Map<Integer, Instruction> instructions, final Map<Integer, Set<Integer>> instructionMapping) {
     final Set<Integer> terminals = new HashSet<>();
     for (Integer nonTerminal : instructionMapping.get(instruction)) {
       terminals.add(nonTerminal);
@@ -152,7 +152,7 @@ public final class Year2020Day08 {
   private Map<Integer, Instruction> parse(final Path path) {
     try {
       final List<Instruction> instructions =
-        Files.readAllLines(path).stream().map(s -> new Instruction(s)).collect(Collectors.toList());
+        Files.readAllLines(path).stream().map(Instruction::new).collect(Collectors.toList());
       final Map<Integer, Instruction> map = new HashMap<>();
       for (int i = 0; i < instructions.size(); ++i) {
         map.put(i, instructions.get(i));

@@ -36,16 +36,16 @@ public final class Year2015Day10 {
 
   private static final String INPUT = "1113122113";
 
-  public long calculatePart1() {
+  public int calculatePart1() {
     return lookAndSay(INPUT, 40);
   }
 
-  public long calculatePart2() {
+  public int calculatePart2() {
     return lookAndSay(INPUT, 50);
   }
 
   /** Apply the look-and-say algorithm to the input. */
-  private long lookAndSay(final String input, final int iterations) {
+  private int lookAndSay(final String input, final int iterations) {
     String value = input;
     for (int i = 0; i < iterations; ++i) {
       value = lookAndSay(value);

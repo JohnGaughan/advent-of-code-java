@@ -18,10 +18,6 @@ package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collection;
-import java.util.NavigableSet;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -50,14 +46,15 @@ import java.util.stream.Collectors;
 public final class Year2020Day05 {
 
   public long calculatePart1(final Path path) {
-    return parse(path).last();
+    int[] values = parse(path);
+    return values[values.length - 1];
   }
 
   public long calculatePart2(final Path path) {
-    final Collection<Long> ids = parse(path);
-    for (final Long id : ids) {
-      final Long next = id + 1;
-      if (!ids.contains(next)) {
+    final int[] ids = parse(path);
+    for (int i = 0; i < ids.length; ++i) {
+      final int next = ids[i] + 1;
+      if (ids[i + 1] != next) {
         return next;
       }
     }
@@ -65,12 +62,10 @@ public final class Year2020Day05 {
   }
 
   /** Parse the file located at the provided path location. */
-  private NavigableSet<Long> parse(final Path path) {
+  private int[] parse(final Path path) {
     try {
-      // NavigableSet self-sorts and allows us to get the last element.
-      return Files.readAllLines(path).stream().map(
-        s -> Long.valueOf(s.replace('F', '0').replace('B', '1').replace('L', '0').replace('R', '1'), 2)).collect(
-          Collectors.toCollection(TreeSet::new));
+      return Files.readAllLines(path).stream().mapToInt(s -> Integer.parseInt(
+        s.replace('F', '0').replace('B', '1').replace('L', '0').replace('R', '1'), 2)).sorted().toArray();
     }
     catch (final RuntimeException ex) {
       throw ex;

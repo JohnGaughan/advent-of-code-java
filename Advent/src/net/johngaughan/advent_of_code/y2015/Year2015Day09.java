@@ -61,20 +61,20 @@ import net.johngaughan.advent_of_code.Utils;
  */
 public final class Year2015Day09 {
 
-  public long calculatePart1(final Path path) {
+  public int calculatePart1(final Path path) {
     final Map<String, Map<String, Long>> distances = parse(path);
-    return calculateDistances(distances).stream().mapToLong(l -> l).min().getAsLong();
+    return calculateDistances(distances).stream().mapToInt(Integer::intValue).min().getAsInt();
   }
 
-  public long calculatePart2(final Path path) {
+  public int calculatePart2(final Path path) {
     final Map<String, Map<String, Long>> distances = parse(path);
-    return calculateDistances(distances).stream().mapToLong(l -> l).max().getAsLong();
+    return calculateDistances(distances).stream().mapToInt(Integer::intValue).max().getAsInt();
   }
 
   /** Calculate all unique distances. */
-  private Set<Long> calculateDistances(final Map<String, Map<String, Long>> distances) {
+  private Set<Integer> calculateDistances(final Map<String, Map<String, Long>> distances) {
     final Set<List<String>> routes = Utils.permutations(new ArrayList<>(distances.keySet()));
-    final Set<Long> results = new HashSet<>();
+    final Set<Integer> results = new HashSet<>();
     for (final List<String> route : routes) {
       results.add(calculateDistance(route, distances));
     }
@@ -82,8 +82,8 @@ public final class Year2015Day09 {
   }
 
   /** Get the distance for a specific route. */
-  private long calculateDistance(final List<String> route, final Map<String, Map<String, Long>> distances) {
-    long distance = 0;
+  private Integer calculateDistance(final List<String> route, final Map<String, Map<String, Long>> distances) {
+    int distance = 0;
     String previousLocation = null;
     for (final String location : route) {
       if (previousLocation != null) {

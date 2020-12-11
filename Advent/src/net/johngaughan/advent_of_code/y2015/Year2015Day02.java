@@ -75,7 +75,7 @@ public final class Year2015Day02 {
   /** Parse the file located at the provided path location. */
   private List<Dimensions> parse(final Path path) {
     try {
-      return Files.readAllLines(path).stream().map(s -> new Dimensions(s)).collect(Collectors.toList());
+      return Files.readAllLines(path).stream().map(Dimensions::new).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

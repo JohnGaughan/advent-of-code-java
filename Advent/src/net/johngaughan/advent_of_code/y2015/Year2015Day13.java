@@ -79,12 +79,14 @@ public class Year2015Day13 {
 
   private static final String ME = "Me";
 
+  private static final Integer ZERO = Integer.valueOf(0);
+
   /** Add myself to the seating rules. */
   private Map<String, Map<String, Integer>> addMyself(final Map<String, Map<String, Integer>> rules) {
     final Map<String, Integer> myRules = new HashMap<>();
     for (Map.Entry<String, Map<String, Integer>> entry : rules.entrySet()) {
-      myRules.put(entry.getKey(), 0);
-      entry.getValue().put(ME, 0);
+      myRules.put(entry.getKey(), ZERO);
+      entry.getValue().put(ME, ZERO);
     }
     rules.put(ME, myRules);
     return rules;
@@ -94,7 +96,7 @@ public class Year2015Day13 {
   private Map<String, Map<String, Integer>> parse(final Path path) {
     try {
       final Map<String, Map<String, Integer>> results = new HashMap<>();
-      for (Rule rule : Files.readAllLines(path).stream().map(s -> new Rule(s)).collect(Collectors.toList())) {
+      for (Rule rule : Files.readAllLines(path).stream().map(Rule::new).collect(Collectors.toList())) {
         if (!results.containsKey(rule.person1)) {
           results.put(rule.person1, new HashMap<>());
         }

@@ -19,8 +19,8 @@ package net.johngaughan.advent_of_code.y2015;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -53,24 +53,22 @@ public final class Year2015Day17 {
   }
 
   /** Find the number of solutions available for the given state. */
-  private List<List<Integer>> solutions(final List<Integer> currentBins, final List<Integer> availableBins, final int leftToPack) {
+  private List<List<Integer>> solutions(final List<Integer> currentBins, final int[] availableBins, final int leftToPack) {
     final List<List<Integer>> solutions = new ArrayList<>();
-    for (int i = 0; i < availableBins.size(); ++i) {
-      final Integer nextBin = availableBins.get(i);
-
-      if (leftToPack < nextBin) {
+    for (int i = 0; i < availableBins.length; ++i) {
+      if (leftToPack < availableBins[i]) {
         // This bin and subsequent bins cannot be solutions.
         break;
       }
 
       final List<Integer> newCurrentBins = new ArrayList<>(currentBins);
-      newCurrentBins.add(nextBin);
+      newCurrentBins.add(availableBins[i]);
 
-      final List<Integer> newAvailableBins = new ArrayList<>(availableBins.subList(i + 1, availableBins.size()));
+      final int[] newAvailableBins = Arrays.copyOfRange(availableBins, i + 1, availableBins.length);
 
-      final int newLeftToPack = leftToPack - nextBin;
+      final int newLeftToPack = leftToPack - availableBins[i];
 
-      if (leftToPack == nextBin) {
+      if (leftToPack == availableBins[i]) {
         // Found a solution, but there might be a valid duplicate after this one. Keep going.
         solutions.add(newCurrentBins);
       }
@@ -82,10 +80,10 @@ public final class Year2015Day17 {
   }
 
   /** Parse the file located at the provided path location. */
-  private List<Integer> parse(final Path path) {
+  private int[] parse(final Path path) {
     try {
       // Important: this logic sorts the numbers.
-      return Files.readAllLines(path).stream().map(s -> Integer.valueOf(s)).sorted().collect(Collectors.toList());
+      return Files.readAllLines(path).stream().mapToInt(Integer::parseInt).sorted().toArray();
     }
     catch (final RuntimeException ex) {
       throw ex;

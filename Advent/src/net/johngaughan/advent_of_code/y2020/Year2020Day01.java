@@ -18,8 +18,6 @@ package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -39,12 +37,12 @@ import java.util.stream.Collectors;
  */
 public final class Year2020Day01 {
 
-  public long calculatePart1(final Path path) {
-    final List<Integer> values = parse(path);
-    for (int i = 0; i < values.size(); ++i) {
-      final int i1 = values.get(i).intValue();
-      for (int j = i + 1; j < values.size(); ++j) {
-        final int j1 = values.get(j).intValue();
+  public int calculatePart1(final Path path) {
+    final int[] values = parse(path);
+    for (int i = 0; i < values.length; ++i) {
+      final int i1 = values[i];
+      for (int j = i + 1; j < values.length; ++j) {
+        final int j1 = values[j];
         final int sum = i1 + j1;
         if (sum == 2020) {
           return i1 * j1;
@@ -57,17 +55,17 @@ public final class Year2020Day01 {
     return -1;
   }
 
-  public long calculatePart2(final Path path) {
-    final List<Integer> values = parse(path);
-    for (int i = 0; i < values.size(); ++i) {
-      final int i1 = values.get(i).intValue();
-      for (int j = i + 1; j < values.size(); ++j) {
-        final int j1 = values.get(j).intValue();
-        for (int k = j + 1; k < values.size(); ++k) {
-          final int k1 = values.get(k).intValue();
+  public int calculatePart2(final Path path) {
+    final int[] values = parse(path);
+    for (int i = 0; i < values.length; ++i) {
+      final int i1 = values[i];
+      for (int j = i + 1; j < values.length; ++j) {
+        final int j1 = values[j];
+        for (int k = j + 1; k < values.length; ++k) {
+          final int k1 = values[k];
           final int sum = i1 + j1 + k1;
           if (sum == 2020) {
-            return Integer.valueOf(i1 * j1 * k1);
+            return i1 * j1 * k1;
           }
           else if (sum > 2020) {
             continue;
@@ -82,9 +80,9 @@ public final class Year2020Day01 {
   }
 
   /** Parse the file located at the provided path location. */
-  private List<Integer> parse(final Path path) {
+  private int[] parse(final Path path) {
     try {
-      return Files.readAllLines(path).stream().map(s -> Integer.parseInt(s)).sorted().collect(Collectors.toList());
+      return Files.readAllLines(path).stream().mapToInt(Integer::parseInt).sorted().toArray();
     }
     catch (final RuntimeException ex) {
       throw ex;

@@ -48,7 +48,7 @@ public final class Year2015Day01 {
     return ups - downs;
   }
 
-  public long calculatePart2(final Path path) {
+  public int calculatePart2(final Path path) {
     int floor = 0;
     int step = 1;
     for (final Direction d : parse(path)) {
@@ -63,13 +63,13 @@ public final class Year2015Day01 {
       }
       ++step;
     }
-    return Long.MIN_VALUE;
+    return Integer.MIN_VALUE;
   }
 
   /** Parse the file located at the provided path location. */
   private List<Direction> parse(final Path path) {
     try {
-      return Files.readString(path).trim().chars().boxed().map(c -> Direction.valueOf(c)).collect(Collectors.toList());
+      return Files.readString(path).trim().chars().boxed().map(Direction::valueOf).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

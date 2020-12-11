@@ -43,8 +43,8 @@ public final class Year2015Day04 {
   /** The prefix for each plaintext to digest. */
   private static final String PLAINTEXT_PREFIX = "ckczppom";
 
-  public long calculatePart1() {
-    for (long i = 0; i <= Long.MAX_VALUE; ++i) {
+  public int calculatePart1() {
+    for (int i = 0; i <= Long.MAX_VALUE; ++i) {
       final String plaintext = PLAINTEXT_PREFIX + i;
       final byte[] cipher = MD5.digest(plaintext.getBytes(ASCII));
       // Cipher must start with 0x00000, or the first 20 bits must be zero. This is the first two and a half bytes.
@@ -52,11 +52,11 @@ public final class Year2015Day04 {
         return i;
       }
     }
-    return Long.MIN_VALUE;
+    return Integer.MIN_VALUE;
   }
 
-  public long calculatePart2() {
-    for (long i = 0; i <= Long.MAX_VALUE; ++i) {
+  public int calculatePart2() {
+    for (int i = 0; i <= Long.MAX_VALUE; ++i) {
       final String plaintext = PLAINTEXT_PREFIX + i;
       final byte[] cipher = MD5.digest(plaintext.getBytes(ASCII));
       // Cipher must start with 0x000000, or the first 24 bits must be zero. This is the first three bytes.
@@ -64,7 +64,7 @@ public final class Year2015Day04 {
         return i;
       }
     }
-    return Long.MIN_VALUE;
+    return Integer.MIN_VALUE;
   }
 
   /** ASCII character set used to encode the plaintext into a byte array suitable for digesting. */

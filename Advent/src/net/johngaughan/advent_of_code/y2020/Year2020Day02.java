@@ -57,7 +57,7 @@ public final class Year2020Day02 {
   /** Parse the file located at the provided path location. */
   private List<Input> parse(final Path path) {
     try {
-      return Files.readAllLines(path).stream().map(s -> new Input(s)).collect(Collectors.toList());
+      return Files.readAllLines(path).stream().map(Input::new).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

@@ -44,16 +44,16 @@ import java.util.List;
  */
 public final class Year2015Day08 {
 
-  public long calculatePart1(final Path path) {
+  public int calculatePart1(final Path path) {
     final List<String> lines = parse(path);
-    final long total = lines.stream().mapToLong(s -> s.length()).sum();
-    final long parsed = lines.stream().mapToLong(s -> countParsedCharacters(s)).sum();
+    final int total = lines.stream().mapToInt(s -> s.length()).sum();
+    final int parsed = lines.stream().mapToInt(s -> countParsedCharacters(s)).sum();
     return total - parsed;
   }
 
   /** Count the number of characters in the line, considering escape sequences. */
-  private long countParsedCharacters(final String line) {
-    long characters = 0;
+  private int countParsedCharacters(final String line) {
+    int characters = 0;
     // Iterate over everything inside the apostrophes containing the string
     for (int i = 1; i < (line.length() - 1); ++i) {
       ++characters;
@@ -68,15 +68,15 @@ public final class Year2015Day08 {
     return characters;
   }
 
-  public long calculatePart2(final Path path) {
+  public int calculatePart2(final Path path) {
     final List<String> lines = parse(path);
-    final long total = lines.stream().mapToLong(s -> s.length()).sum();
-    final long reverseParsed = lines.stream().mapToLong(s -> countReverseParsedCharacters(s)).sum();
+    final int total = lines.stream().mapToInt(s -> s.length()).sum();
+    final int reverseParsed = lines.stream().mapToInt(s -> countReverseParsedCharacters(s)).sum();
     return reverseParsed - total;
   }
 
-  private long countReverseParsedCharacters(final String line) {
-    long characters = 2;
+  private int countReverseParsedCharacters(final String line) {
+    int characters = 2;
     for (int ch : line.toCharArray()) {
       if ((ch == '"') || (ch == '\\')) {
         ++characters;

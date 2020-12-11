@@ -55,7 +55,7 @@ import java.util.stream.Collectors;
  */
 public final class Year2015Day07 {
 
-  public long calculatePart1(final Path path) {
+  public int calculatePart1(final Path path) {
     final Map<String, Operation> ops = new HashMap<>();
     for (final Operation op : parse(path)) {
       ops.put(op.output, op);
@@ -63,49 +63,49 @@ public final class Year2015Day07 {
     return getValue("a", ops, new HashMap<>());
   }
 
-  public long calculatePart2(final Path path) {
+  public int calculatePart2(final Path path) {
     final Map<String, Operation> ops = new HashMap<>();
     for (final Operation op : parse(path)) {
       ops.put(op.output, op);
     }
-    final long a = getValue("a", ops, new HashMap<>());
-    ops.put("b", new Operation(Long.toString(a) + " -> b"));
+    final int a = getValue("a", ops, new HashMap<>());
+    ops.put("b", new Operation(Integer.toString(a) + " -> b"));
     return getValue("a", ops, new HashMap<>());
   }
 
   /** Get the value of a wire. */
-  private long getValue(final String wire, final Map<String, Operation> ops, final Map<String, Long> memoizer) {
+  private int getValue(final String wire, final Map<String, Operation> ops, final Map<String, Integer> memoizer) {
     // If this value has already been seen, use the memoized value instead.
     if (memoizer.containsKey(wire)) {
       return memoizer.get(wire);
     }
     final Operation thisOp = ops.get(wire);
-    final long value;
+    final int value;
     if (Operator.AND == thisOp.operator) {
-      final long op1 = getValue(thisOp.operands.get(0), ops, memoizer);
-      final long op2 = getValue(thisOp.operands.get(1), ops, memoizer);
+      final int op1 = getValue(thisOp.operands.get(0), ops, memoizer);
+      final int op2 = getValue(thisOp.operands.get(1), ops, memoizer);
       value = op1 & op2;
     }
     else if (Operator.ASSIGN == thisOp.operator) {
       value = getValue(thisOp.operands.get(0), ops, memoizer);
     }
     else if (Operator.LSHIFT == thisOp.operator) {
-      final long op1 = getValue(thisOp.operands.get(0), ops, memoizer);
-      final long op2 = getValue(thisOp.operands.get(1), ops, memoizer);
+      final int op1 = getValue(thisOp.operands.get(0), ops, memoizer);
+      final int op2 = getValue(thisOp.operands.get(1), ops, memoizer);
       value = op1 << op2;
     }
     else if (Operator.NOT == thisOp.operator) {
-      final long op1 = getValue(thisOp.operands.get(0), ops, memoizer);
+      final int op1 = getValue(thisOp.operands.get(0), ops, memoizer);
       value = ~op1;
     }
     else if (Operator.OR == thisOp.operator) {
-      final long op1 = getValue(thisOp.operands.get(0), ops, memoizer);
-      final long op2 = getValue(thisOp.operands.get(1), ops, memoizer);
+      final int op1 = getValue(thisOp.operands.get(0), ops, memoizer);
+      final int op2 = getValue(thisOp.operands.get(1), ops, memoizer);
       value = op1 | op2;
     }
     else if (Operator.RSHIFT == thisOp.operator) {
-      final long op1 = getValue(thisOp.operands.get(0), ops, memoizer);
-      final long op2 = getValue(thisOp.operands.get(1), ops, memoizer);
+      final int op1 = getValue(thisOp.operands.get(0), ops, memoizer);
+      final int op2 = getValue(thisOp.operands.get(1), ops, memoizer);
       value = op1 >> op2;
     }
     else {
@@ -116,9 +116,9 @@ public final class Year2015Day07 {
   }
 
   /** Get the value of an operand which may be a literal value or may delegate to another wire. */
-  private long getValue(final Object value, final Map<String, Operation> ops, final Map<String, Long> memoizer) {
-    if (value instanceof Number) {
-      return ((Number) value).longValue();
+  private int getValue(final Object value, final Map<String, Operation> ops, final Map<String, Integer> memoizer) {
+    if (value instanceof Integer) {
+      return ((Integer) value).intValue();
     }
     return getValue(value.toString(), ops, memoizer);
   }
@@ -126,7 +126,7 @@ public final class Year2015Day07 {
   /** Parse the file located at the provided path location. */
   private List<Operation> parse(final Path path) {
     try {
-      return Files.readAllLines(path).stream().map(s -> new Operation(s)).collect(Collectors.toList());
+      return Files.readAllLines(path).stream().map(Operation::new).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;
@@ -178,7 +178,7 @@ public final class Year2015Day07 {
       else if (io[0].indexOf(' ') < 0) {
         operator = Operator.ASSIGN;
         if (NUMERIC.matcher(io[0]).matches()) {
-          inputs.add(Long.valueOf(io[0]));
+          inputs.add(Integer.valueOf(io[0]));
         }
         else {
           inputs.add(io[0]);
@@ -192,13 +192,13 @@ public final class Year2015Day07 {
 
         // Add the inputs as either integers or strings.
         if (NUMERIC.matcher(tokens[0]).matches()) {
-          inputs.add(Long.valueOf(tokens[0]));
+          inputs.add(Integer.valueOf(tokens[0]));
         }
         else {
           inputs.add(tokens[0]);
         }
         if (NUMERIC.matcher(tokens[2]).matches()) {
-          inputs.add(Long.valueOf(tokens[2]));
+          inputs.add(Integer.valueOf(tokens[2]));
         }
         else {
           inputs.add(tokens[2]);

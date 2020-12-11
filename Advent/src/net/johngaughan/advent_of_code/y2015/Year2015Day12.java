@@ -45,19 +45,19 @@ import org.json.JSONTokener;
  */
 public final class Year2015Day12 {
 
-  public long calculatePart1(final Path path) {
-    return extractNumbers(parse(path), false).stream().mapToLong(l -> l).sum();
+  public int calculatePart1(final Path path) {
+    return extractNumbers(parse(path), false).stream().mapToInt(Integer::intValue).sum();
   }
 
-  public long calculatePart2(final Path path) {
-    return extractNumbers(parse(path), true).stream().mapToLong(l -> l).sum();
+  public int calculatePart2(final Path path) {
+    return extractNumbers(parse(path), true).stream().mapToInt(Integer::intValue).sum();
   }
 
   /** Given a general object from a JSON string, extract all of its numbers. */
-  private Collection<Long> extractNumbers(final Object obj, final boolean ignoreRed) {
-    final Collection<Long> numbers = new ArrayList<>();
-    if (obj instanceof Number) {
-      numbers.add(((Number) obj).longValue());
+  private Collection<Integer> extractNumbers(final Object obj, final boolean ignoreRed) {
+    final Collection<Integer> numbers = new ArrayList<>();
+    if (obj instanceof Integer) {
+      numbers.add((Integer) obj);
     }
     else if (obj instanceof JSONArray) {
       numbers.addAll(extractNumbers((JSONArray) obj, ignoreRed));
@@ -69,9 +69,9 @@ public final class Year2015Day12 {
   }
 
   /** Given an array from a JSON string, extract all of its numbers. */
-  private Collection<Long> extractNumbers(final JSONArray array, final boolean ignoreRed) {
-    final Collection<Long> numbers = new ArrayList<>();
-    for (Iterator<?> iter = array.iterator(); iter.hasNext();) {
+  private Collection<Integer> extractNumbers(final JSONArray array, final boolean ignoreRed) {
+    final Collection<Integer> numbers = new ArrayList<>();
+    for (Iterator<Object> iter = array.iterator(); iter.hasNext();) {
       final Object element = iter.next();
       numbers.addAll(extractNumbers(element, ignoreRed));
     }
@@ -79,8 +79,8 @@ public final class Year2015Day12 {
   }
 
   /** Given a JSON object from a JSON string, extract all of its numbers. */
-  private Collection<Long> extractNumbers(final JSONObject obj, final boolean ignoreRed) {
-    final Collection<Long> numbers = new ArrayList<>();
+  private Collection<Integer> extractNumbers(final JSONObject obj, final boolean ignoreRed) {
+    final Collection<Integer> numbers = new ArrayList<>();
     boolean skip = false;
     if (ignoreRed) {
       for (String key : obj.keySet()) {

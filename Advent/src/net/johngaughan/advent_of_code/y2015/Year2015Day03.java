@@ -46,7 +46,7 @@ import java.util.stream.Collectors;
  */
 public final class Year2015Day03 {
 
-  public long calculatePart1(final Path path) {
+  public int calculatePart1(final Path path) {
     final Set<Coordinates> visited = new HashSet<>();
     int x = 0;
     int y = 0;
@@ -74,7 +74,7 @@ public final class Year2015Day03 {
     return visited.size();
   }
 
-  public long calculatePart2(final Path path) {
+  public int calculatePart2(final Path path) {
     final Set<Coordinates> visited = new HashSet<>();
     final int x[] = new int[2];
     final int y[] = new int[2];
@@ -107,8 +107,7 @@ public final class Year2015Day03 {
   /** Parse the file located at the provided path location. */
   private List<Direction> parse(final Path path) {
     try {
-      return Files.readString(path).trim().codePoints().mapToObj(i -> Direction.valueOf(i)).collect(
-        Collectors.toList());
+      return Files.readString(path).trim().codePoints().mapToObj(Direction::valueOf).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;
@@ -147,17 +146,17 @@ public final class Year2015Day03 {
   /** Represents a single pair of coordinates. */
   private static final class Coordinates {
 
-    private final int _x;
+    private final int x;
 
-    private final int _y;
+    private final int y;
 
     private final int hashCode;
 
     /** Constructs a <code>Coordinates</code>. */
-    public Coordinates(final int x, final int y) {
-      _x = x;
-      _y = y;
-      hashCode = Objects.hash(_x, _y);
+    public Coordinates(final int xx, final int yy) {
+      x = xx;
+      y = yy;
+      hashCode = Objects.hash(x, y);
     }
 
     /** {@inheritDoc} */
@@ -171,7 +170,7 @@ public final class Year2015Day03 {
       }
       else {
         final Coordinates o = (Coordinates) obj;
-        return (_x == o._x) && (_y == o._y);
+        return (x == o.x) && (y == o.y);
       }
     }
 
@@ -184,7 +183,7 @@ public final class Year2015Day03 {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-      return "(" + _x + "," + _y + ")";
+      return "(" + x + "," + y + ")";
     }
   }
 

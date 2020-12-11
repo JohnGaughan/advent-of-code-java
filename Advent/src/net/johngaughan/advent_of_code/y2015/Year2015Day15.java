@@ -50,11 +50,11 @@ public final class Year2015Day15 {
   private static final int QUANTITY = 100;
 
   public int calculatePart1(final Path path) {
-    return scores(parse(path), QUANTITY, -1).stream().mapToInt(i -> i).max().getAsInt();
+    return scores(parse(path), QUANTITY, -1).stream().mapToInt(Integer::intValue).max().getAsInt();
   }
 
   public int calculatePart2(final Path path) {
-    return scores(parse(path), QUANTITY, 500).stream().mapToInt(i -> i).max().getAsInt();
+    return scores(parse(path), QUANTITY, 500).stream().mapToInt(Integer::intValue).max().getAsInt();
   }
 
   /** Get all of the cookie scores. */
@@ -127,7 +127,6 @@ public final class Year2015Day15 {
 
     private static final Pattern PROP_SPLIT = Pattern.compile(" ");
 
-    @SuppressWarnings("unused")
     final String ingredient;
 
     final int capacity;
@@ -150,6 +149,13 @@ public final class Year2015Day15 {
       texture = Integer.parseInt(properties[7]);
       calories = Integer.parseInt(properties[9]);
       Thread.yield();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toString() {
+      return "[" + ingredient + ",capacity=" + capacity + ",durability=" + durability + ",flavor=" + flavor
+        + ",texture=" + texture + ",calories=" + calories + "]";
     }
   }
 }

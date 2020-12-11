@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
  */
 public final class Year2015Day06 {
 
-  public long calculatePart1(final Path path) {
+  public int calculatePart1(final Path path) {
     final boolean[][] grid = new boolean[1000][1000];
     for (final Action action : parse(path)) {
       for (int i = action.x1; i <= action.x2; ++i) {
@@ -58,7 +58,7 @@ public final class Year2015Day06 {
         }
       }
     }
-    long lit = 0;
+    int lit = 0;
     for (final boolean[] row : grid) {
       for (final boolean b : row) {
         if (b) {
@@ -69,7 +69,7 @@ public final class Year2015Day06 {
     return lit;
   }
 
-  public long calculatePart2(final Path path) {
+  public int calculatePart2(final Path path) {
     final int[][] grid = new int[1000][1000];
     for (final Action action : parse(path)) {
       for (int i = action.x1; i <= action.x2; ++i) {
@@ -89,7 +89,7 @@ public final class Year2015Day06 {
         }
       }
     }
-    long brightness = 0;
+    int brightness = 0;
     for (final int[] row : grid) {
       for (final int i : row) {
         brightness += i;
@@ -101,7 +101,7 @@ public final class Year2015Day06 {
   /** Parse the file located at the provided path location. */
   private List<Action> parse(final Path path) {
     try {
-      return Files.readAllLines(path).stream().map(s -> new Action(s)).collect(Collectors.toList());
+      return Files.readAllLines(path).stream().map(Action::new).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;
