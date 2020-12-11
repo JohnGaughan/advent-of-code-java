@@ -16,6 +16,7 @@
  */
 package net.johngaughan.advent_of_code;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -33,6 +34,11 @@ import java.util.Set;
  * @author John Gaughan &lt;john@johngaughan.net&gt;
  */
 public final class Utils {
+
+  /** Gets the path containing input data for the given year and day. Used by unit tests. */
+  static Path getInput(final int year, final int day) {
+    return Path.of("input", Integer.toString(year), "day" + (day < 10 ? "0" + day : Integer.toString(day)) + ".txt");
+  }
 
   /**
    * <p>
