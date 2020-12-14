@@ -117,7 +117,6 @@ public final class Year2020Day13 {
 
     final int earliestDeparture;
 
-    /** The inner array has the bus ID (divisor) in position 0, and the remainder in position 1. */
     final Bus[] buses;
 
     Input(final List<String> lines) {
