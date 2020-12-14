@@ -178,4 +178,16 @@ public class Year2020Tests {
     assertEquals(145_117, answer);
   }
 
+  @Test
+  public void year2020day13part1() {
+    final long answer = new Year2020Day13().calculatePart1(Utils.getInput(2020, 13));
+    assertEquals(261, answer);
+  }
+
+  @Test
+  public void year2020day13part2() {
+    final long answer = new Year2020Day13().calculatePart2(Utils.getInput(2020, 13));
+    assertEquals(807_435_693_182_510L, answer);
+  }
+
 }
