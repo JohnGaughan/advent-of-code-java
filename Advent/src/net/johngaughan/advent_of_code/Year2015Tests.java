@@ -298,4 +298,16 @@ public final class Year2015Tests {
     assertEquals(1_309, answer);
   }
 
+  @Test
+  public void year2015day23part1() {
+    final long answer = new Year2015Day23().calculatePart1(Utils.getInput(2015, 23));
+    assertEquals(307, answer);
+  }
+
+  @Test
+  public void year2015day23part2() {
+    final long answer = new Year2015Day23().calculatePart2(Utils.getInput(2015, 23));
+    assertEquals(160, answer);
+  }
+
 }
