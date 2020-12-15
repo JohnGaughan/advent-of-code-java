@@ -67,7 +67,7 @@ public final class Year2015Day20 {
   public int calculatePart2() {
     final int[] presents = new int[1_000_000];
     for (int i = 1; i < presents.length; ++i) {
-      for (int j = i, visited = 0; (j < presents.length) && (visited < 50); j += i, ++visited) {
+      for (int j = i, visited = 0; j < presents.length && visited < 50; j += i, ++visited) {
         presents[j] += i * 11;
       }
     }

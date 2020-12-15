@@ -45,13 +45,13 @@ public final class Year2020Day02 {
   public long calculatePart1(final Path path) {
     return parse(path).stream().filter(t -> {
       final long count = t.password.chars().filter(c -> c == t.ch).count();
-      return (t.n1 <= count) && (count <= t.n2);
+      return t.n1 <= count && count <= t.n2;
     }).count();
   }
 
   public long calculatePart2(final Path path) {
     return parse(path).stream().filter(
-      t -> (t.password.charAt(t.n1 - 1) == t.ch) ^ (t.password.charAt(t.n2 - 1) == t.ch)).count();
+      t -> t.password.charAt(t.n1 - 1) == t.ch ^ t.password.charAt(t.n2 - 1) == t.ch).count();
   }
 
   /** Parse the file located at the provided path location. */

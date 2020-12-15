@@ -54,7 +54,7 @@ public final class Year2015Day22 {
      * If this is hardmode, reduce player health prior to calculating start of turn effects but only on the player turn.
      * The timing matters here because the boss can die when calculating effects, which would end the game in a win.
      */
-    if (state.hardmode && ((state.turn % 2) != 0)) {
+    if (state.hardmode && state.turn % 2 != 0) {
       --state.playerHp;
       if (state.playerHp < 1) {
         // Player loses
@@ -83,9 +83,9 @@ public final class Year2015Day22 {
     }
 
     // Do the boss's turn if applicable.
-    if ((state.turn % 2) == 0) {
+    if (state.turn % 2 == 0) {
       // Boss attacks player. Works the same no matter what.
-      int damage = Math.max(1, state.bossDamage - state.playerArmor);
+      final int damage = Math.max(1, state.bossDamage - state.playerArmor);
       state.playerHp -= damage;
       if (state.playerHp < 1) {
         // Player loses
@@ -137,7 +137,7 @@ public final class Year2015Day22 {
         }
       }
 
-      if ((state.playerMana >= Spell.SHIELD.mana) && (state.shieldTurns == 0)) {
+      if (state.playerMana >= Spell.SHIELD.mana && state.shieldTurns == 0) {
         final GameState newState = new GameState(state);
         newState.playerMana -= Spell.SHIELD.mana;
         newState.manaSpent += Spell.SHIELD.mana;
@@ -148,7 +148,7 @@ public final class Year2015Day22 {
         }
       }
 
-      if ((state.playerMana >= Spell.POISON.mana) && (state.poisonTurns == 0)) {
+      if (state.playerMana >= Spell.POISON.mana && state.poisonTurns == 0) {
         final GameState newState = new GameState(state);
         newState.playerMana -= Spell.POISON.mana;
         newState.manaSpent += Spell.POISON.mana;
@@ -158,7 +158,7 @@ public final class Year2015Day22 {
         }
       }
 
-      if ((state.playerMana >= Spell.RECHARGE.mana) && (state.rechargeTurns == 0)) {
+      if (state.playerMana >= Spell.RECHARGE.mana && state.rechargeTurns == 0) {
         final GameState newState = new GameState(state);
         newState.playerMana -= Spell.RECHARGE.mana;
         newState.manaSpent += Spell.RECHARGE.mana;
@@ -213,8 +213,8 @@ public final class Year2015Day22 {
 
     /** Construct from program input, using default values where not specified. */
     GameState(final Iterable<String> lines) {
-      for (String line : lines) {
-        String[] tokens = SPLIT.split(line);
+      for (final String line : lines) {
+        final String[] tokens = SPLIT.split(line);
         if (tokens[0].startsWith("H")) {
           bossHp = Integer.parseInt(tokens[1]);
         }
@@ -260,7 +260,7 @@ public final class Year2015Day22 {
     static final int minimumManaCost() {
       if (minimumManaCost == null) {
         int min = Integer.MAX_VALUE;
-        for (Spell spell : values()) {
+        for (final Spell spell : values()) {
           min = Math.min(min, spell.mana);
         }
         minimumManaCost = Integer.valueOf(min);

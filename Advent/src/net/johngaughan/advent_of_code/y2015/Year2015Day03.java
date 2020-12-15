@@ -120,10 +120,10 @@ public final class Year2015Day03 {
   /** Enumeration of movement directions. */
   private static enum Direction {
 
-                                 UP('^'),
-                                 DOWN('v'),
-                                 LEFT('<'),
-                                 RIGHT('>');
+    UP('^'),
+    DOWN('v'),
+    LEFT('<'),
+    RIGHT('>');
 
     public static Direction valueOf(final int codePoint) {
       for (final Direction d : values()) {
@@ -170,7 +170,7 @@ public final class Year2015Day03 {
       }
       else {
         final Coordinates o = (Coordinates) obj;
-        return (x == o.x) && (y == o.y);
+        return x == o.x && y == o.y;
       }
     }
 

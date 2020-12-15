@@ -100,9 +100,9 @@ public final class Year2015Day09 {
   private Map<String, Map<String, Long>> parse(final Path path) {
     try {
       final Map<String, Map<String, Long>> distances = new HashMap<>();
-      for (String line : Files.readAllLines(path)) {
-        String[] tokens = SPLIT.split(line);
-        Long distance = Long.valueOf(tokens[2]);
+      for (final String line : Files.readAllLines(path)) {
+        final String[] tokens = SPLIT.split(line);
+        final Long distance = Long.valueOf(tokens[2]);
         if (!distances.containsKey(tokens[0])) {
           distances.put(tokens[0], new HashMap<>());
         }

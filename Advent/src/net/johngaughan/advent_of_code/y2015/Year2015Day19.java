@@ -67,9 +67,9 @@ public final class Year2015Day19 {
   public int calculatePart1(final Path path) {
     final Input input = parse(path);
     final Set<String> molecules = new HashSet<>();
-    for (Rule rule : input.rules) {
+    for (final Rule rule : input.rules) {
       for (int i = 0; i < input.molecule.length(); ++i) {
-        int j = input.molecule.indexOf(rule.left, i);
+        final int j = input.molecule.indexOf(rule.left, i);
         if (j >= 0) {
           final StringBuilder str = new StringBuilder();
           str.append(input.molecule.substring(0, j));
@@ -88,7 +88,7 @@ public final class Year2015Day19 {
     String str = input.molecule;
     int replacements = 0;
     while (!"e".equals(str)) {
-      for (Rule rule : input.rules) {
+      for (final Rule rule : input.rules) {
         int found;
         while ((found = str.indexOf(rule.right)) >= 0) {
           final StringBuilder temp = new StringBuilder(input.molecule.length());
@@ -163,7 +163,7 @@ public final class Year2015Day19 {
         return false;
       }
       else {
-        Rule other = (Rule) obj;
+        final Rule other = (Rule) obj;
         return Objects.equals(left, other.left) && Objects.equals(right, other.right);
       }
     }

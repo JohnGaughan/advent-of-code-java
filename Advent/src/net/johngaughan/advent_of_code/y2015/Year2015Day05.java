@@ -57,7 +57,7 @@ public final class Year2015Day05 {
     boolean repeated = false;
     for (int i = 0; i < str.length(); ++i) {
       final char c = str.charAt(i);
-      if ((c == 'a') || (c == 'e') || (c == 'i') || (c == 'o') || (c == 'u')) {
+      if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
         ++vowels;
       }
       if (i > 0) {
@@ -65,13 +65,13 @@ public final class Year2015Day05 {
         if (previous == c) {
           repeated = true;
         }
-        if (((previous == 'a') && (c == 'b')) || ((previous == 'c') && (c == 'd')) || ((previous == 'p') && (c == 'q'))
-          || ((previous == 'x') && (c == 'y'))) {
+        if (previous == 'a' && c == 'b' || previous == 'c' && c == 'd' || previous == 'p' && c == 'q'
+          || previous == 'x' && c == 'y') {
           return false;
         }
       }
     }
-    return (vowels >= 3) && repeated;
+    return vowels >= 3 && repeated;
   }
 
   public long calculatePart2(final Path path) {
@@ -85,18 +85,18 @@ public final class Year2015Day05 {
     boolean pairRepeat = false;
     boolean singleRepeat = false;
     final Map<String, Set<Integer>> pairs = new HashMap<>();
-    for (int i = 0; (i < str.length()) && !(singleRepeat && pairRepeat); ++i) {
+    for (int i = 0; i < str.length() && !(singleRepeat && pairRepeat); ++i) {
       // Check for a single repeat two indices apart, e.g. "aba"
-      if ((i > 1) && !singleRepeat) {
+      if (i > 1 && !singleRepeat) {
         singleRepeat = str.charAt(i) == str.charAt(i - 2);
       }
       // Check for a pair of characters already existing.
-      if ((i < (str.length() - 1)) && !pairRepeat) {
+      if (i < str.length() - 1 && !pairRepeat) {
         final String thisPair = str.substring(i, i + 2);
         if (pairs.containsKey(thisPair)) {
           for (final int previousIndex : pairs.get(thisPair)) {
             // No overlap
-            if ((previousIndex + 2) <= i) {
+            if (previousIndex + 2 <= i) {
               pairRepeat = true;
               break;
             }

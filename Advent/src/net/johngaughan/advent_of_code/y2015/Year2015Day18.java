@@ -66,14 +66,14 @@ public final class Year2015Day18 {
 
   /** Transform the cells into a new generation. */
   private boolean[][] transform(final boolean[][] input, final boolean cornersAlwaysLive) {
-    boolean[][] output = new boolean[SIZE][SIZE];
+    final boolean[][] output = new boolean[SIZE][SIZE];
     for (int i = 0; i < SIZE; ++i) {
       for (int j = 0; j < SIZE; ++j) {
         // Count neighbors.
-        boolean hasAbove = i > 0;
-        boolean hasBelow = i < (SIZE - 1);
-        boolean hasLeft = j > 0;
-        boolean hasRight = j < (SIZE - 1);
+        final boolean hasAbove = i > 0;
+        final boolean hasBelow = i < SIZE - 1;
+        final boolean hasLeft = j > 0;
+        final boolean hasRight = j < SIZE - 1;
         int neighbors = 0;
         if (hasAbove) {
           if (hasLeft && input[i - 1][j - 1]) {
@@ -104,7 +104,7 @@ public final class Year2015Day18 {
           }
         }
         if (input[i][j]) {
-          output[i][j] = (neighbors == 2) || (neighbors == 3);
+          output[i][j] = neighbors == 2 || neighbors == 3;
         }
         else {
           output[i][j] = neighbors == 3;
@@ -123,8 +123,8 @@ public final class Year2015Day18 {
   /** Count the number of cells currently alive. */
   private int countLightsOn(final boolean[][] input) {
     int result = 0;
-    for (boolean[] row : input) {
-      for (boolean light : row) {
+    for (final boolean[] row : input) {
+      for (final boolean light : row) {
         if (light) {
           ++result;
         }
@@ -136,7 +136,7 @@ public final class Year2015Day18 {
   /** Parse the file located at the provided path location. */
   private boolean[][] parse(final Path path) {
     try {
-      boolean[][] grid = Files.readAllLines(path).stream().map(s -> parse(s)).toArray(boolean[][]::new);
+      final boolean[][] grid = Files.readAllLines(path).stream().map(s -> parse(s)).toArray(boolean[][]::new);
       if (grid.length != SIZE) {
         throw new IllegalArgumentException("Not a " + SIZE + "x" + SIZE + " grid");
       }
@@ -157,7 +157,7 @@ public final class Year2015Day18 {
     }
     final boolean[] result = new boolean[SIZE];
     for (int i = 0; i < result.length; ++i) {
-      result[i] = (line.codePointAt(i) == '#');
+      result[i] = line.codePointAt(i) == '#';
     }
     return result;
   }

@@ -61,9 +61,9 @@ public final class Year2020Day13 {
 
   public int calculatePart1(final Path path) {
     final Input input = parse(path);
-    for (int i = input.earliestDeparture; (i < Integer.MAX_VALUE) && (i >= 0); ++i) {
+    for (int i = input.earliestDeparture; i < Integer.MAX_VALUE && i >= 0; ++i) {
       for (final Bus bus : input.buses) {
-        if ((i % bus.id) == 0) {
+        if (i % bus.id == 0) {
           return (i - input.earliestDeparture) * bus.id;
         }
       }
@@ -76,7 +76,7 @@ public final class Year2020Day13 {
     long increment = buses[0].id;
     long time = buses[0].id + buses[0].offset;
     for (int i = 1; i < buses.length; ++i) {
-      while (((time + buses[i].offset) % buses[i].id) != 0) {
+      while ((time + buses[i].offset) % buses[i].id != 0) {
         time += increment;
       }
       increment *= buses[i].id;
@@ -123,7 +123,7 @@ public final class Year2020Day13 {
       earliestDeparture = Integer.parseInt(lines.get(0));
       final String[] tokens = SPLIT.split(lines.get(1));
       int totalBuses = tokens.length;
-      for (String token : tokens) {
+      for (final String token : tokens) {
         if ("x".equals(token)) {
           --totalBuses;
         }

@@ -66,9 +66,9 @@ public final class Year2015Day15 {
   private Set<Integer> scores(final List<Rule> rules, final List<Integer> quantities, final int totalQuantity, final int totalCalories) {
     final Set<Integer> scores = new HashSet<>();
     // Only one ingredient left: add the remaining quantity and calculate.
-    if (rules.size() == (quantities.size() + 1)) {
+    if (rules.size() == quantities.size() + 1) {
       int remainingQuantity = totalQuantity;
-      for (int quantity : quantities) {
+      for (final int quantity : quantities) {
         remainingQuantity -= quantity;
       }
       final List<Integer> newQuantities = new ArrayList<>(quantities);
@@ -87,15 +87,15 @@ public final class Year2015Day15 {
         texture += rule.texture * qty;
         calories += rule.calories * qty;
       }
-      if ((capacity > 0) && (durability > 0) && (flavor > 0) && (texture > 0)
-        && ((totalCalories < 0) || (totalCalories == calories))) {
+      if (capacity > 0 && durability > 0 && flavor > 0 && texture > 0
+        && (totalCalories < 0 || totalCalories == calories)) {
         scores.add(capacity * durability * flavor * texture);
       }
     }
     // Multiple ingredients left: iterate over possible quantities.
     else {
       int remainingQuantity = totalQuantity;
-      for (int quantity : quantities) {
+      for (final int quantity : quantities) {
         remainingQuantity -= quantity;
       }
       for (int i = 0; i <= remainingQuantity; ++i) {

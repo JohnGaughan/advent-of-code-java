@@ -53,7 +53,7 @@ public final class Year2015Day11 {
   private static final int[] INPUT = valueOf("vzbxkghb");
 
   public String calculatePart1() {
-    int[] password = getNextPassword(INPUT);
+    final int[] password = getNextPassword(INPUT);
     return valueOf(password);
   }
 
@@ -81,13 +81,13 @@ public final class Year2015Day11 {
     boolean hasTwoRepeats = false;
     int repeat = 0;
     for (int i = 0; i < password.length; ++i) {
-      if ((password[i] == 'i') || (password[i] == 'o') || (password[i] == 'l')) {
+      if (password[i] == 'i' || password[i] == 'o' || password[i] == 'l') {
         return false;
       }
-      if (!hasIncreasingSubstring && (i > 1)) {
-        hasIncreasingSubstring = (password[i - 2] == (password[i - 1] - 1)) && (password[i - 1] == (password[i] - 1));
+      if (!hasIncreasingSubstring && i > 1) {
+        hasIncreasingSubstring = password[i - 2] == password[i - 1] - 1 && password[i - 1] == password[i] - 1;
       }
-      if (!hasTwoRepeats && (i > 0) && (password[i - 1] == password[i]) && (password[i] != repeat)) {
+      if (!hasTwoRepeats && i > 0 && password[i - 1] == password[i] && password[i] != repeat) {
         if (repeat == 0) {
           repeat = password[i];
         }
@@ -106,16 +106,16 @@ public final class Year2015Day11 {
   private int[] increment(final int[] password) {
     // This is basically an eight digit, radix-26 number. Encode it into a long: int will overflow.
     long encoded = 0;
-    for (int i = 0; i < password.length; ++i) {
+    for (final int element : password) {
       encoded *= 26;
-      encoded += (password[i] - A);
+      encoded += element - A;
     }
     ++encoded;
 
     // Now parse it back into a string.
     final int[] str = new int[password.length];
     for (int i = 0; i < password.length; ++i) {
-      str[str.length - i - 1] = (int) (((encoded % 26)) + A);
+      str[str.length - i - 1] = (int) (encoded % 26 + A);
       encoded /= 26;
     }
     return str;
@@ -127,7 +127,7 @@ public final class Year2015Day11 {
    */
   private static String valueOf(final int[] codePoints) {
     final StringBuilder str = new StringBuilder(codePoints.length);
-    for (int codePoint : codePoints) {
+    for (final int codePoint : codePoints) {
       str.appendCodePoint(codePoint);
     }
     return str.toString();
@@ -138,7 +138,7 @@ public final class Year2015Day11 {
    * points.
    */
   private static int[] valueOf(final String str) {
-    int[] value = new int[str.length()];
+    final int[] value = new int[str.length()];
     for (int i = 0; i < str.length(); ++i) {
       value[i] = str.codePointAt(i);
     }

@@ -55,12 +55,12 @@ public final class Year2015Day08 {
   private int countParsedCharacters(final String line) {
     int characters = 0;
     // Iterate over everything inside the apostrophes containing the string
-    for (int i = 1; i < (line.length() - 1); ++i) {
+    for (int i = 1; i < line.length() - 1; ++i) {
       ++characters;
       if (line.codePointAt(i) == '\\') {
         // If this character begins an escape, advance the loop pointer appropriately to skip characters.
         ++i;
-        if (((i + 2) < (line.length() - 1)) && (line.codePointAt(i) == 'x')) {
+        if (i + 2 < line.length() - 1 && line.codePointAt(i) == 'x') {
           i += 2;
         }
       }
@@ -77,8 +77,8 @@ public final class Year2015Day08 {
 
   private int countReverseParsedCharacters(final String line) {
     int characters = 2;
-    for (int ch : line.toCharArray()) {
-      if ((ch == '"') || (ch == '\\')) {
+    for (final int ch : line.toCharArray()) {
+      if (ch == '"' || ch == '\\') {
         ++characters;
       }
       ++characters;

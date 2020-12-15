@@ -71,7 +71,7 @@ public final class Year2020Day01 {
             continue;
           }
         }
-        if ((i1 + j1) > 2020) {
+        if (i1 + j1 > 2020) {
           continue;
         }
       }

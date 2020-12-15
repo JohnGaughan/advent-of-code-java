@@ -113,9 +113,9 @@ public final class Year2015Day06 {
 
   /** Enumeration of commands to change light statuses. */
   private static enum Command {
-                               OFF,
-                               ON,
-                               TOGGLE;
+    OFF,
+    ON,
+    TOGGLE;
   }
 
   /** Represents one discrete action to perform on the lights. */

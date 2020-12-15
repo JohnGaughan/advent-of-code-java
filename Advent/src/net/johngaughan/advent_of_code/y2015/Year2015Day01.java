@@ -82,11 +82,11 @@ public final class Year2015Day01 {
   /** A direction that Santa can take. */
   private static enum Direction {
 
-                                 UP('('),
-                                 DOWN(')');
+    UP('('),
+    DOWN(')');
 
     public static Direction valueOf(final int c) {
-      for (Direction d : values()) {
+      for (final Direction d : values()) {
         if (d.ch == c) {
           return d;
         }

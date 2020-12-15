@@ -108,7 +108,7 @@ public final class Year2020Day04 {
         return false;
       }
       final int numValue = Integer.parseInt(value);
-      return (min <= numValue) && (numValue <= max);
+      return min <= numValue && numValue <= max;
     }
 
     /** Validate the height field. */
@@ -118,9 +118,9 @@ public final class Year2020Day04 {
       }
       final int num = Integer.parseInt(value.substring(0, value.length() - 2));
       if ("cm".equalsIgnoreCase(value.substring(value.length() - 2))) {
-        return (150 <= num) && (num <= 193);
+        return 150 <= num && num <= 193;
       }
-      return (59 <= num) && (num <= 76);
+      return 59 <= num && num <= 76;
     }
 
   }

@@ -98,11 +98,11 @@ public final class Year2020Day09 {
 
   /** Get whether any two of the provided numbers can add up to the number given. */
   private boolean canSum(final long n, final List<Long> numbers) {
-    for (int i = 0; i < (numbers.size() - 1); ++i) {
+    for (int i = 0; i < numbers.size() - 1; ++i) {
       for (int j = i + 1; j < numbers.size(); ++j) {
         final long n_i = numbers.get(i);
         final long n_j = numbers.get(j);
-        if (n == (n_i + n_j)) {
+        if (n == n_i + n_j) {
           return true;
         }
       }

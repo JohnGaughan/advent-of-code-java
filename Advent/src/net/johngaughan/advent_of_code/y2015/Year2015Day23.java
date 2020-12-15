@@ -52,7 +52,7 @@ public final class Year2015Day23 {
   private int runProgram(final Path path, final int initialA) {
     final List<Instruction> instructions = parse(path);
     final MachineState state = new MachineState(initialA);
-    while ((state.i >= 0) && (state.i < instructions.size())) {
+    while (state.i >= 0 && state.i < instructions.size()) {
       final Instruction instruction = instructions.get(state.i);
       instruction.op.exec(state, instruction.reg, instruction.arg);
     }
@@ -100,7 +100,7 @@ public final class Year2015Day23 {
     final int arg;
 
     Instruction(final String input) {
-      String[] tokens = SPLIT.split(input.replace(",", ""));
+      final String[] tokens = SPLIT.split(input.replace(",", ""));
       op = Operation.valueOf(tokens[0]);
       if ("a".equals(tokens[1]) || "b".equals(tokens[1])) {
         reg = Register.valueOf(tokens[1]);
@@ -190,10 +190,10 @@ public final class Year2015Day23 {
       @Override
       public void exec(final MachineState state, final Register reg, final int arg) {
         // Jump to an instruction offset from the current one if the register's value is even.
-        if ((reg == Register.a) && ((state.a % 2) == 0)) {
+        if (reg == Register.a && state.a % 2 == 0) {
           state.i += arg;
         }
-        else if ((reg == Register.b) && ((state.b % 2) == 0)) {
+        else if (reg == Register.b && state.b % 2 == 0) {
           state.i += arg;
         }
         else {
@@ -207,10 +207,10 @@ public final class Year2015Day23 {
       @Override
       public void exec(final MachineState state, final Register reg, final int arg) {
         // Jump to an instruction offset from the current one if the register's value is one.
-        if ((reg == Register.a) && (state.a == 1)) {
+        if (reg == Register.a && state.a == 1) {
           state.i += arg;
         }
-        else if ((reg == Register.b) && (state.b == 1)) {
+        else if (reg == Register.b && state.b == 1) {
           state.i += arg;
         }
         else {

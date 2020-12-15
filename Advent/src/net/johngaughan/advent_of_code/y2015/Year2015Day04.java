@@ -48,7 +48,7 @@ public final class Year2015Day04 {
       final String plaintext = PLAINTEXT_PREFIX + i;
       final byte[] cipher = MD5.digest(plaintext.getBytes(ASCII));
       // Cipher must start with 0x00000, or the first 20 bits must be zero. This is the first two and a half bytes.
-      if ((cipher[0] == 0) && (cipher[1] == 0) && (cipher[2] >= 0) && (cipher[2] < 16)) {
+      if (cipher[0] == 0 && cipher[1] == 0 && cipher[2] >= 0 && cipher[2] < 16) {
         return i;
       }
     }
@@ -60,7 +60,7 @@ public final class Year2015Day04 {
       final String plaintext = PLAINTEXT_PREFIX + i;
       final byte[] cipher = MD5.digest(plaintext.getBytes(ASCII));
       // Cipher must start with 0x000000, or the first 24 bits must be zero. This is the first three bytes.
-      if ((cipher[0] == 0) && (cipher[1] == 0) && (cipher[2] == 0)) {
+      if (cipher[0] == 0 && cipher[1] == 0 && cipher[2] == 0) {
         return i;
       }
     }

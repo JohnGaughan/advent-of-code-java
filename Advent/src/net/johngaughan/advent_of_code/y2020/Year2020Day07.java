@@ -108,7 +108,7 @@ public final class Year2020Day07 {
     for (final Map.Entry<String, Integer> child : rules.get(color).entrySet()) {
       final String childColor = child.getKey();
       final int childCount = child.getValue();
-      count += (childCount * countBagAndChildren(childColor, rules, memoizer));
+      count += childCount * countBagAndChildren(childColor, rules, memoizer);
     }
     memoizer.put(color, count);
     return count;

@@ -43,12 +43,12 @@ public final class Year2020Day11 {
     Status[][] newGrid = parse(path);
     Status[][] oldGrid = new Status[newGrid.length][newGrid[0].length];
     while (!Arrays.deepEquals(oldGrid, newGrid)) {
-      Status[][] temp = newGrid;
+      final Status[][] temp = newGrid;
       newGrid = oldGrid;
       oldGrid = temp;
       for (int i = 0; i < oldGrid.length; ++i) {
         final boolean rowAbove = i > 0;
-        final boolean rowBelow = i < (oldGrid.length - 1);
+        final boolean rowBelow = i < oldGrid.length - 1;
         for (int j = 0; j < oldGrid[i].length; ++j) {
           newGrid[i][j] = oldGrid[i][j];
           // Skip locations that cannot possibly be updated.
@@ -56,44 +56,44 @@ public final class Year2020Day11 {
             continue;
           }
           final boolean colLeft = j > 0;
-          final boolean colRight = j < (oldGrid[i].length - 1);
+          final boolean colRight = j < oldGrid[i].length - 1;
           int neighbors = 0;
           // Above
-          if (rowAbove && colLeft && (oldGrid[i - 1][j - 1] == Status.OCCUPIED)) {
+          if (rowAbove && colLeft && oldGrid[i - 1][j - 1] == Status.OCCUPIED) {
             ++neighbors;
           }
-          if (rowAbove && (oldGrid[i - 1][j] == Status.OCCUPIED)) {
+          if (rowAbove && oldGrid[i - 1][j] == Status.OCCUPIED) {
             ++neighbors;
           }
-          if (rowAbove && colRight && (oldGrid[i - 1][j + 1] == Status.OCCUPIED)) {
+          if (rowAbove && colRight && oldGrid[i - 1][j + 1] == Status.OCCUPIED) {
             ++neighbors;
           }
 
           // Even
-          if (colLeft && (oldGrid[i][j - 1] == Status.OCCUPIED)) {
+          if (colLeft && oldGrid[i][j - 1] == Status.OCCUPIED) {
             ++neighbors;
           }
-          if (colRight && (oldGrid[i][j + 1] == Status.OCCUPIED)) {
+          if (colRight && oldGrid[i][j + 1] == Status.OCCUPIED) {
             ++neighbors;
           }
 
           // Below
-          if (rowBelow && colLeft && (oldGrid[i + 1][j - 1] == Status.OCCUPIED)) {
+          if (rowBelow && colLeft && oldGrid[i + 1][j - 1] == Status.OCCUPIED) {
             ++neighbors;
           }
-          if (rowBelow && (oldGrid[i + 1][j] == Status.OCCUPIED)) {
+          if (rowBelow && oldGrid[i + 1][j] == Status.OCCUPIED) {
             ++neighbors;
           }
-          if (rowBelow && colRight && (oldGrid[i + 1][j + 1] == Status.OCCUPIED)) {
+          if (rowBelow && colRight && oldGrid[i + 1][j + 1] == Status.OCCUPIED) {
             ++neighbors;
           }
 
           // Empty and no occupied neighbors -> occupied
-          if ((oldGrid[i][j] == Status.EMPTY) && (neighbors == 0)) {
+          if (oldGrid[i][j] == Status.EMPTY && neighbors == 0) {
             newGrid[i][j] = Status.OCCUPIED;
           }
           // Occupied and 4+ occupied neighbors -> empty
-          else if ((oldGrid[i][j] == Status.OCCUPIED) && (neighbors > 3)) {
+          else if (oldGrid[i][j] == Status.OCCUPIED && neighbors > 3) {
             newGrid[i][j] = Status.EMPTY;
           }
         }
@@ -106,7 +106,7 @@ public final class Year2020Day11 {
     Status[][] newGrid = parse(path);
     Status[][] oldGrid = new Status[newGrid.length][newGrid[0].length];
     while (!Arrays.deepEquals(oldGrid, newGrid)) {
-      Status[][] temp = newGrid;
+      final Status[][] temp = newGrid;
       newGrid = oldGrid;
       oldGrid = temp;
       for (int i = 0; i < oldGrid.length; ++i) {
@@ -119,7 +119,7 @@ public final class Year2020Day11 {
           int neighbors = 0;
 
           // Up left
-          for (int i2 = i - 1, j2 = j - 1; (i2 >= 0) && (j2 >= 0); --i2, --j2) {
+          for (int i2 = i - 1, j2 = j - 1; i2 >= 0 && j2 >= 0; --i2, --j2) {
             if (oldGrid[i2][j2] == Status.OCCUPIED) {
               ++neighbors;
               break;
@@ -141,7 +141,7 @@ public final class Year2020Day11 {
           }
 
           // Up right
-          for (int i2 = i - 1, j2 = j + 1; (i2 >= 0) && (j2 < oldGrid[i2].length); --i2, ++j2) {
+          for (int i2 = i - 1, j2 = j + 1; i2 >= 0 && j2 < oldGrid[i2].length; --i2, ++j2) {
             if (oldGrid[i2][j2] == Status.OCCUPIED) {
               ++neighbors;
               break;
@@ -174,7 +174,7 @@ public final class Year2020Day11 {
           }
 
           // Down left
-          for (int i2 = i + 1, j2 = j - 1; (i2 < oldGrid.length) && (j2 >= 0); ++i2, --j2) {
+          for (int i2 = i + 1, j2 = j - 1; i2 < oldGrid.length && j2 >= 0; ++i2, --j2) {
             if (oldGrid[i2][j2] == Status.OCCUPIED) {
               ++neighbors;
               break;
@@ -196,7 +196,7 @@ public final class Year2020Day11 {
           }
 
           // Down right
-          for (int i2 = i + 1, j2 = j + 1; (i2 < oldGrid.length) && (j2 < oldGrid[i2].length); ++i2, ++j2) {
+          for (int i2 = i + 1, j2 = j + 1; i2 < oldGrid.length && j2 < oldGrid[i2].length; ++i2, ++j2) {
             if (oldGrid[i2][j2] == Status.OCCUPIED) {
               ++neighbors;
               break;
@@ -207,11 +207,11 @@ public final class Year2020Day11 {
           }
 
           // Empty and no occupied neighbors -> occupied
-          if ((oldGrid[i][j] == Status.EMPTY) && (neighbors == 0)) {
+          if (oldGrid[i][j] == Status.EMPTY && neighbors == 0) {
             newGrid[i][j] = Status.OCCUPIED;
           }
           // Occupied and 5+ occupied neighbors -> empty
-          else if ((oldGrid[i][j] == Status.OCCUPIED) && (neighbors > 4)) {
+          else if (oldGrid[i][j] == Status.OCCUPIED && neighbors > 4) {
             newGrid[i][j] = Status.EMPTY;
           }
         }
@@ -223,8 +223,8 @@ public final class Year2020Day11 {
   /** Count the number of items in the grid that match the given status. */
   private int count(final Status[][] grid, final Status match) {
     int count = 0;
-    for (Status[] row : grid) {
-      for (Status element : row) {
+    for (final Status[] row : grid) {
+      for (final Status element : row) {
         if (element == match) {
           ++count;
         }
@@ -254,7 +254,7 @@ public final class Year2020Day11 {
     NO_SEAT('.');
 
     static Status valueOf(final int codePoint) {
-      for (Status status : values()) {
+      for (final Status status : values()) {
         if (status.c == codePoint) {
           return status;
         }

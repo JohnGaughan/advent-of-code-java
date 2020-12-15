@@ -55,8 +55,8 @@ public final class Year2020Day10 {
     int previous = 0;
     int diff1 = 0;
     int diff3 = 0;
-    for (int i : parse(path)) {
-      int diff = i - previous;
+    for (final int i : parse(path)) {
+      final int diff = i - previous;
       if (diff == 1) {
         ++diff1;
       }
@@ -80,7 +80,7 @@ public final class Year2020Day10 {
     // Iterate the numbers, skipping the base case.
     for (int i = 1; i < numbers.length; ++i) {
       long newPaths = 0;
-      for (int j = numbers[i] + 1; j <= (numbers[i] + 3); ++j) {
+      for (int j = numbers[i] + 1; j <= numbers[i] + 3; ++j) {
         if (numCombinations.containsKey(j)) {
           newPaths += numCombinations.get(j);
         }

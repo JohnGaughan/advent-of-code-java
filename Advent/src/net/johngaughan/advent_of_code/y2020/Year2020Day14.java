@@ -49,7 +49,7 @@ public final class Year2020Day14 {
   public long calculatePart1(final Path path) {
     ValueBitmask bitmask = null;
     final Map<Long, Long> memory = new HashMap<>();
-    for (Object input : parse(path, ValueBitmask::new)) {
+    for (final Object input : parse(path, ValueBitmask::new)) {
       if (input instanceof ValueBitmask) {
         bitmask = (ValueBitmask) input;
       }
@@ -69,7 +69,7 @@ public final class Year2020Day14 {
     // If every X in the mask is a bit, this number can hold the largest number for those Xs.
     int maxReplacement = -1;
     final Map<Long, Long> memory = new HashMap<>();
-    for (Object input : parse(path, s -> s)) {
+    for (final Object input : parse(path, s -> s)) {
       if (input instanceof String) {
         bitmask = (String) input;
         final int bits = bitmask.replace("1", "").replace("0", "").length();
@@ -93,7 +93,7 @@ public final class Year2020Day14 {
             final int ch = bitmask.charAt(i);
             if (ch == '0') {
               // 0 -> use the corresponding bit from the base address.
-              if (((baseAddress >> addressBit) & 1) == 1) {
+              if ((baseAddress >> addressBit & 1) == 1) {
                 ++address;
               }
             }

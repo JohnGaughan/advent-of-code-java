@@ -87,7 +87,7 @@ public final class Year2020Day03 {
         slope[i] = new boolean[line.length()];
         for (int j = 0; j < slope[i].length; ++j) {
           final char c = line.charAt(j);
-          slope[i][j] = (c == '#');
+          slope[i][j] = c == '#';
         }
       }
     }

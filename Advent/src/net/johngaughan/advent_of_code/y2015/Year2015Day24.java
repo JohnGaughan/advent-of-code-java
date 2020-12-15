@@ -80,7 +80,7 @@ public final class Year2015Day24 {
     }
     for (int i = minQty; i < values.length; ++i) {
       final Collection<long[]> solutions = getSubArraysAddingUpTo(values, new long[0], partitionSize, i);
-      for (Iterator<long[]> iter = solutions.iterator(); iter.hasNext();) {
+      for (final Iterator<long[]> iter = solutions.iterator(); iter.hasNext();) {
         final long[] used = iter.next();
         // This filters numbers in "used" from "values" - this works because numbers are unique in the input.
         final long[] filtered = Arrays.stream(values).filter(x -> Arrays.binarySearch(used, x) < 0).toArray();

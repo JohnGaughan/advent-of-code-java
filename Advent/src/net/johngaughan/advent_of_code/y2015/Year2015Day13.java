@@ -69,7 +69,7 @@ public class Year2015Day13 {
     int happiness = 0;
     for (int i = 0; i < ordering.size(); ++i) {
       final String left = ordering.get(i == 0 ? ordering.size() - 1 : i - 1);
-      final String right = ordering.get(i == (ordering.size() - 1) ? 0 : i + 1);
+      final String right = ordering.get(i == ordering.size() - 1 ? 0 : i + 1);
       final Map<String, Integer> guestRules = rules.get(ordering.get(i));
       happiness += guestRules.get(left);
       happiness += guestRules.get(right);
@@ -84,7 +84,7 @@ public class Year2015Day13 {
   /** Add myself to the seating rules. */
   private Map<String, Map<String, Integer>> addMyself(final Map<String, Map<String, Integer>> rules) {
     final Map<String, Integer> myRules = new HashMap<>();
-    for (Map.Entry<String, Map<String, Integer>> entry : rules.entrySet()) {
+    for (final Map.Entry<String, Map<String, Integer>> entry : rules.entrySet()) {
       myRules.put(entry.getKey(), ZERO);
       entry.getValue().put(ME, ZERO);
     }
@@ -96,7 +96,7 @@ public class Year2015Day13 {
   private Map<String, Map<String, Integer>> parse(final Path path) {
     try {
       final Map<String, Map<String, Integer>> results = new HashMap<>();
-      for (Rule rule : Files.readAllLines(path).stream().map(Rule::new).collect(Collectors.toList())) {
+      for (final Rule rule : Files.readAllLines(path).stream().map(Rule::new).collect(Collectors.toList())) {
         if (!results.containsKey(rule.person1)) {
           results.put(rule.person1, new HashMap<>());
         }
@@ -125,7 +125,7 @@ public class Year2015Day13 {
 
     Rule(final String line) {
       // chomp off the trailing period
-      String[] tokens = SPLIT.split(line.substring(0, line.length() - 1));
+      final String[] tokens = SPLIT.split(line.substring(0, line.length() - 1));
       person1 = tokens[0];
       person2 = tokens[10];
 

@@ -48,10 +48,10 @@ public final class Year2015Day02 {
   /** Calculate the area needed by a single box. */
   private long calculateWrappingPaperArea(final Dimensions d) {
     // Total surface area of the box.
-    long area = 2 * ((d.x * d.y) + (d.x * d.z) + (d.y * d.z));
+    final long area = 2 * (d.x * d.y + d.x * d.z + d.y * d.z);
 
     // Add the extra area for slack.
-    return area + ((d.x * d.y * d.z) / Math.max(d.x, Math.max(d.y, d.z)));
+    return area + d.x * d.y * d.z / Math.max(d.x, Math.max(d.y, d.z));
   }
 
   public long calculatePart2(final Path path) {
@@ -61,15 +61,15 @@ public final class Year2015Day02 {
   /** Calculate the ribbon length needed by a single box. */
   private long calculateRibbonLength(final Dimensions d) {
     // Perimeters
-    final long p1 = (2 * d.x) + (2 * d.y);
-    final long p2 = (2 * d.x) + (2 * d.z);
-    final long p3 = (2 * d.y) + (2 * d.z);
+    final long p1 = 2 * d.x + 2 * d.y;
+    final long p2 = 2 * d.x + 2 * d.z;
+    final long p3 = 2 * d.y + 2 * d.z;
 
     // Shortest perimeter
-    long length = Math.min(p1, Math.min(p2, p3));
+    final long length = Math.min(p1, Math.min(p2, p3));
 
     // Extra for the bow
-    return length + (d.x * d.y * d.z);
+    return length + d.x * d.y * d.z;
   }
 
   /** Parse the file located at the provided path location. */
@@ -97,7 +97,7 @@ public final class Year2015Day02 {
     public final long z;
 
     Dimensions(final String line) {
-      String[] s = SPLIT.split(line);
+      final String[] s = SPLIT.split(line);
       x = Long.parseLong(s[0]);
       y = Long.parseLong(s[1]);
       z = Long.parseLong(s[2]);

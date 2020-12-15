@@ -90,11 +90,11 @@ public final class Year2020Day08 {
       // See if uncorrupting the current instruction will result in the next operation being guaranteed to halt. If so,
       // uncorrupt it and mark a flag so we do not uncorrupt more than one instruction.
       if (!alreadyUncorrupted) {
-        if ((op == Operation.jmp) && terminals.contains(location + 1)) {
+        if (op == Operation.jmp && terminals.contains(location + 1)) {
           op = Operation.nop;
           alreadyUncorrupted = true;
         }
-        else if ((op == Operation.nop) && terminals.contains(location + next.arg)) {
+        else if (op == Operation.nop && terminals.contains(location + next.arg)) {
           op = Operation.jmp;
           alreadyUncorrupted = true;
         }
@@ -123,11 +123,11 @@ public final class Year2020Day08 {
     for (int i = 0; i <= instructions.size(); ++i) {
       mapping.put(i, new HashSet<>());
     }
-    for (Map.Entry<Integer, Instruction> entry : instructions.entrySet()) {
+    for (final Map.Entry<Integer, Instruction> entry : instructions.entrySet()) {
       final Integer instructionNumber = entry.getKey();
       final Instruction instruction = entry.getValue();
       final Integer target;
-      if ((instruction.op == Operation.acc) || (instruction.op == Operation.nop)) {
+      if (instruction.op == Operation.acc || instruction.op == Operation.nop) {
         target = instructionNumber + 1;
       }
       else {
@@ -141,7 +141,7 @@ public final class Year2020Day08 {
   /** Get the number of all instructions that are terminal, meaning they lead to the program halting. */
   private Set<Integer> getTerminalInstructions(final Integer instruction, final Map<Integer, Instruction> instructions, final Map<Integer, Set<Integer>> instructionMapping) {
     final Set<Integer> terminals = new HashSet<>();
-    for (Integer nonTerminal : instructionMapping.get(instruction)) {
+    for (final Integer nonTerminal : instructionMapping.get(instruction)) {
       terminals.add(nonTerminal);
       terminals.addAll(getTerminalInstructions(nonTerminal, instructions, instructionMapping));
     }
@@ -187,9 +187,9 @@ public final class Year2020Day08 {
 
   /** Represents the operations supported. */
   private static enum Operation {
-                                 acc,
-                                 jmp,
-                                 nop;
+    acc,
+    jmp,
+    nop;
   }
 
 }

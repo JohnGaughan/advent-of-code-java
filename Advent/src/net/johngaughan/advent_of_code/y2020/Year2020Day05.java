@@ -46,7 +46,7 @@ import java.nio.file.Path;
 public final class Year2020Day05 {
 
   public long calculatePart1(final Path path) {
-    int[] values = parse(path);
+    final int[] values = parse(path);
     return values[values.length - 1];
   }
 

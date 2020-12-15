@@ -138,12 +138,12 @@ public final class Year2015Day07 {
 
   /** Logical operators */
   private static enum Operator {
-                                ASSIGN,
-                                AND,
-                                OR,
-                                NOT,
-                                LSHIFT,
-                                RSHIFT;
+    ASSIGN,
+    AND,
+    OR,
+    NOT,
+    LSHIFT,
+    RSHIFT;
   }
 
   /** One operation including operator and operands */

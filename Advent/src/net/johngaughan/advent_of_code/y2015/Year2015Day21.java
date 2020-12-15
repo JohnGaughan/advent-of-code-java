@@ -61,10 +61,10 @@ public final class Year2015Day21 {
     final Actor bossOriginal = parse(path);
     int bestGoldAmount = Integer.MIN_VALUE;
     // I don't like four nested loops here, but the inputs are small.
-    for (Item weapon : WEAPONS) {
-      for (Item armor : ARMOR) {
-        for (Item ring1 : RINGS) {
-          for (Item ring2 : RINGS) {
+    for (final Item weapon : WEAPONS) {
+      for (final Item armor : ARMOR) {
+        for (final Item ring1 : RINGS) {
+          for (final Item ring2 : RINGS) {
             // Cannot duplicate rings, but no rings is fine.
             if (!"None".equals(ring1.name) && ring1.equals(ring2)) {
               continue;
@@ -92,11 +92,11 @@ public final class Year2015Day21 {
 
     // Don't actually need to fight, just figure out how many turns each actor will live.
     int turnsUntilBossDies = boss.hp / playerDamage;
-    if ((boss.hp % playerDamage) > 0) {
+    if (boss.hp % playerDamage > 0) {
       ++turnsUntilBossDies;
     }
     int turnsUntilPlayerDies = player.hp / bossDamage;
-    if ((player.hp % bossDamage) > 0) {
+    if (player.hp % bossDamage > 0) {
       ++turnsUntilPlayerDies;
     }
 
@@ -132,15 +132,15 @@ public final class Year2015Day21 {
 
     Actor(final Item... items) {
       hp = 100;
-      for (Item item : items) {
+      for (final Item item : items) {
         damage += item.damage;
         armor += item.armor;
       }
     }
 
     Actor(final String input) {
-      for (String line : SPLIT_STRING.split(input)) {
-        String[] tokens = SPLIT_LINE.split(line);
+      for (final String line : SPLIT_STRING.split(input)) {
+        final String[] tokens = SPLIT_LINE.split(line);
         if ("Hit Points".equals(tokens[0])) {
           hp = Integer.parseInt(tokens[1]);
         }

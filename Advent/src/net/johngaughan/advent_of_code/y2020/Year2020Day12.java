@@ -46,7 +46,7 @@ public final class Year2020Day12 {
     int x = 0;
     int y = 0;
     Direction d = Direction.EAST;
-    for (Input input : parse(path)) {
+    for (final Input input : parse(path)) {
       if (input.action == Action.N) {
         y += input.arg;
       }
@@ -59,7 +59,7 @@ public final class Year2020Day12 {
       else if (input.action == Action.W) {
         x -= input.arg;
       }
-      else if ((input.action == Action.L) || (input.action == Action.R)) {
+      else if (input.action == Action.L || input.action == Action.R) {
         for (int i = 0; i < getNumberOfRightTurns(input.action, input.arg); ++i) {
           d = turnRight(d);
         }
@@ -87,7 +87,7 @@ public final class Year2020Day12 {
     int y_s = 0;
     int x_w = 10;
     int y_w = 1;
-    for (Input input : parse(path)) {
+    for (final Input input : parse(path)) {
       if (input.action == Action.N) {
         y_w += input.arg;
       }
@@ -100,7 +100,7 @@ public final class Year2020Day12 {
       else if (input.action == Action.W) {
         x_w -= input.arg;
       }
-      else if ((input.action == Action.L) || (input.action == Action.R)) {
+      else if (input.action == Action.L || input.action == Action.R) {
         for (int i = 0; i < getNumberOfRightTurns(input.action, input.arg); ++i) {
           final int old_x = x_w;
           x_w = y_w;
@@ -117,7 +117,7 @@ public final class Year2020Day12 {
 
   /** Get the number of right turns for the given turning direction and number of degrees. */
   private int getNumberOfRightTurns(final Action action, final int degrees) {
-    int turns = (degrees / 90) % 4;
+    int turns = degrees / 90 % 4;
     if (action == Action.L) {
       turns = 4 - turns;
     }

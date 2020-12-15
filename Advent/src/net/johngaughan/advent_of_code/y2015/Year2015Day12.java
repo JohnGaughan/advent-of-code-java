@@ -20,7 +20,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -71,8 +70,7 @@ public final class Year2015Day12 {
   /** Given an array from a JSON string, extract all of its numbers. */
   private Collection<Integer> extractNumbers(final JSONArray array, final boolean ignoreRed) {
     final Collection<Integer> numbers = new ArrayList<>();
-    for (Iterator<Object> iter = array.iterator(); iter.hasNext();) {
-      final Object element = iter.next();
+    for (final Object element : array) {
       numbers.addAll(extractNumbers(element, ignoreRed));
     }
     return numbers;
@@ -83,16 +81,16 @@ public final class Year2015Day12 {
     final Collection<Integer> numbers = new ArrayList<>();
     boolean skip = false;
     if (ignoreRed) {
-      for (String key : obj.keySet()) {
-        Object value = obj.opt(key);
-        if ((value instanceof String) && "red".equals(value)) {
+      for (final String key : obj.keySet()) {
+        final Object value = obj.opt(key);
+        if (value instanceof String && "red".equals(value)) {
           skip = true;
           break;
         }
       }
     }
     if (!skip) {
-      for (String key : obj.keySet()) {
+      for (final String key : obj.keySet()) {
         numbers.addAll(extractNumbers(obj.get(key), ignoreRed));
       }
     }
@@ -102,7 +100,7 @@ public final class Year2015Day12 {
   /** Parse the file located at the provided path location. */
   private JSONArray parse(final Path path) {
     try {
-      JSONTokener tokener = new JSONTokener(Files.readString(path));
+      final JSONTokener tokener = new JSONTokener(Files.readString(path));
       return new JSONArray(tokener);
     }
     catch (final RuntimeException ex) {

@@ -100,7 +100,7 @@ public final class Year2015Day16 {
       if (!attributes.containsKey(key)) {
         return true;
       }
-      return attributes.containsKey(key) && (value == attributes.get(key));
+      return attributes.containsKey(key) && value == attributes.get(key);
     }
 
     /** Convenience method for use in stream predicates. */
@@ -108,7 +108,7 @@ public final class Year2015Day16 {
       if (!attributes.containsKey(key)) {
         return true;
       }
-      int keyValue = attributes.get(key);
+      final int keyValue = attributes.get(key);
       if ("cats".equals(key) || "trees".equals(key)) {
         return value < keyValue;
       }

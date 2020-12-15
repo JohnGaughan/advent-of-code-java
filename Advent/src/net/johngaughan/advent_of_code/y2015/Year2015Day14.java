@@ -64,7 +64,7 @@ public final class Year2015Day14 {
     for (int i = 1; i <= TIME; ++i) {
       // Update the locations
       int farthest = 0;
-      for (Rule rule : rules) {
+      for (final Rule rule : rules) {
         final int location = getPosition(rule, i);
         if (location > farthest) {
           farthest = location;
@@ -75,7 +75,7 @@ public final class Year2015Day14 {
       for (final Map.Entry<String, Integer> location : locations.entrySet()) {
         if (location.getValue() == farthest) {
           final String key = location.getKey();
-          int point = 1 + points.get(key);
+          final int point = 1 + points.get(key);
           points.put(key, point);
         }
       }
@@ -87,7 +87,7 @@ public final class Year2015Day14 {
   private int getPosition(final Rule rule, final int time) {
     final int cycles = time / rule.cycleTime;
     final int finalCycle = Math.min(time % rule.cycleTime, rule.flyTime);
-    return rule.velocity * ((cycles * rule.flyTime) + finalCycle);
+    return rule.velocity * (cycles * rule.flyTime + finalCycle);
   }
 
   /** Parse the file located at the provided path location. */

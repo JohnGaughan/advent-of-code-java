@@ -59,7 +59,7 @@ public final class Year2015Day10 {
     int groupStart = 0;
     int groupChar = input.codePointAt(0);
     for (int i = 1; i < input.length(); ++i) {
-      int current = input.codePointAt(i);
+      final int current = input.codePointAt(i);
       // Every time the character changes, save the previous group.
       if (current != groupChar) {
         str.append(i - groupStart);
