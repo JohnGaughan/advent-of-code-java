@@ -151,7 +151,7 @@ public class Year2020Tests {
   @Test
   public void year2020day10part2() {
     final long answer = new Year2020Day10().calculatePart2(Utils.getInput(2020, 10));
-    assertEquals(169_255_295_254_528l, answer);
+    assertEquals(169_255_295_254_528L, answer);
   }
 
   @Test
@@ -188,6 +188,18 @@ public class Year2020Tests {
   public void year2020day13part2() {
     final long answer = new Year2020Day13().calculatePart2(Utils.getInput(2020, 13));
     assertEquals(807_435_693_182_510L, answer);
+  }
+
+  @Test
+  public void year2020day14part1() {
+    final long answer = new Year2020Day14().calculatePart1(Utils.getInput(2020, 14));
+    assertEquals(6_559_449_933_360L, answer);
+  }
+
+  @Test
+  public void year2020day14part2() {
+    final long answer = new Year2020Day14().calculatePart2(Utils.getInput(2020, 14));
+    assertEquals(3_369_767_240_513L, answer);
   }
 
 }
