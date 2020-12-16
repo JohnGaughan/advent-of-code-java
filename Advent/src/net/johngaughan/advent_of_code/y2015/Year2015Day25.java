@@ -33,15 +33,15 @@ import java.nio.file.Path;
  * off-by-one because the program assumes f(1, 1) = 1 instead of zero, we can directly calculate any number in the first
  * column. If we go past the desired row by an amount equal to the column number, we get the diagonal containing the
  * cell we need. Since the numbers simply count up, we can add the column to that calculated value to get the number in
- * that cell. Again, we need to account for an off-by-one because the first "real" cell is given, not calculated.
+ * that cell. Again, we need to account for an off-by-one because the first "real" cell is given, not calculated. In the
+ * code below, the calculation to get that specific grid element is simplified a bit.
  * </p>
  * <p>
- * Once this is done, we simply do the math over and over to get the result. This is a general hashing algorithm that
- * performs modulo arithmetic: that means it cannot produce any value greater than the modulo, nor smaller than zero.
- * Since the multiplicand and modulo are both prime, it has a long sequence before it repeats. In this specific case,
- * the length of the sequence is half of the modulo, rounding down. This shaves off the vast majority of calculations,
- * which are not required because at one point, the calculations repeat. While the algorith completes in a few tens of
- * milliseconds in either case, I chose to optimize this because I did the math so I may as well use it.
+ * Once this is done, apply <a href="https://en.wikipedia.org/wiki/Modular_exponentiation">modular exponentiation</a> to
+ * get the result. This completes in 21 iterations instead of 1,073,157 (or over 30 million without optimizing away the
+ * repetitions) of a brute force implementation. It is far, far more efficient. Note that {@link java.math.BigInteger}
+ * has a method to compute this, but it is slower than using primitives. Since the numbers all fit in <code>long</code>,
+ * this is the better approach.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
@@ -51,25 +51,34 @@ import java.nio.file.Path;
  */
 public final class Year2015Day25 {
 
+  private static final long FIRST_VALUE = 20_151_125L;
+
   private static final long MULTIPLIER = 252_533L;
 
-  private static final long DIVISOR = 33_554_393L;
+  private static final long MODULUS = 33_554_393L;
 
-  private static final long PERIOD = DIVISOR / 2;
+  private static final long PERIOD = MODULUS >> 1;
 
   public long calculatePart1(final Path path) {
-    final Coordinate c = parse(path);
-    // Calculate the number of iterations required. Note that "n+2" in the sequence simplifies with the -2 from the row
-    // and column being one-indexed.
-    final long iterations = (((c.row + c.col - 2) * (c.row + c.col - 2) + c.row + c.col) / 2 + c.col - 2) % PERIOD;
+    final Coordinate crd = parse(path);
+    final int r = crd.row;
+    final int c = crd.col;
+    // Calculate the number of iterations required. This is simplified from a more complex equation.
+    final long iterations = (r * r + 2 * r * c + c * c - 3 * r - c) / 2;
 
-    // Hash around a million times.
-    long output = 20_151_125L;
-    for (int i = 0; i < iterations; ++i) {
-      output *= MULTIPLIER;
-      output %= DIVISOR;
+    // Use modular exponentiation to calculate it.
+    long result = 1;
+    long base = MULTIPLIER;
+    long exponent = iterations % PERIOD;
+    while (exponent > 0) {
+      if ((exponent & 1) == 1) {
+        result = result * base % MODULUS;
+      }
+      exponent >>= 1;
+      base = base * base % MODULUS;
     }
-    return output;
+    result = FIRST_VALUE * result % MODULUS;
+    return result;
   }
 
   /** Parse the file located at the provided path location. */
