@@ -44,8 +44,6 @@ package net.johngaughan.advent_of_code.y2020;
  */
 public final class Year2020Day15 {
 
-  private static final int[] INPUT = new int[] { 1, 12, 0, 20, 8, 16 };
-
   public int calculatePart1() {
     return calculate(2_020);
   }
@@ -55,15 +53,16 @@ public final class Year2020Day15 {
   }
 
   private int calculate(final int iterations) {
+    final int[] input = getInput();
     // Indices are numbers that are seen, values are the turn they were seen.
     final int[] valuesToLastSeen = new int[iterations];
-    for (int i = 0; i < INPUT.length; ++i) {
-      valuesToLastSeen[INPUT[i]] = i + 1;
+    for (int i = 0; i < input.length; ++i) {
+      valuesToLastSeen[input[i]] = i + 1;
     }
 
     // Iterate over each turn.
     int nextValue = 0;
-    for (int i = INPUT.length + 1; i < iterations; ++i) {
+    for (int i = input.length + 1; i < iterations; ++i) {
       // If this value has not been seen before: mark it as seen this turn, and next value is 0.
       if (valuesToLastSeen[nextValue] == 0) {
         valuesToLastSeen[nextValue] = i;
@@ -77,6 +76,11 @@ public final class Year2020Day15 {
       }
     }
     return nextValue;
+  }
+
+  /** Get the input data for this solution. */
+  private int[] getInput() {
+    return new int[] { 1, 12, 0, 20, 8, 16 };
   }
 
 }

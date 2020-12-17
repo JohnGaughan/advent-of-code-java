@@ -17,11 +17,12 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -44,21 +45,21 @@ import java.util.regex.Pattern;
  */
 public final class Year2015Day21 {
 
-  public int calculatePart1(final Path path) {
-    return runSimulation(path, (a, b) -> Math.min(a, b), s -> s);
+  public int calculatePart1() {
+    return runSimulation((a, b) -> Math.min(a, b), s -> s);
   }
 
-  public int calculatePart2(final Path path) {
-    return runSimulation(path, (a, b) -> Math.max(a, b), s -> !s);
+  public int calculatePart2() {
+    return runSimulation((a, b) -> Math.max(a, b), s -> !s);
   }
 
   /**
    * Run the simulation, using the provided functions to determine which gold value is more desirable and whether the
    * fight was successful.
    */
-  private int runSimulation(final Path path, final IntegerBiFunction f, final BooleanBiFunction success) {
+  private int runSimulation(final IntegerBiFunction f, final BooleanBiFunction success) {
     // Keep the original boss around so we don't need to keep parsing strings.
-    final Actor bossOriginal = parse(path);
+    final Actor bossOriginal = getInput();
     int bestGoldAmount = Integer.MIN_VALUE;
     // I don't like four nested loops here, but the inputs are small.
     for (final Item weapon : WEAPONS) {
@@ -104,10 +105,10 @@ public final class Year2015Day21 {
     return turnsUntilPlayerDies >= turnsUntilBossDies;
   }
 
-  /** Parse the file located at the provided path location. */
-  private Actor parse(final Path path) {
+  /** Get the input data for this solution. */
+  private Actor getInput() {
     try {
-      return new Actor(Files.readString(path));
+      return new Actor(Files.readString(Utils.getInput(2015, 21)));
     }
     catch (final RuntimeException ex) {
       throw ex;

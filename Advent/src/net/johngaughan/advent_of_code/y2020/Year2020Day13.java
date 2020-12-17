@@ -17,10 +17,11 @@
 package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -59,8 +60,8 @@ import java.util.regex.Pattern;
  */
 public final class Year2020Day13 {
 
-  public int calculatePart1(final Path path) {
-    final Input input = parse(path);
+  public int calculatePart1() {
+    final Input input = getInput();
     for (int i = input.earliestDeparture; i < Integer.MAX_VALUE && i >= 0; ++i) {
       for (final Bus bus : input.buses) {
         if (i % bus.id == 0) {
@@ -71,8 +72,8 @@ public final class Year2020Day13 {
     return Integer.MIN_VALUE;
   }
 
-  public long calculatePart2(final Path path) {
-    final Bus[] buses = parse(path).buses;
+  public long calculatePart2() {
+    final Bus[] buses = getInput().buses;
     long increment = buses[0].id;
     long time = buses[0].id + buses[0].offset;
     for (int i = 1; i < buses.length; ++i) {
@@ -84,10 +85,10 @@ public final class Year2020Day13 {
     return time;
   }
 
-  /** Parse the file located at the provided path location. */
-  private Input parse(final Path path) {
+  /** Get the input data for this solution. */
+  private Input getInput() {
     try {
-      return new Input(Files.readAllLines(path));
+      return new Input(Files.readAllLines(Utils.getInput(2020, 13)));
     }
     catch (final RuntimeException ex) {
       throw ex;

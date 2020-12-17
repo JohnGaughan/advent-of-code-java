@@ -17,8 +17,9 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.regex.Pattern;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -39,12 +40,12 @@ import java.util.regex.Pattern;
  */
 public final class Year2015Day22 {
 
-  public int calculatePart1(final Path path) {
-    return runSimulation(parse(path), Integer.MAX_VALUE);
+  public int calculatePart1() {
+    return runSimulation(getInput(), Integer.MAX_VALUE);
   }
 
-  public int calculatePart2(final Path path) {
-    return runSimulation(parse(path).hardmode(), Integer.MAX_VALUE);
+  public int calculatePart2() {
+    return runSimulation(getInput().hardmode(), Integer.MAX_VALUE);
   }
 
   private int runSimulation(final GameState state, final int best) {
@@ -172,10 +173,10 @@ public final class Year2015Day22 {
     }
   }
 
-  /** Parse the file located at the provided path location. */
-  private GameState parse(final Path path) {
+  /** Get the input data for this solution. */
+  private GameState getInput() {
     try {
-      return new GameState(Files.readAllLines(path));
+      return new GameState(Files.readAllLines(Utils.getInput(2015, 22)));
     }
     catch (final RuntimeException ex) {
       throw ex;

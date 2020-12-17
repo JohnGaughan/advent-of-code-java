@@ -17,7 +17,6 @@
 package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
@@ -49,15 +48,12 @@ import net.johngaughan.advent_of_code.Utils;
  */
 public final class Year2020Day04 {
 
-  private static final Set<String> REQUIRED_FIELDS =
-    Arrays.stream(new String[] { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid" }).collect(Collectors.toSet());
-
-  public long calculatePart1(final Path path) {
-    return parse(path).stream().filter(m -> m.keySet().containsAll(REQUIRED_FIELDS)).count();
+  public long calculatePart1() {
+    return getInput().stream().filter(m -> m.keySet().containsAll(REQUIRED_FIELDS)).count();
   }
 
-  public long calculatePart2(final Path path) {
-    return parse(path).stream().filter(m -> m.keySet().containsAll(REQUIRED_FIELDS)).filter(
+  public long calculatePart2() {
+    return getInput().stream().filter(m -> m.keySet().containsAll(REQUIRED_FIELDS)).filter(
       new ValidatorPart2()).count();
   }
 
@@ -125,16 +121,20 @@ public final class Year2020Day04 {
 
   }
 
+  /** Field names that are required to be in the input. */
+  private static final Set<String> REQUIRED_FIELDS =
+    Arrays.stream(new String[] { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid" }).collect(Collectors.toSet());
+
   /** Pattern that splits a line into individual tokens. */
   private static final Pattern SPLIT_LINE = Pattern.compile(" ");
 
   /** Pattern that splits a token into its key and value parts. */
   private static final Pattern SPLIT_TOKEN = Pattern.compile(":");
 
-  /** Parse the file located at the provided path location. */
-  private Collection<Map<String, String>> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private Collection<Map<String, String>> getInput() {
     try {
-      return Utils.getLineGroups(Files.readAllLines(path)).stream().map(
+      return Utils.getLineGroups(Files.readAllLines(Utils.getInput(2020, 4))).stream().map(
         line -> Arrays.stream(SPLIT_LINE.split(String.join(" ", line))).map(s -> SPLIT_TOKEN.split(s)).collect(
           Collectors.toMap(s -> s[0], s -> s[1]))).collect(Collectors.toList());
     }

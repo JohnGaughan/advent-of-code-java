@@ -17,12 +17,13 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -43,9 +44,9 @@ import java.util.stream.Collectors;
  */
 public final class Year2015Day16 {
 
-  public int calculatePart1(final Path path) {
+  public int calculatePart1() {
     final List<Rule> rules =
-      parse(path).stream().filter(r -> r.check1("children", 3) && r.check1("cats", 7) && r.check1("samoyeds", 2)
+      getInput().stream().filter(r -> r.check1("children", 3) && r.check1("cats", 7) && r.check1("samoyeds", 2)
         && r.check1("pomeranians", 3) && r.check1("akitas", 0) && r.check1("vizslas", 0) && r.check1("goldfish", 5)
         && r.check1("trees", 3) && r.check1("cars", 2) && r.check1("perfumes", 1)).collect(Collectors.toList());
     if (rules.size() == 1) {
@@ -54,9 +55,9 @@ public final class Year2015Day16 {
     return Integer.MIN_VALUE;
   }
 
-  public int calculatePart2(final Path path) {
+  public int calculatePart2() {
     final List<Rule> rules =
-      parse(path).stream().filter(r -> r.check2("children", 3) && r.check2("cats", 7) && r.check2("samoyeds", 2)
+      getInput().stream().filter(r -> r.check2("children", 3) && r.check2("cats", 7) && r.check2("samoyeds", 2)
         && r.check2("pomeranians", 3) && r.check2("akitas", 0) && r.check2("vizslas", 0) && r.check2("goldfish", 5)
         && r.check2("trees", 3) && r.check2("cars", 2) && r.check2("perfumes", 1)).collect(Collectors.toList());
     if (rules.size() == 1) {
@@ -65,10 +66,10 @@ public final class Year2015Day16 {
     return Integer.MIN_VALUE;
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<Rule> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private List<Rule> getInput() {
     try {
-      return Files.readAllLines(path).stream().map(Rule::new).collect(Collectors.toList());
+      return Files.readAllLines(Utils.getInput(2015, 16)).stream().map(Rule::new).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;
@@ -100,7 +101,7 @@ public final class Year2015Day16 {
       if (!attributes.containsKey(key)) {
         return true;
       }
-      return attributes.containsKey(key) && value == attributes.get(key);
+      return attributes.containsKey(key) && value == attributes.get(key).intValue();
     }
 
     /** Convenience method for use in stream predicates. */
@@ -108,7 +109,7 @@ public final class Year2015Day16 {
       if (!attributes.containsKey(key)) {
         return true;
       }
-      final int keyValue = attributes.get(key);
+      final int keyValue = attributes.get(key).intValue();
       if ("cats".equals(key) || "trees".equals(key)) {
         return value < keyValue;
       }

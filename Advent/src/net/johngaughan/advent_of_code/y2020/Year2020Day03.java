@@ -17,8 +17,9 @@
 package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -39,13 +40,13 @@ import java.util.List;
  */
 public final class Year2020Day03 {
 
-  public long calculatePart1(final Path path) {
-    final Slope slope = parse(path);
+  public long calculatePart1() {
+    final Slope slope = getInput();
     return slope.countTrees(1, 3);
   }
 
-  public long calculatePart2(final Path path) {
-    final Slope slope = parse(path);
+  public long calculatePart2() {
+    final Slope slope = getInput();
     long answer = slope.countTrees(1, 1);
     answer *= slope.countTrees(1, 3);
     answer *= slope.countTrees(1, 5);
@@ -54,10 +55,10 @@ public final class Year2020Day03 {
     return answer;
   }
 
-  /** Parse the file located at the provided path location. */
-  private Slope parse(final Path t) {
+  /** Get the input data for this solution. */
+  private Slope getInput() {
     try {
-      return new Slope(Files.readAllLines(t));
+      return new Slope(Files.readAllLines(Utils.getInput(2020, 3)));
     }
     catch (final RuntimeException ex) {
       throw ex;

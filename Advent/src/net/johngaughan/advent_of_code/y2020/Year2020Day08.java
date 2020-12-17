@@ -17,7 +17,6 @@
 package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +24,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -51,8 +52,8 @@ import java.util.stream.Collectors;
  */
 public final class Year2020Day08 {
 
-  public long calculatePart1(final Path path) {
-    final Map<Integer, Instruction> instructions = parse(path);
+  public long calculatePart1() {
+    final Map<Integer, Instruction> instructions = getInput();
     final Set<Integer> seen = new HashSet<>();
     long accumulator = 0;
     int location = 0;
@@ -73,8 +74,8 @@ public final class Year2020Day08 {
     return accumulator;
   }
 
-  public long calculatePart2(final Path path) {
-    final Map<Integer, Instruction> instructions = parse(path);
+  public long calculatePart2() {
+    final Map<Integer, Instruction> instructions = getInput();
     final Set<Integer> terminals =
       getTerminalInstructions(instructions.size(), instructions, getInstructionMapping(instructions));
     long accumulator = 0;
@@ -148,11 +149,11 @@ public final class Year2020Day08 {
     return terminals;
   }
 
-  /** Parse the file located at the provided path location. */
-  private Map<Integer, Instruction> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private Map<Integer, Instruction> getInput() {
     try {
       final List<Instruction> instructions =
-        Files.readAllLines(path).stream().map(Instruction::new).collect(Collectors.toList());
+        Files.readAllLines(Utils.getInput(2020, 8)).stream().map(Instruction::new).collect(Collectors.toList());
       final Map<Integer, Instruction> map = new HashMap<>();
       for (int i = 0; i < instructions.size(); ++i) {
         map.put(i, instructions.get(i));

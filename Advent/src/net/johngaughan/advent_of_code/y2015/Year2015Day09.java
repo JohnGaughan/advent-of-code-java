@@ -17,7 +17,6 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -61,13 +60,13 @@ import net.johngaughan.advent_of_code.Utils;
  */
 public final class Year2015Day09 {
 
-  public int calculatePart1(final Path path) {
-    final Map<String, Map<String, Long>> distances = parse(path);
+  public int calculatePart1() {
+    final Map<String, Map<String, Long>> distances = getInput();
     return calculateDistances(distances).stream().mapToInt(Integer::intValue).min().getAsInt();
   }
 
-  public int calculatePart2(final Path path) {
-    final Map<String, Map<String, Long>> distances = parse(path);
+  public int calculatePart2() {
+    final Map<String, Map<String, Long>> distances = getInput();
     return calculateDistances(distances).stream().mapToInt(Integer::intValue).max().getAsInt();
   }
 
@@ -96,11 +95,11 @@ public final class Year2015Day09 {
 
   private static Pattern SPLIT = Pattern.compile(" (=|to) ");
 
-  /** Parse the file located at the provided path location. */
-  private Map<String, Map<String, Long>> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private Map<String, Map<String, Long>> getInput() {
     try {
       final Map<String, Map<String, Long>> distances = new HashMap<>();
-      for (final String line : Files.readAllLines(path)) {
+      for (final String line : Files.readAllLines(Utils.getInput(2015, 9))) {
         final String[] tokens = SPLIT.split(line);
         final Long distance = Long.valueOf(tokens[2]);
         if (!distances.containsKey(tokens[0])) {

@@ -17,10 +17,11 @@
 package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -42,22 +43,22 @@ import java.util.stream.Collectors;
  */
 public final class Year2020Day02 {
 
-  public long calculatePart1(final Path path) {
-    return parse(path).stream().filter(t -> {
+  public long calculatePart1() {
+    return getInput().stream().filter(t -> {
       final long count = t.password.chars().filter(c -> c == t.ch).count();
       return t.n1 <= count && count <= t.n2;
     }).count();
   }
 
-  public long calculatePart2(final Path path) {
-    return parse(path).stream().filter(
+  public long calculatePart2() {
+    return getInput().stream().filter(
       t -> t.password.charAt(t.n1 - 1) == t.ch ^ t.password.charAt(t.n2 - 1) == t.ch).count();
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<Input> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private List<Input> getInput() {
     try {
-      return Files.readAllLines(path).stream().map(Input::new).collect(Collectors.toList());
+      return Files.readAllLines(Utils.getInput(2020, 2)).stream().map(Input::new).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

@@ -17,9 +17,10 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -41,9 +42,9 @@ import java.util.stream.Collectors;
  */
 public final class Year2015Day06 {
 
-  public int calculatePart1(final Path path) {
+  public int calculatePart1() {
     final boolean[][] grid = new boolean[1000][1000];
-    for (final Action action : parse(path)) {
+    for (final Action action : getInput()) {
       for (int i = action.x1; i <= action.x2; ++i) {
         for (int j = action.y1; j <= action.y2; ++j) {
           if (action.command == Command.ON) {
@@ -69,9 +70,9 @@ public final class Year2015Day06 {
     return lit;
   }
 
-  public int calculatePart2(final Path path) {
+  public int calculatePart2() {
     final int[][] grid = new int[1000][1000];
-    for (final Action action : parse(path)) {
+    for (final Action action : getInput()) {
       for (int i = action.x1; i <= action.x2; ++i) {
         for (int j = action.y1; j <= action.y2; ++j) {
           if (action.command == Command.ON) {
@@ -98,10 +99,10 @@ public final class Year2015Day06 {
     return brightness;
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<Action> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private List<Action> getInput() {
     try {
-      return Files.readAllLines(path).stream().map(Action::new).collect(Collectors.toList());
+      return Files.readAllLines(Utils.getInput(2015, 6)).stream().map(Action::new).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

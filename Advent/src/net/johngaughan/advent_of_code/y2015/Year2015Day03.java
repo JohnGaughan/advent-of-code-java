@@ -17,12 +17,13 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -46,7 +47,7 @@ import java.util.stream.Collectors;
  */
 public final class Year2015Day03 {
 
-  public int calculatePart1(final Path path) {
+  public int calculatePart1() {
     final Set<Coordinates> visited = new HashSet<>();
     int x = 0;
     int y = 0;
@@ -55,7 +56,7 @@ public final class Year2015Day03 {
     visited.add(new Coordinates(x, y));
 
     // Now travel around and visit other houses.
-    for (final Direction d : parse(path)) {
+    for (final Direction d : getInput()) {
       if (Direction.UP == d) {
         ++x;
       }
@@ -74,7 +75,7 @@ public final class Year2015Day03 {
     return visited.size();
   }
 
-  public int calculatePart2(final Path path) {
+  public int calculatePart2() {
     final Set<Coordinates> visited = new HashSet<>();
     final int x[] = new int[2];
     final int y[] = new int[2];
@@ -84,7 +85,7 @@ public final class Year2015Day03 {
     visited.add(new Coordinates(0, 0));
 
     // Now travel around and visit other houses.
-    for (final Direction d : parse(path)) {
+    for (final Direction d : getInput()) {
       if (Direction.UP == d) {
         ++x[visitor];
       }
@@ -104,10 +105,11 @@ public final class Year2015Day03 {
     return visited.size();
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<Direction> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private List<Direction> getInput() {
     try {
-      return Files.readString(path).trim().codePoints().mapToObj(Direction::valueOf).collect(Collectors.toList());
+      return Files.readString(Utils.getInput(2015, 3)).trim().codePoints().mapToObj(Direction::valueOf).collect(
+        Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

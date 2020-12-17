@@ -17,7 +17,8 @@
 package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -37,8 +38,8 @@ import java.nio.file.Path;
  */
 public final class Year2020Day01 {
 
-  public int calculatePart1(final Path path) {
-    final int[] values = parse(path);
+  public int calculatePart1() {
+    final int[] values = getInput();
     for (int i = 0; i < values.length; ++i) {
       final int i1 = values[i];
       for (int j = i + 1; j < values.length; ++j) {
@@ -55,8 +56,8 @@ public final class Year2020Day01 {
     return -1;
   }
 
-  public int calculatePart2(final Path path) {
-    final int[] values = parse(path);
+  public int calculatePart2() {
+    final int[] values = getInput();
     for (int i = 0; i < values.length; ++i) {
       final int i1 = values[i];
       for (int j = i + 1; j < values.length; ++j) {
@@ -79,10 +80,10 @@ public final class Year2020Day01 {
     return -1;
   }
 
-  /** Parse the file located at the provided path location. */
-  private int[] parse(final Path path) {
+  /** Get the input data for this solution. */
+  private int[] getInput() {
     try {
-      return Files.readAllLines(path).stream().mapToInt(Integer::parseInt).sorted().toArray();
+      return Files.readAllLines(Utils.getInput(2020, 1)).stream().mapToInt(Integer::parseInt).sorted().toArray();
     }
     catch (final RuntimeException ex) {
       throw ex;

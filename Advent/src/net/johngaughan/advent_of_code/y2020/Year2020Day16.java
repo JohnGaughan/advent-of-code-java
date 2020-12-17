@@ -17,7 +17,6 @@
 package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -53,8 +52,8 @@ import net.johngaughan.advent_of_code.Utils;
  */
 public final class Year2020Day16 {
 
-  public int calculatePart1(final Path path) {
-    final Input input = parse(path);
+  public int calculatePart1() {
+    final Input input = getInput();
     int errorRate = 0;
     for (int[] ticket : input.otherTickets) {
       errorRate +=
@@ -63,8 +62,8 @@ public final class Year2020Day16 {
     return errorRate;
   }
 
-  public long calculatePart2(final Path path) {
-    final Input input = parse(path);
+  public long calculatePart2() {
+    final Input input = getInput();
     final Field[] fields = input.fields;
 
     // First, remove all tickets that are invalid
@@ -117,10 +116,10 @@ public final class Year2020Day16 {
     return true;
   }
 
-  /** Parse the file located at the provided path location. */
-  private Input parse(final Path path) {
+  /** Get the input data for this solution. */
+  private Input getInput() {
     try {
-      return parse(Utils.getLineGroups(Files.readAllLines(path)));
+      return getInput(Utils.getLineGroups(Files.readAllLines(Utils.getInput(2020, 16))));
     }
     catch (final RuntimeException ex) {
       throw ex;
@@ -140,7 +139,7 @@ public final class Year2020Day16 {
   private static final Pattern FIELD_V = Pattern.compile("(-| or )");
 
   /** Given raw file */
-  private Input parse(final Iterable<List<String>> groups) {
+  private Input getInput(final Iterable<List<String>> groups) {
     final List<Field> fields = new ArrayList<>(235);
     int[] myTicket = null;
     final Collection<int[]> otherTickets = new ArrayList<>();

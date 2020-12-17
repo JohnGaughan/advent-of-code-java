@@ -17,12 +17,13 @@
 package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -46,10 +47,10 @@ import java.util.stream.Collectors;
  */
 public final class Year2020Day14 {
 
-  public long calculatePart1(final Path path) {
+  public long calculatePart1() {
     ValueBitmask bitmask = null;
     final Map<Long, Long> memory = new HashMap<>();
-    for (final Object input : parse(path, ValueBitmask::new)) {
+    for (final Object input : getInput(ValueBitmask::new)) {
       if (input instanceof ValueBitmask) {
         bitmask = (ValueBitmask) input;
       }
@@ -64,12 +65,12 @@ public final class Year2020Day14 {
     return memory.values().stream().mapToLong(Long::valueOf).sum();
   }
 
-  public long calculatePart2(final Path path) {
+  public long calculatePart2() {
     String bitmask = null;
     // If every X in the mask is a bit, this number can hold the largest number for those Xs.
     int maxReplacement = -1;
     final Map<Long, Long> memory = new HashMap<>();
-    for (final Object input : parse(path, s -> s)) {
+    for (final Object input : getInput(s -> s)) {
       if (input instanceof String) {
         bitmask = (String) input;
         final int bits = bitmask.replace("1", "").replace("0", "").length();
@@ -117,10 +118,11 @@ public final class Year2020Day14 {
     return memory.values().stream().mapToLong(Long::valueOf).sum();
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<Object> parse(final Path path, final Function<String, Object> maskCreator) {
+  /** Get the input data for this solution. */
+  private List<Object> getInput(final Function<String, Object> maskCreator) {
     try {
-      return Files.readAllLines(path).stream().map(s -> parse(s, maskCreator)).collect(Collectors.toList());
+      return Files.readAllLines(Utils.getInput(2020, 14)).stream().map(s -> getInput(s, maskCreator)).collect(
+        Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;
@@ -131,7 +133,7 @@ public final class Year2020Day14 {
   }
 
   /** Parse a line of input into either a Boolean[] or Long. */
-  private Object parse(final String line, final Function<String, Object> maskCreator) {
+  private Object getInput(final String line, final Function<String, Object> maskCreator) {
     if (line.startsWith("mask")) {
       return maskCreator.apply(line.substring(7));
     }

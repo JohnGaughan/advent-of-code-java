@@ -50,15 +50,13 @@ package net.johngaughan.advent_of_code.y2015;
  */
 public final class Year2015Day11 {
 
-  private static final int[] INPUT = valueOf("vzbxkghb");
-
   public String calculatePart1() {
-    final int[] password = getNextPassword(INPUT);
+    final int[] password = getNextPassword(getInput());
     return valueOf(password);
   }
 
   public String calculatePart2() {
-    int[] password = getNextPassword(INPUT);
+    int[] password = getNextPassword(getInput());
     password = getNextPassword(password);
     return valueOf(password);
   }
@@ -119,6 +117,11 @@ public final class Year2015Day11 {
       encoded /= 26;
     }
     return str;
+  }
+
+  /** Get the input data for this solution. */
+  private int[] getInput() {
+    return valueOf("vzbxkghb");
   }
 
   /**

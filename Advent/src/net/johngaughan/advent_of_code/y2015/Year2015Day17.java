@@ -17,10 +17,11 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -42,12 +43,12 @@ import java.util.List;
  */
 public final class Year2015Day17 {
 
-  public int calculatePart1(final Path path) {
-    return solutions(new ArrayList<>(), parse(path), 150).size();
+  public int calculatePart1() {
+    return solutions(new ArrayList<>(), getInput(), 150).size();
   }
 
-  public long calculatePart2(final Path path) {
-    final List<List<Integer>> solutions = solutions(new ArrayList<>(), parse(path), 150);
+  public long calculatePart2() {
+    final List<List<Integer>> solutions = solutions(new ArrayList<>(), getInput(), 150);
     final int minimum = solutions.stream().mapToInt(l -> l.size()).min().getAsInt();
     return solutions.stream().filter(l -> l.size() == minimum).count();
   }
@@ -79,11 +80,11 @@ public final class Year2015Day17 {
     return solutions;
   }
 
-  /** Parse the file located at the provided path location. */
-  private int[] parse(final Path path) {
+  /** Get the input data for this solution. */
+  private int[] getInput() {
     try {
       // Important: this logic sorts the numbers.
-      return Files.readAllLines(path).stream().mapToInt(Integer::parseInt).sorted().toArray();
+      return Files.readAllLines(Utils.getInput(2015, 17)).stream().mapToInt(Integer::parseInt).sorted().toArray();
     }
     catch (final RuntimeException ex) {
       throw ex;

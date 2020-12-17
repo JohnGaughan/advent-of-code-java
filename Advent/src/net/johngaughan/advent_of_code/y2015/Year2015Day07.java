@@ -17,7 +17,6 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -55,17 +56,17 @@ import java.util.stream.Collectors;
  */
 public final class Year2015Day07 {
 
-  public int calculatePart1(final Path path) {
+  public int calculatePart1() {
     final Map<String, Operation> ops = new HashMap<>();
-    for (final Operation op : parse(path)) {
+    for (final Operation op : getInput()) {
       ops.put(op.output, op);
     }
     return getValue("a", ops, new HashMap<>());
   }
 
-  public int calculatePart2(final Path path) {
+  public int calculatePart2() {
     final Map<String, Operation> ops = new HashMap<>();
-    for (final Operation op : parse(path)) {
+    for (final Operation op : getInput()) {
       ops.put(op.output, op);
     }
     final int a = getValue("a", ops, new HashMap<>());
@@ -77,7 +78,7 @@ public final class Year2015Day07 {
   private int getValue(final String wire, final Map<String, Operation> ops, final Map<String, Integer> memoizer) {
     // If this value has already been seen, use the memoized value instead.
     if (memoizer.containsKey(wire)) {
-      return memoizer.get(wire);
+      return memoizer.get(wire).intValue();
     }
     final Operation thisOp = ops.get(wire);
     final int value;
@@ -111,7 +112,7 @@ public final class Year2015Day07 {
     else {
       throw new IllegalArgumentException();
     }
-    memoizer.put(wire, value);
+    memoizer.put(wire, Integer.valueOf(value));
     return value;
   }
 
@@ -123,10 +124,10 @@ public final class Year2015Day07 {
     return getValue(value.toString(), ops, memoizer);
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<Operation> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private List<Operation> getInput() {
     try {
-      return Files.readAllLines(path).stream().map(Operation::new).collect(Collectors.toList());
+      return Files.readAllLines(Utils.getInput(2015, 7)).stream().map(Operation::new).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

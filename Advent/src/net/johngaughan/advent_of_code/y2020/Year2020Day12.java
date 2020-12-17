@@ -17,9 +17,10 @@
 package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -42,11 +43,11 @@ import java.util.stream.Collectors;
  */
 public final class Year2020Day12 {
 
-  public int calculatePart1(final Path path) {
+  public int calculatePart1() {
     int x = 0;
     int y = 0;
     Direction d = Direction.EAST;
-    for (final Input input : parse(path)) {
+    for (final Input input : getInput()) {
       if (input.action == Action.N) {
         y += input.arg;
       }
@@ -82,12 +83,12 @@ public final class Year2020Day12 {
     return Math.abs(x) + Math.abs(y);
   }
 
-  public int calculatePart2(final Path path) {
+  public int calculatePart2() {
     int x_s = 0;
     int y_s = 0;
     int x_w = 10;
     int y_w = 1;
-    for (final Input input : parse(path)) {
+    for (final Input input : getInput()) {
       if (input.action == Action.N) {
         y_w += input.arg;
       }
@@ -140,10 +141,10 @@ public final class Year2020Day12 {
     }
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<Input> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private List<Input> getInput() {
     try {
-      return Files.readAllLines(path).stream().map(Input::new).collect(Collectors.toList());
+      return Files.readAllLines(Utils.getInput(2020, 12)).stream().map(Input::new).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

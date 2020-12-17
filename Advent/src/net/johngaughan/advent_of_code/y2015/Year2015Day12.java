@@ -17,13 +17,14 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -44,12 +45,12 @@ import org.json.JSONTokener;
  */
 public final class Year2015Day12 {
 
-  public int calculatePart1(final Path path) {
-    return extractNumbers(parse(path), false).stream().mapToInt(Integer::intValue).sum();
+  public int calculatePart1() {
+    return extractNumbers(getInput(), false).stream().mapToInt(Integer::intValue).sum();
   }
 
-  public int calculatePart2(final Path path) {
-    return extractNumbers(parse(path), true).stream().mapToInt(Integer::intValue).sum();
+  public int calculatePart2() {
+    return extractNumbers(getInput(), true).stream().mapToInt(Integer::intValue).sum();
   }
 
   /** Given a general object from a JSON string, extract all of its numbers. */
@@ -97,10 +98,10 @@ public final class Year2015Day12 {
     return numbers;
   }
 
-  /** Parse the file located at the provided path location. */
-  private JSONArray parse(final Path path) {
+  /** Get the input data for this solution. */
+  private JSONArray getInput() {
     try {
-      final JSONTokener tokener = new JSONTokener(Files.readString(path));
+      final JSONTokener tokener = new JSONTokener(Files.readString(Utils.getInput(2015, 12)));
       return new JSONArray(tokener);
     }
     catch (final RuntimeException ex) {

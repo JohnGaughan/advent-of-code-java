@@ -17,9 +17,10 @@
 package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -51,11 +52,11 @@ import java.util.Map;
  */
 public final class Year2020Day10 {
 
-  public int calculatePart1(final Path path) {
+  public int calculatePart1() {
     int previous = 0;
     int diff1 = 0;
     int diff3 = 0;
-    for (final int i : parse(path)) {
+    for (final int i : getInput()) {
       final int diff = i - previous;
       if (diff == 1) {
         ++diff1;
@@ -70,8 +71,8 @@ public final class Year2020Day10 {
     return diff1 * diff3;
   }
 
-  public long calculatePart2(final Path path) {
-    final int[] numbers = prepareForPart2(parse(path));
+  public long calculatePart2() {
+    final int[] numbers = prepareForPart2(getInput());
     final Map<Integer, Long> numCombinations = new HashMap<>();
 
     // Base case: last number has one path.
@@ -102,10 +103,10 @@ public final class Year2020Day10 {
     return output;
   }
 
-  /** Parse the file located at the provided path location. */
-  private int[] parse(final Path path) {
+  /** Get the input data for this solution. */
+  private int[] getInput() {
     try {
-      return Files.readAllLines(path).stream().mapToInt(Integer::valueOf).sorted().toArray();
+      return Files.readAllLines(Utils.getInput(2020, 10)).stream().mapToInt(Integer::valueOf).sorted().toArray();
     }
     catch (final RuntimeException ex) {
       throw ex;

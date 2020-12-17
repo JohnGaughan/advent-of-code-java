@@ -46,10 +46,8 @@ package net.johngaughan.advent_of_code.y2015;
  */
 public final class Year2015Day20 {
 
-  /** Scaled down by ten from the real input so there is less math. */
-  private static final int INPUT = 36_000_000;
-
   public int calculatePart1() {
+    final int input = getInput();
     final int[] presents = new int[900_000];
     for (int i = 1; i < presents.length; ++i) {
       for (int j = i; j < presents.length; j += i) {
@@ -57,7 +55,7 @@ public final class Year2015Day20 {
       }
     }
     for (int i = 1; i < presents.length; ++i) {
-      if (presents[i] >= INPUT) {
+      if (presents[i] >= input) {
         return i;
       }
     }
@@ -65,6 +63,7 @@ public final class Year2015Day20 {
   }
 
   public int calculatePart2() {
+    final int input = getInput();
     final int[] presents = new int[1_000_000];
     for (int i = 1; i < presents.length; ++i) {
       for (int j = i, visited = 0; j < presents.length && visited < 50; j += i, ++visited) {
@@ -72,11 +71,16 @@ public final class Year2015Day20 {
       }
     }
     for (int i = 1; i < presents.length; ++i) {
-      if (presents[i] >= INPUT) {
+      if (presents[i] >= input) {
         return i;
       }
     }
     return 0;
+  }
+
+  /** Get the input data for this solution. */
+  private int getInput() {
+    return 36_000_000;
   }
 
 }

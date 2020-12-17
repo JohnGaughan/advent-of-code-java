@@ -17,8 +17,9 @@
 package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -39,8 +40,8 @@ import java.util.Arrays;
  */
 public final class Year2020Day11 {
 
-  public int calculatePart1(final Path path) {
-    Status[][] newGrid = parse(path);
+  public int calculatePart1() {
+    Status[][] newGrid = getInput();
     Status[][] oldGrid = new Status[newGrid.length][newGrid[0].length];
     while (!Arrays.deepEquals(oldGrid, newGrid)) {
       final Status[][] temp = newGrid;
@@ -102,8 +103,8 @@ public final class Year2020Day11 {
     return count(newGrid, Status.OCCUPIED);
   }
 
-  public int calculatePart2(final Path path) {
-    Status[][] newGrid = parse(path);
+  public int calculatePart2() {
+    Status[][] newGrid = getInput();
     Status[][] oldGrid = new Status[newGrid.length][newGrid[0].length];
     while (!Arrays.deepEquals(oldGrid, newGrid)) {
       final Status[][] temp = newGrid;
@@ -233,10 +234,10 @@ public final class Year2020Day11 {
     return count;
   }
 
-  /** Parse the file located at the provided path location. */
-  private Status[][] parse(final Path path) {
+  /** Get the input data for this solution. */
+  private Status[][] getInput() {
     try {
-      return Files.readAllLines(path).stream().map(
+      return Files.readAllLines(Utils.getInput(2020, 11)).stream().map(
         s -> s.codePoints().mapToObj(Status::valueOf).toArray(Status[]::new)).toArray(Status[][]::new);
     }
     catch (final RuntimeException ex) {

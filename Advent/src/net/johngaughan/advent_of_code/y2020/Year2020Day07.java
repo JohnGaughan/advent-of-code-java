@@ -17,13 +17,14 @@
 package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -45,8 +46,8 @@ public final class Year2020Day07 {
 
   private static final String SEARCH_NEEDLE = "shiny gold";
 
-  public int calculatePart1(final Path path) {
-    final Map<String, Map<String, Integer>> rules = parse(path);
+  public int calculatePart1() {
+    final Map<String, Map<String, Integer>> rules = getInput();
     final Set<String> colors = getColors(rules);
     return colors.size();
   }
@@ -92,8 +93,8 @@ public final class Year2020Day07 {
     return positives.contains(currentColor);
   }
 
-  public int calculatePart2(final Path path) {
-    final Map<String, Map<String, Integer>> rules = parse(path);
+  public int calculatePart2() {
+    final Map<String, Map<String, Integer>> rules = getInput();
     // Don't count the shiny gold bag itself.
     return countBagAndChildren(SEARCH_NEEDLE, rules, new HashMap<>()) - 1;
   }
@@ -101,16 +102,16 @@ public final class Year2020Day07 {
   /** Count the number of bags contained by the given color of bag, including the bag itself. */
   private int countBagAndChildren(final String color, final Map<String, Map<String, Integer>> rules, final Map<String, Integer> memoizer) {
     if (memoizer.containsKey(color)) {
-      return memoizer.get(color);
+      return memoizer.get(color).intValue();
     }
 
     int count = 1;
     for (final Map.Entry<String, Integer> child : rules.get(color).entrySet()) {
       final String childColor = child.getKey();
-      final int childCount = child.getValue();
+      final int childCount = child.getValue().intValue();
       count += childCount * countBagAndChildren(childColor, rules, memoizer);
     }
-    memoizer.put(color, count);
+    memoizer.put(color, Integer.valueOf(count));
     return count;
   }
 
@@ -120,11 +121,11 @@ public final class Year2020Day07 {
   /** Matches the delimiter between bag types. */
   private static final Pattern LIST_SPLIT = Pattern.compile(", ");
 
-  /** Parse the file located at the provided path location. */
-  public Map<String, Map<String, Integer>> parse(final Path path) {
+  /** Get the input data for this solution. */
+  public Map<String, Map<String, Integer>> getInput() {
     try {
-      return Files.readAllLines(path).stream().map(s -> LINE_SPLIT.split(s)).collect(
-        Collectors.toMap(s -> s[0], s -> parse(s[1].substring(0, s[1].length() - 1))));
+      return Files.readAllLines(Utils.getInput(2020, 7)).stream().map(s -> LINE_SPLIT.split(s)).collect(
+        Collectors.toMap(s -> s[0], s -> getInput(s[1].substring(0, s[1].length() - 1))));
     }
     catch (final RuntimeException ex) {
       throw ex;
@@ -135,7 +136,7 @@ public final class Year2020Day07 {
   }
 
   /** Parse a single input line. */
-  private Map<String, Integer> parse(final String line) {
+  private Map<String, Integer> getInput(final String line) {
     final Map<String, Integer> rules = new HashMap<>();
 
     // Only populate if there are children: otherwise keep it empty, to avoid null checks when using it.

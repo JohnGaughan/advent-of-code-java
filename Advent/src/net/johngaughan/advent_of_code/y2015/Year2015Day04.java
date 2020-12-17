@@ -40,12 +40,10 @@ import java.security.NoSuchAlgorithmException;
  */
 public final class Year2015Day04 {
 
-  /** The prefix for each plaintext to digest. */
-  private static final String PLAINTEXT_PREFIX = "ckczppom";
-
   public int calculatePart1() {
+    final String input = getInput();
     for (int i = 0; i <= Long.MAX_VALUE; ++i) {
-      final String plaintext = PLAINTEXT_PREFIX + i;
+      final String plaintext = input + i;
       final byte[] cipher = MD5.digest(plaintext.getBytes(ASCII));
       // Cipher must start with 0x00000, or the first 20 bits must be zero. This is the first two and a half bytes.
       if (cipher[0] == 0 && cipher[1] == 0 && cipher[2] >= 0 && cipher[2] < 16) {
@@ -56,8 +54,9 @@ public final class Year2015Day04 {
   }
 
   public int calculatePart2() {
+    final String input = getInput();
     for (int i = 0; i <= Long.MAX_VALUE; ++i) {
-      final String plaintext = PLAINTEXT_PREFIX + i;
+      final String plaintext = input + i;
       final byte[] cipher = MD5.digest(plaintext.getBytes(ASCII));
       // Cipher must start with 0x000000, or the first 24 bits must be zero. This is the first three bytes.
       if (cipher[0] == 0 && cipher[1] == 0 && cipher[2] == 0) {
@@ -65,6 +64,11 @@ public final class Year2015Day04 {
       }
     }
     return Integer.MIN_VALUE;
+  }
+
+  /** Get the input data for this solution. */
+  private String getInput() {
+    return "ckczppom";
   }
 
   /** ASCII character set used to encode the plaintext into a byte array suitable for digesting. */

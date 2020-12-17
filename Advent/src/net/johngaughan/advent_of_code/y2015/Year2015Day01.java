@@ -17,9 +17,10 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -41,17 +42,17 @@ import java.util.stream.Collectors;
  */
 public final class Year2015Day01 {
 
-  public long calculatePart1(final Path path) {
-    final List<Direction> input = parse(path);
+  public long calculatePart1() {
+    final List<Direction> input = getInput();
     final long ups = input.stream().filter(d -> d == Direction.UP).count();
     final long downs = input.stream().filter(d -> d == Direction.DOWN).count();
     return ups - downs;
   }
 
-  public int calculatePart2(final Path path) {
+  public int calculatePart2() {
     int floor = 0;
     int step = 1;
-    for (final Direction d : parse(path)) {
+    for (final Direction d : getInput()) {
       if (d == Direction.UP) {
         ++floor;
       }
@@ -66,10 +67,11 @@ public final class Year2015Day01 {
     return Integer.MIN_VALUE;
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<Direction> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private List<Direction> getInput() {
     try {
-      return Files.readString(path).trim().chars().boxed().map(Direction::valueOf).collect(Collectors.toList());
+      return Files.readString(Utils.getInput(2015, 1)).trim().chars().boxed().map(Direction::valueOf).collect(
+        Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

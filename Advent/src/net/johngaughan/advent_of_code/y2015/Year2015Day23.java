@@ -17,10 +17,11 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -41,16 +42,16 @@ import java.util.stream.Collectors;
  */
 public final class Year2015Day23 {
 
-  public int calculatePart1(final Path path) {
-    return runProgram(path, 0);
+  public int calculatePart1() {
+    return runProgram(0);
   }
 
-  public int calculatePart2(final Path path) {
-    return runProgram(path, 1);
+  public int calculatePart2() {
+    return runProgram(1);
   }
 
-  private int runProgram(final Path path, final int initialA) {
-    final List<Instruction> instructions = parse(path);
+  private int runProgram(final int initialA) {
+    final List<Instruction> instructions = getInput();
     final MachineState state = new MachineState(initialA);
     while (state.i >= 0 && state.i < instructions.size()) {
       final Instruction instruction = instructions.get(state.i);
@@ -59,10 +60,10 @@ public final class Year2015Day23 {
     return state.b;
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<Instruction> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private List<Instruction> getInput() {
     try {
-      return Files.readAllLines(path).stream().map(Instruction::new).collect(Collectors.toList());
+      return Files.readAllLines(Utils.getInput(2015, 23)).stream().map(Instruction::new).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

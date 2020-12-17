@@ -17,13 +17,14 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -49,12 +50,12 @@ public final class Year2015Day15 {
   /** The number of teaspoons worth of ingredients in the recipe. */
   private static final int QUANTITY = 100;
 
-  public int calculatePart1(final Path path) {
-    return scores(parse(path), QUANTITY, -1).stream().mapToInt(Integer::intValue).max().getAsInt();
+  public int calculatePart1() {
+    return scores(getInput(), QUANTITY, -1).stream().mapToInt(Integer::intValue).max().getAsInt();
   }
 
-  public int calculatePart2(final Path path) {
-    return scores(parse(path), QUANTITY, 500).stream().mapToInt(Integer::intValue).max().getAsInt();
+  public int calculatePart2() {
+    return scores(getInput(), QUANTITY, 500).stream().mapToInt(Integer::intValue).max().getAsInt();
   }
 
   /** Get all of the cookie scores. */
@@ -89,7 +90,7 @@ public final class Year2015Day15 {
       }
       if (capacity > 0 && durability > 0 && flavor > 0 && texture > 0
         && (totalCalories < 0 || totalCalories == calories)) {
-        scores.add(capacity * durability * flavor * texture);
+        scores.add(Integer.valueOf(capacity * durability * flavor * texture));
       }
     }
     // Multiple ingredients left: iterate over possible quantities.
@@ -107,10 +108,10 @@ public final class Year2015Day15 {
     return scores;
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<Rule> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private List<Rule> getInput() {
     try {
-      return Files.readAllLines(path).stream().map(s -> new Rule(s)).collect(Collectors.toList());
+      return Files.readAllLines(Utils.getInput(2015, 15)).stream().map(s -> new Rule(s)).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

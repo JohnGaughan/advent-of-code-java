@@ -17,8 +17,9 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -44,8 +45,8 @@ import java.util.List;
  */
 public final class Year2015Day08 {
 
-  public int calculatePart1(final Path path) {
-    final List<String> lines = parse(path);
+  public int calculatePart1() {
+    final List<String> lines = getInput();
     final int total = lines.stream().mapToInt(s -> s.length()).sum();
     final int parsed = lines.stream().mapToInt(s -> countParsedCharacters(s)).sum();
     return total - parsed;
@@ -68,8 +69,8 @@ public final class Year2015Day08 {
     return characters;
   }
 
-  public int calculatePart2(final Path path) {
-    final List<String> lines = parse(path);
+  public int calculatePart2() {
+    final List<String> lines = getInput();
     final int total = lines.stream().mapToInt(s -> s.length()).sum();
     final int reverseParsed = lines.stream().mapToInt(s -> countReverseParsedCharacters(s)).sum();
     return reverseParsed - total;
@@ -86,10 +87,10 @@ public final class Year2015Day08 {
     return characters;
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<String> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private List<String> getInput() {
     try {
-      return Files.readAllLines(path);
+      return Files.readAllLines(Utils.getInput(2015, 8));
     }
     catch (final RuntimeException ex) {
       throw ex;

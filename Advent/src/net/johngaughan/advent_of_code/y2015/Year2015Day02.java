@@ -17,10 +17,11 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -41,8 +42,8 @@ import java.util.stream.Collectors;
  */
 public final class Year2015Day02 {
 
-  public long calculatePart1(final Path path) {
-    return parse(path).stream().mapToLong(l -> calculateWrappingPaperArea(l)).sum();
+  public long calculatePart1() {
+    return getInput().stream().mapToLong(l -> calculateWrappingPaperArea(l)).sum();
   }
 
   /** Calculate the area needed by a single box. */
@@ -54,8 +55,8 @@ public final class Year2015Day02 {
     return area + d.x * d.y * d.z / Math.max(d.x, Math.max(d.y, d.z));
   }
 
-  public long calculatePart2(final Path path) {
-    return parse(path).stream().mapToLong(l -> calculateRibbonLength(l)).sum();
+  public long calculatePart2() {
+    return getInput().stream().mapToLong(l -> calculateRibbonLength(l)).sum();
   }
 
   /** Calculate the ribbon length needed by a single box. */
@@ -72,10 +73,10 @@ public final class Year2015Day02 {
     return length + d.x * d.y * d.z;
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<Dimensions> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private List<Dimensions> getInput() {
     try {
-      return Files.readAllLines(path).stream().map(Dimensions::new).collect(Collectors.toList());
+      return Files.readAllLines(Utils.getInput(2015, 2)).stream().map(Dimensions::new).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

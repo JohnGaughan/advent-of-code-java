@@ -17,7 +17,6 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,12 +46,12 @@ import net.johngaughan.advent_of_code.Utils;
  */
 public class Year2015Day13 {
 
-  public int calculatePart1(final Path path) {
-    return getMaxHappiness(parse(path));
+  public int calculatePart1() {
+    return getMaxHappiness(getInput());
   }
 
-  public int calculatePart2(final Path path) {
-    return getMaxHappiness(addMyself(parse(path)));
+  public int calculatePart2() {
+    return getMaxHappiness(addMyself(getInput()));
   }
 
   /** Get the maximum happiness value. */
@@ -71,8 +70,8 @@ public class Year2015Day13 {
       final String left = ordering.get(i == 0 ? ordering.size() - 1 : i - 1);
       final String right = ordering.get(i == ordering.size() - 1 ? 0 : i + 1);
       final Map<String, Integer> guestRules = rules.get(ordering.get(i));
-      happiness += guestRules.get(left);
-      happiness += guestRules.get(right);
+      happiness += guestRules.get(left).intValue();
+      happiness += guestRules.get(right).intValue();
     }
     return happiness;
   }
@@ -92,15 +91,16 @@ public class Year2015Day13 {
     return rules;
   }
 
-  /** Parse the file located at the provided path location. */
-  private Map<String, Map<String, Integer>> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private Map<String, Map<String, Integer>> getInput() {
     try {
       final Map<String, Map<String, Integer>> results = new HashMap<>();
-      for (final Rule rule : Files.readAllLines(path).stream().map(Rule::new).collect(Collectors.toList())) {
+      for (final Rule rule : Files.readAllLines(Utils.getInput(2015, 13)).stream().map(Rule::new).collect(
+        Collectors.toList())) {
         if (!results.containsKey(rule.person1)) {
           results.put(rule.person1, new HashMap<>());
         }
-        results.get(rule.person1).put(rule.person2, rule.happiness);
+        results.get(rule.person1).put(rule.person2, Integer.valueOf(rule.happiness));
       }
       return results;
     }

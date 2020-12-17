@@ -17,7 +17,8 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -59,8 +60,8 @@ public final class Year2015Day25 {
 
   private static final long PERIOD = MODULUS >> 1;
 
-  public long calculatePart1(final Path path) {
-    final Coordinate crd = parse(path);
+  public long calculatePart1() {
+    final Coordinate crd = getInput();
     final int r = crd.row;
     final int c = crd.col;
     // Calculate the number of iterations required. This is simplified from a more complex equation.
@@ -81,10 +82,10 @@ public final class Year2015Day25 {
     return result;
   }
 
-  /** Parse the file located at the provided path location. */
-  private Coordinate parse(final Path path) {
+  /** Get the input data for this solution. */
+  private Coordinate getInput() {
     try {
-      return new Coordinate(Files.readString(path).trim());
+      return new Coordinate(Files.readString(Utils.getInput(2015, 25)).trim());
     }
     catch (final RuntimeException ex) {
       throw ex;

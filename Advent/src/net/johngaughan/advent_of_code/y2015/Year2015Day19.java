@@ -17,7 +17,6 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -64,8 +63,8 @@ import net.johngaughan.advent_of_code.Utils;
  */
 public final class Year2015Day19 {
 
-  public int calculatePart1(final Path path) {
-    final Input input = parse(path);
+  public int calculatePart1() {
+    final Input input = getInput();
     final Set<String> molecules = new HashSet<>();
     for (final Rule rule : input.rules) {
       for (int i = 0; i < input.molecule.length(); ++i) {
@@ -83,8 +82,8 @@ public final class Year2015Day19 {
     return molecules.size();
   }
 
-  public int calculatePart2(final Path path) {
-    final Input input = parse(path);
+  public int calculatePart2() {
+    final Input input = getInput();
     String str = input.molecule;
     int replacements = 0;
     while (!"e".equals(str)) {
@@ -103,10 +102,10 @@ public final class Year2015Day19 {
     return replacements;
   }
 
-  /** Parse the file located at the provided path location. */
-  private Input parse(final Path path) {
+  /** Get the input data for this solution. */
+  private Input getInput() {
     try {
-      final List<List<String>> groups = Utils.getLineGroups(Files.readAllLines(path));
+      final List<List<String>> groups = Utils.getLineGroups(Files.readAllLines(Utils.getInput(2015, 19)));
       final Collection<Rule> rules = groups.get(0).stream().map(Rule::new).collect(Collectors.toSet());
       return new Input(rules, groups.get(1).get(0));
     }

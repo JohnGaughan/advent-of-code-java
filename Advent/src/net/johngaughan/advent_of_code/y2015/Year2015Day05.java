@@ -17,12 +17,13 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -44,8 +45,8 @@ import java.util.Set;
  */
 public final class Year2015Day05 {
 
-  public long calculatePart1(final Path path) {
-    return parse(path).stream().filter(s -> isNicePart1(s)).count();
+  public long calculatePart1() {
+    return getInput().stream().filter(s -> isNicePart1(s)).count();
   }
 
   /** Determine if a string is nice per the requirements of part 1. */
@@ -74,8 +75,8 @@ public final class Year2015Day05 {
     return vowels >= 3 && repeated;
   }
 
-  public long calculatePart2(final Path path) {
-    return parse(path).stream().filter(s -> isNicePart2(s)).count();
+  public long calculatePart2() {
+    return getInput().stream().filter(s -> isNicePart2(s)).count();
   }
 
   /** Determine if a string is nice per the requirements of part 2. */
@@ -106,16 +107,16 @@ public final class Year2015Day05 {
         else {
           pairs.put(thisPair, new HashSet<>());
         }
-        pairs.get(thisPair).add(i);
+        pairs.get(thisPair).add(Integer.valueOf(i));
       }
     }
     return pairRepeat && singleRepeat;
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<String> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private List<String> getInput() {
     try {
-      return Files.readAllLines(path);
+      return Files.readAllLines(Utils.getInput(2015, 5));
     }
     catch (final RuntimeException ex) {
       throw ex;

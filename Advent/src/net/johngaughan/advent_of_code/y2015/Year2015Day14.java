@@ -17,12 +17,13 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -48,12 +49,12 @@ public final class Year2015Day14 {
 
   private static final int TIME = 2503;
 
-  public int calculatePart1(final Path path) {
-    return parse(path).stream().mapToInt(r -> getPosition(r, TIME)).max().getAsInt();
+  public int calculatePart1() {
+    return getInput().stream().mapToInt(r -> getPosition(r, TIME)).max().getAsInt();
   }
 
-  public int calculatePart2(final Path path) {
-    final Collection<Rule> rules = parse(path);
+  public int calculatePart2() {
+    final Collection<Rule> rules = getInput();
     // Initialize maps of points and locations
     final Map<String, Integer> points = new HashMap<>();
     final Map<String, Integer> locations = new HashMap<>();
@@ -90,10 +91,10 @@ public final class Year2015Day14 {
     return rule.velocity * (cycles * rule.flyTime + finalCycle);
   }
 
-  /** Parse the file located at the provided path location. */
-  private Collection<Rule> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private Collection<Rule> getInput() {
     try {
-      return Files.readAllLines(path).stream().map(Rule::new).collect(Collectors.toList());
+      return Files.readAllLines(Utils.getInput(2015, 14)).stream().map(Rule::new).collect(Collectors.toList());
     }
     catch (final RuntimeException ex) {
       throw ex;

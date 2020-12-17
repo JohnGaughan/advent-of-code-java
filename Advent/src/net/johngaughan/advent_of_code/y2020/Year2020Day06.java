@@ -17,7 +17,6 @@
 package net.johngaughan.advent_of_code.y2020;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,12 +43,12 @@ import net.johngaughan.advent_of_code.Utils;
  */
 public final class Year2020Day06 {
 
-  public int calculatePart1(final Path path) {
-    return parse(path).stream().map(l -> union(l)).mapToInt(s -> s.size()).sum();
+  public int calculatePart1() {
+    return getInput().stream().map(l -> union(l)).mapToInt(s -> s.size()).sum();
   }
 
-  public int calculatePart2(final Path path) {
-    return parse(path).stream().map(l -> intersection(l)).mapToInt(s -> s.size()).sum();
+  public int calculatePart2() {
+    return getInput().stream().map(l -> intersection(l)).mapToInt(s -> s.size()).sum();
   }
 
   /** Reduces a single group of passenger answers by calculating the union. */
@@ -66,10 +65,10 @@ public final class Year2020Day06 {
     return result;
   }
 
-  /** Parse the file located at the provided path location. */
-  private List<List<Set<Integer>>> parse(final Path path) {
+  /** Get the input data for this solution. */
+  private List<List<Set<Integer>>> getInput() {
     try {
-      return Utils.getLineGroups(Files.readAllLines(path)).stream().map(
+      return Utils.getLineGroups(Files.readAllLines(Utils.getInput(2020, 6))).stream().map(
         lines -> lines.stream().map(line -> line.codePoints().boxed().collect(Collectors.toSet())).collect(
           Collectors.toList())).collect(Collectors.toList());
     }

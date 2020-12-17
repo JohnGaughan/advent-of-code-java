@@ -17,12 +17,13 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -51,17 +52,17 @@ import java.util.Iterator;
  */
 public final class Year2015Day24 {
 
-  public long calculatePart1(final Path path) {
-    return calculateAnswer(path, 3);
+  public long calculatePart1() {
+    return calculateAnswer(3);
   }
 
-  public long calculatePart2(final Path path) {
-    return calculateAnswer(path, 4);
+  public long calculatePart2() {
+    return calculateAnswer(4);
   }
 
   /** Common code for getting the answer based on the number of partitions. */
-  private long calculateAnswer(final Path path, final int partitions) {
-    return getSolutionsWithLowestCount(parse(path), partitions).stream().mapToLong(
+  private long calculateAnswer(final int partitions) {
+    return getSolutionsWithLowestCount(getInput(), partitions).stream().mapToLong(
       a -> Arrays.stream(a).reduce((x, y) -> x * y).getAsLong()).min().getAsLong();
   }
 
@@ -152,10 +153,10 @@ public final class Year2015Day24 {
     return false;
   }
 
-  /** Parse the file located at the provided path location. */
-  private long[] parse(final Path path) {
+  /** Get the input data for this solution. */
+  private long[] getInput() {
     try {
-      return Files.readAllLines(path).stream().mapToLong(Long::parseLong).sorted().toArray();
+      return Files.readAllLines(Utils.getInput(2015, 24)).stream().mapToLong(Long::parseLong).sorted().toArray();
     }
     catch (final RuntimeException ex) {
       throw ex;

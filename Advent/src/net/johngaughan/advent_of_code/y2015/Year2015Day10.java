@@ -34,14 +34,12 @@ package net.johngaughan.advent_of_code.y2015;
  */
 public final class Year2015Day10 {
 
-  private static final String INPUT = "1113122113";
-
   public int calculatePart1() {
-    return lookAndSay(INPUT, 40);
+    return lookAndSay(getInput(), 40);
   }
 
   public int calculatePart2() {
-    return lookAndSay(INPUT, 50);
+    return lookAndSay(getInput(), 50);
   }
 
   /** Apply the look-and-say algorithm to the input. */
@@ -72,6 +70,11 @@ public final class Year2015Day10 {
     str.append(input.length() - groupStart);
     str.appendCodePoint(groupChar);
     return str.toString();
+  }
+
+  /** Get the input data for this solution. */
+  private String getInput() {
+    return "1113122113";
   }
 
 }

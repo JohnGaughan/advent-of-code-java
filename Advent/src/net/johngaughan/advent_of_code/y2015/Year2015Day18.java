@@ -17,7 +17,8 @@
 package net.johngaughan.advent_of_code.y2015;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
+
+import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
@@ -43,16 +44,16 @@ public final class Year2015Day18 {
   /** Array size. Used for clarity, and input is enforced to be a grid this size. */
   private final int SIZE = 100;
 
-  public int calculatePart1(final Path path) {
-    boolean[][] grid = parse(path);
+  public int calculatePart1() {
+    boolean[][] grid = getInput();
     for (int i = 0; i < ITERATIONS; ++i) {
       grid = transform(grid, false);
     }
     return countLightsOn(grid);
   }
 
-  public int calculatePart2(final Path path) {
-    boolean[][] grid = parse(path);
+  public int calculatePart2() {
+    boolean[][] grid = getInput();
     // Need to start with the corners alive.
     grid[0][0] = true;
     grid[0][SIZE - 1] = true;
@@ -133,10 +134,11 @@ public final class Year2015Day18 {
     return result;
   }
 
-  /** Parse the file located at the provided path location. */
-  private boolean[][] parse(final Path path) {
+  /** Get the input data for this solution. */
+  private boolean[][] getInput() {
     try {
-      final boolean[][] grid = Files.readAllLines(path).stream().map(s -> parse(s)).toArray(boolean[][]::new);
+      final boolean[][] grid =
+        Files.readAllLines(Utils.getInput(2015, 18)).stream().map(s -> getInput(s)).toArray(boolean[][]::new);
       if (grid.length != SIZE) {
         throw new IllegalArgumentException("Not a " + SIZE + "x" + SIZE + " grid");
       }
@@ -151,7 +153,7 @@ public final class Year2015Day18 {
   }
 
   /** Parse a single line into a boolean array. */
-  private boolean[] parse(final String line) {
+  private boolean[] getInput(final String line) {
     if (line.length() != SIZE) {
       throw new IllegalArgumentException("Not a " + SIZE + "x" + SIZE + " grid");
     }
