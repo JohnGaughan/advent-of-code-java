@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * <a href="https://adventofcode.com/2015/day/12">Year 2015, day 12</a>. This problem requires us to move a boat around
+ * <a href="https://adventofcode.com/2020/day/12">Year 2020, day 12</a>. This problem requires us to move a boat around
  * on a grid using navigation instructions. Part one has us track the boat's location and heading, where the heading is
  * aligned to 90 degree angles. It moves around a few hundred times, then we return the Manhattan distance of the boat
  * compared to origin. Part two changes how we interpret the instructions by tracking a waypoint near the boat. Most of

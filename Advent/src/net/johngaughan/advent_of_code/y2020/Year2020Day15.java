@@ -18,7 +18,7 @@ package net.johngaughan.advent_of_code.y2020;
 
 /**
  * <p>
- * <a href="https://adventofcode.com/2015/day/15">Year 2015, day 15</a>. This is a simple numbers puzzle where each
+ * <a href="https://adventofcode.com/2020/day/15">Year 2020, day 15</a>. This is a simple numbers puzzle where each
  * value in the sequence is either zero if the previous number does not exist earlier in the sequence, or it is equal to
  * the difference between its current and previous positions in the sequence. Parts one and two run this algorithm for
  * different iteration counts.

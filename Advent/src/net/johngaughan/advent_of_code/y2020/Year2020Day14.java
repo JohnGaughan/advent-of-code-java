@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * <a href="https://adventofcode.com/2015/day/14">Year 2015, day 14</a>. This problem describes a simple computer, and
+ * <a href="https://adventofcode.com/2020/day/14">Year 2020, day 14</a>. This problem describes a simple computer, and
  * we need to set memory at various addresses to specific values, then get the sum of those values. It has us use a bit
  * mask to do so, but in different ways for each part. Part one requires us to use a bit mask to modify the values set,
  * while part two uses the bit mask to modify the memory address. Part two not only changes how to interpret the bit

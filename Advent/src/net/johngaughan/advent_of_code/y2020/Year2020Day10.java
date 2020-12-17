@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * <p>
- * <a href="https://adventofcode.com/2015/day/10">Year 2015, day 10</a>. The problem throws a lot of wordiness around
+ * <a href="https://adventofcode.com/2020/day/10">Year 2020, day 10</a>. The problem throws a lot of wordiness around
  * but ultimately it is about combinations of numbers where numbers are related to those close to them. Specifically,
  * they must be between one and three of their neighbors. Part one asks for a product related to the spacing. Part two
  * asks how many combinations there are given the constraints.

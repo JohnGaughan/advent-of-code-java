@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 
 /**
  * <p>
- * <a href="https://adventofcode.com/2015/day/13">Year 2015, day 13</a>. This problem is an exercise in quotients and
+ * <a href="https://adventofcode.com/2020/day/13">Year 2020, day 13</a>. This problem is an exercise in quotients and
  * remainders. Part one asks to find the next bus ID that will arrive. Part two asks us to find a time when all buses
  * will return at the same time.
  * </p>

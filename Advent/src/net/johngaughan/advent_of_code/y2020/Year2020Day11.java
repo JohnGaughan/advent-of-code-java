@@ -22,7 +22,7 @@ import java.util.Arrays;
 
 /**
  * <p>
- * <a href="https://adventofcode.com/2015/day/11">Year 2015, day 11</a>. This problem is another variation on Conway's
+ * <a href="https://adventofcode.com/2020/day/11">Year 2020, day 11</a>. This problem is another variation on Conway's
  * Game of Life that pops up in this challenge regularly. This time, there are grid elements that are ignored. Part one
  * is an ordinary variation, while part two considers a neighbor to be a seat in any of the eight directions that is
  * visible across floor elements.
