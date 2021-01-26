@@ -30,7 +30,7 @@ import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
- * <a href="https://adventofcode.com/2015/day/16">Year 2020, day 16</a>. This problem has us look at train tickets where
+ * <a href="https://adventofcode.com/2020/day/16">Year 2020, day 16</a>. This problem has us look at train tickets where
  * we cannot read the field names, figure out what those field names are, then do some math with certain fields to prove
  * it. We do this because we know what the field names are and what valid data is for each one, we just do not know
  * which numbers on a ticket match up with which field definition. Part one starts out by having us remove all invalid

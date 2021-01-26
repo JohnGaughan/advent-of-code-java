@@ -23,7 +23,7 @@ import net.johngaughan.advent_of_code.Utils;
 
 /**
  * <p>
- * <a href="https://adventofcode.com/2015/day/17">Year 2020, day 17</a>. This problem is another Conway's Game of Life.
+ * <a href="https://adventofcode.com/2020/day/17">Year 2020, day 17</a>. This problem is another Conway's Game of Life.
  * Part one simulates it in 3D, part two in 4D. In both cases, it starts with a 2D grid that expands into higher
  * dimensions.
  * </p>
