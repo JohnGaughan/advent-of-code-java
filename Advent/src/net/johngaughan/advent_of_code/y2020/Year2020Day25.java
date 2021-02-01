@@ -16,11 +16,20 @@
  */
 package net.johngaughan.advent_of_code.y2020;
 
+import java.nio.file.Files;
+
+import net.johngaughan.advent_of_code.Utils;
+
 /**
  * <p>
- * <a href="https://adventofcode.com/2020/day/25">Year 2020, day 25</a>.
+ * <a href="https://adventofcode.com/2020/day/25">Year 2020, day 25</a>. The final, one-part puzzle is a fairly simple
+ * brute force algorithm. Using two public keys, reverse engineer an algorithm and determine an encryption key.
  * </p>
  * <p>
+ * The algorithm is spelled out pretty much verbatim in the problem statement, although I found it a little confusing.
+ * Generally, the example problem includes different data from the real problem. This time, some of the data was the
+ * same, namely, the multiplier used to figure out the number of iterations. Aside from that, this is a simple and
+ * straightforward problem without any short cuts.
  * </p>
  * <p>
  * Copyright (c) 2020 John Gaughan
@@ -30,18 +39,37 @@ package net.johngaughan.advent_of_code.y2020;
  */
 public class Year2020Day25 {
 
-  public long calculatePart1() {
-    return 0;
-  }
+  private static final long MODULO = 20201227;
 
-  public long calculatePart2() {
-    return 0;
+  public long calculatePart1() {
+    int[] input = getInput();
+
+    final int cardKey = input[0];
+    final int doorKey = input[1];
+
+    // Get the loop size.
+    long value = 1;
+    int doorLoops = 0;
+    while (value != doorKey) {
+      value *= 7;
+      value %= MODULO;
+      ++doorLoops;
+    }
+
+    // Get the encryption key.
+    long key = 1;
+    for (int i = 0; i < doorLoops; ++i) {
+      key *= cardKey;
+      key %= MODULO;
+    }
+
+    return key;
   }
 
   /** Get the input data for this solution. */
-  private Object getInput() {
+  private int[] getInput() {
     try {
-      return null;
+      return Files.readAllLines(Utils.getInput(2020, 25)).stream().mapToInt(Integer::parseInt).toArray();
     }
     catch (final RuntimeException ex) {
       throw ex;

@@ -277,61 +277,55 @@ public class Year2020Tests {
   @Test
   public void year2020day21part1() {
     final long answer = new Year2020Day21().calculatePart1();
-    assertEquals(-1, answer);
+    assertEquals(2_779, answer);
   }
 
   @Test
   public void year2020day21part2() {
-    final long answer = new Year2020Day21().calculatePart2();
-    assertEquals(-1, answer);
+    final String answer = new Year2020Day21().calculatePart2();
+    assertEquals("lkv,lfcppl,jhsrjlj,jrhvk,zkls,qjltjd,xslr,rfpbpn", answer);
   }
 
   @Test
   public void year2020day22part1() {
     final long answer = new Year2020Day22().calculatePart1();
-    assertEquals(-1, answer);
+    assertEquals(33_925, answer);
   }
 
   @Test
   public void year2020day22part2() {
     final long answer = new Year2020Day22().calculatePart2();
-    assertEquals(-1, answer);
+    assertEquals(33_441, answer);
   }
 
   @Test
   public void year2020day23part1() {
     final long answer = new Year2020Day23().calculatePart1();
-    assertEquals(-1, answer);
+    assertEquals(74_698_532, answer);
   }
 
   @Test
   public void year2020day23part2() {
     final long answer = new Year2020Day23().calculatePart2();
-    assertEquals(-1, answer);
+    assertEquals(286_194_102_744L, answer);
   }
 
   @Test
   public void year2020day24part1() {
     final long answer = new Year2020Day24().calculatePart1();
-    assertEquals(-1, answer);
+    assertEquals(312, answer);
   }
 
   @Test
   public void year2020day24part2() {
     final long answer = new Year2020Day24().calculatePart2();
-    assertEquals(-1, answer);
+    assertEquals(3_733, answer);
   }
 
   @Test
   public void year2020day25part1() {
     final long answer = new Year2020Day25().calculatePart1();
-    assertEquals(-1, answer);
-  }
-
-  @Test
-  public void year2020day25part2() {
-    final long answer = new Year2020Day25().calculatePart2();
-    assertEquals(-1, answer);
+    assertEquals(7_269_858, answer);
   }
 
 }
