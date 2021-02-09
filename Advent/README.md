@@ -28,6 +28,11 @@ Programs only rely on core Java, with a small number relying on one utility meth
 any of the solution logic outside of the program itself beyond the bare minimum: things like Java containers and streams, or JUnit which manages running the
 various programs and validating their answers.
 
+## Who am I?
+
+My name is John Gaughan, and I am a professional software developer living in Ohio, USA. My email address is <john@coffeecode.us> and my personal blog is at
+<https://coffeecode.us/>.
+
 ## Licenses
 
 This project is licensed under the GNU GPL v3. See the LICENSE file for the complete text.
