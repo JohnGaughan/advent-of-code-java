@@ -37,6 +37,4 @@ My name is John Gaughan, and I am a professional software developer living in Oh
 
 This project is licensed under the GNU GPL v3. See the LICENSE file for the complete text.
 
-Licenses for included libraries are also included in LICENSE-junit, LICENSE-hamcrest, and LICENSE-json.
-
 Input data reproduced here is the IP of the Advent of Code team.

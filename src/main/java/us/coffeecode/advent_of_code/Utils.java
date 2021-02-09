@@ -37,7 +37,8 @@ public final class Utils {
 
   /** Gets the path containing input data for the given year and day. Used by unit tests. */
   public static Path getInput(final int year, final int day) {
-    return Path.of("input", Integer.toString(year), "day" + (day < 10 ? "0" + day : Integer.toString(day)) + ".txt");
+    return Path.of("src", "main", "resources", Integer.toString(year),
+      "day" + (day < 10 ? "0" + day : Integer.toString(day)) + ".txt");
   }
 
   /**
