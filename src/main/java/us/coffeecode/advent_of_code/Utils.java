@@ -16,7 +16,10 @@
  */
 package us.coffeecode.advent_of_code;
 
+import java.nio.charset.Charset;
 import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -113,5 +116,42 @@ public final class Utils {
     }
     return results;
   }
+
+  public static byte[] md5(final String input) {
+    return MD5.get().digest(input.getBytes(ASCII));
+  }
+
+  public static String md5ToHex(final String input) {
+    final byte[] bytes = MD5.get().digest(input.getBytes(ASCII));
+    return toHexString(bytes);
+  }
+
+  private static String toHexString(final byte[] bytes) {
+    final char[] hex = new char[bytes.length << 1];
+    for (int i = 0; i < bytes.length; ++i) {
+      final int v = bytes[i] & 0xFF;
+      hex[i << 1] = CHARS[v >>> 4];
+      hex[(i << 1) + 1] = CHARS[v & 0x0F];
+    }
+    return new String(hex);
+  }
+
+  private static final Charset ASCII = Charset.forName("US-ASCII");
+
+  /** Hexadecimal character set. */
+  private static final char[] CHARS = "0123456789abcdef".toCharArray();
+
+  /** MD5 message digest. */
+  private static final ThreadLocal<MessageDigest> MD5 = new ThreadLocal<>() {
+
+    protected MessageDigest initialValue() {
+      try {
+        return MessageDigest.getInstance("MD5");
+      }
+      catch (final NoSuchAlgorithmException ex) {
+        throw new RuntimeException(ex);
+      }
+    }
+  };
 
 }

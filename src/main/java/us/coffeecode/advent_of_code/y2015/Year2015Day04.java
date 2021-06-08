@@ -16,9 +16,7 @@
  */
 package us.coffeecode.advent_of_code.y2015;
 
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import us.coffeecode.advent_of_code.Utils;
 
 /**
  * <p>
@@ -41,25 +39,19 @@ import java.security.NoSuchAlgorithmException;
 public final class Year2015Day04 {
 
   public int calculatePart1() {
-    final String input = getInput();
-    for (int i = 0; i <= Long.MAX_VALUE; ++i) {
-      final String plaintext = input + i;
-      final byte[] cipher = MD5.digest(plaintext.getBytes(ASCII));
-      // Cipher must start with 0x00000, or the first 20 bits must be zero. This is the first two and a half bytes.
-      if (cipher[0] == 0 && cipher[1] == 0 && cipher[2] >= 0 && cipher[2] < 16) {
-        return i;
-      }
-    }
-    return Integer.MIN_VALUE;
+    return calculate("00000");
   }
 
   public int calculatePart2() {
+    return calculate("000000");
+  }
+
+  public int calculate(final String prefix) {
     final String input = getInput();
     for (int i = 0; i <= Long.MAX_VALUE; ++i) {
       final String plaintext = input + i;
-      final byte[] cipher = MD5.digest(plaintext.getBytes(ASCII));
-      // Cipher must start with 0x000000, or the first 24 bits must be zero. This is the first three bytes.
-      if (cipher[0] == 0 && cipher[1] == 0 && cipher[2] == 0) {
+      final String ciphertext = Utils.md5ToHex(plaintext);
+      if (ciphertext.startsWith(prefix)) {
         return i;
       }
     }
@@ -69,21 +61,6 @@ public final class Year2015Day04 {
   /** Get the input data for this solution. */
   private String getInput() {
     return "ckczppom";
-  }
-
-  /** ASCII character set used to encode the plaintext into a byte array suitable for digesting. */
-  private static final Charset ASCII = Charset.forName("US-ASCII");
-
-  /** MD5 message digest. */
-  private static final MessageDigest MD5;
-
-  static {
-    try {
-      MD5 = MessageDigest.getInstance("MD5");
-    }
-    catch (final NoSuchAlgorithmException ex) {
-      throw new ExceptionInInitializerError(ex);
-    }
   }
 
 }
