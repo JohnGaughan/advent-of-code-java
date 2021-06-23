@@ -68,7 +68,6 @@ public final class Year2017Day24 {
         longest = Math.max(longest, chain.size());
       }
     }
-    System.out.println(chains.size());
     long max = 0;
     for (final List<Integer> chain : chains) {
       if (chain.size() == longest) {

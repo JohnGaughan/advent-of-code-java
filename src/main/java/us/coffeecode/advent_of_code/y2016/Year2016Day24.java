@@ -194,29 +194,21 @@ public final class Year2016Day24 {
   void print(final char[][] maze) {
     for (int y = 0; y < maze.length; ++y) {
       for (int x = 0; x < maze[y].length; ++x) {
-        System.out.print(maze[y][x]);
       }
-      System.out.println();
     }
-    System.out.println();
   }
 
   void print(final int[][] distances) {
     for (int y = 0; y < distances.length; ++y) {
       for (int x = 0; x < distances[y].length; ++x) {
         if (distances[y][x] < 10) {
-          System.out.print("   " + distances[y][x]);
         }
         else if (distances[y][x] < 100) {
-          System.out.print("  " + distances[y][x]);
         }
         else {
-          System.out.print(" " + distances[y][x]);
         }
       }
-      System.out.println();
     }
-    System.out.println();
   }
 
   /** Get the input data for this solution. */
