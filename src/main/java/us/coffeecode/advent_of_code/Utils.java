@@ -45,6 +45,42 @@ public final class Utils {
   }
 
   /**
+   * Given an array of code points, convert to a string. Java's String class can construct a string from bytes and
+   * characters, but not code points.
+   */
+  public static String codePointsToString(final List<Integer> codePoints) {
+    final StringBuilder str = new StringBuilder(codePoints.size());
+    for (final Integer codePoint : codePoints) {
+      str.appendCodePoint(codePoint.intValue());
+    }
+    return str.toString();
+  }
+
+  /**
+   * Given an array of code points, convert to a string. Java's String class can construct a string from bytes and
+   * characters, but not code points.
+   */
+  public static String codePointsToString(final Integer[] codePoints) {
+    final StringBuilder str = new StringBuilder(codePoints.length);
+    for (final Integer codePoint : codePoints) {
+      str.appendCodePoint(codePoint.intValue());
+    }
+    return str.toString();
+  }
+
+  /**
+   * Given an array of code points, convert to a string. Java's String class can construct a string from bytes and
+   * characters, but not code points.
+   */
+  public static String codePointsToString(final int[] codePoints) {
+    final StringBuilder str = new StringBuilder(codePoints.length);
+    for (final int codePoint : codePoints) {
+      str.appendCodePoint(codePoint);
+    }
+    return str.toString();
+  }
+
+  /**
    * <p>
    * Given a list of strings, group them up based on spacing. A blank string marks the boundary between string groups.
    * </p>
@@ -126,7 +162,17 @@ public final class Utils {
     return toHexString(bytes);
   }
 
-  private static String toHexString(final byte[] bytes) {
+  public static String toHexString(final byte[] bytes) {
+    final char[] hex = new char[bytes.length << 1];
+    for (int i = 0; i < bytes.length; ++i) {
+      final int v = bytes[i] & 0xFF;
+      hex[i << 1] = CHARS[v >>> 4];
+      hex[(i << 1) + 1] = CHARS[v & 0x0F];
+    }
+    return new String(hex);
+  }
+
+  public static String toHexString(final int[] bytes) {
     final char[] hex = new char[bytes.length << 1];
     for (int i = 0; i < bytes.length; ++i) {
       final int v = bytes[i] & 0xFF;
