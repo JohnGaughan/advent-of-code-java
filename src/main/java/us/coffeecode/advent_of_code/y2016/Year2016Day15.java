@@ -56,7 +56,7 @@ public final class Year2016Day15 {
   private long calculate(final List<Disc> discs) {
     int dropTime = 0;
     int increment = 1;
-    for (Disc disc : discs) {
+    for (final Disc disc : discs) {
       int t = disc.positions - disc.id - disc.start;
       while (t < 0) {
         t += disc.positions;
@@ -72,7 +72,6 @@ public final class Year2016Day15 {
   /** Get the input data for this solution. */
   private List<Disc> getInput(final boolean bonusDisc) {
     try {
-      // new Disc("Disc #7 has 11 positions; at time=0, it is at position 0.");
       final List<Disc> discs =
         Files.readAllLines(Utils.getInput(2016, 15)).stream().map(Disc::new).collect(Collectors.toList());
       if (bonusDisc) {
