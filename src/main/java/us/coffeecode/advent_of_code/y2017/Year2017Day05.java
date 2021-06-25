@@ -29,7 +29,8 @@ import us.coffeecode.advent_of_code.Utils;
  * program.
  * </p>
  * <p>
- * TODO
+ * This is a trivial simulation where we simply track an instruction pointer and the number of jumps, and increment
+ * until the pointer is invalid.
  * </p>
  * <p>
  * Copyright (c) 2021 John Gaughan
