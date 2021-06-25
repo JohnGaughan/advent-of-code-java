@@ -16,7 +16,10 @@
  */
 package us.coffeecode.advent_of_code.y2020;
 
+import java.nio.file.Files;
 import java.util.Arrays;
+
+import us.coffeecode.advent_of_code.Utils;
 
 /**
  * <p>
@@ -99,7 +102,16 @@ public class Year2020Day23 {
 
   /** Get the input data for this solution. */
   private State getInput(final boolean partTwo) {
-    return new State(new int[] { 6, 2, 4, 3, 9, 7, 1, 5, 8 }, partTwo);
+    try {
+      return new State(Files.readString(Utils.getInput(2020, 23)).trim().codePoints().map(i -> i - '0').toArray(),
+        partTwo);
+    }
+    catch (final RuntimeException ex) {
+      throw ex;
+    }
+    catch (final Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
   private static final class State {

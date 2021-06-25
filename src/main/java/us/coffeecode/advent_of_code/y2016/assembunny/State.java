@@ -16,9 +16,8 @@
  */
 package us.coffeecode.advent_of_code.y2016.assembunny;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -41,9 +40,9 @@ public final class State {
    * @param input path to the file to load
    * @return an initialized state instance.
    */
-  public static State load(final Path input) {
+  public static State load(final List<String> input) {
     try {
-      return new State(Files.readAllLines(input).stream().map(Instruction::new).toArray(Instruction[]::new));
+      return new State(input.stream().map(Instruction::new).toArray(Instruction[]::new));
     }
     catch (RuntimeException ex) {
       throw ex;

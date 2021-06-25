@@ -16,6 +16,10 @@
  */
 package us.coffeecode.advent_of_code.y2015;
 
+import java.nio.file.Files;
+
+import us.coffeecode.advent_of_code.Utils;
+
 /**
  * <p>
  * <a href="https://adventofcode.com/2015/day/20">Year 2015, day 20</a>. This is a problem about factorization. The
@@ -80,7 +84,15 @@ public final class Year2015Day20 {
 
   /** Get the input data for this solution. */
   private int getInput() {
-    return 36_000_000;
+    try {
+      return Integer.parseInt(Files.readString(Utils.getInput(2015, 20)).trim());
+    }
+    catch (final RuntimeException ex) {
+      throw ex;
+    }
+    catch (final Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
 }

@@ -16,7 +16,9 @@
  */
 package us.coffeecode.advent_of_code.y2016;
 
+import java.nio.file.Files;
 import java.util.Arrays;
+import java.util.List;
 
 import us.coffeecode.advent_of_code.Utils;
 import us.coffeecode.advent_of_code.y2016.assembunny.Interpreter;
@@ -47,8 +49,9 @@ public final class Year2016Day25 {
     for (int i = 0; i < expected.length; ++i) {
       expected[i] = i % 2;
     }
+    final List<String> input = getInput();
     for (int i = 1; i < Integer.MAX_VALUE; ++i) {
-      final State state = State.load(Utils.getInput(2016, 25));
+      final State state = State.load(input);
       state.reg[0] = i;
       new Interpreter().execute(state);
       if (Arrays.compare(expected, state.out) == 0) {
@@ -56,6 +59,19 @@ public final class Year2016Day25 {
       }
     }
     return -1;
+  }
+
+  /** Get the input data for this solution. */
+  private List<String> getInput() {
+    try {
+      return Files.readAllLines(Utils.getInput(2016, 25));
+    }
+    catch (RuntimeException ex) {
+      throw ex;
+    }
+    catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
 }

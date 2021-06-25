@@ -16,9 +16,12 @@
  */
 package us.coffeecode.advent_of_code.y2016;
 
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import us.coffeecode.advent_of_code.Utils;
 
 /**
  * <p>
@@ -42,19 +45,18 @@ import java.util.Map;
  */
 public final class Year2016Day13 {
 
-  private static final int INPUT = 1352;
-
   public long calculatePart1() {
-    return traverse(100).get(new Point(31, 39)).intValue();
+    final int input = getInput();
+    return traverse(100, input).get(new Point(31, 39, input)).intValue();
   }
 
   public long calculatePart2() {
-    return traverse(50).size();
+    return traverse(50, getInput()).size();
   }
 
-  private Map<Point, Integer> traverse(final int limit) {
+  private Map<Point, Integer> traverse(final int limit, final int input) {
     final Map<Point, Integer> visited = new HashMap<>(limit << 1);
-    visited.put(new Point(1, 1), Integer.valueOf(0));
+    visited.put(new Point(1, 1, input), Integer.valueOf(0));
 
     boolean updated = true;
     while (updated) {
@@ -66,7 +68,7 @@ public final class Year2016Day13 {
           continue;
         }
         // Try each direction around the point.
-        for (final Point next : getAdjacents(current.getKey())) {
+        for (final Point next : getAdjacents(current.getKey(), input)) {
           // Already visited: update with the better of the two paths to this point.
           if (visited.containsKey(next)) {
             final int existingLength = visited.get(next).intValue();
@@ -86,9 +88,22 @@ public final class Year2016Day13 {
     return visited;
   }
 
-  private Point[] getAdjacents(final Point p) {
-    return new Point[] { new Point(p.x - 1, p.y), new Point(p.x + 1, p.y), new Point(p.x, p.y - 1),
-        new Point(p.x, p.y + 1) };
+  private Point[] getAdjacents(final Point p, final int input) {
+    return new Point[] { new Point(p.x - 1, p.y, input), new Point(p.x + 1, p.y, input), new Point(p.x, p.y - 1, input),
+        new Point(p.x, p.y + 1, input) };
+  }
+
+  /** Get the input data for this solution. */
+  private int getInput() {
+    try {
+      return Integer.parseInt(Files.readString(Utils.getInput(2016, 13)).trim());
+    }
+    catch (RuntimeException ex) {
+      throw ex;
+    }
+    catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
   private static final class Point {
@@ -101,7 +116,7 @@ public final class Year2016Day13 {
 
     private final boolean isWall;
 
-    Point(final int _x, final int _y) {
+    Point(final int _x, final int _y, final int input) {
       x = _x;
       y = _y;
       hashCode = (x << 16) + y;
@@ -109,7 +124,7 @@ public final class Year2016Day13 {
         isWall = true;
       }
       else {
-        final int value = x * x + 3 * x + 2 * x * y + y + y * y + INPUT;
+        final int value = x * x + 3 * x + 2 * x * y + y + y * y + input;
         final int count = Integer.bitCount(value);
         isWall = (count & 1) > 0;
       }

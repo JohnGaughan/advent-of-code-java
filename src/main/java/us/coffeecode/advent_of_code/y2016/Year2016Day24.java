@@ -191,26 +191,6 @@ public final class Year2016Day24 {
     return adjacent;
   }
 
-  void print(final char[][] maze) {
-    for (int y = 0; y < maze.length; ++y) {
-      for (int x = 0; x < maze[y].length; ++x) {
-      }
-    }
-  }
-
-  void print(final int[][] distances) {
-    for (int y = 0; y < distances.length; ++y) {
-      for (int x = 0; x < distances[y].length; ++x) {
-        if (distances[y][x] < 10) {
-        }
-        else if (distances[y][x] < 100) {
-        }
-        else {
-        }
-      }
-    }
-  }
-
   /** Get the input data for this solution. */
   private char[][] getInput() {
     try {

@@ -16,6 +16,7 @@
  */
 package us.coffeecode.advent_of_code.y2016;
 
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,15 +61,12 @@ public final class Year2016Day14 {
   /** Array index that stores quintuples. */
   private static final int QUINTUPLE = 1;
 
-  /** Input hash salt. */
-  private static final String INPUT = "zpqevtbw";
-
   public long calculatePart1() {
-    return calculate(calculateHashData(false));
+    return calculate(calculateHashData(false, getInput()));
   }
 
   public long calculatePart2() {
-    return calculate(calculateHashData(true));
+    return calculate(calculateHashData(true, getInput()));
   }
 
   private long calculate(final boolean[][][] hashData) {
@@ -93,13 +91,26 @@ public final class Year2016Day14 {
     return -1;
   }
 
-  private boolean[][][] calculateHashData(final boolean stretch) {
+  /** Get the input data for this solution. */
+  private String getInput() {
+    try {
+      return Files.readString(Utils.getInput(2016, 14)).trim();
+    }
+    catch (RuntimeException ex) {
+      throw ex;
+    }
+    catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
+  }
+
+  private boolean[][][] calculateHashData(final boolean stretch, final String salt) {
     final boolean[][][] result = new boolean[LIMIT][2][CHARS.length];
     final int HASHES_PER_THREAD = LIMIT / THREAD_COUNT;
     final ExecutorService exec = Executors.newFixedThreadPool(THREAD_COUNT);
     final List<Future<?>> futures = new ArrayList<>();
     for (int i = 0; i < LIMIT; i += HASHES_PER_THREAD) {
-      futures.add(exec.submit(new Hasher(result, i, i + HASHES_PER_THREAD, stretch)));
+      futures.add(exec.submit(new Hasher(result, i, i + HASHES_PER_THREAD, stretch, salt)));
     }
     for (Future<?> future : futures) {
       try {
@@ -126,18 +137,21 @@ public final class Year2016Day14 {
 
     final boolean stretch;
 
-    Hasher(final boolean[][][] _result, final int _lowerBound, final int _upperBound, final boolean _stretch) {
+    final String salt;
+
+    Hasher(final boolean[][][] _result, final int _lowerBound, final int _upperBound, final boolean _stretch, final String _salt) {
       result = _result;
       lowerBound = _lowerBound;
       upperBound = _upperBound;
       stretch = _stretch;
+      salt = _salt;
     }
 
     /** {@inheritDoc} */
     @Override
     public Void call() throws Exception {
       for (int i = lowerBound; i < upperBound; ++i) {
-        final String plaintext = INPUT + i;
+        final String plaintext = salt + i;
         String hex = Utils.md5ToHex(plaintext);
         if (stretch) {
           for (int j = 0; j < 2016; ++j) {

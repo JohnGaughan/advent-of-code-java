@@ -16,6 +16,10 @@
  */
 package us.coffeecode.advent_of_code.y2015;
 
+import java.nio.file.Files;
+
+import us.coffeecode.advent_of_code.Utils;
+
 /**
  * <p>
  * <a href="https://adventofcode.com/2015/day/10">Year 2015, day 10</a>. The problem asks for the length of the string
@@ -74,7 +78,15 @@ public final class Year2015Day10 {
 
   /** Get the input data for this solution. */
   private String getInput() {
-    return "1113122113";
+    try {
+      return Files.readString(Utils.getInput(2015, 10)).trim();
+    }
+    catch (final RuntimeException ex) {
+      throw ex;
+    }
+    catch (final Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
 }

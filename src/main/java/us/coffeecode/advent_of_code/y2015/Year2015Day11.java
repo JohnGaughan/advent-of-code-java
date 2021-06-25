@@ -16,6 +16,10 @@
  */
 package us.coffeecode.advent_of_code.y2015;
 
+import java.nio.file.Files;
+
+import us.coffeecode.advent_of_code.Utils;
+
 /**
  * <p>
  * <a href="https://adventofcode.com/2015/day/11">Year 2015, day 11</a>. This problem asks us to increment a password
@@ -52,13 +56,13 @@ public final class Year2015Day11 {
 
   public String calculatePart1() {
     final int[] password = getNextPassword(getInput());
-    return valueOf(password);
+    return Utils.codePointsToString(password);
   }
 
   public String calculatePart2() {
     int[] password = getNextPassword(getInput());
     password = getNextPassword(password);
-    return valueOf(password);
+    return Utils.codePointsToString(password);
   }
 
   /** Get the next valid password. */
@@ -121,31 +125,15 @@ public final class Year2015Day11 {
 
   /** Get the input data for this solution. */
   private int[] getInput() {
-    return valueOf("vzbxkghb");
-  }
-
-  /**
-   * Convert code points to a string, because String doesn't have a way to do this despite operating mostly on code
-   * points.
-   */
-  private static String valueOf(final int[] codePoints) {
-    final StringBuilder str = new StringBuilder(codePoints.length);
-    for (final int codePoint : codePoints) {
-      str.appendCodePoint(codePoint);
+    try {
+      return Files.readString(Utils.getInput(2015, 11)).trim().codePoints().toArray();
     }
-    return str.toString();
-  }
-
-  /**
-   * Convert a string to code points, because String doesn't have a way to do this despite operating mostly on code
-   * points.
-   */
-  private static int[] valueOf(final String str) {
-    final int[] value = new int[str.length()];
-    for (int i = 0; i < str.length(); ++i) {
-      value[i] = str.codePointAt(i);
+    catch (final RuntimeException ex) {
+      throw ex;
     }
-    return value;
+    catch (final Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
 }

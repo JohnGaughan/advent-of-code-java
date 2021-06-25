@@ -16,6 +16,10 @@
  */
 package us.coffeecode.advent_of_code.y2016;
 
+import java.nio.file.Files;
+
+import us.coffeecode.advent_of_code.Utils;
+
 /**
  * <p>
  * <a href="https://adventofcode.com/2016/day/16">Year 2016, day 16</a>. This problem asks us to generate a string, then
@@ -47,8 +51,6 @@ package us.coffeecode.advent_of_code.y2016;
  */
 public final class Year2016Day16 {
 
-  private static final String INPUT = "10001110011110000";
-
   public String calculatePart1() {
     return calculate(272);
   }
@@ -58,7 +60,7 @@ public final class Year2016Day16 {
   }
 
   private String calculate(final int length) {
-    return checksum(dragon(INPUT, length));
+    return checksum(dragon(getInput(), length));
   }
 
   private boolean[] dragon(final String input, final int length) {
@@ -101,6 +103,19 @@ public final class Year2016Day16 {
     }
     // Note: the checksum may have a leading zero and yes, this matters.
     return checksum.toString();
+  }
+
+  /** Get the input data for this solution. */
+  private String getInput() {
+    try {
+      return Files.readString(Utils.getInput(2016, 16)).trim();
+    }
+    catch (RuntimeException ex) {
+      throw ex;
+    }
+    catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
 }

@@ -16,6 +16,10 @@
  */
 package us.coffeecode.advent_of_code.y2016;
 
+import java.nio.file.Files;
+
+import us.coffeecode.advent_of_code.Utils;
+
 /**
  * <p>
  * <a href="https://adventofcode.com/2016/day/19">Year 2016, day 19</a>. This day's problem asks us to calculate the
@@ -47,10 +51,8 @@ package us.coffeecode.advent_of_code.y2016;
  */
 public final class Year2016Day19 {
 
-  private static final int INPUT = 3_001_330;
-
   public long calculatePart1() {
-    return a(INPUT);
+    return a(getInput());
   }
 
   private long a(final long n) {
@@ -66,7 +68,7 @@ public final class Year2016Day19 {
   }
 
   public long calculatePart2() {
-    return b(INPUT);
+    return b(getInput());
   }
 
   private long b(final long n) {
@@ -85,6 +87,19 @@ public final class Year2016Day19 {
       // Multiply n by 2 to get the two-spacing needed, then subtract the next higher power of three to scale it back
       // down.
       return (n << 1) - 3 * pow3;
+    }
+  }
+
+  /** Get the input data for this solution. */
+  private int getInput() {
+    try {
+      return Integer.parseInt(Files.readString(Utils.getInput(2016, 19)).trim());
+    }
+    catch (RuntimeException ex) {
+      throw ex;
+    }
+    catch (Exception ex) {
+      throw new RuntimeException(ex);
     }
   }
 

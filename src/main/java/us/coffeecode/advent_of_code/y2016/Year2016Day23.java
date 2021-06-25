@@ -16,6 +16,9 @@
  */
 package us.coffeecode.advent_of_code.y2016;
 
+import java.nio.file.Files;
+import java.util.List;
+
 import us.coffeecode.advent_of_code.Utils;
 import us.coffeecode.advent_of_code.y2016.assembunny.Instruction;
 import us.coffeecode.advent_of_code.y2016.assembunny.Interpreter;
@@ -44,14 +47,14 @@ import us.coffeecode.advent_of_code.y2016.assembunny.State;
 public final class Year2016Day23 {
 
   public long calculatePart1() {
-    final State state = State.load(Utils.getInput(2016, 23));
+    final State state = State.load(getInput());
     state.reg[0] = 7;
     new Interpreter().execute(state);
     return state.reg[0];
   }
 
   public long calculatePart2() {
-    final State state = State.load(Utils.getInput(2016, 23));
+    final State state = State.load(getInput());
     state.reg[0] = 12;
     // Patch the input program to use multiplication instead of repeated incrementing.
     state.instructions[4] = new Instruction("mul b d a");
@@ -59,6 +62,19 @@ public final class Year2016Day23 {
       state.instructions[7] = state.instructions[8] = state.instructions[9] = new Instruction("nop");
     new Interpreter().execute(state);
     return state.reg[0];
+  }
+
+  /** Get the input data for this solution. */
+  private List<String> getInput() {
+    try {
+      return Files.readAllLines(Utils.getInput(2016, 23));
+    }
+    catch (RuntimeException ex) {
+      throw ex;
+    }
+    catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
 }

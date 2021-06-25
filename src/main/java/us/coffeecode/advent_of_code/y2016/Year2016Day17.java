@@ -16,6 +16,7 @@
  */
 package us.coffeecode.advent_of_code.y2016;
 
+import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -40,21 +41,19 @@ import us.coffeecode.advent_of_code.Utils;
  */
 public final class Year2016Day17 {
 
-  private static final String INPUT = "yjjvjgan";
-
   private static final int HEIGHT = 4;
 
   private static final int WIDTH = 4;
 
   public String calculatePart1() {
-    return getPath(true);
+    return getPath(true, getInput());
   }
 
   public long calculatePart2() {
-    return getPath(false).length();
+    return getPath(false, getInput()).length();
   }
 
-  private String getPath(final boolean findShortest) {
+  private String getPath(final boolean findShortest, final String salt) {
     Set<Path> paths = new HashSet<>();
     paths.add(new Path(""));
     Path currentSolution = null;
@@ -70,7 +69,7 @@ public final class Year2016Day17 {
           // Otherwise, mark this as a potential solution and stop searching this branch of the search tree.
           continue;
         }
-        final String md5 = Utils.md5ToHex(INPUT + path.path);
+        final String md5 = Utils.md5ToHex(salt + path.path);
         if (path.y > 0 && md5.codePointAt(0) > 'a') {
           nextIterationPaths.add(new Path(path.path + UP));
         }
@@ -87,6 +86,19 @@ public final class Year2016Day17 {
       paths = nextIterationPaths;
     }
     return currentSolution == null ? "" : currentSolution.path;
+  }
+
+  /** Get the input data for this solution. */
+  private String getInput() {
+    try {
+      return Files.readString(Utils.getInput(2016, 17)).trim();
+    }
+    catch (RuntimeException ex) {
+      throw ex;
+    }
+    catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
   private static final class Path {

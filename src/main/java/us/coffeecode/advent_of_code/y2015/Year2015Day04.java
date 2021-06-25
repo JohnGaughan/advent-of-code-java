@@ -16,6 +16,8 @@
  */
 package us.coffeecode.advent_of_code.y2015;
 
+import java.nio.file.Files;
+
 import us.coffeecode.advent_of_code.Utils;
 
 /**
@@ -60,7 +62,15 @@ public final class Year2015Day04 {
 
   /** Get the input data for this solution. */
   private String getInput() {
-    return "ckczppom";
+    try {
+      return Files.readString(Utils.getInput(2015, 4)).trim();
+    }
+    catch (final RuntimeException ex) {
+      throw ex;
+    }
+    catch (final Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
 }

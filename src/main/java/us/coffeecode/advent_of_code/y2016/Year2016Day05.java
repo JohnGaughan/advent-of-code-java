@@ -16,6 +16,8 @@
  */
 package us.coffeecode.advent_of_code.y2016;
 
+import java.nio.file.Files;
+
 import us.coffeecode.advent_of_code.Utils;
 
 /**
@@ -37,14 +39,13 @@ public final class Year2016Day05 {
 
   private static final boolean CHEAT_MODE = true;
 
-  private static final String INPUT = "uqwqemis";
-
   public String calculatePart1() {
+    final String salt = getInput();
     final StringBuilder password = new StringBuilder(8);
     // Cheat a little to shave off some time.
     int index = CHEAT_MODE ? 4_515_059 : 0;
     while (password.length() < 8) {
-      String plaintext = INPUT + index;
+      String plaintext = salt + index;
       final byte[] cipher = Utils.md5(plaintext);
       // Cipher must start with 0x00000, or the first 20 bits must be zero. This is the first two and a half bytes.
       if (cipher[0] == 0 && cipher[1] == 0 && cipher[2] >= 0 && cipher[2] < 16) {
@@ -81,11 +82,12 @@ public final class Year2016Day05 {
   }
 
   public String calculatePart2() {
+    final String salt = getInput();
     final StringBuilder password = new StringBuilder("________");
     // Cheat a little to shave off some time.
     int index = CHEAT_MODE ? 4_515_059 : 0;
     while (password.indexOf("_") >= 0) {
-      String plaintext = INPUT + index;
+      String plaintext = salt + index;
       final byte[] cipher = Utils.md5(plaintext);
       // Cipher must start with 0x00000, or the first 20 bits must be zero. This is the first two and a half bytes.
       if (cipher[0] == 0 && cipher[1] == 0 && cipher[2] >= 0 && cipher[2] < 16) {
@@ -127,6 +129,19 @@ public final class Year2016Day05 {
       ++index;
     }
     return password.toString();
+  }
+
+  /** Get the input data for this solution. */
+  private String getInput() {
+    try {
+      return Files.readString(Utils.getInput(2016, 5)).trim();
+    }
+    catch (RuntimeException ex) {
+      throw ex;
+    }
+    catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
 }

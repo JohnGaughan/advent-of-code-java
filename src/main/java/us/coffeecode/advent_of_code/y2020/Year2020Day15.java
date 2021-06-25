@@ -16,6 +16,12 @@
  */
 package us.coffeecode.advent_of_code.y2020;
 
+import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.regex.Pattern;
+
+import us.coffeecode.advent_of_code.Utils;
+
 /**
  * <p>
  * <a href="https://adventofcode.com/2020/day/15">Year 2020, day 15</a>. This is a simple numbers puzzle where each
@@ -78,9 +84,20 @@ public final class Year2020Day15 {
     return nextValue;
   }
 
+  private static final Pattern SEPARATOR = Pattern.compile(",");
+
   /** Get the input data for this solution. */
   private int[] getInput() {
-    return new int[] { 1, 12, 0, 20, 8, 16 };
+    try {
+      return Arrays.stream(SEPARATOR.split(Files.readString(Utils.getInput(2020, 15)).trim())).mapToInt(
+        Integer::parseInt).toArray();
+    }
+    catch (final RuntimeException ex) {
+      throw ex;
+    }
+    catch (final Exception ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
 }
