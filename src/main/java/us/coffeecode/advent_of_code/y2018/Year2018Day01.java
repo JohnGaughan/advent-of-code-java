@@ -17,15 +17,22 @@
 package us.coffeecode.advent_of_code.y2018;
 
 import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import us.coffeecode.advent_of_code.Utils;
 
 /**
  * <p>
- * <a href="https://adventofcode.com/2018/day/1">Year 2018, day 1</a>. TODO
+ * <a href="https://adventofcode.com/2018/day/1">Year 2018, day 1</a>. Today's puzzle has us process a list of integers.
+ * Part one asks for its sum. Part two has us repeatedly process the list, tracking the sum along the way, until we
+ * encounter a duplicate sum.
  * </p>
  * <p>
- * TODO
+ * Part one has a trivial solution using Java's stream operations. Part two calculates over 129,000 values until it
+ * finds a repeat. This takes a trivial amount of time on the given input. I am aware of ways to calculate this that are
+ * faster using advanced math. When JUnit reports 0ms as the run time, I would rather move on to the next day.
  * </p>
  * <p>
  * Copyright (c) 2021 John Gaughan
@@ -36,17 +43,30 @@ import us.coffeecode.advent_of_code.Utils;
 public final class Year2018Day01 {
 
   public long calculatePart1() {
-    return 0;
+    return Arrays.stream(getInput()).sum();
   }
 
   public long calculatePart2() {
-    return 0;
+    int frequency = 0;
+    final Set<Integer> seen = new HashSet<>(1 << 17);
+    final int[] input = getInput();
+    outer: while (true) {
+      for (final int change : input) {
+        final Integer key = Integer.valueOf(frequency);
+        if (seen.contains(key)) {
+          break outer;
+        }
+        seen.add(key);
+        frequency += change;
+      }
+    }
+    return frequency;
   }
 
   /** Get the input data for this solution. */
-  private Object getInput() {
+  private int[] getInput() {
     try {
-      return Files.readString(Utils.getInput(2018, 1));
+      return Files.readAllLines(Utils.getInput(2018, 1)).stream().mapToInt(Integer::parseInt).toArray();
     }
     catch (RuntimeException ex) {
       throw ex;

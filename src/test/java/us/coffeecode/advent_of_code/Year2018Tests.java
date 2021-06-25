@@ -37,133 +37,133 @@ public class Year2018Tests {
   @Test
   public void year2018day01part1() {
     final long answer = new Year2018Day01().calculatePart1();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(540, answer);
   }
 
   @Test
   public void year2018day01part2() {
     final long answer = new Year2018Day01().calculatePart2();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(73_056, answer);
   }
 
   @Test
   public void year2018day02part1() {
     final long answer = new Year2018Day02().calculatePart1();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(6_888, answer);
   }
 
   @Test
   public void year2018day02part2() {
-    final long answer = new Year2018Day02().calculatePart2();
-    assertEquals(Long.MIN_VALUE, answer);
+    final String answer = new Year2018Day02().calculatePart2();
+    assertEquals("icxjvbrobtunlelzpdmfkahgs", answer);
   }
 
   @Test
   public void year2018day03part1() {
     final long answer = new Year2018Day03().calculatePart1();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(111_326, answer);
   }
 
   @Test
   public void year2018day03part2() {
     final long answer = new Year2018Day03().calculatePart2();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(1_019, answer);
   }
 
   @Test
   public void year2018day04part1() {
     final long answer = new Year2018Day04().calculatePart1();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(39_698, answer);
   }
 
   @Test
   public void year2018day04part2() {
     final long answer = new Year2018Day04().calculatePart2();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(14_920, answer);
   }
 
   @Test
   public void year2018day05part1() {
     final long answer = new Year2018Day05().calculatePart1();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(9_386, answer);
   }
 
   @Test
   public void year2018day05part2() {
     final long answer = new Year2018Day05().calculatePart2();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(4_876, answer);
   }
 
   @Test
   public void year2018day06part1() {
     final long answer = new Year2018Day06().calculatePart1();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(3_907, answer);
   }
 
   @Test
   public void year2018day06part2() {
     final long answer = new Year2018Day06().calculatePart2();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(42_036, answer);
   }
 
   @Test
   public void year2018day07part1() {
-    final long answer = new Year2018Day07().calculatePart1();
-    assertEquals(Long.MIN_VALUE, answer);
+    final String answer = new Year2018Day07().calculatePart1();
+    assertEquals("OKBNLPHCSVWAIRDGUZEFMXYTJQ", answer);
   }
 
   @Test
   public void year2018day07part2() {
     final long answer = new Year2018Day07().calculatePart2();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(982, answer);
   }
 
   @Test
   public void year2018day08part1() {
     final long answer = new Year2018Day08().calculatePart1();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(40_848, answer);
   }
 
   @Test
   public void year2018day08part2() {
     final long answer = new Year2018Day08().calculatePart2();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(34_466, answer);
   }
 
   @Test
   public void year2018day09part1() {
     final long answer = new Year2018Day09().calculatePart1();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(388_024, answer);
   }
 
   @Test
   public void year2018day09part2() {
     final long answer = new Year2018Day09().calculatePart2();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(3_180_929_875L, answer);
   }
 
   @Test
   public void year2018day10part1() {
-    final long answer = new Year2018Day10().calculatePart1();
-    assertEquals(Long.MIN_VALUE, answer);
+    final String answer = new Year2018Day10().calculatePart1();
+    assertEquals("RLEZNRAN", answer);
   }
 
   @Test
   public void year2018day10part2() {
     final long answer = new Year2018Day10().calculatePart2();
-    assertEquals(Long.MIN_VALUE, answer);
+    assertEquals(10_240, answer);
   }
 
   @Test
   public void year2018day11part1() {
-    final long answer = new Year2018Day11().calculatePart1();
-    assertEquals(Long.MIN_VALUE, answer);
+    final String answer = new Year2018Day11().calculatePart1();
+    assertEquals("21,53", answer);
   }
 
   @Test
   public void year2018day11part2() {
-    final long answer = new Year2018Day11().calculatePart2();
-    assertEquals(Long.MIN_VALUE, answer);
+    final String answer = new Year2018Day11().calculatePart2();
+    assertEquals("233,250,12", answer);
   }
 
   @Test
