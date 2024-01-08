@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -52,22 +53,19 @@ public class Year2023Day23 {
   /** Calculate the answer to the puzzle. Common between both parts. */
   private long calculate(final PuzzleContext pc) {
     final Input input = getInput(pc);
-    return calculate(input, List.of(input.start), 0);
+    return calculate(input, input.start, input.start, 0);
   }
 
   /** Recursively calculate the longest path. */
-  private long calculate(final Input input, final List<Point2D> path, final long cost) {
+  private long calculate(final Input input, final long path, final long current, final long cost) {
     long answer = 0;
-    for (final Edge edge : input.edges.get(path.getLast())) {
-      if (!path.contains(edge.end) && (input.ignoreRestrictions || !edge.restricted)) {
+    for (final Edge edge : input.edges.get(Long.valueOf(current))) {
+      if (((path & edge.end) == 0) && (input.ignoreRestrictions || !edge.restricted)) {
         final long nextCost = cost + edge.cost;
-        if (input.end.equals(edge.end)) {
+        if (input.end == edge.end) {
           return nextCost;
         }
-        final List<Point2D> nextPath = new ArrayList<>(path.size() + 1);
-        nextPath.addAll(path);
-        nextPath.add(edge.end);
-        answer = Math.max(answer, calculate(input, nextPath, nextCost));
+        answer = Math.max(answer, calculate(input, (path | edge.end), edge.end, nextCost));
       }
     }
     return answer;
@@ -106,12 +104,32 @@ public class Year2023Day23 {
     }
 
     // Find all edges.
-    final Map<Point2D, Collection<Edge>> edges = new HashMap<>();
+    final Map<Point2D, Collection<PointEdge>> pointEdges = new HashMap<>();
     for (final Point2D pt : intersections) {
-      edges.put(pt, getEdges(grid, pt, end, intersections));
+      pointEdges.put(pt, getEdges(grid, pt, end, intersections));
     }
 
-    return new Input(start, end, intersections, edges, pc.getBoolean("IgnoreRestrictions"));
+    // Convert points to long bit masks.
+    final Map<Point2D, Long> pointToLong = new HashMap<>();
+    final Set<Long> intersectionsLong = new HashSet<>();
+    long value = 1;
+    for (final Point2D pt : intersections) {
+      final Long key = Long.valueOf(value);
+      pointToLong.put(pt, key);
+      intersectionsLong.add(key);
+      value <<= 1;
+    }
+    final Map<Long, Collection<Edge>> edges = new HashMap<>();
+    for (final var entry : pointEdges.entrySet()) {
+      final Collection<Edge> values = new HashSet<>();
+      edges.put(pointToLong.get(entry.getKey()), values);
+      for (final PointEdge pe : entry.getValue()) {
+        values.add(new Edge(pointToLong.get(pe.start).longValue(), pointToLong.get(pe.end).longValue(), pe.cost, pe.restricted));
+      }
+    }
+
+    return new Input(pointToLong.get(start).longValue(), pointToLong.get(end).longValue(), intersectionsLong, edges,
+      pc.getBoolean("IgnoreRestrictions"));
   }
 
   /** Get whether the point is an intersection of multiple paths. */
@@ -126,8 +144,8 @@ public class Year2023Day23 {
   }
 
   /** Given a point, find the edges that lead to other points. */
-  private Collection<Edge> getEdges(final int[][] grid, final Point2D start, final Point2D end, final Collection<Point2D> intersections) {
-    final Collection<Edge> edges = new HashSet<>();
+  private Collection<PointEdge> getEdges(final int[][] grid, final Point2D start, final Point2D end, final Collection<Point2D> intersections) {
+    final Collection<PointEdge> edges = new HashSet<>();
     boolean endFound = false;
     for (final Direction d : Direction.values()) {
       final Point2D step = d.apply(start);
@@ -135,7 +153,7 @@ public class Year2023Day23 {
         final int ch = step.get(grid);
         if (ch != '#') {
           // This is the start of a valid edge.
-          final Edge edge = getEdge(grid, start, intersections, d.isRestricted(ch), List.of(start, step));
+          final PointEdge edge = getEdge(grid, start, intersections, d.isRestricted(ch), List.of(start, step));
           endFound |= edge.end.equals(end);
           edges.add(edge);
         }
@@ -153,14 +171,14 @@ public class Year2023Day23 {
   }
 
   /** Get the edge found by following the given path. */
-  private Edge getEdge(final int[][] grid, final Point2D start, final Collection<Point2D> intersections, final boolean restricted, final List<Point2D> path) {
+  private PointEdge getEdge(final int[][] grid, final Point2D start, final Collection<Point2D> intersections, final boolean restricted, final List<Point2D> path) {
     final Point2D current = path.getLast();
     for (final Direction d : Direction.values()) {
       final Point2D next = d.apply(current);
       // This is a valid direction to travel.
       if (next.isIn(grid) && (next.get(grid) != '#') && !path.contains(next)) {
         if (intersections.contains(next)) {
-          return new Edge(start, next, path.size(), restricted);
+          return new PointEdge(start, next, path.size(), restricted);
         }
         final List<Point2D> nextPath = new ArrayList<>(path.size() + 1);
         nextPath.addAll(path);
@@ -208,9 +226,11 @@ public class Year2023Day23 {
   }
 
   /** Input contains the start and end locations as well as all graph nodes and edges.. */
-  private record Input(Point2D start, Point2D end, Collection<Point2D> nodes, Map<Point2D, Collection<Edge>> edges,
+  private record Input(long start, long end, Collection<Long> nodes, Map<Long, Collection<Edge>> edges,
     boolean ignoreRestrictions) {}
 
   /** An edge is a path from one node to another. It also tracks whether directional travel is restricted. */
-  private record Edge(Point2D start, Point2D end, int cost, boolean restricted) {}
+  private record PointEdge(Point2D start, Point2D end, int cost, boolean restricted) {}
+
+  private record Edge(long start, long end, int cost, boolean restricted) {}
 }

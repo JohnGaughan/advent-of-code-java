@@ -998,11 +998,22 @@ two.
 Once parsing is done, perform a basic [recursive depth-first search algorithm][23.2]. Return zero for any invalid path and the
 path length for a valid path. At each recursive step return the maximum encountered value.
 
-This takes a while to run on the real input for part two. Unfortunately there are simply a large number of search trees and the
-nature of trying to find the _most_ expensive route makes heuristics difficult to define and use. The only optimization I found
-that worked was pruning edges from the penultimate node that do not go to the end. The end is only reachable by one interior node,
-so once we reach that node, no other path can succeed. While this did help, the improvement was very modest and only shaved off
-around 6% of the runtime.
+To speed up the implementation, there is a post-parsing step that performs a massive optimization. Instead of dealing with points,
+convert each point to a long integer where each point corresponds to a unique bit. The first point is one, the next is two, then
+four, and so on. Then a path can be represented by a long integer where each bit corresponds to one node in that path. If we also
+track the current node separately, then we can identify a current state using two integers: where we are, and where we have been.
+Determining if a node is already visited then becomes a bitwise operation.
+
+The first implementation instead used collections of points. While the `Point2D` class is itself very fast with comparisons and
+hash codes, the collections that held them are definitely _not_ fast when collections were created many times during recursion and
+there were many checks to see if a point already existed in a path. Using integer bitwise operations is an order of magnitude
+faster than using collections because there are no method calls, no complex operations, no memory allocation. Instead of a bunch
+of method calls and other operations, the CPU can handle this directly using very fast one-cycle operations to apply a bit mask
+and check for zero or not zero.
+
+Part two is still slow and reddit mentions another optimization where we can search from the start and end, stopping halfway. This
+would greatly reduce the search space, and with the previous long integer optimization would mean that checking for compatible
+halfway searches should be fast. Maybe I will revisit this later.
 
 ## Day 24: Never Tell Me The Odds
 
