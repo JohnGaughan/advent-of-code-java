@@ -17,7 +17,10 @@
 package us.coffeecode.advent_of_code.y2024;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,48 +36,38 @@ public class Year2024Day01 {
 
   private static final Pattern SPLIT = Pattern.compile("\\s+");
 
+  private static final Long ZERO = Long.valueOf(0);
+
   @Autowired
   private InputLoader il;
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    Input input = getInput(pc);
-    long result = 0;
-    for (int i = 0; i < input.left.length; ++i) {
-      result += Math.abs(input.left[i] - input.right[i]);
-    }
-    return result;
+    final Input input = getInput(pc);
+    return IntStream.range(0, input.left.length).mapToLong(i -> Math.abs(input.left[i] - input.right[i])).sum();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    Input input = getInput(pc);
-    long result = 0;
-    for (long value : input.left) {
-      long matches = Arrays.stream(input.right).filter(v -> v == value).count();
-      result += (value * matches);
-    }
-    return result;
+    final Input input = getInput(pc);
+    final Map<Long, Long> occurrences = countOccurrences(input.right);
+    return Arrays.stream(input.left).map(v -> v * occurrences.getOrDefault(Long.valueOf(v), ZERO).longValue()).sum();
   }
 
-  /** Split the file line into two longs. */
-  private long[] split(final String line) {
-    final String[] tokens = SPLIT.split(line);
-    return new long[] { Long.parseLong(tokens[0]), Long.parseLong(tokens[1]) };
-  }
-
-  private long[] halve(final long[][] array, final int idx) {
-    long[] result = new long[array.length];
-    for (int i = 0; i < array.length; ++i) {
-      result[i] = array[i][idx];
+  private Map<Long, Long> countOccurrences(final long[] array) {
+    final Map<Long, Long> occurrences = new HashMap<>();
+    for (final long value : array) {
+      final Long key = Long.valueOf(value);
+      final long newValue = occurrences.getOrDefault(key, ZERO).longValue() + 1;
+      occurrences.put(key, Long.valueOf(newValue));
     }
-    return result;
+    return occurrences;
   }
 
   private Input getInput(final PuzzleContext pc) {
-    long[][] data = il.linesAs2dLongArray(pc, this::split);
-    long[] left = halve(data, 0);
-    long[] right = halve(data, 1);
+    long[][] data = il.linesAs2dLongArrayFromSplit(pc, SPLIT);
+    long[] left = Arrays.stream(data).mapToLong(a -> a[0]).toArray();
+    long[] right = Arrays.stream(data).mapToLong(a -> a[1]).toArray();
     Arrays.sort(left);
     Arrays.sort(right);
     return new Input(left, right);

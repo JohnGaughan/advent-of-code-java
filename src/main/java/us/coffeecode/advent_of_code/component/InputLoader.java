@@ -382,14 +382,26 @@ public class InputLoader {
   }
 
   /**
-   * Get the contents of the file by line, where each line is translated into an integer array.
+   * Get the contents of the file by line, where each line is translated into a long array.
    *
    * @param parent calling object annotated with AdventOfCodeSolution.
-   * @param f function that converts each string line into an integer array.
-   * @return a two-dimensional integer array representing the file.
+   * @param f function that converts each string line into a long array.
+   * @return a two-dimensional long array representing the file.
    */
   public long[][] linesAs2dLongArray(final PuzzleContext pc, final Function<String, long[]> f) {
     return lines(pc).stream().map(f).toArray(long[][]::new);
+  }
+
+  /**
+   * Get the contents of the file by line, where each line is translated into a long array.
+   *
+   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param f function that converts each string line into a long array.
+   * @return a two-dimensional long array representing the file.
+   */
+  public long[][] linesAs2dLongArrayFromSplit(final PuzzleContext pc, final Pattern split) {
+    return lines(pc).stream().map(s -> Arrays.stream(split.split(s.trim())).mapToLong(Long::parseLong).toArray()).toArray(
+      long[][]::new);
   }
 
   /**
