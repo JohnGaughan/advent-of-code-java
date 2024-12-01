@@ -86,6 +86,11 @@ extends AbstractTests {
     return tests(Integer.valueOf(2023));
   }
 
+  @TestFactory
+  public DynamicContainer year2024() {
+    return tests(Integer.valueOf(2024));
+  }
+
   private DynamicContainer tests(final Integer year) {
     return DynamicContainer.dynamicContainer("Advent of Code " + year + ": " + TITLES.get(year),
       dtf.getTests(new TestContext(year)));
@@ -103,6 +108,7 @@ extends AbstractTests {
     TITLES.put(Integer.valueOf(2021), "Ocean Exploration");
     TITLES.put(Integer.valueOf(2022), "Jungle Expedition");
     TITLES.put(Integer.valueOf(2023), "Global Snow Production");
+    TITLES.put(Integer.valueOf(2024), "Christmas Historian");
   }
 
 }
