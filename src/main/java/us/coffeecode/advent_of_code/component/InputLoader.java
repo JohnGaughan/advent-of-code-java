@@ -76,7 +76,7 @@ public class InputLoader {
    * Get the contents of the file as a boolean array. The provided truth value will be used to determine which code
    * points evaluate to true: all other code points evaluate to false.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param truth code point that indicates true.
    * @return an array of primitive booleans.
    */
@@ -93,7 +93,7 @@ public class InputLoader {
   /**
    * Get the contents of the file as an array of code points.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return an array of code points.
    */
   public int[] fileAsCodePoints(final PuzzleContext pc) {
@@ -103,7 +103,7 @@ public class InputLoader {
   /**
    * Get the contents of the file as a single integer.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return a single primitive integer.
    */
   public int fileAsInt(final PuzzleContext pc) {
@@ -114,7 +114,7 @@ public class InputLoader {
    * Get the contents of the file as an integer array. An internal regular expression is used to extract each group of
    * digits, which is then parsed into a primitive integer that becomes an element in the array.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return an integer array containing each number in the file.
    */
   public int[] fileAsIntsFromDigitGroups(final PuzzleContext pc) {
@@ -125,7 +125,7 @@ public class InputLoader {
    * Get the contents of the file as an integer array. Each code point in the file is treated as a textual number, which
    * is translated into a primitive integer between zero and nine.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return an array of integers.
    */
   public int[] fileAsIntsFromDigits(final PuzzleContext pc) {
@@ -136,7 +136,7 @@ public class InputLoader {
    * Get the contents of the file as an integer array. The file is a hexadecimal string. Each digit of that string is
    * converted to its equivalent integer.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return an integer array containing each number in the file.
    */
   public int[] fileAsIntsFromHexDigits(final PuzzleContext pc) {
@@ -147,7 +147,7 @@ public class InputLoader {
    * Get the contents of the file as an integer array. The provided regular expression is used to split the file
    * contents into tokens, and each token is parsed into a primitive integer.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param split the regular expression to use to split the file.
    * @return an integer array containing each number in the file.
    */
@@ -158,7 +158,7 @@ public class InputLoader {
   /**
    * Get the contents of the file as a single long.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return a single primitive long.
    */
   public long fileAsLong(final PuzzleContext pc) {
@@ -169,7 +169,7 @@ public class InputLoader {
    * Get the contents of the file as a long array. The provided regular expression is used to split the file contents
    * into tokens, and each token is parsed into a primitive long.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param split the regular expression to use to split the file.
    * @return a long array containing each number in the file.
    */
@@ -181,7 +181,7 @@ public class InputLoader {
    * Get the contents of the file as a single object.
    *
    * @param <T> the type of the object to return.
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f function that converts the string contents of the file into an object.
    * @return the object representing the file contents.
    */
@@ -193,7 +193,7 @@ public class InputLoader {
    * Get the contents of the file as multiple objects that do not necessarily correlate with lines.
    *
    * @param <T> the type of the objects to return.
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f function that converts the string contents of the file into multiple objects.
    * @return a list of objects representing the file contents.
    */
@@ -206,7 +206,7 @@ public class InputLoader {
    * contents, and each token from that split will correspond with an object.
    *
    * @param <T> the type of the objects to return.
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param split the regular expression to use to split the file.
    * @param f function that converts a string from the regex split into an object.
    * @return a list of objects representing the file contents.
@@ -220,7 +220,7 @@ public class InputLoader {
    * contents into tokens, and each token is parsed into a primitive integer. The resultant array will be sorted using
    * the integers' natural sort order.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param split the regular expression to use to split the file.
    * @return an integer array containing each number in the file, sorted in natural order.
    */
@@ -231,7 +231,7 @@ public class InputLoader {
   /**
    * Get the contents of the file as a string.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return a string containing all of the text in the file, minus any leading or trailing whitespace.
    */
   public String fileAsString(final PuzzleContext pc) {
@@ -246,7 +246,7 @@ public class InputLoader {
   /**
    * Get the lines of the file grouped together such that blank lines separate the groups.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return a list of line groups, which are themselves lists of strings.
    */
   public List<List<String>> groups(final PuzzleContext pc) {
@@ -281,7 +281,7 @@ public class InputLoader {
    * Get the contents of the file as grouped lines separated by blank lines, where each group is then transformed into a
    * primitive long. The resultant longs are then returned in an array.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f the function that converts groups of strings to a primitive long.
    * @return a long array where each element represents a group of strings.
    */
@@ -294,7 +294,7 @@ public class InputLoader {
    * supplied function.
    *
    * @param <T> the type of the object to return.
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f the function that constructs the object to return.
    * @return an object representing all data in the file.
    */
@@ -307,7 +307,7 @@ public class InputLoader {
    * each object represents one group of lines.
    *
    * @param <T> the type of the objects to return.
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f the function that constructs the objects to return.
    * @return a list of object representing each group of lines.
    */
@@ -318,7 +318,7 @@ public class InputLoader {
   /**
    * Get the lines of the file as strings.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return a list of strings.
    */
   public List<String> lines(final PuzzleContext pc) {
@@ -333,7 +333,7 @@ public class InputLoader {
   /**
    * Get the contents of the file by line, where each line is translated into a boolean array.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param truth code point that indicates true.
    * @return a two-dimensional boolean array representing the file.
    */
@@ -350,7 +350,7 @@ public class InputLoader {
   /**
    * Get the contents of the file by line, where each line is translated into an integer array.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f function that converts each string line into an integer array.
    * @return a two-dimensional integer array representing the file.
    */
@@ -362,7 +362,7 @@ public class InputLoader {
    * Get the contents of the file by line, where each line is translated into an integer array. Each code point on a
    * line is translated into an integer representing its textual digit.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return a two-dimensional integer array representing the file.
    */
   public int[][] linesAs2dIntArrayFromDigits(final PuzzleContext pc) {
@@ -372,7 +372,7 @@ public class InputLoader {
   /**
    * Get the contents of the file by line, where each line is translated into an integer array.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param split the regular expression to use to split each line.
    * @return a two-dimensional integer array representing the file.
    */
@@ -384,7 +384,7 @@ public class InputLoader {
   /**
    * Get the contents of the file by line, where each line is translated into a long array.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f function that converts each string line into a long array.
    * @return a two-dimensional long array representing the file.
    */
@@ -395,7 +395,7 @@ public class InputLoader {
   /**
    * Get the contents of the file by line, where each line is translated into a long array.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f function that converts each string line into a long array.
    * @return a two-dimensional long array representing the file.
    */
@@ -407,7 +407,7 @@ public class InputLoader {
   /**
    * Get the contents of the file by line, where each line is translated into the code points representing its string.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return a two-dimensional array of code points representing the file.
    */
   public int[][] linesAsCodePoints(final PuzzleContext pc) {
@@ -417,7 +417,7 @@ public class InputLoader {
   /**
    * Get the contents of the file by line, where each line is translated into a single integer.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return an array of integers where each integer represents one line.
    */
   public int[] linesAsInts(final PuzzleContext pc) {
@@ -428,7 +428,7 @@ public class InputLoader {
    * Get the contents of the file by line, where each line is translated into an integer array. Each code point on a
    * line is translated into an integer representing its textual digit.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return a list of integer arrays representing the file.
    */
   public List<int[]> linesAsIntsFromDigits(final PuzzleContext pc) {
@@ -439,7 +439,7 @@ public class InputLoader {
    * Get the contents of the file by line, where each line is translated into a single integer. The final array is
    * sorted using integers' natural ordering.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return an array of integers where each integer represents one line. This array is sorted.
    */
   public int[] linesAsIntsSorted(final PuzzleContext pc) {
@@ -449,7 +449,7 @@ public class InputLoader {
   /**
    * Get the contents of the file by line, where each line is translated into a single long.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return an array of longs where each integer represents one line.
    */
   public long[] linesAsLongs(final PuzzleContext pc) {
@@ -459,7 +459,7 @@ public class InputLoader {
   /**
    * Get the contents of the file by line, where each line is translated into a single long using custom parsing logic.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param parser the function which will convert each line to a long.
    * @return an array of longs where each integer represents one line.
    */
@@ -471,7 +471,7 @@ public class InputLoader {
    * Get the contents of the file by line, where each line is translated into a single long. The final array is sorted
    * using longs' natural ordering.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @return an array of longs where each long represents one line. This array is sorted.
    */
   public long[] linesAsLongsSorted(final PuzzleContext pc) {
@@ -485,7 +485,7 @@ public class InputLoader {
    * @param <T> the type of object to construct.
    * @param <U> the type of map key.
    * @param <V> the type of map value.
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f function that constructs an object from a string line in the file.
    * @param k function that constructs a map key from an object.
    * @param v function that constructs a map value from an object.
@@ -499,7 +499,7 @@ public class InputLoader {
    * Get the contents of the file by line, and translate those lines into a single object representing the file.
    *
    * @param <T> the type of object to construct.
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f function that converts a list of lines into an object.
    * @return an object representing the entire file.
    */
@@ -512,7 +512,7 @@ public class InputLoader {
    * about the mutability of the returned list.
    *
    * @param <T> the type of object to construct.
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f function that converts a string line into an object.
    * @return a list of objects, one per line in the file. This list has no guarantee about mutability.
    */
@@ -526,7 +526,7 @@ public class InputLoader {
    * set needs to implement the <code>{@link Comparable}</code> interface.
    *
    * @param <T> the type of object to construct.
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f function that converts a string line into an object.
    * @param g supplier function that creates the collection containing the generated objects.
    * @return a collection of objects, one per line in the file.
@@ -539,7 +539,7 @@ public class InputLoader {
    * Get the contents of the file by line, and translate those lines into an array of objects per line.
    *
    * @param <T> the type of object to construct.
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f function that converts a string line into an array of objects.
    * @param a function that constructs a 2D array of objects.
    * @return a two-dimensional array of objects.
@@ -552,7 +552,7 @@ public class InputLoader {
    * Get the contents of the file by line, and translate those lines into an array of objects per line.
    *
    * @param <T> the type of object to construct.
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param split the regular expression to use to split each line.
    * @param f function that converts a string token into an object.
    * @param a1 function that constructs an array of objects.
@@ -567,7 +567,7 @@ public class InputLoader {
    * Get the contents of the file by line, and translate those lines into one object per line.
    *
    * @param <T> the type of object to construct.
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f function that converts a string line into an object.
    * @return a list of objects, one per line in the file. This list is mutable.
    */
@@ -580,7 +580,7 @@ public class InputLoader {
    * by the provided pattern before being handed to the function that builds each object.
    *
    * @param <T> the type of object to construct.
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param f function that converts a string line into an object.
    * @param split pattern that splits each line into a string array.
    * @return a list of objects, one per line in the file. This list is mutable.
@@ -592,7 +592,7 @@ public class InputLoader {
   /**
    * Get the contents of the file by line, and translate those lines into a list of strings per line.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param split the regular expression to use to split each line.
    * @return a list representing the file, with each list entry being another list containing strings for that line.
    */
@@ -603,7 +603,7 @@ public class InputLoader {
   /**
    * Get the contents of the file by line, and translate those lines into a list of strings per line.
    *
-   * @param parent calling object annotated with AdventOfCodeSolution.
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
    * @param split the regular expression to use to split each line.
    * @param skip the number of tokens to skip at the start of each line after splitting it.
    * @return a list representing the file, with each list entry being another list containing strings for that line.
@@ -612,6 +612,13 @@ public class InputLoader {
     return lines(pc).stream().map(s -> Arrays.asList(split.split(s.trim())).stream().skip(skip).toList()).toList();
   }
 
+  /**
+   * Get the full path to the input file to load including all path elements (directories) and the regular file itself
+   * (file name).
+   *
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
+   * @return full path to the specific file to load.
+   */
   private Path path(final PuzzleContext pc) {
     return il.getInputLocation(pc.getYear(), pc.getDay(), pc.getInputId());
   }
