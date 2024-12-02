@@ -38,6 +38,8 @@ public class Year2024Day01 {
 
   private static final Long ZERO = Long.valueOf(0);
 
+  private static final Long ONE = Long.valueOf(1);
+
   @Autowired
   private InputLoader il;
 
@@ -50,26 +52,15 @@ public class Year2024Day01 {
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     final Input input = getInput(pc);
-    final Map<Long, Long> occurrences = countOccurrences(input.right);
-    return Arrays.stream(input.left).map(v -> v * occurrences.getOrDefault(Long.valueOf(v), ZERO).longValue()).sum();
-  }
-
-  private Map<Long, Long> countOccurrences(final long[] array) {
     final Map<Long, Long> occurrences = new HashMap<>();
-    for (final long value : array) {
-      final Long key = Long.valueOf(value);
-      final long newValue = occurrences.getOrDefault(key, ZERO).longValue() + 1;
-      occurrences.put(key, Long.valueOf(newValue));
-    }
-    return occurrences;
+    Arrays.stream(input.right).forEach(v -> occurrences.merge(Long.valueOf(v), ONE, Math::addExact));
+    return Arrays.stream(input.left).map(v -> v * occurrences.getOrDefault(Long.valueOf(v), ZERO).longValue()).sum();
   }
 
   private Input getInput(final PuzzleContext pc) {
     long[][] data = il.linesAs2dLongArrayFromSplit(pc, SPLIT);
-    long[] left = Arrays.stream(data).mapToLong(a -> a[0]).toArray();
-    long[] right = Arrays.stream(data).mapToLong(a -> a[1]).toArray();
-    Arrays.sort(left);
-    Arrays.sort(right);
+    long[] left = Arrays.stream(data).mapToLong(a -> a[0]).sorted().toArray();
+    long[] right = Arrays.stream(data).mapToLong(a -> a[1]).sorted().toArray();
     return new Input(left, right);
   }
 
