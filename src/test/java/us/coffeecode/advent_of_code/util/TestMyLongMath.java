@@ -28,7 +28,7 @@ import us.coffeecode.advent_of_code.AbstractTests;
 public class TestMyLongMath
 extends AbstractTests {
 
-  // long
+  // lcm(long, long)
 
   @Test
   public void testLCM_long_Negative_1() {
@@ -70,7 +70,7 @@ extends AbstractTests {
     Assertions.assertEquals(8, MyLongMath.lcm(8, 2));
   }
 
-  // long[]
+  // lcm(long[])
 
   @Test
   public void testLCM_Array_of_long_Negative_1() {
@@ -112,7 +112,7 @@ extends AbstractTests {
     Assertions.assertEquals(8, MyLongMath.lcm(LongStream.of(2, 8, 4).toArray()));
   }
 
-  // Collection<Long>
+  // lcm(Collection<Long>)
 
   @Test
   public void testLCM_Collection_of_Long_Null_1() {
@@ -164,4 +164,30 @@ extends AbstractTests {
     Assertions.assertEquals(120, MyLongMath.lcm(LongStream.of(3, 40, 20, 1).boxed().toList()));
   }
 
+  // signum(long)
+
+  @Test
+  public void testSignum_Zero() {
+    Assertions.assertEquals(0, MyLongMath.signum(0));
+  }
+
+  @Test
+  public void testSignum_Negative() {
+    Assertions.assertEquals(-1, MyLongMath.signum(-7));
+  }
+
+  @Test
+  public void testSignum_MinValue() {
+    Assertions.assertEquals(-1, MyLongMath.signum(Long.MIN_VALUE));
+  }
+
+  @Test
+  public void testSignum_Positive() {
+    Assertions.assertEquals(1, MyLongMath.signum(73));
+  }
+
+  @Test
+  public void testSignum_MaxValue() {
+    Assertions.assertEquals(1, MyLongMath.signum(Long.MAX_VALUE));
+  }
 }

@@ -108,7 +108,7 @@ extends AbstractTests {
     TITLES.put(Integer.valueOf(2021), "Ocean Exploration");
     TITLES.put(Integer.valueOf(2022), "Jungle Expedition");
     TITLES.put(Integer.valueOf(2023), "Global Snow Production");
-    TITLES.put(Integer.valueOf(2024), "Christmas Historian");
+    TITLES.put(Integer.valueOf(2024), "Finding the Chief Historian");
   }
 
 }

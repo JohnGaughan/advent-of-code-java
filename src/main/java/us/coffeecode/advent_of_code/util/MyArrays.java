@@ -51,4 +51,27 @@ public final class MyArrays {
     }
     return result;
   }
+
+  /**
+   * Make a copy of an array, omitting a specific index.
+   *
+   * @param array the array to copy.
+   * @param index the index of the element to omit.
+   * @return a copy of the array, minus the specified element.
+   */
+  public static int[] copyOmitting(final int[] array, final int index) {
+    if (array == null) {
+      throw new IllegalArgumentException("Null array");
+    }
+    else if (array.length == 0) {
+      throw new IllegalArgumentException("Array length zero: cannot reduce length");
+    }
+    else if ((index < 0) || (index >= array.length)) {
+      throw new IllegalArgumentException("Index " + index + " not valid for array of length " + array.length);
+    }
+    final int[] newArray = new int[array.length - 1];
+    System.arraycopy(array, 0, newArray, 0, index);
+    System.arraycopy(array, index + 1, newArray, index, newArray.length - index);
+    return newArray;
+  }
 }

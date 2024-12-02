@@ -1,8 +1,8 @@
-# Year 2024: Christmas Historian
+# Year 2024: Finding the Chief Historian
 
 ## Day 1: Historian Hysteria
 
-[Year 2023, day 1][1.0]
+[Year 2024, day 1][1.0]
 
 As usual, the first day is somewhat easy. We are given two lists that we need to compare.
 
@@ -29,5 +29,23 @@ For each value in the first list, use it as a key to get the value in the occurr
 stream by converting each element to the element's value times the value retrieved from the occurrence map. Once that is done sum
 the stream to get the answer.
 
+## Day 2: Red-Nosed Reports
+
+[Year 2024, day 2][2.0]
+
+Today's puzzle asks us to examine a series of integer arrays and test to see if they meet a condition. They must be either
+strictly increasing or decreasing: the values cannot have duplicates and cannot change direction. Furthermore, they must not
+increase or decrease by more than three.
+
+Part one has us count the number of inputs that meet this condition. Part two adds the requirement that if an array does not pass
+the initial test, it can also pass if removing any single element causes it to pass.
+
+This is a simple brute-force algorithm that tests each array in turn. For part one, simply perform the test. For part two, if an
+input array fails, iterate that array. Make a copy minus each element in turn, and see if that copy passes. If so, count the input
+as passing and continue to the next array.
+
+There are probably more efficient ways to accomplish this task, but the code is simple and still runs extremely quickly.
+
 
 [1.0]: https://adventofcode.com/2024/day/1
+[2.0]: https://adventofcode.com/2024/day/2

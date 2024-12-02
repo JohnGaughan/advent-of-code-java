@@ -28,6 +28,22 @@ import com.google.common.math.IntMath;
 public final class MyIntMath {
 
   /**
+   * Get the signum of a value, indicating its sign. If negative, return -1. If positive, return 1. If zero, return 0.
+   *
+   * @param value the value to test.
+   * @return its signum value.
+   */
+  public static int signum(final int value) {
+    if (value < 0) {
+      return -1;
+    }
+    else if (value > 0) {
+      return 1;
+    }
+    return 0;
+  }
+
+  /**
    * Computes the least common multiple of two numbers. These numbers must not be negative, and at most one may be zero.
    *
    * @param a the first number.

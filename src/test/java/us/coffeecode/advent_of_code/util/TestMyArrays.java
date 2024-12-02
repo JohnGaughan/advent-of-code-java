@@ -120,4 +120,54 @@ extends AbstractTests {
     Assertions.assertTrue(Arrays.deepEquals(expected, actual));
   }
 
+  // copyOmitting(int[])
+
+  @Test
+  public void copyOmitting_0() {
+    final int[] expected = new int[] { 2, 3, 4 };
+    final int[] actual = MyArrays.copyOmitting(new int[] { 1, 2, 3, 4 }, 0);
+    Assertions.assertTrue(Arrays.equals(expected, actual));
+  }
+
+  @Test
+  public void copyOmitting_1() {
+    final int[] expected = new int[] { 1, 3, 4 };
+    final int[] actual = MyArrays.copyOmitting(new int[] { 1, 2, 3, 4 }, 1);
+    Assertions.assertTrue(Arrays.equals(expected, actual));
+  }
+
+  @Test
+  public void copyOmitting_2() {
+    final int[] expected = new int[] { 1, 2, 4 };
+    final int[] actual = MyArrays.copyOmitting(new int[] { 1, 2, 3, 4 }, 2);
+    Assertions.assertTrue(Arrays.equals(expected, actual));
+  }
+
+  @Test
+  public void copyOmitting_3() {
+    final int[] expected = new int[] { 1, 2, 3 };
+    final int[] actual = MyArrays.copyOmitting(new int[] { 1, 2, 3, 4 }, 3);
+    Assertions.assertTrue(Arrays.equals(expected, actual));
+  }
+
+  @Test()
+  public void copyOmitting_Null() {
+    Assertions.assertThrows(RuntimeException.class, () -> MyArrays.copyOmitting(null, 0));
+  }
+
+  @Test()
+  public void copyOmitting_ZeroLength() {
+    Assertions.assertThrows(RuntimeException.class, () -> MyArrays.copyOmitting(new int[0], 0));
+  }
+
+  @Test()
+  public void copyOmitting_NegativeIndex() {
+    Assertions.assertThrows(RuntimeException.class, () -> MyArrays.copyOmitting(new int[] { 1, 2, 3, 4 }, -1));
+  }
+
+  @Test()
+  public void copyOmitting_IndexTooHigh() {
+    final int[] array = new int[] { 1, 2, 3, 4 };
+    Assertions.assertThrows(RuntimeException.class, () -> MyArrays.copyOmitting(array, array.length));
+  }
 }

@@ -28,7 +28,7 @@ import us.coffeecode.advent_of_code.AbstractTests;
 public class TestMyIntMath
 extends AbstractTests {
 
-  // int
+  // lcm(int, int)
 
   @Test
   public void testLCM_int_Negative_1() {
@@ -70,7 +70,7 @@ extends AbstractTests {
     Assertions.assertEquals(8, MyIntMath.lcm(8, 2));
   }
 
-  // int[]
+  // lcm(int[])
 
   @Test
   public void testLCM_Array_of_int_Negative_1() {
@@ -112,7 +112,7 @@ extends AbstractTests {
     Assertions.assertEquals(8, MyIntMath.lcm(IntStream.of(2, 8, 4).toArray()));
   }
 
-  // Collection<Integer>
+  // lcm(Collection<Integer>)
 
   @Test
   public void testLCM_Collection_of_Integer_Null_1() {
@@ -164,4 +164,30 @@ extends AbstractTests {
     Assertions.assertEquals(120, MyIntMath.lcm(IntStream.of(3, 40, 20, 1).boxed().toList()));
   }
 
+  // signum(int)
+
+  @Test
+  public void testSignum_Zero() {
+    Assertions.assertEquals(0, MyIntMath.signum(0));
+  }
+
+  @Test
+  public void testSignum_Negative() {
+    Assertions.assertEquals(-1, MyIntMath.signum(-4));
+  }
+
+  @Test
+  public void testSignum_MinValue() {
+    Assertions.assertEquals(-1, MyIntMath.signum(Integer.MIN_VALUE));
+  }
+
+  @Test
+  public void testSignum_Positive() {
+    Assertions.assertEquals(1, MyIntMath.signum(12));
+  }
+
+  @Test
+  public void testSignum_MaxValue() {
+    Assertions.assertEquals(1, MyIntMath.signum(Integer.MAX_VALUE));
+  }
 }
