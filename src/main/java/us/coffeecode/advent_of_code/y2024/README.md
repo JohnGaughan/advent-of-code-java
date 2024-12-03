@@ -46,6 +46,23 @@ as passing and continue to the next array.
 
 There are probably more efficient ways to accomplish this task, but the code is simple and still runs extremely quickly.
 
+## Day 3: Mull It Over
+
+[Year 2024, day 3][3.0]
+
+This is a problem about pattern matching. We need to scan an input string and find text representing instructions for multiplying
+two numbers. Part two adds additional strings that enable or disable those multiply instructions until altered further.
+
+My solution is a simple Java regex exercise. Write a function that accepts a string region and extracts and multiplies the
+numbers, and use it as-is for part one. For part two, use additional matching logic that finds the indices of the string where
+instructions enable and disable multiplication. Using a navigable map, we can easily find the most recent map entry in terms of
+the string index. Then we know whether or not to evaluate each multiply instruction.
+
+When solving this problem, keep in mind that the example input provided is different between the two parts. This is not uncommon,
+but typically does not happen until later in each event. The sample input looks quite similar between the two, but is subtly
+different.
+
 
 [1.0]: https://adventofcode.com/2024/day/1
 [2.0]: https://adventofcode.com/2024/day/2
+[3.0]: https://adventofcode.com/2024/day/3
