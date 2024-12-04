@@ -63,6 +63,44 @@ but typically does not happen until later in each event. The sample input looks 
 different.
 
 
+## Day 4: Ceres Search
+
+[Year 2024, day 4][4.0]
+
+We are asked to search a grid for variations of the string XMAS, and count the number of occurrences. Both parts use similar but
+different algorithms.
+
+First, static state includes eight `Point2D` objects that are one unit away from origin and an array containing them all. These
+can then be leveraged to simplify search logic.
+
+For part one, we need to find the count of all unique instances of the string XMAS which can occur in eight directions. Start by
+checking every point in the grid. At each point, look in all eight directions and count how many matches there are.
+
+There is a simple method to check for a match. Create a new point representing the current location, and set it to the point being
+iterated above. Iterate over each character in the search string. Does the character in the grid match the current location? If
+not, return false: this is not a match. If it does match, update the current point by adding the point corresponding to the
+direction being checked. Since this directional point is one unit away, the algorithm will keep moving one point away for each
+character being checked. If we run out of characters to check then they must have all matched, so we return true indicating this
+is a match. There is also a bounds check at each step, so it never attempts to go outside the grid.
+
+Once all combinations of points and directions are exhaustively searched, we have the answer.
+
+Part two instead has us check that two instances of the string MAS form a visual X, where both words can run in either direction.
+
+Again iterate the entire grid, except now we can omit the edge rows and columns since they will never match because it would
+require checking out of bounds. This time we do not iterate directions, since those are fixed.
+
+Observe that the two MAS strings must have the character `A` in the center: the first check we perform is that the current point
+has an `A`. If not, fail fast and keep going. Construct points for north-west and south-east. Check both combinations where one is
+`M` and the other is `S`. If not, fail fast and keep going. Otherwise, construct points for north-east and south-west. Perform the
+same check as above and we have our answer for this grid point.
+
+Overall, this is a simple problem and I found the only halfway difficult part to be expressing the algorithm clearly in code in a
+way that avoided repetition and verbose coordinate math. While it obscures some of the algorithm behind library code, I think
+using the home-grown `Point2D` class makes the intent of the code more clear while being easier to read.
+
+
 [1.0]: https://adventofcode.com/2024/day/1
 [2.0]: https://adventofcode.com/2024/day/2
 [3.0]: https://adventofcode.com/2024/day/3
+[4.0]: https://adventofcode.com/2024/day/4
