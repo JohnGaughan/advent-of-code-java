@@ -99,8 +99,59 @@ Overall, this is a simple problem and I found the only halfway difficult part to
 way that avoided repetition and verbose coordinate math. While it obscures some of the algorithm behind library code, I think
 using the home-grown `Point2D` class makes the intent of the code more clear while being easier to read.
 
+## Day 5: Print Queue
+
+[Year 2024, day 5][5.0]
+
+Today's puzzle involves custom sort ordering of integers other than their natural ordering.
+
+We start by parsing the input into something useful. The file contains two groups of lines. The first contains the sort ordering.
+Given a line with two pipe-separated integers, the first integer is less than the second regardless of what you learned in first
+grade. To accomplish this, we build a mapping. The key is the integer, a page number. The value is a set of all integers that sort
+lower than it. We first ensure both integers map to an empty set if not already mapped, which is a crucial step because one page
+will not have any mapping in the input file because it sorts lowest. Next, we get the mapping for the _larger_ of the two
+elements, the one on the right, and add the integer on the left of the delimiter to its set. Do this for all rules, and we are
+done. This logic assumes that the input defines a full mapping and does not leave any edge cases that are implied, such as
+transitive sorting where `a < b < c` but `a < c` is not defined. This assumption holds true for the test data and my real input
+data.
+
+Next, we perform some simple list stream processing to split the lines of manuals into a double-list of integers. The inner list
+represents a single manual, while the outer list simply holds all of the manuals.
+
+There are three methods used in both parts of the question:
+
+* `isCorrect()` checks whether a manual is in correct order. It does this by sorting a copy of the manual and checking it against
+  the input. Since manuals are short and the sorting algorithm is efficient, this is not a problem.
+
+* `sorted()` returns a copy of the input manual, run through a sorting algorithm. This uses a custom comparator that checks the
+  left side against the set of page numbers that are lower than it. If the right side is found in the list, then return `1`
+  indicating the left is larger. Otherwise return `-1` indicating the right is larger. Even if the input data contained manuals
+  with duplicate pages, which it does not, this would still work although it would be an [unstable sort][5.1] in that case.
+
+* `score()` calculates the score for a manual, which is the value of its center page.
+
+Part one filters all manuals that are in correct order, removing incorrect manuals. It adds up their scores.
+
+Part two filters all manuals that are _not_ in correct order, removing correct manuals. It sorts each manual, then adds up their
+scores.
+
+For a simple problem such as this, it was a bit of a wild ride. Programming after midnight does not help, but it took me a while
+to work through an issue where the sample data worked fine but my real input sorted incorrectly. Turns out I had some faulty
+assumptions about the input rules, and we really do only need to store the mapping of page number to lower page numbers.
+
+The method `isCorrect()` does extra work to sort each manual. In theory this could be wildly inefficient, and there is a better
+way to do this if that were the case which is an `O(n)` algorithm instead of `O(n log n)`. This would iterate the list once,
+maintaining a set of seen page numbers. At each step, check that the set of seen numbers is wholly contained in the current page's
+mapping of lower page numbers. However, the sorting technique is trivially concise and easy to read on a single line, which trumps
+the technically correct algorithm given the low input sizes and run times that are lower than the time it takes the JVM to
+initialize and run the unit test. If for some reason you want to run this on much larger inputs, then this method should be
+rewritten.
+
+
 
 [1.0]: https://adventofcode.com/2024/day/1
 [2.0]: https://adventofcode.com/2024/day/2
 [3.0]: https://adventofcode.com/2024/day/3
 [4.0]: https://adventofcode.com/2024/day/4
+[5.0]: https://adventofcode.com/2024/day/5
+[5.1]: https://en.wikipedia.org/wiki/Sorting_algorithm#Stability
