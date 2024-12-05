@@ -42,12 +42,16 @@ public class Year2023Day12 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return getInput(pc).stream().mapToLong(this::arrangements).sum();
+    return getInput(pc).stream()
+                       .mapToLong(this::arrangements)
+                       .sum();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return getInput(pc).stream().mapToLong(this::arrangements).sum();
+    return getInput(pc).stream()
+                       .mapToLong(this::arrangements)
+                       .sum();
   }
 
   /** Count the number of arrangements are valid for the given input. */
@@ -65,12 +69,18 @@ public class Year2023Day12 {
 
     // If this state is already visited, return the previous result.
     if (cache.containsKey(cacheKey)) {
-      return cache.get(cacheKey).longValue();
+      return cache.get(cacheKey)
+                  .longValue();
     }
 
-    final long unknownGearsRemaining = state.codePoints().filter(ch -> (ch == '?')).count();
-    final long brokenGearsRemaining = state.codePoints().filter(ch -> (ch == '#')).count();
-    final long gearsRemaining = Arrays.stream(gearGroups).sum();
+    final long unknownGearsRemaining = state.codePoints()
+                                            .filter(ch -> (ch == '?'))
+                                            .count();
+    final long brokenGearsRemaining = state.codePoints()
+                                           .filter(ch -> (ch == '#'))
+                                           .count();
+    final long gearsRemaining = Arrays.stream(gearGroups)
+                                      .sum();
 
     // This cannot possibly result in success: bail early.
     if ((gearsRemaining < brokenGearsRemaining) || (gearsRemaining > unknownGearsRemaining + brokenGearsRemaining)) {
@@ -87,10 +97,14 @@ public class Year2023Day12 {
 
     // Get the theoretical last state location where we can try to match the next group: remaining state minus the total
     // of all remaining groups minus the minimal gap between those groups.
-    final int lastBegin = state.length() - Arrays.stream(gearGroups).sum() - Math.max(0, gearGroups.length - 1);
+    final int lastBegin = state.length() - Arrays.stream(gearGroups)
+                                                 .sum()
+      - Math.max(0, gearGroups.length - 1);
 
     // Do the array copy once for all loop iterations.
-    final int[] nextGroups = Arrays.stream(gearGroups).skip(1).toArray();
+    final int[] nextGroups = Arrays.stream(gearGroups)
+                                   .skip(1)
+                                   .toArray();
     long count = 0;
     for (int begin = 0; begin <= lastBegin; ++begin) {
       // [begin, end) is the range for the current group.
@@ -116,20 +130,31 @@ public class Year2023Day12 {
   }
 
   private Collection<Input> getInput(final PuzzleContext pc) {
-    return il.lines(pc).stream().map(s -> parse(LINE_SPLIT.split(s), pc.getInt("repeat"))).toList();
+    return il.lines(pc)
+             .stream()
+             .map(s -> parse(LINE_SPLIT.split(s), pc.getInt("repeat")))
+             .toList();
   }
 
   /** Given an input line split into two tokens of gears and an integer list, parse it into an Input record. */
   private Input parse(final String[] tokens, final int repeat) {
-    final String string = IntStream.range(0, repeat).mapToObj(i -> tokens[0]).collect(Collectors.joining("?"));
-    final int[] array0 = Arrays.stream(INT_SPLIT.split(tokens[1])).mapToInt(Integer::parseInt).toArray();
-    final int[] array = combine(IntStream.range(0, repeat).mapToObj(i -> array0).toArray(int[][]::new));
+    final String string = IntStream.range(0, repeat)
+                                   .mapToObj(i -> tokens[0])
+                                   .collect(Collectors.joining("?"));
+    final int[] array0 = Arrays.stream(INT_SPLIT.split(tokens[1]))
+                               .mapToInt(Integer::parseInt)
+                               .toArray();
+    final int[] array = combine(IntStream.range(0, repeat)
+                                         .mapToObj(i -> array0)
+                                         .toArray(int[][]::new));
     return new Input(string, array);
   }
 
   /** Combine any number of integer arrays contained in an array: in other words, flatten a 2D array to 1D. */
   public static int[] combine(final int[][] arrays) {
-    final int[] array = new int[Arrays.stream(arrays).mapToInt(a -> a.length).sum()];
+    final int[] array = new int[Arrays.stream(arrays)
+                                      .mapToInt(a -> a.length)
+                                      .sum()];
     int start = 0;
     for (int i = 0; i < arrays.length; ++i) {
       System.arraycopy(arrays[i], 0, array, start, arrays[i].length);

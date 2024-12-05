@@ -33,10 +33,13 @@ public final class Year2019Day02 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final IntCode state = icf.make(pc);
-    state.getMemory().set(1, 12);
-    state.getMemory().set(2, 2);
+    state.getMemory()
+         .set(1, 12);
+    state.getMemory()
+         .set(2, 2);
     state.exec();
-    return state.getMemory().getFirst();
+    return state.getMemory()
+                .getFirst();
   }
 
   @Solver(part = 2)
@@ -45,10 +48,13 @@ public final class Year2019Day02 {
     for (int x = 0; x < 99; ++x) {
       for (int y = 0; y < 99; ++y) {
         final IntCode state = icf.make(original);
-        state.getMemory().set(1, x);
-        state.getMemory().set(2, y);
+        state.getMemory()
+             .set(1, x);
+        state.getMemory()
+             .set(2, y);
         state.exec();
-        if (state.getMemory().getFirst() == 19_690_720) {
+        if (state.getMemory()
+                 .getFirst() == 19_690_720) {
           return (100 * x) + y;
         }
       }

@@ -43,13 +43,20 @@ public class Year2024Day05 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final Input input = getInput(pc);
-    return input.manuals.stream().filter(l -> isCorrect(input, l)).mapToLong(this::score).sum();
+    return input.manuals.stream()
+                        .filter(l -> isCorrect(input, l))
+                        .mapToLong(this::score)
+                        .sum();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     final Input input = getInput(pc);
-    return input.manuals.stream().filter(l -> !isCorrect(input, l)).map(l -> sorted(input, l)).mapToLong(this::score).sum();
+    return input.manuals.stream()
+                        .filter(l -> !isCorrect(input, l))
+                        .map(l -> sorted(input, l))
+                        .mapToLong(this::score)
+                        .sum();
   }
 
   /** Determine whether the given manual is in the correct order. */
@@ -59,12 +66,16 @@ public class Year2024Day05 {
 
   /** Return a new manual that is a copy of the provided manual, but sorted. */
   private List<Integer> sorted(final Input input, final Collection<Integer> manual) {
-    return manual.stream().sorted((a, b) -> input.ordering.get(a).contains(b) ? 1 : -1).toList();
+    return manual.stream()
+                 .sorted((a, b) -> input.ordering.get(a)
+                                                 .contains(b) ? 1 : -1)
+                 .toList();
   }
 
   /** Calculate the score for the manual, which is the number of its center page. */
   private long score(final List<Integer> manual) {
-    return manual.get(manual.size() >> 1).longValue();
+    return manual.get(manual.size() >> 1)
+                 .longValue();
   }
 
   /** Get the program input. */
@@ -85,7 +96,8 @@ public class Year2024Day05 {
       pre.computeIfAbsent(left, HashSet::new);
       pre.computeIfAbsent(right, HashSet::new);
 
-      pre.get(right).add(left);
+      pre.get(right)
+         .add(left);
       pages.add(left);
       pages.add(right);
     }
@@ -98,7 +110,11 @@ public class Year2024Day05 {
 
   /** Parse comma-separated lines into a list of list of page numbers representing manuals. */
   private List<List<Integer>> getManuals(final List<String> lines) {
-    return lines.stream().map(l -> Arrays.stream(MANUAL_SPLIT.split(l)).map(Integer::valueOf).toList()).toList();
+    return lines.stream()
+                .map(l -> Arrays.stream(MANUAL_SPLIT.split(l))
+                                .map(Integer::valueOf)
+                                .toList())
+                .toList();
   }
 
   private static final Pattern RULE_SPLIT = Pattern.compile("\\|");

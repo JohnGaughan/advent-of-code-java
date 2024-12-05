@@ -52,7 +52,9 @@ public final class Year2017Day12 {
     final Map<Integer, Integer[]> nodeMapping = getInput(pc);
     final Collection<Set<Integer>> groups = new ArrayList<>();
     while (!nodeMapping.isEmpty()) {
-      final Integer start = nodeMapping.keySet().iterator().next();
+      final Integer start = nodeMapping.keySet()
+                                       .iterator()
+                                       .next();
       final Set<Integer> group = getGroup(nodeMapping, start);
       groups.add(group);
       for (final Integer key : group) {
@@ -93,7 +95,9 @@ public final class Year2017Day12 {
       final String[] tokens = LINE_SPLIT.split(line);
       final String[] targets = SEPARATOR.split(tokens[1]);
       final Integer key = Integer.valueOf(tokens[0]);
-      final Integer[] value = Arrays.stream(targets).map(Integer::valueOf).toArray(Integer[]::new);
+      final Integer[] value = Arrays.stream(targets)
+                                    .map(Integer::valueOf)
+                                    .toArray(Integer[]::new);
       result.put(key, value);
     }
     return result;

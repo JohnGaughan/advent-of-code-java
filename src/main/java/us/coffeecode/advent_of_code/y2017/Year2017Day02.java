@@ -38,8 +38,12 @@ public final class Year2017Day02 {
   public long calculatePart1(final PuzzleContext pc) {
     long checksum = 0;
     for (final int[] row : il.linesAs2dIntArrayFromSplit(pc, SEPARATOR)) {
-      final long min = Arrays.stream(row).min().getAsInt();
-      final long max = Arrays.stream(row).max().getAsInt();
+      final long min = Arrays.stream(row)
+                             .min()
+                             .getAsInt();
+      final long max = Arrays.stream(row)
+                             .max()
+                             .getAsInt();
       checksum += max - min;
     }
     return checksum;

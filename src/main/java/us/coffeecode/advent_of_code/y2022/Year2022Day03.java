@@ -44,12 +44,21 @@ public class Year2022Day03 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return il.lines(pc).stream().map(this::intersection).mapToLong(s -> s.stream().mapToLong(this::priority).sum()).sum();
+    return il.lines(pc)
+             .stream()
+             .map(this::intersection)
+             .mapToLong(s -> s.stream()
+                              .mapToLong(this::priority)
+                              .sum())
+             .sum();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return groups(il.lines(pc)).stream().map(Group::intersection).mapToLong(this::priority).sum();
+    return groups(il.lines(pc)).stream()
+                               .map(Group::intersection)
+                               .mapToLong(this::priority)
+                               .sum();
   }
 
   private List<Group> groups(final List<String> lines) {
@@ -65,17 +74,22 @@ public class Year2022Day03 {
   }
 
   private long priority(final Integer i) {
-    return PRIORITY.get(i).longValue();
+    return PRIORITY.get(i)
+                   .longValue();
   }
 
   private Set<Integer> toSet(final String s) {
-    return s.chars().mapToObj(Integer::valueOf).collect(Collectors.toSet());
+    return s.chars()
+            .mapToObj(Integer::valueOf)
+            .collect(Collectors.toSet());
   }
 
   private record Group(Set<Integer> elf1, Set<Integer> elf2, Set<Integer> elf3) {
 
     Integer intersection() {
-      return Sets.intersection(elf1, Sets.intersection(elf2, elf3)).iterator().next();
+      return Sets.intersection(elf1, Sets.intersection(elf2, elf3))
+                 .iterator()
+                 .next();
     }
   }
 

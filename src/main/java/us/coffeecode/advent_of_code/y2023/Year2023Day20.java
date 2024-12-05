@@ -77,7 +77,9 @@ public class Year2023Day20 {
           case ModuleType.CONJUNCTION:
             action.destination.upstream.put(action.source.id, action.pulse);
             Pulse pulse = Pulse.HIGH;
-            if (action.destination.upstream.values().stream().allMatch(p -> p == Pulse.HIGH)) {
+            if (action.destination.upstream.values()
+                                           .stream()
+                                           .allMatch(p -> p == Pulse.HIGH)) {
               pulse = Pulse.LOW;
             }
             for (final String id : action.destination.downstream) {
@@ -96,7 +98,9 @@ public class Year2023Day20 {
     // For each module directly downstream from the broadcaster, inspect the module chain to get its period. The real
     // inputs all have periods that are prime numbers, which means LCM is not necessary. I include it here in case
     // anyone runs it with custom data where that is not the case.
-    return modules.get(BROADCASTER_ID).downstream.stream().mapToLong(m -> getValue(modules, m)).reduce(1, MyLongMath::lcm);
+    return modules.get(BROADCASTER_ID).downstream.stream()
+                                                 .mapToLong(m -> getValue(modules, m))
+                                                 .reduce(1, MyLongMath::lcm);
   }
 
   /**
@@ -114,13 +118,17 @@ public class Year2023Day20 {
     // flip flop has a conjunction downstream, then it represents a one.
     while (current != null) {
       // Has a conjunction downstream: flip its bit.
-      if (current.downstream.stream().map(s -> modules.get(s).type).anyMatch(t -> t == ModuleType.CONJUNCTION)) {
+      if (current.downstream.stream()
+                            .map(s -> modules.get(s).type)
+                            .anyMatch(t -> t == ModuleType.CONJUNCTION)) {
         result += bit;
       }
       // Replace the current module reference with the downstream flip flop, or null if this is the last in the chain.
-      current =
-        current.downstream.stream().map(s -> modules.get(s)).filter(m -> m.type == ModuleType.FLIP_FLOP).findFirst().orElseGet(
-          () -> null);
+      current = current.downstream.stream()
+                                  .map(s -> modules.get(s))
+                                  .filter(m -> m.type == ModuleType.FLIP_FLOP)
+                                  .findFirst()
+                                  .orElseGet(() -> null);
       bit <<= 1;
     }
     return result;
@@ -132,7 +140,8 @@ public class Year2023Day20 {
     final Map<String, Set<String>> conjunctions = new HashMap<>();
     for (final String line : il.lines(pc)) {
       final String[] tokens = SPLIT1.split(line);
-      final List<String> downstream = Arrays.stream(SPLIT2.split(tokens[1])).toList();
+      final List<String> downstream = Arrays.stream(SPLIT2.split(tokens[1]))
+                                            .toList();
       final String id;
       final ModuleType type;
       if (tokens[0].codePointAt(0) == '%') {
@@ -155,13 +164,19 @@ public class Year2023Day20 {
     input.put(RX.id, RX);
     // Wire up conjunction modules
     for (final var entry : input.entrySet()) {
-      entry.getValue().downstream.stream().filter(id -> conjunctions.containsKey(id)).forEach(
-        id -> conjunctions.get(id).add(entry.getKey()));
+      entry.getValue().downstream.stream()
+                                 .filter(id -> conjunctions.containsKey(id))
+                                 .forEach(id -> conjunctions.get(id)
+                                                            .add(entry.getKey()));
     }
-    conjunctions.entrySet().stream().forEach(e -> {
-      final Module conjunction = input.get(e.getKey());
-      e.getValue().stream().forEach(up -> conjunction.upstream.put(up, Pulse.LOW));
-    });
+    conjunctions.entrySet()
+                .stream()
+                .forEach(e -> {
+                  final Module conjunction = input.get(e.getKey());
+                  e.getValue()
+                   .stream()
+                   .forEach(up -> conjunction.upstream.put(up, Pulse.LOW));
+                });
     return input;
   }
 

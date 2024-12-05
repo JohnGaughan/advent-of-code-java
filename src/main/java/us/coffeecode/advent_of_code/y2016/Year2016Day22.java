@@ -93,7 +93,11 @@ public final class Year2016Day22 {
 
   /** Get the input data for this solution. */
   private List<Node> getInput(final PuzzleContext pc) {
-    return il.lines(pc).stream().filter(s -> s.startsWith("/")).map(Node::make).toList();
+    return il.lines(pc)
+             .stream()
+             .filter(s -> s.startsWith("/"))
+             .map(Node::make)
+             .toList();
   }
 
   private static record Node(String id, int x, int y, int size, int used, int avail, int pct) {

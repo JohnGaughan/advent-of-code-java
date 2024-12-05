@@ -89,7 +89,9 @@ public final class Year2016Day03 {
 
   /** Get the input data for this solution. */
   private int[][] getInput(final PuzzleContext pc) {
-    return il.linesAs2dIntArray(pc, s -> Arrays.stream(SPLIT.split(s.trim())).mapToInt(Integer::parseInt).toArray());
+    return il.linesAs2dIntArray(pc, s -> Arrays.stream(SPLIT.split(s.trim()))
+                                               .mapToInt(Integer::parseInt)
+                                               .toArray());
   }
 
 }

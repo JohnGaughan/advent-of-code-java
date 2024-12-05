@@ -38,12 +38,18 @@ public final class Year2020Day06 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return getInput(pc).stream().map(l -> union(l)).mapToInt(s -> s.size()).sum();
+    return getInput(pc).stream()
+                       .map(l -> union(l))
+                       .mapToInt(s -> s.size())
+                       .sum();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return getInput(pc).stream().map(l -> intersection(l)).mapToInt(s -> s.size()).sum();
+    return getInput(pc).stream()
+                       .map(l -> intersection(l))
+                       .mapToInt(s -> s.size())
+                       .sum();
   }
 
   /** Reduces a single group of passenger answers by calculating the union. */
@@ -55,15 +61,23 @@ public final class Year2020Day06 {
 
   /** Reduces a single group of passenger answers by calculating the intersection. */
   private Set<Integer> intersection(final List<Set<Integer>> group) {
-    final Set<Integer> result = "abcdefghijklmnopqrstuvwxyz".codePoints().boxed().collect(Collectors.toSet());
+    final Set<Integer> result = "abcdefghijklmnopqrstuvwxyz".codePoints()
+                                                            .boxed()
+                                                            .collect(Collectors.toSet());
     group.forEach(s -> result.retainAll(s));
     return result;
   }
 
   /** Get the input data for this solution. */
   private List<List<Set<Integer>>> getInput(final PuzzleContext pc) {
-    return il.groups(pc).stream().map(
-      lines -> lines.stream().map(line -> line.codePoints().boxed().collect(Collectors.toSet())).toList()).toList();
+    return il.groups(pc)
+             .stream()
+             .map(lines -> lines.stream()
+                                .map(line -> line.codePoints()
+                                                 .boxed()
+                                                 .collect(Collectors.toSet()))
+                                .toList())
+             .toList();
   }
 
 }

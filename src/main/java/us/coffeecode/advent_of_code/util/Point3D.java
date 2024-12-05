@@ -31,7 +31,9 @@ implements Comparable<Point3D> {
    * Construct a Point3D from a string containing a comma-delimited set of coordinates.
    */
   public static Point3D valueOf(final String s) {
-    final int[] parts = Arrays.stream(SPLIT.split(s.trim())).mapToInt(Integer::parseInt).toArray();
+    final int[] parts = Arrays.stream(SPLIT.split(s.trim()))
+                              .mapToInt(Integer::parseInt)
+                              .toArray();
     return new Point3D(parts[0], parts[1], parts[2]);
   }
 

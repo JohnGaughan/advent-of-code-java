@@ -45,7 +45,11 @@ public final class Year2019Day10 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return getVisible(getInput(pc)).values().stream().mapToLong(Long::longValue).max().getAsLong();
+    return getVisible(getInput(pc)).values()
+                                   .stream()
+                                   .mapToLong(Long::longValue)
+                                   .max()
+                                   .getAsLong();
   }
 
   @Solver(part = 2)
@@ -53,7 +57,12 @@ public final class Year2019Day10 {
     // Load the asteroids and make the Death Star to destroy them.
     final Set<Point2D> asteroids = getInput(pc);
     final Map<Point2D, Long> visible = getVisible(asteroids);
-    final Point2D deathStar = visible.entrySet().stream().max((a, b) -> a.getValue().compareTo(b.getValue())).get().getKey();
+    final Point2D deathStar = visible.entrySet()
+                                     .stream()
+                                     .max((a, b) -> a.getValue()
+                                                     .compareTo(b.getValue()))
+                                     .get()
+                                     .getKey();
 
     // Arrange the asteroids based on angle (map key) and store them in an ordered set closest to farthest (map value).
     final Map<Point2D, NavigableSet<Point2D>> anglesToAsteroids = new TreeMap<>(new CircularAngleComparator());
@@ -65,7 +74,8 @@ public final class Year2019Day10 {
 
         // Add it to the coordinates
         anglesToAsteroids.putIfAbsent(key, new TreeSet<>(comp));
-        anglesToAsteroids.get(key).add(other);
+        anglesToAsteroids.get(key)
+                         .add(other);
       }
     }
 
@@ -75,14 +85,17 @@ public final class Year2019Day10 {
     // Iterate until the 200th asteroid is destroyed.
     while (i < 200) {
       // Keep iterating over the asteroids. When the iterator is exhausted, start over.
-      for (final var iter = anglesToAsteroids.entrySet().iterator(); iter.hasNext();) {
+      for (final var iter = anglesToAsteroids.entrySet()
+                                             .iterator(); iter.hasNext();) {
         var entry = iter.next();
         ++i;
 
-        lastDestroyed = entry.getValue().pollFirst();
+        lastDestroyed = entry.getValue()
+                             .pollFirst();
 
         // Remove this entry if there is nothing along this line, so the code above will work as expected.
-        if (entry.getValue().isEmpty()) {
+        if (entry.getValue()
+                 .isEmpty()) {
           iter.remove();
         }
 

@@ -55,7 +55,8 @@ public class Year2022Day02 {
   }
 
   private long calculate(final PuzzleContext pc, final ToLongFunction<String> parser) {
-    return Arrays.stream(il.linesAsLongs(pc, parser)).sum();
+    return Arrays.stream(il.linesAsLongs(pc, parser))
+                 .sum();
   }
 
   /** The outcome of a match from my perspective. */
@@ -116,7 +117,10 @@ public class Year2022Day02 {
           return play;
         }
       }
-      return Arrays.stream(values()).filter(p -> ((p.codePoint1 == codePoint) || (p.codePoint2 == codePoint))).findFirst().get();
+      return Arrays.stream(values())
+                   .filter(p -> ((p.codePoint1 == codePoint) || (p.codePoint2 == codePoint)))
+                   .findFirst()
+                   .get();
     }
 
     static Play valueOf(final Play opponent, final Outcome out) {

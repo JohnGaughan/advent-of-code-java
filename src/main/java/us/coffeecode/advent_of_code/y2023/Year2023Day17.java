@@ -120,7 +120,8 @@ public class Year2023Day17 {
     Collection<Path> next(final int[][] grid) {
       final Collection<Path> result = new ArrayList<>(3);
       for (final Direction d : Direction.values()) {
-        final Point2D next = path.getLast().add(d.dx, d.dy);
+        final Point2D next = path.getLast()
+                                 .add(d.dx, d.dy);
         // Candidate point must be in the grid, not already on the path, and meet the min/max travel requirements.
         if (isAllowed(d) && next.isIn(grid) && !path.contains(next)) {
           final List<Point2D> newPoints = new ArrayList<>(path.size() + 1);
@@ -155,7 +156,9 @@ public class Year2023Day17 {
      * queue.
      */
     private long getWeight() {
-      return path.getLast().getManhattanDistance(target) + score;
+      return path.getLast()
+                 .getManhattanDistance(target)
+        + score;
     }
 
     @Override

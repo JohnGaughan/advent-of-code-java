@@ -49,7 +49,8 @@ public final class Year2017Day17 {
     if (index == spinlock.size()) {
       index = 0;
     }
-    return spinlock.get(index).longValue();
+    return spinlock.get(index)
+                   .longValue();
   }
 
   @Solver(part = 2)

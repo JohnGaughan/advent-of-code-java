@@ -41,7 +41,8 @@ public final class Year2017Day23 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final State state = new State();
-    final Instruction[] instructions = il.linesAsObjects(pc, Instruction::new).toArray(Instruction[]::new);
+    final Instruction[] instructions = il.linesAsObjects(pc, Instruction::new)
+                                         .toArray(Instruction[]::new);
     long multiplies = 0;
     while ((state.pointer >= 0) && (state.pointer < instructions.length)) {
       if (instructions[state.pointer].op == OpCode.mul) {
@@ -54,7 +55,8 @@ public final class Year2017Day23 {
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    final Instruction[] input = il.linesAsObjects(pc, Instruction::new).toArray(Instruction[]::new);
+    final Instruction[] input = il.linesAsObjects(pc, Instruction::new)
+                                  .toArray(Instruction[]::new);
     final int b = (input[4].arg2 * input[0].arg2) - input[5].arg2;
     final int c = b - input[7].arg2;
 

@@ -37,12 +37,22 @@ public class Year2022Day08 {
   public long calculatePart1(final PuzzleContext pc) {
     final int[][] trees = il.linesAs2dIntArrayFromDigits(pc);
     long visible = 0;
-    for (final int y : IntStream.range(0, trees[0].length).toArray()) {
-      for (final int x : IntStream.range(0, trees[y].length).toArray()) {
-        if (IntStream.range(0, y).filter(y0 -> trees[y][x] <= trees[y0][x]).count() == 0
-          || IntStream.range(y + 1, trees.length).filter(y0 -> trees[y][x] <= trees[y0][x]).count() == 0
-          || IntStream.range(0, x).filter(x0 -> trees[y][x] <= trees[y][x0]).count() == 0
-          || IntStream.range(x + 1, trees[y].length).filter(x0 -> trees[y][x] <= trees[y][x0]).count() == 0) {
+    for (final int y : IntStream.range(0, trees[0].length)
+                                .toArray()) {
+      for (final int x : IntStream.range(0, trees[y].length)
+                                  .toArray()) {
+        if (IntStream.range(0, y)
+                     .filter(y0 -> trees[y][x] <= trees[y0][x])
+                     .count() == 0
+          || IntStream.range(y + 1, trees.length)
+                      .filter(y0 -> trees[y][x] <= trees[y0][x])
+                      .count() == 0
+          || IntStream.range(0, x)
+                      .filter(x0 -> trees[y][x] <= trees[y][x0])
+                      .count() == 0
+          || IntStream.range(x + 1, trees[y].length)
+                      .filter(x0 -> trees[y][x] <= trees[y][x0])
+                      .count() == 0) {
           ++visible;
         }
       }

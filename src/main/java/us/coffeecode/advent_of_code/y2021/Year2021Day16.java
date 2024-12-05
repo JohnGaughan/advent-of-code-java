@@ -135,35 +135,47 @@ public final class Year2021Day16 {
 
       @Override
       long evaluate(final Collection<Node> nodes) {
-        return nodes.stream().mapToLong(Node::evaluate).sum();
+        return nodes.stream()
+                    .mapToLong(Node::evaluate)
+                    .sum();
       }
     },
     PRODUCT(1) {
 
       @Override
       long evaluate(final Collection<Node> nodes) {
-        return nodes.stream().mapToLong(Node::evaluate).reduce(1, (a, b) -> a * b);
+        return nodes.stream()
+                    .mapToLong(Node::evaluate)
+                    .reduce(1, (a, b) -> a * b);
       }
     },
     MINIMUM(2) {
 
       @Override
       long evaluate(final Collection<Node> nodes) {
-        return nodes.stream().mapToLong(Node::evaluate).min().getAsLong();
+        return nodes.stream()
+                    .mapToLong(Node::evaluate)
+                    .min()
+                    .getAsLong();
       }
     },
     MAXIMUM(3) {
 
       @Override
       long evaluate(final Collection<Node> nodes) {
-        return nodes.stream().mapToLong(Node::evaluate).max().getAsLong();
+        return nodes.stream()
+                    .mapToLong(Node::evaluate)
+                    .max()
+                    .getAsLong();
       }
     },
     GREATER_THAN(5) {
 
       @Override
       long evaluate(final Collection<Node> nodes) {
-        final long[] values = nodes.stream().mapToLong(Node::evaluate).toArray();
+        final long[] values = nodes.stream()
+                                   .mapToLong(Node::evaluate)
+                                   .toArray();
         return (values[0] > values[1]) ? 1 : 0;
       }
     },
@@ -171,7 +183,9 @@ public final class Year2021Day16 {
 
       @Override
       long evaluate(final Collection<Node> nodes) {
-        final long[] values = nodes.stream().mapToLong(Node::evaluate).toArray();
+        final long[] values = nodes.stream()
+                                   .mapToLong(Node::evaluate)
+                                   .toArray();
         return (values[0] < values[1]) ? 1 : 0;
       }
     },
@@ -179,13 +193,18 @@ public final class Year2021Day16 {
 
       @Override
       long evaluate(final Collection<Node> nodes) {
-        final long[] values = nodes.stream().mapToLong(Node::evaluate).toArray();
+        final long[] values = nodes.stream()
+                                   .mapToLong(Node::evaluate)
+                                   .toArray();
         return (values[0] == values[1]) ? 1 : 0;
       }
     };
 
     public static Operator valueOf(final int id) {
-      return Arrays.stream(values()).filter(o -> o.id == id).findFirst().orElse(null);
+      return Arrays.stream(values())
+                   .filter(o -> o.id == id)
+                   .findFirst()
+                   .orElse(null);
     }
 
     private final int id;
@@ -245,7 +264,9 @@ public final class Year2021Day16 {
 
     @Override
     public long getVersionSum() {
-      return version + operands.stream().mapToLong(Node::getVersionSum).sum();
+      return version + operands.stream()
+                               .mapToLong(Node::getVersionSum)
+                               .sum();
     }
 
     @Override

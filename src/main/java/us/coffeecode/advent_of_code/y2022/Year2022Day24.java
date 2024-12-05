@@ -141,7 +141,9 @@ public class Year2022Day24 {
     final int[][] array = new int[lines.size() - 2][];
     for (int y = 1; y < lines.size() - 1; ++y) {
       final String line = lines.get(y);
-      array[y - 1] = line.substring(1, line.length() - 1).codePoints().toArray();
+      array[y - 1] = line.substring(1, line.length() - 1)
+                         .codePoints()
+                         .toArray();
     }
     return array;
   }

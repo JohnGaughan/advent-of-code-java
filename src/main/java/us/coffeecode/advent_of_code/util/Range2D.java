@@ -83,11 +83,13 @@ public class Range2D {
   }
 
   public boolean containsAnyExclusive(final Collection<Point2D> points) {
-    return points.stream().anyMatch(p -> containsExclusive(p));
+    return points.stream()
+                 .anyMatch(p -> containsExclusive(p));
   }
 
   public boolean containsAnyInclusive(final Collection<Point2D> points) {
-    return points.stream().anyMatch(p -> containsInclusive(p));
+    return points.stream()
+                 .anyMatch(p -> containsInclusive(p));
   }
 
   public boolean overlaps(final Range2D r) {
@@ -108,19 +110,23 @@ public class Range2D {
   }
 
   public int[] getRangeXExclusive() {
-    return IntStream.range(_x1, _x2).toArray();
+    return IntStream.range(_x1, _x2)
+                    .toArray();
   }
 
   public int[] getRangeXInclusive() {
-    return IntStream.rangeClosed(_x1, _x2).toArray();
+    return IntStream.rangeClosed(_x1, _x2)
+                    .toArray();
   }
 
   public int[] getRangeYExclusive() {
-    return IntStream.range(_y1, _y2).toArray();
+    return IntStream.range(_y1, _y2)
+                    .toArray();
   }
 
   public int[] getRangeYInclusive() {
-    return IntStream.rangeClosed(_y1, _y2).toArray();
+    return IntStream.rangeClosed(_y1, _y2)
+                    .toArray();
   }
 
   public long sizeExclusive() {

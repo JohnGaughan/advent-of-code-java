@@ -52,9 +52,15 @@ public class Year2023Day19 {
     final Collection<Map<Category, Range>> ranges = makeRanges(in.workflows);
     long score = 0;
     for (final Map<Category, Integer> part : in.parts) {
-      if (ranges.stream().anyMatch(
-        m -> Arrays.stream(Category.values()).allMatch(c -> m.get(c).containsInclusive(part.get(c).intValue())))) {
-        score += part.values().stream().mapToLong(Integer::longValue).sum();
+      if (ranges.stream()
+                .anyMatch(m -> Arrays.stream(Category.values())
+                                     .allMatch(c -> m.get(c)
+                                                     .containsInclusive(part.get(c)
+                                                                            .intValue())))) {
+        score += part.values()
+                     .stream()
+                     .mapToLong(Integer::longValue)
+                     .sum();
       }
     }
     return score;
@@ -63,7 +69,9 @@ public class Year2023Day19 {
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     final Input in = getInput(pc);
-    return size(makeRanges(in.workflows).stream().map(this::toRange4D).toList());
+    return size(makeRanges(in.workflows).stream()
+                                        .map(this::toRange4D)
+                                        .toList());
   }
 
   /** Get the total size of the given 4D ranges, excluding duplicated regions. */
@@ -79,7 +87,9 @@ public class Year2023Day19 {
     List<Range4D> intersections = getIntersections(ranges);
     long signum = -1;
     while (!intersections.isEmpty()) {
-      size += signum * intersections.stream().mapToLong(Range4D::sizeInclusive).sum();
+      size += signum * intersections.stream()
+                                    .mapToLong(Range4D::sizeInclusive)
+                                    .sum();
       signum = -signum;
       intersections = getIntersections(intersections);
     }
@@ -184,8 +194,9 @@ public class Year2023Day19 {
     for (final String line : inputs) {
       final int openBrace = line.indexOf('{');
       workflows.put(line.substring(0, openBrace),
-        Arrays.stream(RULE_SPLIT.split(line.substring(openBrace + 1, line.length() - 1))).map(this::makeRule).collect(
-          ArrayList::new, List::add, List::addAll));
+        Arrays.stream(RULE_SPLIT.split(line.substring(openBrace + 1, line.length() - 1)))
+              .map(this::makeRule)
+              .collect(ArrayList::new, List::add, List::addAll));
     }
     return workflows;
   }
@@ -206,8 +217,8 @@ public class Year2023Day19 {
   private List<Map<Category, Integer>> makeParts(final Collection<String> inputs) {
     final List<Map<Category, Integer>> parts = new ArrayList<>(inputs.size());
     for (final String line : inputs) {
-      parts.add(Arrays.stream(VALUES_SPLIT.split(line.substring(1, line.length() - 1))).collect(
-        Collectors.toMap(s -> Category.valueOf(s.codePointAt(0)), s -> Integer.valueOf(s.substring(2)))));
+      parts.add(Arrays.stream(VALUES_SPLIT.split(line.substring(1, line.length() - 1)))
+                      .collect(Collectors.toMap(s -> Category.valueOf(s.codePointAt(0)), s -> Integer.valueOf(s.substring(2)))));
     }
     return parts;
   }
@@ -219,7 +230,10 @@ public class Year2023Day19 {
     GREATER_THAN('>');
 
     static Test valueOf(final int ch) {
-      return Arrays.stream(values()).filter(e -> e.ch == ch).findFirst().orElseGet(() -> null);
+      return Arrays.stream(values())
+                   .filter(e -> e.ch == ch)
+                   .findFirst()
+                   .orElseGet(() -> null);
     }
 
     final int ch;
@@ -238,7 +252,8 @@ public class Year2023Day19 {
     S;
 
     static Category valueOf(final int ch) {
-      return valueOf(Character.toString(ch).toUpperCase());
+      return valueOf(Character.toString(ch)
+                              .toUpperCase());
     }
   }
 

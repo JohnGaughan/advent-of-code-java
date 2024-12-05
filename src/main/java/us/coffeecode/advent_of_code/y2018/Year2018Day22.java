@@ -106,7 +106,8 @@ public final class Year2018Day22 {
         boolean add = true;
         final VisitedMapKey key = new VisitedMapKey(next);
         if (visited.containsKey(key)) {
-          final long previousTime = visited.get(key).longValue();
+          final long previousTime = visited.get(key)
+                                           .longValue();
           if (time >= previousTime) {
             add = false;
           }

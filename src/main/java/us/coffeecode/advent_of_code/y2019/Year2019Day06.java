@@ -62,7 +62,10 @@ public final class Year2019Day06 {
 
   /** Get the input data for this solution. */
   private Node getInput(final PuzzleContext pc) {
-    return buildTree(il.lines(pc).stream().map(s -> LINE_SPLIT.split(s)).toArray(String[][]::new));
+    return buildTree(il.lines(pc)
+                       .stream()
+                       .map(s -> LINE_SPLIT.split(s))
+                       .toArray(String[][]::new));
   }
 
   private static final Pattern LINE_SPLIT = Pattern.compile("\\)");
@@ -74,7 +77,8 @@ public final class Year2019Day06 {
       if (!parentChild.containsKey(pair[0])) {
         parentChild.put(pair[0], new HashSet<>());
       }
-      parentChild.get(pair[0]).add(pair[1]);
+      parentChild.get(pair[0])
+                 .add(pair[1]);
       childParent.put(pair[1], pair[0]);
     }
 

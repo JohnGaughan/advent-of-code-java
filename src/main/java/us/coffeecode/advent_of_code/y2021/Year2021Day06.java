@@ -67,7 +67,8 @@ public final class Year2021Day06 {
       fish = newFish;
     }
     // Number of fish is simply the sum of the fish across all timer values.
-    return LongStream.of(fish).sum();
+    return LongStream.of(fish)
+                     .sum();
   }
 
   private static final Pattern SPLIT = Pattern.compile(",");

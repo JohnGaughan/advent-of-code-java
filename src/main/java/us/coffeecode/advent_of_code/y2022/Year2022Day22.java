@@ -80,15 +80,19 @@ public class Year2022Day22 {
   private Input getInput(final PuzzleContext pc) {
     final List<List<String>> groups = il.groups(pc);
     final List<String> group0 = groups.getFirst();
-    final String group1 = groups.get(1).getFirst();
+    final String group1 = groups.get(1)
+                                .getFirst();
 
     final int[][] board = new int[group0.size()][];
     int maxX = 0;
     for (int i = 0; i < board.length; ++i) {
-      maxX = Math.max(maxX, group0.get(i).length());
+      maxX = Math.max(maxX, group0.get(i)
+                                  .length());
     }
     for (int i = 0; i < board.length; ++i) {
-      int[] row = group0.get(i).chars().toArray();
+      int[] row = group0.get(i)
+                        .chars()
+                        .toArray();
       board[i] = Arrays.copyOf(row, maxX);
       for (int x = 0; x < board[i].length; ++x) {
         if (board[i][x] == 0) {

@@ -105,7 +105,10 @@ public final class Year2015Day03 {
     RIGHT('>');
 
     public static Direction valueOf(final int codePoint) {
-      return Arrays.stream(values()).filter(d -> d._codePoint == codePoint).findFirst().get();
+      return Arrays.stream(values())
+                   .filter(d -> d._codePoint == codePoint)
+                   .findFirst()
+                   .get();
     }
 
     private final int _codePoint;

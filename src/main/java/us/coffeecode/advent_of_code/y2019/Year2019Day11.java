@@ -93,7 +93,8 @@ public final class Year2019Day11 {
 
   private Map<Point2D, Long> calculate(final PuzzleContext pc, final long startingColor) {
     final IntCode state = icf.make(pc, BLOCK_UNTIL_INPUT_AVAILABLE);
-    state.getInput().add(startingColor);
+    state.getInput()
+         .add(startingColor);
 
     Point2D current = new Point2D(0, 0);
     Direction heading = Direction.NORTH;
@@ -101,7 +102,8 @@ public final class Year2019Day11 {
 
     while (true) {
       state.exec();
-      final long[] results = state.getOutput().removeAll();
+      final long[] results = state.getOutput()
+                                  .removeAll();
       if (results.length == 0) {
         break;
       }
@@ -116,9 +118,11 @@ public final class Year2019Day11 {
       // Tell the robot the state of the new coordinate.
       long color = BLACK.longValue();
       if (colors.containsKey(current)) {
-        color = colors.get(current).longValue();
+        color = colors.get(current)
+                      .longValue();
       }
-      state.getInput().add(color);
+      state.getInput()
+           .add(color);
     }
     return colors;
   }

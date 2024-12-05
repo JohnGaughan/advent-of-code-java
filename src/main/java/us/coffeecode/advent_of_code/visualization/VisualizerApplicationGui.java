@@ -96,7 +96,8 @@ public class VisualizerApplicationGui {
     final Map<String, VisualizerExecutable> tests = getTests();
     final GridBagConstraints c = new GridBagConstraints();
 
-    final JList<String> box = new JList<>(tests.keySet().toArray(String[]::new));
+    final JList<String> box = new JList<>(tests.keySet()
+                                               .toArray(String[]::new));
     box.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     box.setSelectedIndex(0);
 
@@ -162,16 +163,20 @@ public class VisualizerApplicationGui {
         JOptionPane.showMessageDialog(component, "There are no available tests.");
         return;
       }
-      final Collection<IVisualizationResult> results = tests.get(key).call();
+      final Collection<IVisualizationResult> results = tests.get(key)
+                                                            .call();
 
       final JFrame frame = new JFrame(key);
 
       if (results.size() == 1) {
-        frame.add(results.iterator().next().buildComponent());
+        frame.add(results.iterator()
+                         .next()
+                         .buildComponent());
       }
       else {
         final JTabbedPane tabs = new JTabbedPane();
-        results.stream().forEach(r -> tabs.addTab(r.getDescription(), r.buildComponent()));
+        results.stream()
+               .forEach(r -> tabs.addTab(r.getDescription(), r.buildComponent()));
         frame.add(tabs);
       }
       frame.pack();

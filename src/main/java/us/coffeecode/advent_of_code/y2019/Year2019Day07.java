@@ -42,14 +42,17 @@ public final class Year2019Day07 {
   public long calculatePart1(final PuzzleContext pc) {
     final IntCode original = icf.make(pc, BLOCK_UNTIL_INPUT_AVAILABLE);
     long answer = 0;
-    for (final List<Integer> phaseSettings : Collections2.permutations(
-      IntStream.range(0, 5).mapToObj(Integer::valueOf).toList())) {
+    for (final List<Integer> phaseSettings : Collections2.permutations(IntStream.range(0, 5)
+                                                                                .mapToObj(Integer::valueOf)
+                                                                                .toList())) {
       long signal = 0;
       for (Integer phaseSetting : phaseSettings) {
         final IntCode state = icf.make(original);
-        state.getInput().add(new long[] { phaseSetting.longValue(), signal });
+        state.getInput()
+             .add(new long[] { phaseSetting.longValue(), signal });
         state.exec();
-        signal = state.getOutput().remove();
+        signal = state.getOutput()
+                      .remove();
       }
       answer = Math.max(signal, answer);
     }
@@ -60,25 +63,33 @@ public final class Year2019Day07 {
   public long calculatePart2(final PuzzleContext pc) {
     final IntCode original = icf.make(pc, BLOCK_UNTIL_INPUT_AVAILABLE);
     long answer = 0;
-    for (final List<Integer> phaseSettings : Collections2.permutations(
-      IntStream.range(5, 10).mapToObj(Integer::valueOf).toList())) {
+    for (final List<Integer> phaseSettings : Collections2.permutations(IntStream.range(5, 10)
+                                                                                .mapToObj(Integer::valueOf)
+                                                                                .toList())) {
 
       // Create distinct amps and wire them together.
       // Output feeds into the next amp's output. We need to see amp 5's output though.
       // Input is the phase setting, then the previous amp's output. First time, amp 1 needs 0.
       final IntCode[] amps = new IntCode[5];
       amps[0] = icf.make(original);
-      amps[1] = icf.make(original, new Pipe(amps[0], phaseSettings.get(1).longValue()));
-      amps[2] = icf.make(original, new Pipe(amps[1], phaseSettings.get(2).longValue()));
-      amps[3] = icf.make(original, new Pipe(amps[2], phaseSettings.get(3).longValue()));
-      amps[4] = icf.make(original, new Pipe(amps[3], phaseSettings.get(4).longValue()));
-      amps[0].setInput(new Pipe(amps[4], phaseSettings.getFirst().longValue(), 0));
+      amps[1] = icf.make(original, new Pipe(amps[0], phaseSettings.get(1)
+                                                                  .longValue()));
+      amps[2] = icf.make(original, new Pipe(amps[1], phaseSettings.get(2)
+                                                                  .longValue()));
+      amps[3] = icf.make(original, new Pipe(amps[2], phaseSettings.get(3)
+                                                                  .longValue()));
+      amps[4] = icf.make(original, new Pipe(amps[3], phaseSettings.get(4)
+                                                                  .longValue()));
+      amps[0].setInput(new Pipe(amps[4], phaseSettings.getFirst()
+                                                      .longValue(),
+        0));
 
       // Loop over and over until there is a halt, as opposed to a pause.
       for (final IntCode amp : new ArrayInfinitelyIterable<>(amps)) {
         final ExecutionResult exec = amp.exec();
         if ((amp == amps[4]) && exec.isHalt()) {
-          answer = Math.max(answer, amp.getOutput().remove());
+          answer = Math.max(answer, amp.getOutput()
+                                       .remove());
           break;
         }
       }

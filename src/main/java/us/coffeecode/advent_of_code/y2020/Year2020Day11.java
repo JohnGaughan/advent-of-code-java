@@ -218,12 +218,19 @@ public final class Year2020Day11 {
 
   /** Count the number of items in the grid that match the given status. */
   private long count(final Status[][] grid, final Status match) {
-    return Arrays.stream(grid).mapToLong(a -> Arrays.stream(a).filter(s -> s == match).count()).sum();
+    return Arrays.stream(grid)
+                 .mapToLong(a -> Arrays.stream(a)
+                                       .filter(s -> s == match)
+                                       .count())
+                 .sum();
   }
 
   /** Get the input data for this solution. */
   private Status[][] getInput(final PuzzleContext pc) {
-    return il.linesAsObjectsArray(pc, s -> s.codePoints().mapToObj(Status::valueOf).toArray(Status[]::new), Status[][]::new);
+    return il.linesAsObjectsArray(pc, s -> s.codePoints()
+                                            .mapToObj(Status::valueOf)
+                                            .toArray(Status[]::new),
+      Status[][]::new);
   }
 
   private static enum Status {
@@ -233,7 +240,10 @@ public final class Year2020Day11 {
     NO_SEAT('.');
 
     static Status valueOf(final int codePoint) {
-      return Arrays.stream(values()).filter(s -> s.c == codePoint).findFirst().get();
+      return Arrays.stream(values())
+                   .filter(s -> s.c == codePoint)
+                   .findFirst()
+                   .get();
     }
 
     private final int c;

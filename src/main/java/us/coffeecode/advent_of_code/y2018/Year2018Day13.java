@@ -65,7 +65,8 @@ public final class Year2018Day13 {
         boolean collision = false;
         Iterator<Cart> iter = processedCarts.iterator();
         while (iter.hasNext()) {
-          if (iter.next().collidesWith(cart)) {
+          if (iter.next()
+                  .collidesWith(cart)) {
             if (removeCrashes) {
               collision = true;
               iter.remove();
@@ -77,7 +78,8 @@ public final class Year2018Day13 {
         }
         iter = state.carts.iterator();
         while (iter.hasNext()) {
-          if (iter.next().collidesWith(cart)) {
+          if (iter.next()
+                  .collidesWith(cart)) {
             if (removeCrashes) {
               collision = true;
               iter.remove();
@@ -105,7 +107,8 @@ public final class Year2018Day13 {
       // Reset the carts back into the state and check for the exit condition of part two.
       state.carts.addAll(processedCarts);
       if (state.carts.size() == 1) {
-        return state.carts.remove().toString();
+        return state.carts.remove()
+                          .toString();
       }
     }
     return "NO SOLUTION";
@@ -173,11 +176,13 @@ public final class Year2018Day13 {
     }
 
     Direction corner(final int c) {
-      return CORNERS.get(this).get(Integer.valueOf(c));
+      return CORNERS.get(this)
+                    .get(Integer.valueOf(c));
     }
 
     Direction turn(final Turn turn) {
-      return TURNS.get(this).get(turn);
+      return TURNS.get(this)
+                  .get(turn);
     }
   }
 

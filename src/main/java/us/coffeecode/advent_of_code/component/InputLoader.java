@@ -97,7 +97,8 @@ public class InputLoader {
    * @return an array of code points.
    */
   public int[] fileAsCodePoints(final PuzzleContext pc) {
-    return fileAsString(pc).codePoints().toArray();
+    return fileAsString(pc).codePoints()
+                           .toArray();
   }
 
   /**
@@ -118,7 +119,11 @@ public class InputLoader {
    * @return an integer array containing each number in the file.
    */
   public int[] fileAsIntsFromDigitGroups(final PuzzleContext pc) {
-    return DIGITS.matcher(fileAsString(pc)).results().map(r -> r.group()).mapToInt(Integer::parseInt).toArray();
+    return DIGITS.matcher(fileAsString(pc))
+                 .results()
+                 .map(r -> r.group())
+                 .mapToInt(Integer::parseInt)
+                 .toArray();
   }
 
   /**
@@ -129,7 +134,9 @@ public class InputLoader {
    * @return an array of integers.
    */
   public int[] fileAsIntsFromDigits(final PuzzleContext pc) {
-    return fileAsString(pc).codePoints().map(i -> i - '0').toArray();
+    return fileAsString(pc).codePoints()
+                           .map(i -> i - '0')
+                           .toArray();
   }
 
   /**
@@ -140,7 +147,9 @@ public class InputLoader {
    * @return an integer array containing each number in the file.
    */
   public int[] fileAsIntsFromHexDigits(final PuzzleContext pc) {
-    return fileAsString(pc).codePoints().map(i -> (('0' <= i) && (i <= '9')) ? (i - '0') : (i - 'A' + 10)).toArray();
+    return fileAsString(pc).codePoints()
+                           .map(i -> (('0' <= i) && (i <= '9')) ? (i - '0') : (i - 'A' + 10))
+                           .toArray();
   }
 
   /**
@@ -152,7 +161,9 @@ public class InputLoader {
    * @return an integer array containing each number in the file.
    */
   public int[] fileAsIntsFromSplit(final PuzzleContext pc, final Pattern split) {
-    return Arrays.stream(split.split(fileAsString(pc).trim())).mapToInt(Integer::parseInt).toArray();
+    return Arrays.stream(split.split(fileAsString(pc).trim()))
+                 .mapToInt(Integer::parseInt)
+                 .toArray();
   }
 
   /**
@@ -174,7 +185,9 @@ public class InputLoader {
    * @return a long array containing each number in the file.
    */
   public long[] fileAsLongsFromSplit(final PuzzleContext pc, final Pattern split) {
-    return Arrays.stream(split.split(fileAsString(pc).trim())).mapToLong(Long::parseLong).toArray();
+    return Arrays.stream(split.split(fileAsString(pc).trim()))
+                 .mapToLong(Long::parseLong)
+                 .toArray();
   }
 
   /**
@@ -198,7 +211,9 @@ public class InputLoader {
    * @return a list of objects representing the file contents.
    */
   public <T> List<T> fileAsObjectsFromCodePoints(final PuzzleContext pc, final IntFunction<T> f) {
-    return IntStream.of(fileAsCodePoints(pc)).mapToObj(f).toList();
+    return IntStream.of(fileAsCodePoints(pc))
+                    .mapToObj(f)
+                    .toList();
   }
 
   /**
@@ -212,7 +227,9 @@ public class InputLoader {
    * @return a list of objects representing the file contents.
    */
   public <T> List<T> fileAsObjectsFromSplit(final PuzzleContext pc, final Pattern split, final Function<String, T> f) {
-    return Arrays.stream(split.split(fileAsString(pc).trim())).map(f).toList();
+    return Arrays.stream(split.split(fileAsString(pc).trim()))
+                 .map(f)
+                 .toList();
   }
 
   /**
@@ -225,7 +242,10 @@ public class InputLoader {
    * @return an integer array containing each number in the file, sorted in natural order.
    */
   public int[] fileAsSortedIntsFromSplit(final PuzzleContext pc, final Pattern split) {
-    return Arrays.stream(split.split(fileAsString(pc).trim())).mapToInt(Integer::parseInt).sorted().toArray();
+    return Arrays.stream(split.split(fileAsString(pc).trim()))
+                 .mapToInt(Integer::parseInt)
+                 .sorted()
+                 .toArray();
   }
 
   /**
@@ -236,7 +256,8 @@ public class InputLoader {
    */
   public String fileAsString(final PuzzleContext pc) {
     try {
-      return Files.readString(path(pc)).trim();
+      return Files.readString(path(pc))
+                  .trim();
     }
     catch (final IOException ex) {
       throw new RuntimeException(ex);
@@ -255,7 +276,8 @@ public class InputLoader {
     final List<List<String>> lineGroups = new ArrayList<>();
     int start = -1;
     for (int i = 0; i < lines.size(); ++i) {
-      final boolean currentLineHasData = !lines.get(i).isBlank();
+      final boolean currentLineHasData = !lines.get(i)
+                                               .isBlank();
       // Not currently inside a group
       if (start < 0) {
         // Don't combine these if statements!
@@ -286,7 +308,9 @@ public class InputLoader {
    * @return a long array where each element represents a group of strings.
    */
   public long[] groupsAsLongs(final PuzzleContext pc, final ToLongFunction<List<String>> f) {
-    return groups(pc).stream().mapToLong(f).toArray();
+    return groups(pc).stream()
+                     .mapToLong(f)
+                     .toArray();
   }
 
   /**
@@ -312,7 +336,9 @@ public class InputLoader {
    * @return a list of object representing each group of lines.
    */
   public <T> List<T> groupsAsObjects(final PuzzleContext pc, final Function<List<String>, T> f) {
-    return groups(pc).stream().map(f).toList();
+    return groups(pc).stream()
+                     .map(f)
+                     .toList();
   }
 
   /**
@@ -338,13 +364,15 @@ public class InputLoader {
    * @return a two-dimensional boolean array representing the file.
    */
   public boolean[][] linesAs2dBooleanArray(final PuzzleContext pc, final int truth) {
-    return lines(pc).stream().map(s -> {
-      boolean[] b = new boolean[s.length()];
-      for (int i = 0; i < b.length; ++i) {
-        b[i] = s.codePointAt(i) == truth;
-      }
-      return b;
-    }).toArray(boolean[][]::new);
+    return lines(pc).stream()
+                    .map(s -> {
+                      boolean[] b = new boolean[s.length()];
+                      for (int i = 0; i < b.length; ++i) {
+                        b[i] = s.codePointAt(i) == truth;
+                      }
+                      return b;
+                    })
+                    .toArray(boolean[][]::new);
   }
 
   /**
@@ -355,7 +383,9 @@ public class InputLoader {
    * @return a two-dimensional integer array representing the file.
    */
   public int[][] linesAs2dIntArray(final PuzzleContext pc, final Function<String, int[]> f) {
-    return lines(pc).stream().map(f).toArray(int[][]::new);
+    return lines(pc).stream()
+                    .map(f)
+                    .toArray(int[][]::new);
   }
 
   /**
@@ -366,7 +396,11 @@ public class InputLoader {
    * @return a two-dimensional integer array representing the file.
    */
   public int[][] linesAs2dIntArrayFromDigits(final PuzzleContext pc) {
-    return lines(pc).stream().map(s -> s.codePoints().map(i -> i - '0').toArray()).toArray(int[][]::new);
+    return lines(pc).stream()
+                    .map(s -> s.codePoints()
+                               .map(i -> i - '0')
+                               .toArray())
+                    .toArray(int[][]::new);
   }
 
   /**
@@ -377,8 +411,11 @@ public class InputLoader {
    * @return a two-dimensional integer array representing the file.
    */
   public int[][] linesAs2dIntArrayFromSplit(final PuzzleContext pc, final Pattern split) {
-    return lines(pc).stream().map(s -> Arrays.stream(split.split(s.trim())).mapToInt(Integer::parseInt).toArray()).toArray(
-      int[][]::new);
+    return lines(pc).stream()
+                    .map(s -> Arrays.stream(split.split(s.trim()))
+                                    .mapToInt(Integer::parseInt)
+                                    .toArray())
+                    .toArray(int[][]::new);
   }
 
   /**
@@ -389,7 +426,9 @@ public class InputLoader {
    * @return a two-dimensional long array representing the file.
    */
   public long[][] linesAs2dLongArray(final PuzzleContext pc, final Function<String, long[]> f) {
-    return lines(pc).stream().map(f).toArray(long[][]::new);
+    return lines(pc).stream()
+                    .map(f)
+                    .toArray(long[][]::new);
   }
 
   /**
@@ -400,8 +439,11 @@ public class InputLoader {
    * @return a two-dimensional long array representing the file.
    */
   public long[][] linesAs2dLongArrayFromSplit(final PuzzleContext pc, final Pattern split) {
-    return lines(pc).stream().map(s -> Arrays.stream(split.split(s.trim())).mapToLong(Long::parseLong).toArray()).toArray(
-      long[][]::new);
+    return lines(pc).stream()
+                    .map(s -> Arrays.stream(split.split(s.trim()))
+                                    .mapToLong(Long::parseLong)
+                                    .toArray())
+                    .toArray(long[][]::new);
   }
 
   /**
@@ -411,7 +453,10 @@ public class InputLoader {
    * @return a two-dimensional array of code points representing the file.
    */
   public int[][] linesAsCodePoints(final PuzzleContext pc) {
-    return lines(pc).stream().map(s -> s.codePoints().toArray()).toArray(int[][]::new);
+    return lines(pc).stream()
+                    .map(s -> s.codePoints()
+                               .toArray())
+                    .toArray(int[][]::new);
   }
 
   /**
@@ -421,7 +466,9 @@ public class InputLoader {
    * @return an array of integers where each integer represents one line.
    */
   public int[] linesAsInts(final PuzzleContext pc) {
-    return lines(pc).stream().mapToInt(Integer::parseInt).toArray();
+    return lines(pc).stream()
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
   }
 
   /**
@@ -432,7 +479,11 @@ public class InputLoader {
    * @return a list of integer arrays representing the file.
    */
   public List<int[]> linesAsIntsFromDigits(final PuzzleContext pc) {
-    return lines(pc).stream().map(s -> s.codePoints().map(i -> i - '0').toArray()).toList();
+    return lines(pc).stream()
+                    .map(s -> s.codePoints()
+                               .map(i -> i - '0')
+                               .toArray())
+                    .toList();
   }
 
   /**
@@ -443,7 +494,10 @@ public class InputLoader {
    * @return an array of integers where each integer represents one line. This array is sorted.
    */
   public int[] linesAsIntsSorted(final PuzzleContext pc) {
-    return lines(pc).stream().mapToInt(Integer::parseInt).sorted().toArray();
+    return lines(pc).stream()
+                    .mapToInt(Integer::parseInt)
+                    .sorted()
+                    .toArray();
   }
 
   /**
@@ -453,7 +507,9 @@ public class InputLoader {
    * @return an array of longs where each integer represents one line.
    */
   public long[] linesAsLongs(final PuzzleContext pc) {
-    return lines(pc).stream().mapToLong(Long::parseLong).toArray();
+    return lines(pc).stream()
+                    .mapToLong(Long::parseLong)
+                    .toArray();
   }
 
   /**
@@ -464,7 +520,9 @@ public class InputLoader {
    * @return an array of longs where each integer represents one line.
    */
   public long[] linesAsLongs(final PuzzleContext pc, final ToLongFunction<String> parser) {
-    return lines(pc).stream().mapToLong(parser).toArray();
+    return lines(pc).stream()
+                    .mapToLong(parser)
+                    .toArray();
   }
 
   /**
@@ -475,7 +533,10 @@ public class InputLoader {
    * @return an array of longs where each long represents one line. This array is sorted.
    */
   public long[] linesAsLongsSorted(final PuzzleContext pc) {
-    return lines(pc).stream().mapToLong(Long::parseLong).sorted().toArray();
+    return lines(pc).stream()
+                    .mapToLong(Long::parseLong)
+                    .sorted()
+                    .toArray();
   }
 
   /**
@@ -492,7 +553,9 @@ public class InputLoader {
    * @return a map representing the entire file.
    */
   public <T, U, V> Map<U, V> linesAsMap(final PuzzleContext pc, final Function<String, T> f, final Function<T, U> k, final Function<T, V> v) {
-    return lines(pc).stream().map(f).collect(Collectors.toMap(k, v));
+    return lines(pc).stream()
+                    .map(f)
+                    .collect(Collectors.toMap(k, v));
   }
 
   /**
@@ -517,7 +580,9 @@ public class InputLoader {
    * @return a list of objects, one per line in the file. This list has no guarantee about mutability.
    */
   public <T> List<T> linesAsObjects(final PuzzleContext pc, final Function<String, T> f) {
-    return lines(pc).stream().map(f).toList();
+    return lines(pc).stream()
+                    .map(f)
+                    .toList();
   }
 
   /**
@@ -532,7 +597,9 @@ public class InputLoader {
    * @return a collection of objects, one per line in the file.
    */
   public <T> SequencedCollection<T> linesAsObjects(final PuzzleContext pc, final Function<String, T> f, final Supplier<? extends SequencedCollection<T>> g) {
-    return lines(pc).stream().map(f).collect(Collectors.toCollection(g));
+    return lines(pc).stream()
+                    .map(f)
+                    .collect(Collectors.toCollection(g));
   }
 
   /**
@@ -545,7 +612,9 @@ public class InputLoader {
    * @return a two-dimensional array of objects.
    */
   public <T> T[][] linesAsObjectsArray(final PuzzleContext pc, final Function<String, T[]> f, final IntFunction<T[][]> a) {
-    return lines(pc).stream().map(f).toArray(a);
+    return lines(pc).stream()
+                    .map(f)
+                    .toArray(a);
   }
 
   /**
@@ -560,7 +629,11 @@ public class InputLoader {
    * @return a two-dimensional array of objects.
    */
   public <T> T[][] linesAsObjectsArray(final PuzzleContext pc, final Pattern split, final Function<String, T> f, final IntFunction<T[]> a1, final IntFunction<T[][]> a2) {
-    return lines(pc).stream().map(s -> Arrays.stream(split.split(s)).map(f).toArray(a1)).toArray(a2);
+    return lines(pc).stream()
+                    .map(s -> Arrays.stream(split.split(s))
+                                    .map(f)
+                                    .toArray(a1))
+                    .toArray(a2);
   }
 
   /**
@@ -572,7 +645,9 @@ public class InputLoader {
    * @return a list of objects, one per line in the file. This list is mutable.
    */
   public <T> List<T> linesAsObjectsMutable(final PuzzleContext pc, final Function<String, T> f) {
-    return lines(pc).stream().map(f).collect(Collectors.toCollection(ArrayList::new));
+    return lines(pc).stream()
+                    .map(f)
+                    .collect(Collectors.toCollection(ArrayList::new));
   }
 
   /**
@@ -586,7 +661,10 @@ public class InputLoader {
    * @return a list of objects, one per line in the file. This list is mutable.
    */
   public <T> List<T> linesAsObjectsMutable(final PuzzleContext pc, final Function<String[], T> f, final Pattern split) {
-    return lines(pc).stream().map(s -> split.split(s)).map(f).collect(Collectors.toCollection(ArrayList::new));
+    return lines(pc).stream()
+                    .map(s -> split.split(s))
+                    .map(f)
+                    .collect(Collectors.toCollection(ArrayList::new));
   }
 
   /**
@@ -597,7 +675,9 @@ public class InputLoader {
    * @return a list representing the file, with each list entry being another list containing strings for that line.
    */
   public List<List<String>> linesAsStrings(final PuzzleContext pc, final Pattern split) {
-    return lines(pc).stream().map(s -> Arrays.asList(split.split(s.trim()))).toList();
+    return lines(pc).stream()
+                    .map(s -> Arrays.asList(split.split(s.trim())))
+                    .toList();
   }
 
   /**
@@ -609,7 +689,12 @@ public class InputLoader {
    * @return a list representing the file, with each list entry being another list containing strings for that line.
    */
   public List<List<String>> linesAsStrings(final PuzzleContext pc, final Pattern split, final long skip) {
-    return lines(pc).stream().map(s -> Arrays.asList(split.split(s.trim())).stream().skip(skip).toList()).toList();
+    return lines(pc).stream()
+                    .map(s -> Arrays.asList(split.split(s.trim()))
+                                    .stream()
+                                    .skip(skip)
+                                    .toList())
+                    .toList();
   }
 
   /**

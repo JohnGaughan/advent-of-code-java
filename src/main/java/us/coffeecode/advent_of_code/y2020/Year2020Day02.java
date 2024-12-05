@@ -35,16 +35,23 @@ public final class Year2020Day02 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return il.linesAsObjects(pc, Input::make).stream().filter(t -> {
-      final long count = t.password.codePoints().filter(c -> c == t.ch).count();
-      return (t.n1 <= count) && (count <= t.n2);
-    }).count();
+    return il.linesAsObjects(pc, Input::make)
+             .stream()
+             .filter(t -> {
+               final long count = t.password.codePoints()
+                                            .filter(c -> c == t.ch)
+                                            .count();
+               return (t.n1 <= count) && (count <= t.n2);
+             })
+             .count();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return il.linesAsObjects(pc, Input::make).stream().filter(
-      t -> (t.password.charAt(t.n1 - 1) == t.ch) ^ (t.password.charAt(t.n2 - 1) == t.ch)).count();
+    return il.linesAsObjects(pc, Input::make)
+             .stream()
+             .filter(t -> (t.password.charAt(t.n1 - 1) == t.ch) ^ (t.password.charAt(t.n2 - 1) == t.ch))
+             .count();
   }
 
   private static record Input(int n1, int n2, char ch, String password) {

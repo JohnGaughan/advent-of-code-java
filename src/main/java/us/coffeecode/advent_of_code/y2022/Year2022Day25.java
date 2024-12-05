@@ -33,7 +33,9 @@ public class Year2022Day25 {
 
   @Solver(part = 1)
   public String calculatePart1(final PuzzleContext pc) {
-    return il.lines(pc).stream().reduce("", this::add);
+    return il.lines(pc)
+             .stream()
+             .reduce("", this::add);
   }
 
   private String add(final String a, final String b) {

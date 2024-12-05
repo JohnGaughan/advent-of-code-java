@@ -46,7 +46,8 @@ public final class Year2019Day23 {
     final IntCode[] computers = new IntCode[50];
     for (int i = 0; i < computers.length; ++i) {
       computers[i] = icf.make(original, new Day23InputQueue());
-      computers[i].getInput().add(i);
+      computers[i].getInput()
+                  .add(i);
     }
 
     long previousY = Long.MIN_VALUE;
@@ -57,15 +58,19 @@ public final class Year2019Day23 {
     for (int iterations = 0; iterations < (1 << 20); ++iterations) {
       boolean idle = true;
       for (int i = 0; i < computers.length; ++i) {
-        if (!computers[i].getInput().isEmpty()) {
+        if (!computers[i].getInput()
+                         .isEmpty()) {
           idle = false;
         }
         computers[i].exec();
-        if (!computers[i].getOutput().isEmpty()) {
+        if (!computers[i].getOutput()
+                         .isEmpty()) {
           idle = false;
         }
-        if (computers[i].getOutput().size() >= 3) {
-          final long[] output = computers[i].getOutput().remove(3);
+        if (computers[i].getOutput()
+                        .size() >= 3) {
+          final long[] output = computers[i].getOutput()
+                                            .remove(3);
           final long[] packet = new long[] { output[1], output[2] };
           if (output[0] == 255) {
             if (returnFirstYValue) {
@@ -74,7 +79,8 @@ public final class Year2019Day23 {
             natPacket = packet;
           }
           else {
-            computers[(int) output[0]].getInput().add(packet);
+            computers[(int) output[0]].getInput()
+                                      .add(packet);
           }
         }
       }
@@ -89,7 +95,8 @@ public final class Year2019Day23 {
           return previousY;
         }
         previousY = natPacket[1];
-        computers[0].getInput().add(natPacket);
+        computers[0].getInput()
+                    .add(natPacket);
         natPacket = null;
       }
     }

@@ -29,7 +29,9 @@ extends AbstractTests {
 
   @Test
   public void test() {
-    final Integer[] array = IntStream.range(0, 10).boxed().toArray(Integer[]::new);
+    final Integer[] array = IntStream.range(0, 10)
+                                     .boxed()
+                                     .toArray(Integer[]::new);
     final ArrayInfinitelyIterable<Integer> aii = new ArrayInfinitelyIterable<>(array);
     final Iterator<Integer> iter = aii.iterator();
     for (int i = 0; i < 105; ++i) {

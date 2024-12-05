@@ -38,7 +38,9 @@ public final class Year2018Day04 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    final Guard mostAsleep = getInput(pc).stream().max((a, b) -> Integer.compare(a.asleep, b.asleep)).get();
+    final Guard mostAsleep = getInput(pc).stream()
+                                         .max((a, b) -> Integer.compare(a.asleep, b.asleep))
+                                         .get();
     return (long) mostAsleep.id * (long) mostAsleep.mostAsleepMinute;
   }
 
@@ -58,7 +60,10 @@ public final class Year2018Day04 {
 
   /** Get the input data for this solution. */
   private Collection<Guard> getInput(final PuzzleContext pc) {
-    final Event[] events = il.linesAsObjects(pc, Event::make).stream().sorted().toArray(Event[]::new);
+    final Event[] events = il.linesAsObjects(pc, Event::make)
+                             .stream()
+                             .sorted()
+                             .toArray(Event[]::new);
 
     // Aggregate events into guards.
     final Map<Integer, Guard> guards = new HashMap<>();
@@ -82,7 +87,8 @@ public final class Year2018Day04 {
         guards.put(key, new Guard(log.guard));
       }
 
-      guards.get(key).add(log);
+      guards.get(key)
+            .add(log);
 
       start = end;
       end = start + 1;

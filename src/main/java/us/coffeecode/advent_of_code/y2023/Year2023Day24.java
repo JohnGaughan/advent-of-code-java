@@ -40,7 +40,9 @@ public class Year2023Day24 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final List<Hailstone> hs = getInput(pc);
-    final List<BigDecimal[]> slopeIntercepts = hs.stream().map(this::toSlopeIntercept).toList();
+    final List<BigDecimal[]> slopeIntercepts = hs.stream()
+                                                 .map(this::toSlopeIntercept)
+                                                 .toList();
     final BigDecimal x_min = pc.getBigDecimal("AreaXmin");
     final BigDecimal x_max = pc.getBigDecimal("AreaXmax");
     final BigDecimal y_min = pc.getBigDecimal("AreaYmin");
@@ -85,9 +87,12 @@ public class Year2023Day24 {
     final Hailstone h1 = hs.get(0);
     final Hailstone h2 = hs.get(1);
     // These bounds work for the example and my input. Another input might have different velocities.
-    final int[] x_s = IntStream.range(-400, 0).toArray();
-    final int[] y_s = IntStream.range(0, 40).toArray();
-    final int[] z_s = IntStream.range(0, 40).toArray();
+    final int[] x_s = IntStream.range(-400, 0)
+                               .toArray();
+    final int[] y_s = IntStream.range(0, 40)
+                               .toArray();
+    final int[] z_s = IntStream.range(0, 40)
+                               .toArray();
     for (final int vx : x_s) {
       for (int vy : y_s) {
         for (int vz : z_s) {
@@ -112,14 +117,16 @@ public class Year2023Day24 {
           final long z_rock = h1.z + (h1.vz * dt) - (vz * dt);
 
           // Now check against all hailstones, in all three dimensions.
-          if (hs.stream().allMatch(h -> {
-            // Find the time until the rock intercepts one of the hailstone's coordinates, then check that it intercepts
-            // all three coordinates.
-            final long time = (h.vx == vx) ? ((h.vy == vy) ? (z_rock - h.z) / (h.vz - vz) : (y_rock - h.y) / (h.vy - vy))
-              : ((x_rock - h.x) / (h.vx - vx));
-            return ((x_rock + (time * vx) == h.x + (time * h.vx)) && (y_rock + (time * vy) == h.y + (time * h.vy))
-              && (z_rock + (time * vz) == h.z + (time * h.vz)));
-          })) {
+          if (hs.stream()
+                .allMatch(h -> {
+                  // Find the time until the rock intercepts one of the hailstone's coordinates, then check that it
+                  // intercepts
+                  // all three coordinates.
+                  final long time = (h.vx == vx) ? ((h.vy == vy) ? (z_rock - h.z) / (h.vz - vz) : (y_rock - h.y) / (h.vy - vy))
+                    : ((x_rock - h.x) / (h.vx - vx));
+                  return ((x_rock + (time * vx) == h.x + (time * h.vx)) && (y_rock + (time * vy) == h.y + (time * h.vy))
+                    && (z_rock + (time * vz) == h.z + (time * h.vz)));
+                })) {
             return x_rock + y_rock + z_rock;
           }
         }
@@ -142,7 +149,10 @@ public class Year2023Day24 {
 
   /** Get the input as hailstones. */
   private List<Hailstone> getInput(final PuzzleContext pc) {
-    return il.lines(pc).stream().map(this::make).toList();
+    return il.lines(pc)
+             .stream()
+             .map(this::make)
+             .toList();
   }
 
   /** Make a hailstone from one line in the input file. */
@@ -153,11 +163,16 @@ public class Year2023Day24 {
     final int comma3 = s.indexOf(',', at);
     final int comma4 = s.indexOf(',', comma3 + 1);
     final long x = Long.parseLong(s.substring(0, comma1));
-    final long y = Long.parseLong(s.substring(comma1 + 1, comma2).trim());
-    final long z = Long.parseLong(s.substring(comma2 + 1, at).trim());
-    final long dx = Long.parseLong(s.substring(at + 1, comma3).trim());
-    final long dy = Long.parseLong(s.substring(comma3 + 1, comma4).trim());
-    final long dz = Long.parseLong(s.substring(comma4 + 1).trim());
+    final long y = Long.parseLong(s.substring(comma1 + 1, comma2)
+                                   .trim());
+    final long z = Long.parseLong(s.substring(comma2 + 1, at)
+                                   .trim());
+    final long dx = Long.parseLong(s.substring(at + 1, comma3)
+                                    .trim());
+    final long dy = Long.parseLong(s.substring(comma3 + 1, comma4)
+                                    .trim());
+    final long dz = Long.parseLong(s.substring(comma4 + 1)
+                                    .trim());
     return new Hailstone(x, y, z, dx, dy, dz);
   }
 
@@ -166,8 +181,10 @@ public class Year2023Day24 {
 
     /** Check whether the given X/Y coordinate is in the future path of this hailstone. */
     boolean isInFuture(final BigDecimal xx, final BigDecimal yy) {
-      return (xx.subtract(BigDecimal.valueOf(x), DECIMAL128).signum() == Long.signum(vx))
-        && (yy.subtract(BigDecimal.valueOf(y), DECIMAL128).signum() == Long.signum(vy));
+      return (xx.subtract(BigDecimal.valueOf(x), DECIMAL128)
+                .signum() == Long.signum(vx))
+        && (yy.subtract(BigDecimal.valueOf(y), DECIMAL128)
+              .signum() == Long.signum(vy));
     }
   }
 }

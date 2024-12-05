@@ -45,7 +45,8 @@ public final class Year2016Day21 {
   @Solver(part = 2)
   public String calculatePart2(final PuzzleContext pc) {
     String text = pc.getString("input");
-    for (final Instruction instruction : il.linesAsObjectsMutable(pc, Instruction::make).reversed()) {
+    for (final Instruction instruction : il.linesAsObjectsMutable(pc, Instruction::make)
+                                           .reversed()) {
       text = instruction.transform(text, true);
     }
     return text;

@@ -64,8 +64,10 @@ public class Year2015Day13 {
       final String left = ordering.get((i == 0) ? (ordering.size() - 1) : (i - 1));
       final String right = ordering.get((i == (ordering.size() - 1)) ? 0 : (i + 1));
       final Map<String, Integer> guestRules = rules.get(ordering.get(i));
-      happiness += guestRules.get(left).intValue();
-      happiness += guestRules.get(right).intValue();
+      happiness += guestRules.get(left)
+                             .intValue();
+      happiness += guestRules.get(right)
+                             .intValue();
     }
     return happiness;
   }
@@ -79,7 +81,8 @@ public class Year2015Day13 {
     final Map<String, Integer> myRules = new HashMap<>();
     for (final Map.Entry<String, Map<String, Integer>> entry : rules.entrySet()) {
       myRules.put(entry.getKey(), ZERO);
-      entry.getValue().put(ME, ZERO);
+      entry.getValue()
+           .put(ME, ZERO);
     }
     rules.put(ME, myRules);
     return rules;
@@ -92,7 +95,8 @@ public class Year2015Day13 {
       if (!results.containsKey(rule.person1)) {
         results.put(rule.person1, new HashMap<>());
       }
-      results.get(rule.person1).put(rule.person2, Integer.valueOf(rule.happiness));
+      results.get(rule.person1)
+             .put(rule.person2, Integer.valueOf(rule.happiness));
     }
     return results;
   }

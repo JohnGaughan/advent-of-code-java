@@ -508,7 +508,9 @@ public final class Year2020Day17 {
   private boolean[][][] getInput(final PuzzleContext pc, final int iterations) {
     final List<String> lines = il.lines(pc);
     final int bufferSize = 2 * iterations;
-    final int width = lines.getFirst().length() + bufferSize;
+    final int width = lines.getFirst()
+                           .length()
+      + bufferSize;
     final int height = lines.size() + bufferSize;
     final int depth = 1 + bufferSize;
     final boolean[][][] output = new boolean[width][height][depth];

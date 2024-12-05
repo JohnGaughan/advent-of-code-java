@@ -146,7 +146,8 @@ public final class Year2017Day22 {
     }
 
     Direction turn(final State state) {
-      return TURNS.get(this).get(state);
+      return TURNS.get(this)
+                  .get(state);
     }
 
   }

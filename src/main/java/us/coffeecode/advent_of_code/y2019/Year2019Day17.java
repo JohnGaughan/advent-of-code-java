@@ -74,12 +74,16 @@ public final class Year2019Day17 {
     final IntCodeIoQueue input = state.getInput();
 
     // Give the main movement routine.
-    input.add(solution[0].codePoints().mapToLong(ch -> ch).toArray());
+    input.add(solution[0].codePoints()
+                         .mapToLong(ch -> ch)
+                         .toArray());
     input.add('\n');
 
     // Give the three functions in order
     for (int i = 1; i < solution.length; ++i) {
-      input.add(solution[i].codePoints().mapToLong(ch -> ch).toArray());
+      input.add(solution[i].codePoints()
+                           .mapToLong(ch -> ch)
+                           .toArray());
       input.add('\n');
     }
 
@@ -87,9 +91,11 @@ public final class Year2019Day17 {
     input.add('n');
     input.add('\n');
 
-    state.getMemory().set(0, 2);
+    state.getMemory()
+         .set(0, 2);
     state.exec();
-    final long[] output = state.getOutput().removeAll();
+    final long[] output = state.getOutput()
+                               .removeAll();
     return output[output.length - 1];
   }
 
@@ -135,7 +141,8 @@ public final class Year2019Day17 {
   private String toRoute(final String steps) {
     final Collection<String> segments = new ArrayList<>(72);
     int distance = 0;
-    for (final int ch : steps.codePoints().toArray()) {
+    for (final int ch : steps.codePoints()
+                             .toArray()) {
       if (ch == 'F') {
         ++distance;
       }
@@ -149,7 +156,8 @@ public final class Year2019Day17 {
     }
     segments.add(Integer.toString(distance));
 
-    return segments.stream().collect(Collectors.joining(","));
+    return segments.stream()
+                   .collect(Collectors.joining(","));
   }
 
   private String[] bruteForce(final String route) {
@@ -209,8 +217,9 @@ public final class Year2019Day17 {
             // functions A, B, and C, this is a solution.
             final String c = routeB.substring(cStart, cEnd);
             final String routeC = routeB.replace(c, "C");
-            if (c.length() <= 20 && routeC.length() <= 20
-              && routeC.codePoints().allMatch(ch -> ch == 'A' || ch == 'B' || ch == 'C' || ch == ',')) {
+            if (c.length() <= 20 && routeC.length() <= 20 && routeC.codePoints()
+                                                                   .allMatch(
+                                                                     ch -> ch == 'A' || ch == 'B' || ch == 'C' || ch == ',')) {
               return new String[] { routeC, a, b, c };
             }
           }
@@ -236,7 +245,8 @@ public final class Year2019Day17 {
     state.exec();
     final List<String> lines = new ArrayList<>(45);
     StringBuilder str = new StringBuilder(29);
-    for (final long value : state.getOutput().removeAll()) {
+    for (final long value : state.getOutput()
+                                 .removeAll()) {
       if ('\n' == value && !str.isEmpty()) {
         lines.add(str.toString());
         str = new StringBuilder(29);

@@ -43,8 +43,13 @@ public class Year2023Day13 {
 
   private long calculate(final PuzzleContext pc) {
     final int differences = pc.getInt("differences");
-    return il.groupsAsObjects(pc, group -> group.stream().map(line -> line.codePoints().toArray()).toArray(int[][]::new)) //
-    .stream().mapToLong(grid -> score(grid, differences)).sum();
+    return il.groupsAsObjects(pc, group -> group.stream()
+                                                .map(line -> line.codePoints()
+                                                                 .toArray())
+                                                .toArray(int[][]::new)) //
+             .stream()
+             .mapToLong(grid -> score(grid, differences))
+             .sum();
   }
 
   /** Determine the score of a board where there are a specific number of differences required in a reflection. */

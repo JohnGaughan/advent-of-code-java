@@ -39,9 +39,12 @@ public final class Year2016Day13 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    final int[] target = Arrays.stream(TARGET_SPLIT.split(pc.getString("target"))).mapToInt(Integer::parseInt).toArray();
+    final int[] target = Arrays.stream(TARGET_SPLIT.split(pc.getString("target")))
+                               .mapToInt(Integer::parseInt)
+                               .toArray();
     final int input = il.fileAsInt(pc);
-    return traverse(100, input).get(new Point(target[0], target[1], input)).intValue();
+    return traverse(100, input).get(new Point(target[0], target[1], input))
+                               .intValue();
   }
 
   private static final Pattern TARGET_SPLIT = Pattern.compile(",");
@@ -60,7 +63,9 @@ public final class Year2016Day13 {
       updated = false;
       // Work on a copy to avoid ConcurrentModificationException. This does a breadth-first search.
       for (final Map.Entry<Point, Integer> current : new ArrayList<>(visited.entrySet())) {
-        final int nextPathLength = current.getValue().intValue() + 1;
+        final int nextPathLength = current.getValue()
+                                          .intValue()
+          + 1;
         if (nextPathLength > limit) {
           continue;
         }
@@ -68,7 +73,8 @@ public final class Year2016Day13 {
         for (final Point next : getAdjacents(current.getKey(), input)) {
           // Already visited: update with the better of the two paths to this point.
           if (visited.containsKey(next)) {
-            final int existingLength = visited.get(next).intValue();
+            final int existingLength = visited.get(next)
+                                              .intValue();
             if (nextPathLength < existingLength) {
               visited.put(next, Integer.valueOf(nextPathLength));
               updated = true;

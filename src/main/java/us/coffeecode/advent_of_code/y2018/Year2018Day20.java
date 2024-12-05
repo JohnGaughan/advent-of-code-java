@@ -40,13 +40,21 @@ public final class Year2018Day20 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final Map<Point2D, Long> paths = mapPaths(pc);
-    return paths.values().stream().mapToLong(Long::longValue).max().getAsLong();
+    return paths.values()
+                .stream()
+                .mapToLong(Long::longValue)
+                .max()
+                .getAsLong();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     final Map<Point2D, Long> paths = mapPaths(pc);
-    return paths.values().stream().mapToLong(Long::longValue).filter(i -> i >= 1_000).count();
+    return paths.values()
+                .stream()
+                .mapToLong(Long::longValue)
+                .filter(i -> i >= 1_000)
+                .count();
   }
 
   private Map<Point2D, Long> mapPaths(final PuzzleContext pc) {
@@ -65,7 +73,9 @@ public final class Year2018Day20 {
         current = stack.peekFirst();
       }
       else {
-        final long distance = points.get(current).longValue() + 1;
+        final long distance = points.get(current)
+                                    .longValue()
+          + 1;
         if (ch == 'N') {
           current = new Point2D(current, 0, -1);
         }
@@ -79,7 +89,8 @@ public final class Year2018Day20 {
           current = new Point2D(current, -1, 0);
         }
         if (points.containsKey(current)) {
-          points.put(current, Long.valueOf(Math.min(distance, points.get(current).longValue())));
+          points.put(current, Long.valueOf(Math.min(distance, points.get(current)
+                                                                    .longValue())));
         }
         else {
           points.put(current, Long.valueOf(distance));
@@ -92,7 +103,9 @@ public final class Year2018Day20 {
   /** Get the input data for this solution. */
   private int[] getInput(final PuzzleContext pc) {
     final String input = il.fileAsString(pc);
-    return input.substring(1, input.length() - 1).codePoints().toArray();
+    return input.substring(1, input.length() - 1)
+                .codePoints()
+                .toArray();
   }
 
 }

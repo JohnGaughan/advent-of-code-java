@@ -51,7 +51,9 @@ public class Year2023Day07 {
     final boolean wildcardsEnabled = pc.getBoolean("WildcardsEnabled");
     final List<Hand> hands = il.linesAsObjectsMutable(pc, s -> parse(s, wildcardsEnabled), SPLIT);
     Collections.sort(hands, (a, b) -> compare(a, b, wildcardsEnabled));
-    return IntStream.range(0, hands.size()).mapToLong(i -> (i + 1) * hands.get(i).bid).sum();
+    return IntStream.range(0, hands.size())
+                    .mapToLong(i -> (i + 1) * hands.get(i).bid)
+                    .sum();
   }
 
   /** Compare two hands for order, allowing for wildcards to be turned on or off. */
@@ -98,7 +100,8 @@ public class Year2023Day07 {
 
   /** Parse a line from the input file into a hand. Allows the option of wildcards, which can alter a hand's type. */
   private Hand parse(final String[] tokens, final boolean wildcardsEnabled) {
-    final int[] cards = tokens[0].codePoints().toArray();
+    final int[] cards = tokens[0].codePoints()
+                                 .toArray();
     return new Hand(cards, Type.valueOf(cards, wildcardsEnabled), Long.parseLong(tokens[1]));
   }
 
@@ -122,9 +125,14 @@ public class Year2023Day07 {
     /** Get the type that matches the given cards and whether wildcards are enabled. */
     static Type valueOf(final int[] cards, final boolean wildcardsEnabled) {
       // Wildcards are not enabled and/or there are no wildcards present. Use part one's logic.
-      if (!wildcardsEnabled || IntStream.of(cards).noneMatch(c -> c == 'J')) {
-        final int[] sorted = IntStream.of(cards).sorted().toArray();
-        final long uniques = IntStream.of(sorted).distinct().count();
+      if (!wildcardsEnabled || IntStream.of(cards)
+                                        .noneMatch(c -> c == 'J')) {
+        final int[] sorted = IntStream.of(cards)
+                                      .sorted()
+                                      .toArray();
+        final long uniques = IntStream.of(sorted)
+                                      .distinct()
+                                      .count();
         if (uniques == 1) {
           // Only one unique card, so this is the only option.
           return FIVE_OF_A_KIND;
@@ -152,9 +160,16 @@ public class Year2023Day07 {
       }
       // Wildcards are enabled and there is a wildcard present.
       else {
-        final long wild = IntStream.of(cards).filter(c -> c == 'J').count();
-        final int[] sortedNoWild = IntStream.of(cards).filter(c -> c != 'J').sorted().toArray();
-        final long uniques = IntStream.of(sortedNoWild).distinct().count();
+        final long wild = IntStream.of(cards)
+                                   .filter(c -> c == 'J')
+                                   .count();
+        final int[] sortedNoWild = IntStream.of(cards)
+                                            .filter(c -> c != 'J')
+                                            .sorted()
+                                            .toArray();
+        final long uniques = IntStream.of(sortedNoWild)
+                                      .distinct()
+                                      .count();
         if (wild == 1) {
           if (uniques == 1) {
             return FIVE_OF_A_KIND;

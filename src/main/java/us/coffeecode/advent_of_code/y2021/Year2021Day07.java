@@ -50,7 +50,11 @@ public final class Year2021Day07 {
     final int[] array = il.fileAsSortedIntsFromSplit(pc, SPLIT);
     long lowestScore = Long.MAX_VALUE;
     for (final int loc : reduction.apply(array)) {
-      final long score = IntStream.of(array).map(i -> i - loc).map(Math::abs).map(scoringAlgorithm).sum();
+      final long score = IntStream.of(array)
+                                  .map(i -> i - loc)
+                                  .map(Math::abs)
+                                  .map(scoringAlgorithm)
+                                  .sum();
       if (score < lowestScore) {
         lowestScore = score;
       }
@@ -59,7 +63,8 @@ public final class Year2021Day07 {
   }
 
   private int[] mean(final int[] a) {
-    final int sum = IntStream.of(a).sum();
+    final int sum = IntStream.of(a)
+                             .sum();
     final int avg = sum / a.length;
     if (avg * a.length == sum) {
       return new int[] { avg };
@@ -72,7 +77,8 @@ public final class Year2021Day07 {
     if (((array.length & 1) == 1) || (array[mid - 1] == array[mid])) {
       return new int[] { array[mid] };
     }
-    return IntStream.rangeClosed(array[mid - 1], array[mid]).toArray();
+    return IntStream.rangeClosed(array[mid - 1], array[mid])
+                    .toArray();
   }
 
   private static final Pattern SPLIT = Pattern.compile(",");

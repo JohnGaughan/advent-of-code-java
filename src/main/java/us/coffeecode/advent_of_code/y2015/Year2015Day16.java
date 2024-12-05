@@ -38,9 +38,13 @@ public final class Year2015Day16 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    final List<Rule> rules = il.linesAsObjects(pc, Rule::new).stream().filter(r -> r.check1("children", 3) && r.check1("cats", 7)
-      && r.check1("samoyeds", 2) && r.check1("pomeranians", 3) && r.check1("akitas", 0) && r.check1("vizslas", 0)
-      && r.check1("goldfish", 5) && r.check1("trees", 3) && r.check1("cars", 2) && r.check1("perfumes", 1)).toList();
+    final List<Rule> rules = il.linesAsObjects(pc, Rule::new)
+                               .stream()
+                               .filter(r -> r.check1("children", 3) && r.check1("cats", 7) && r.check1("samoyeds", 2)
+                                 && r.check1("pomeranians", 3) && r.check1("akitas", 0) && r.check1("vizslas", 0)
+                                 && r.check1("goldfish", 5) && r.check1("trees", 3) && r.check1("cars", 2)
+                                 && r.check1("perfumes", 1))
+                               .toList();
     if (rules.size() == 1) {
       return rules.getFirst().auntId;
     }
@@ -49,9 +53,13 @@ public final class Year2015Day16 {
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    final List<Rule> rules = il.linesAsObjects(pc, Rule::new).stream().filter(r -> r.check2("children", 3) && r.check2("cats", 7)
-      && r.check2("samoyeds", 2) && r.check2("pomeranians", 3) && r.check2("akitas", 0) && r.check2("vizslas", 0)
-      && r.check2("goldfish", 5) && r.check2("trees", 3) && r.check2("cars", 2) && r.check2("perfumes", 1)).toList();
+    final List<Rule> rules = il.linesAsObjects(pc, Rule::new)
+                               .stream()
+                               .filter(r -> r.check2("children", 3) && r.check2("cats", 7) && r.check2("samoyeds", 2)
+                                 && r.check2("pomeranians", 3) && r.check2("akitas", 0) && r.check2("vizslas", 0)
+                                 && r.check2("goldfish", 5) && r.check2("trees", 3) && r.check2("cars", 2)
+                                 && r.check2("perfumes", 1))
+                               .toList();
     if (rules.size() == 1) {
       return rules.getFirst().auntId;
     }
@@ -67,7 +75,8 @@ public final class Year2015Day16 {
     final Map<String, Integer> attributes = new HashMap<>();
 
     Rule(final String input) {
-      final String[] tokens = SPLIT.split(input.replace(":", "").replace(",", ""));
+      final String[] tokens = SPLIT.split(input.replace(":", "")
+                                               .replace(",", ""));
       auntId = Long.parseLong(tokens[1]);
       for (int i = 3; i < tokens.length; i += 2) {
         // Just in case there is an odd number of tokens...
@@ -80,7 +89,8 @@ public final class Year2015Day16 {
       if (!attributes.containsKey(key)) {
         return true;
       }
-      return value == attributes.get(key).intValue();
+      return value == attributes.get(key)
+                                .intValue();
     }
 
     /** Convenience method for use in stream predicates. */
@@ -88,7 +98,8 @@ public final class Year2015Day16 {
       if (!attributes.containsKey(key)) {
         return true;
       }
-      final int keyValue = attributes.get(key).intValue();
+      final int keyValue = attributes.get(key)
+                                     .intValue();
       if ("cats".equals(key) || "trees".equals(key)) {
         return value < keyValue;
       }

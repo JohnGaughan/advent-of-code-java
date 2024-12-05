@@ -93,8 +93,16 @@ public final class Year2021Day14 {
     }
 
     // Get the two extreme frequencies and calculate their difference.
-    final long most = singleCount.values().stream().mapToLong(Long::longValue).max().getAsLong();
-    final long least = singleCount.values().stream().mapToLong(Long::longValue).min().getAsLong();
+    final long most = singleCount.values()
+                                 .stream()
+                                 .mapToLong(Long::longValue)
+                                 .max()
+                                 .getAsLong();
+    final long least = singleCount.values()
+                                  .stream()
+                                  .mapToLong(Long::longValue)
+                                  .min()
+                                  .getAsLong();
     return most - least;
   }
 
@@ -104,8 +112,10 @@ public final class Year2021Day14 {
 
   private Input getInput(final PuzzleContext pc) {
     final List<List<String>> groups = il.groups(pc);
-    final String template = groups.getFirst().getFirst();
-    final Map<String, Integer> rules = new HashMap<>(groups.get(1).size());
+    final String template = groups.getFirst()
+                                  .getFirst();
+    final Map<String, Integer> rules = new HashMap<>(groups.get(1)
+                                                           .size());
     for (final String line : groups.get(1)) {
       final String[] tokens = SPLIT.split(line);
       rules.put(tokens[0], Integer.valueOf(tokens[1].codePointAt(0)));

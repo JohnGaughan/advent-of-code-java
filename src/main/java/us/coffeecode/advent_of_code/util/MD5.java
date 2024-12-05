@@ -32,7 +32,8 @@ import com.google.common.base.Charsets;
 public class MD5 {
 
   public byte[] md5(final String input) {
-    return MD5.get().digest(input.getBytes(Charsets.US_ASCII));
+    return MD5.get()
+              .digest(input.getBytes(Charsets.US_ASCII));
   }
 
   /** MD5 message digest. */

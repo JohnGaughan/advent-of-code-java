@@ -88,8 +88,12 @@ public final class Year2015Day19 {
   /** Get the input data for this solution. */
   private Input getInput(final PuzzleContext pc) {
     final List<List<String>> groups = il.groups(pc);
-    final Collection<Rule> rules = groups.getFirst().stream().map(Rule::make).collect(Collectors.toSet());
-    return new Input(rules, groups.get(1).getFirst());
+    final Collection<Rule> rules = groups.getFirst()
+                                         .stream()
+                                         .map(Rule::make)
+                                         .collect(Collectors.toSet());
+    return new Input(rules, groups.get(1)
+                                  .getFirst());
   }
 
   private static record Input(Collection<Rule> rules, String molecule) {}

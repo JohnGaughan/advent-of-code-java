@@ -42,12 +42,18 @@ public final class Year2015Day15 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return scores(il.linesAsObjects(pc, Rule::make), QUANTITY, -1).stream().mapToLong(Long::longValue).max().getAsLong();
+    return scores(il.linesAsObjects(pc, Rule::make), QUANTITY, -1).stream()
+                                                                  .mapToLong(Long::longValue)
+                                                                  .max()
+                                                                  .getAsLong();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return scores(il.linesAsObjects(pc, Rule::make), QUANTITY, 500).stream().mapToLong(Long::longValue).max().getAsLong();
+    return scores(il.linesAsObjects(pc, Rule::make), QUANTITY, 500).stream()
+                                                                   .mapToLong(Long::longValue)
+                                                                   .max()
+                                                                   .getAsLong();
   }
 
   /** Get all of the cookie scores. */
@@ -73,7 +79,8 @@ public final class Year2015Day15 {
       long calories = 0;
       for (int i = 0; i < rules.size(); ++i) {
         final Rule rule = rules.get(i);
-        final long qty = newQuantities.get(i).longValue();
+        final long qty = newQuantities.get(i)
+                                      .longValue();
         capacity += rule.capacity * qty;
         durability += rule.durability * qty;
         flavor += rule.flavor * qty;

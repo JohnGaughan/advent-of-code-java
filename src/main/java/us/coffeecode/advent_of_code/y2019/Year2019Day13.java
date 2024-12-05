@@ -38,25 +38,31 @@ public final class Year2019Day13 {
   public long calculatePart1(final PuzzleContext pc) {
     final IntCode state = icf.make(pc);
     state.exec();
-    final long[] output = state.getOutput().removeAll();
+    final long[] output = state.getOutput()
+                               .removeAll();
     final Map<Point2D, Tile> tiles = new HashMap<>();
     for (int i = 0; i < output.length; i += 3) {
       tiles.put(new Point2D((int) output[i], (int) output[i + 1]), Tile.valueOf(output[i + 2]));
     }
-    return tiles.values().stream().filter(t -> t == Tile.BLOCK).count();
+    return tiles.values()
+                .stream()
+                .filter(t -> t == Tile.BLOCK)
+                .count();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     final Controller input = new Controller();
     final IntCode state = icf.make(pc, input, ExecutionOption.BLOCK_AFTER_THREE_OUTPUTS);
-    state.getMemory().set(0, 2);
+    state.getMemory()
+         .set(0, 2);
     final Map<Point2D, Tile> tiles = new HashMap<>();
     long answer = 0;
     while (true) {
       // Run the simulation until it produces output, then decide how to proceed.
       state.exec();
-      long[] results = state.getOutput().removeAll();
+      long[] results = state.getOutput()
+                            .removeAll();
 
       // Invalid output.
       if ((results == null) || (results.length != 3)) {
@@ -64,7 +70,10 @@ public final class Year2019Day13 {
       }
 
       // IntCode returned a score, and there are no more blocks.
-      if ((results[0] == -1) && (results[1] == 0) && tiles.values().stream().filter(t -> t == Tile.BLOCK).count() == 0) {
+      if ((results[0] == -1) && (results[1] == 0) && tiles.values()
+                                                          .stream()
+                                                          .filter(t -> t == Tile.BLOCK)
+                                                          .count() == 0) {
         answer = results[2];
         break;
       }

@@ -52,10 +52,12 @@ enum Instruction {
 
     @Override
     public ExecutionResult execute(final IntCode state, final Mode[] modes) {
-      if (state.hasOption(ExecutionOption.BLOCK_UNTIL_INPUT_AVAILABLE) && state.getInput().isEmpty()) {
+      if (state.hasOption(ExecutionOption.BLOCK_UNTIL_INPUT_AVAILABLE) && state.getInput()
+                                                                               .isEmpty()) {
         return ExecutionResult.BLOCK;
       }
-      modes[0].setValue(state, state.instructionPointer + 1, state.getInput().remove());
+      modes[0].setValue(state, state.instructionPointer + 1, state.getInput()
+                                                                  .remove());
       state.instructionPointer += 2;
       return ExecutionResult.COMPLETE;
     }
@@ -66,9 +68,11 @@ enum Instruction {
     @Override
     public ExecutionResult execute(final IntCode state, final Mode[] modes) {
       final long value = modes[0].getValue(state, state.instructionPointer + 1);
-      state.getOutput().add(value);
+      state.getOutput()
+           .add(value);
       state.instructionPointer += 2;
-      if (state.hasOption(ExecutionOption.BLOCK_AFTER_THREE_OUTPUTS) && state.getOutput().size() >= 3) {
+      if (state.hasOption(ExecutionOption.BLOCK_AFTER_THREE_OUTPUTS) && state.getOutput()
+                                                                             .size() >= 3) {
         return ExecutionResult.BLOCK;
       }
       return ExecutionResult.COMPLETE;
@@ -153,7 +157,10 @@ enum Instruction {
 
   public static Instruction valueOf(final long intcode) {
     final long _code = intcode % 100;
-    return Arrays.stream(values()).filter(i -> i.code == _code).findFirst().orElse(null);
+    return Arrays.stream(values())
+                 .filter(i -> i.code == _code)
+                 .findFirst()
+                 .orElse(null);
   }
 
   private final long code;

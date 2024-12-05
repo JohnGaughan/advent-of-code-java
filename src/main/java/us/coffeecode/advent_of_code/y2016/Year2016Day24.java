@@ -52,7 +52,9 @@ public final class Year2016Day24 {
   }
 
   private long calculate(final PuzzleContext pc) {
-    final int[][] maze = il.linesAsObjects(pc, s -> s.codePoints().toArray()).toArray(int[][]::new);
+    final int[][] maze = il.linesAsObjects(pc, s -> s.codePoints()
+                                                     .toArray())
+                           .toArray(int[][]::new);
     reduce(maze);
     Point2D[] points = getPoints(maze);
     final int[][] distances = getDistances(maze, points);
@@ -118,7 +120,8 @@ public final class Year2016Day24 {
     }
     final Point2D[] points = new Point2D[collect.size()];
     for (Map.Entry<Integer, Point2D> entry : collect.entrySet()) {
-      points[entry.getKey().intValue()] = entry.getValue();
+      points[entry.getKey()
+                  .intValue()] = entry.getValue();
     }
     return points;
   }

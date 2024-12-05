@@ -116,8 +116,14 @@ public class Year2022Day14 {
         points.addAll(new Point2D(line, i).range(new Point2D(line, i - 2)));
       }
     }
-    final int width = 1 + xAdjust.applyAsInt(points.stream().mapToInt(Point2D::getX).max().getAsInt());
-    final int height = 1 + yAdjust.applyAsInt(points.stream().mapToInt(Point2D::getY).max().getAsInt());
+    final int width = 1 + xAdjust.applyAsInt(points.stream()
+                                                   .mapToInt(Point2D::getX)
+                                                   .max()
+                                                   .getAsInt());
+    final int height = 1 + yAdjust.applyAsInt(points.stream()
+                                                    .mapToInt(Point2D::getY)
+                                                    .max()
+                                                    .getAsInt());
     final int[][] map = new int[height][width];
     for (final int[] row : map) {
       Arrays.fill(row, OPEN);

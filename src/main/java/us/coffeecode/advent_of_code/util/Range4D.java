@@ -132,35 +132,43 @@ public class Range4D {
   }
 
   public int[] getRangeWExclusive() {
-    return IntStream.range(_w1, _w2).toArray();
+    return IntStream.range(_w1, _w2)
+                    .toArray();
   }
 
   public int[] getRangeWInclusive() {
-    return IntStream.rangeClosed(_w1, _w2).toArray();
+    return IntStream.rangeClosed(_w1, _w2)
+                    .toArray();
   }
 
   public int[] getRangeXExclusive() {
-    return IntStream.range(_x1, _x2).toArray();
+    return IntStream.range(_x1, _x2)
+                    .toArray();
   }
 
   public int[] getRangeXInclusive() {
-    return IntStream.rangeClosed(_x1, _x2).toArray();
+    return IntStream.rangeClosed(_x1, _x2)
+                    .toArray();
   }
 
   public int[] getRangeYExclusive() {
-    return IntStream.range(_y1, _y2).toArray();
+    return IntStream.range(_y1, _y2)
+                    .toArray();
   }
 
   public int[] getRangeYInclusive() {
-    return IntStream.rangeClosed(_y1, _y2).toArray();
+    return IntStream.rangeClosed(_y1, _y2)
+                    .toArray();
   }
 
   public int[] getRangeZExclusive() {
-    return IntStream.range(_z1, _z2).toArray();
+    return IntStream.range(_z1, _z2)
+                    .toArray();
   }
 
   public int[] getRangeZInclusive() {
-    return IntStream.rangeClosed(_z1, _z2).toArray();
+    return IntStream.rangeClosed(_z1, _z2)
+                    .toArray();
   }
 
   public long sizeExclusive() {

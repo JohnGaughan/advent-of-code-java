@@ -58,7 +58,10 @@ public final class Year2016Day04 {
 
   /** Get the input data for this solution. */
   private Iterable<Room> getInput(final PuzzleContext pc) {
-    return il.linesAsObjects(pc, Room::make).stream().filter(Room::real).toList();
+    return il.linesAsObjects(pc, Room::make)
+             .stream()
+             .filter(Room::real)
+             .toList();
   }
 
   private static record Room(String name, int sectorId, boolean real) {
@@ -101,7 +104,8 @@ public final class Year2016Day04 {
           if (!countBuckets.containsKey(key)) {
             countBuckets.put(key, new TreeSet<>());
           }
-          countBuckets.get(key).add(Integer.valueOf(i));
+          countBuckets.get(key)
+                      .add(Integer.valueOf(i));
         }
       }
 

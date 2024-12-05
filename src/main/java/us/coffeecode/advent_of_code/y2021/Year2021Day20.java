@@ -117,7 +117,9 @@ public final class Year2021Day20 {
         }
       }
     }
-    return new Input(iea.toString().trim(), pixels);
+    return new Input(iea.toString()
+                        .trim(),
+      pixels);
   }
 
   private record Input(String iea, Set<Point2D> pixels) {}

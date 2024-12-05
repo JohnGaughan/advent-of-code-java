@@ -39,12 +39,16 @@ public final class Year2020Day18 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return getInput(pc, s -> recursiveDescent(s)).stream().mapToLong(Expression::evaluate).sum();
+    return getInput(pc, s -> recursiveDescent(s)).stream()
+                                                 .mapToLong(Expression::evaluate)
+                                                 .sum();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return getInput(pc, s -> shuntingYard(s)).stream().mapToLong(Expression::evaluate).sum();
+    return getInput(pc, s -> shuntingYard(s)).stream()
+                                             .mapToLong(Expression::evaluate)
+                                             .sum();
   }
 
   /** Get the input data for this solution. */
@@ -57,7 +61,8 @@ public final class Year2020Day18 {
   /** Parse a single line from the input file. */
   private Expression parseLine(final String line, final Function<String, Expression> algorithm) {
     // Remove useless spaces then call whatever algorithm is needed.
-    String expression = SPACE.matcher(line).replaceAll("");
+    String expression = SPACE.matcher(line)
+                             .replaceAll("");
     return algorithm.apply(expression);
   }
 

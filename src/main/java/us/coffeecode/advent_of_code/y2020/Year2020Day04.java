@@ -41,12 +41,19 @@ public final class Year2020Day04 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return getInput(pc).stream().filter(m -> m.keySet().containsAll(REQUIRED_FIELDS)).count();
+    return getInput(pc).stream()
+                       .filter(m -> m.keySet()
+                                     .containsAll(REQUIRED_FIELDS))
+                       .count();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return getInput(pc).stream().filter(m -> m.keySet().containsAll(REQUIRED_FIELDS)).filter(new ValidatorPart2()).count();
+    return getInput(pc).stream()
+                       .filter(m -> m.keySet()
+                                     .containsAll(REQUIRED_FIELDS))
+                       .filter(new ValidatorPart2())
+                       .count();
   }
 
   /** Predicate that validates data for part 2. */
@@ -77,13 +84,16 @@ public final class Year2020Day04 {
       if (!validateHeight(t.get("hgt"))) {
         return false;
       }
-      if (!HAIR_COLOR.matcher(t.get("hcl")).matches()) {
+      if (!HAIR_COLOR.matcher(t.get("hcl"))
+                     .matches()) {
         return false;
       }
-      if (!EYE_COLOR.matcher(t.get("ecl")).matches()) {
+      if (!EYE_COLOR.matcher(t.get("ecl"))
+                    .matches()) {
         return false;
       }
-      if (!PASSPORT_ID.matcher(t.get("pid")).matches()) {
+      if (!PASSPORT_ID.matcher(t.get("pid"))
+                      .matches()) {
         return false;
       }
       return true;
@@ -91,7 +101,8 @@ public final class Year2020Day04 {
 
     /** Validates one of the year fields. */
     boolean validateYear(final String value, final int min, final int max) {
-      if (!YEAR.matcher(value).matches()) {
+      if (!YEAR.matcher(value)
+               .matches()) {
         return false;
       }
       final int numValue = Integer.parseInt(value);
@@ -100,7 +111,8 @@ public final class Year2020Day04 {
 
     /** Validate the height field. */
     boolean validateHeight(final String value) {
-      if (!HEIGHT.matcher(value).matches()) {
+      if (!HEIGHT.matcher(value)
+                 .matches()) {
         return false;
       }
       final int num = Integer.parseInt(value.substring(0, value.length() - 2));
@@ -114,7 +126,8 @@ public final class Year2020Day04 {
 
   /** Field names that are required to be in the input. */
   private static final Set<String> REQUIRED_FIELDS =
-    Arrays.stream(new String[] { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid" }).collect(Collectors.toSet());
+    Arrays.stream(new String[] { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid" })
+          .collect(Collectors.toSet());
 
   /** Pattern that splits a line into individual tokens. */
   private static final Pattern SPLIT_LINE = Pattern.compile(" ");
@@ -124,9 +137,12 @@ public final class Year2020Day04 {
 
   /** Get the input data for this solution. */
   private Collection<Map<String, String>> getInput(final PuzzleContext pc) {
-    return il.groups(pc).stream().map(
-      line -> Arrays.stream(SPLIT_LINE.split(String.join(" ", line))).map(s -> SPLIT_TOKEN.split(s)).collect(
-        Collectors.toMap(s -> s[0], s -> s[1]))).toList();
+    return il.groups(pc)
+             .stream()
+             .map(line -> Arrays.stream(SPLIT_LINE.split(String.join(" ", line)))
+                                .map(s -> SPLIT_TOKEN.split(s))
+                                .collect(Collectors.toMap(s -> s[0], s -> s[1])))
+             .toList();
   }
 
 }

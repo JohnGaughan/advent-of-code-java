@@ -38,7 +38,9 @@ implements Comparable<Range> {
    */
   public static List<Range> merge(final List<Range> ranges) {
     final List<Range> result = new ArrayList<>(ranges.size());
-    ranges.stream().filter(r -> r != null).forEach(result::add);
+    ranges.stream()
+          .filter(r -> r != null)
+          .forEach(result::add);
     Collections.sort(result);
     boolean merged = true;
     while (merged) {
@@ -125,11 +127,13 @@ implements Comparable<Range> {
   }
 
   public int[] getRangeXExclusive() {
-    return IntStream.range(_x1, _x2).toArray();
+    return IntStream.range(_x1, _x2)
+                    .toArray();
   }
 
   public int[] getRangeXInclusive() {
-    return IntStream.rangeClosed(_x1, _x2).toArray();
+    return IntStream.rangeClosed(_x1, _x2)
+                    .toArray();
   }
 
   public int sizeExclusive() {

@@ -54,8 +54,13 @@ public class Year2023Day08 {
   /** Calculate the answer for all ghosts. */
   private long calculate(final PuzzleContext pc, final Predicate<String> isStart, final Predicate<String> isNotEnd) {
     final Input in = getInput(pc);
-    final String[] locations = in.turns.keySet().stream().filter(isStart).toArray(String[]::new);
-    final long[] steps = Arrays.stream(locations).mapToLong(l -> calculate(l, in, isNotEnd)).toArray();
+    final String[] locations = in.turns.keySet()
+                                       .stream()
+                                       .filter(isStart)
+                                       .toArray(String[]::new);
+    final long[] steps = Arrays.stream(locations)
+                               .mapToLong(l -> calculate(l, in, isNotEnd))
+                               .toArray();
     return MyLongMath.lcm(steps);
   }
 
@@ -74,9 +79,12 @@ public class Year2023Day08 {
 
   private Input getInput(final PuzzleContext pc) {
     final List<List<String>> groups = il.groups(pc);
-    final Iterable<Direction> dirs = Direction.parse(groups.getFirst().getFirst());
-    final Map<String, Turns> turns = groups.get(1).stream().collect(
-      Collectors.toMap(s -> s.substring(0, 3), s -> new Turns(s.substring(7, 10), s.substring(12, 15))));
+    final Iterable<Direction> dirs = Direction.parse(groups.getFirst()
+                                                           .getFirst());
+    final Map<String, Turns> turns = groups.get(1)
+                                           .stream()
+                                           .collect(Collectors.toMap(s -> s.substring(0, 3),
+                                             s -> new Turns(s.substring(7, 10), s.substring(12, 15))));
     return new Input(dirs, turns);
   }
 
@@ -86,7 +94,9 @@ public class Year2023Day08 {
     R(t -> t.right);
 
     static Iterable<Direction> parse(final String line) {
-      final Direction[] array = line.codePoints().mapToObj(cp -> cp == 'L' ? L : R).toArray(Direction[]::new);
+      final Direction[] array = line.codePoints()
+                                    .mapToObj(cp -> cp == 'L' ? L : R)
+                                    .toArray(Direction[]::new);
       return new ArrayInfinitelyIterable<>(array);
     }
 

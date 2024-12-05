@@ -48,7 +48,9 @@ public final class Year2016Day10 {
   }
 
   public long calculate(final PuzzleContext pc) {
-    final int[] values = Arrays.stream(CHIPS_SPLIT.split(pc.getString("values"))).mapToInt(Integer::parseInt).toArray();
+    final int[] values = Arrays.stream(CHIPS_SPLIT.split(pc.getString("values")))
+                               .mapToInt(Integer::parseInt)
+                               .toArray();
     final boolean findBot = pc.getBoolean("findBot");
     final State state = getInput(pc);
     while (!state.rules.isEmpty() && ((state.outputs[0] == 0) || (state.outputs[1] == 0) || (state.outputs[2] == 0))) {

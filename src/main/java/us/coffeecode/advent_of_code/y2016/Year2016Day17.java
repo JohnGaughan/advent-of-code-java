@@ -69,7 +69,8 @@ public final class Year2016Day17 {
           // Otherwise, mark this as a potential solution and stop searching this branch of the search tree.
           continue;
         }
-        final String hash = HexFormat.of().formatHex(md5.md5(salt + path.path));
+        final String hash = HexFormat.of()
+                                     .formatHex(md5.md5(salt + path.path));
         if ((path.y > 0) && (hash.codePointAt(0) > 'a')) {
           nextIterationPaths.add(Path.make(path.path + UP));
         }

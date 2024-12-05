@@ -46,7 +46,8 @@ public final class Year2016Day06 {
 
   private String calculate(final PuzzleContext pc, final BiIntPredicate test) {
     final SequencedCollection<String> lines = il.lines(pc);
-    int[][] frequency = new int[lines.getFirst().length()][26];
+    int[][] frequency = new int[lines.getFirst()
+                                     .length()][26];
     for (final String line : lines) {
       for (int i = 0; i < line.length(); ++i) {
         frequency[i][line.codePointAt(i) - 'a']++;

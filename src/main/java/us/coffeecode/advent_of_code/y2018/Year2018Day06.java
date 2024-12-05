@@ -84,7 +84,9 @@ public final class Year2018Day06 {
       }
     }
 
-    return Arrays.stream(sizes).max().getAsInt();
+    return Arrays.stream(sizes)
+                 .max()
+                 .getAsInt();
   }
 
   @Solver(part = 2)

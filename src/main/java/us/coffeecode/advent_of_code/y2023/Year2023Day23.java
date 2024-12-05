@@ -124,12 +124,19 @@ public class Year2023Day23 {
       final Collection<Edge> values = new HashSet<>();
       edges.put(pointToLong.get(entry.getKey()), values);
       for (final PointEdge pe : entry.getValue()) {
-        values.add(new Edge(pointToLong.get(pe.start).longValue(), pointToLong.get(pe.end).longValue(), pe.cost, pe.restricted));
+        values.add(new Edge(pointToLong.get(pe.start)
+                                       .longValue(),
+          pointToLong.get(pe.end)
+                     .longValue(),
+          pe.cost, pe.restricted));
       }
     }
 
-    return new Input(pointToLong.get(start).longValue(), pointToLong.get(end).longValue(), intersectionsLong, edges,
-      pc.getBoolean("IgnoreRestrictions"));
+    return new Input(pointToLong.get(start)
+                                .longValue(),
+      pointToLong.get(end)
+                 .longValue(),
+      intersectionsLong, edges, pc.getBoolean("IgnoreRestrictions"));
   }
 
   /** Get whether the point is an intersection of multiple paths. */

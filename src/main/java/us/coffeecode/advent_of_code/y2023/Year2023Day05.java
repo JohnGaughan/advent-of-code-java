@@ -74,7 +74,8 @@ public class Year2023Day05 {
     for (final Iterable<RangeMapping> mappingGroup : mappings) {
       inputs = process(inputs, mappingGroup);
     }
-    return inputs.getFirst().getX1();
+    return inputs.getFirst()
+                 .getX1();
   }
 
   /**
@@ -91,7 +92,8 @@ public class Year2023Day05 {
         // Ranges here are closed intervals.
         if (input.overlaps(mapping.src)) {
           // Map the part that overlaps.
-          result.add(input.intersection(mapping.src).shift(mapping.shift));
+          result.add(input.intersection(mapping.src)
+                          .shift(mapping.shift));
           // Copy the part below the range, if anything.
           if (input.getX1() < mapping.src.getX1()) {
             nextUnmapped.add(new LongRange(input.getX1(), mapping.src.getX1() - 1));
@@ -126,8 +128,11 @@ public class Year2023Day05 {
     // Convert the initial seeds into ranges.
     final List<LongRange> seedRanges;
     {
-      final long[] seedInputs =
-        Arrays.stream(SPLIT.split(groups.getFirst().getFirst().substring(SEEDS.length()))).mapToLong(Long::parseLong).toArray();
+      final long[] seedInputs = Arrays.stream(SPLIT.split(groups.getFirst()
+                                                                .getFirst()
+                                                                .substring(SEEDS.length())))
+                                      .mapToLong(Long::parseLong)
+                                      .toArray();
       // Part two: treat pairs of seeds as ranges. Map each pair of longs to a range.
       if (pc.getBoolean("InputIsRange")) {
         seedRanges = new ArrayList<>(seedInputs.length >> 1);
@@ -137,7 +142,9 @@ public class Year2023Day05 {
       }
       // Part one: treat each seed as a distinct value. Map each long to a range of size one.
       else {
-        seedRanges = Arrays.stream(seedInputs).mapToObj(n -> new LongRange(n, n)).toList();
+        seedRanges = Arrays.stream(seedInputs)
+                           .mapToObj(n -> new LongRange(n, n))
+                           .toList();
       }
     }
 
@@ -147,7 +154,9 @@ public class Year2023Day05 {
       final List<String> group = groups.get(i);
       final List<RangeMapping> rangeMap = new ArrayList<>(group.size() - 1);
       for (int j = 1; j < group.size(); ++j) {
-        final long[] values = Arrays.stream(SPLIT.split(group.get(j))).mapToLong(Long::parseLong).toArray();
+        final long[] values = Arrays.stream(SPLIT.split(group.get(j)))
+                                    .mapToLong(Long::parseLong)
+                                    .toArray();
         // Store ranges as a closed interval. It makes the math easier later.
         final LongRange src = new LongRange(values[1], values[1] + values[2] - 1);
         final LongRange dest = new LongRange(values[0], values[0] + values[2] - 1);

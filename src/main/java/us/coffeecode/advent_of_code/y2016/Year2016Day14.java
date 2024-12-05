@@ -137,10 +137,12 @@ public final class Year2016Day14 {
     public Void call() throws Exception {
       for (int i = lowerBound; i < upperBound; ++i) {
         final String plaintext = salt + i;
-        String hex = HexFormat.of().formatHex(md5.md5(plaintext));
+        String hex = HexFormat.of()
+                              .formatHex(md5.md5(plaintext));
         if (stretch) {
           for (int j = 0; j < 2016; ++j) {
-            hex = HexFormat.of().formatHex(md5.md5(hex));
+            hex = HexFormat.of()
+                           .formatHex(md5.md5(hex));
           }
         }
         for (int j = 0; j < CHARS.length; ++j) {

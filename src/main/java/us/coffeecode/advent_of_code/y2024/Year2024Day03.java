@@ -44,7 +44,10 @@ public class Year2024Day03 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    final Matcher matches = MATCH.matcher(il.lines(pc).stream().reduce(String::concat).get());
+    final Matcher matches = MATCH.matcher(il.lines(pc)
+                                            .stream()
+                                            .reduce(String::concat)
+                                            .get());
     long result = 0;
     while (matches.find()) {
       result += eval(matches.group());
@@ -54,12 +57,17 @@ public class Year2024Day03 {
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    final String line = il.lines(pc).stream().reduce(String::concat).get();
+    final String line = il.lines(pc)
+                          .stream()
+                          .reduce(String::concat)
+                          .get();
     final NavigableMap<Integer, Boolean> enabled = getEnabled(line);
     final Matcher matches = MATCH.matcher(line);
     long result = 0;
     while (matches.find()) {
-      if (enabled.floorEntry(Integer.valueOf(matches.start())).getValue().booleanValue()) {
+      if (enabled.floorEntry(Integer.valueOf(matches.start()))
+                 .getValue()
+                 .booleanValue()) {
         result += eval(matches.group());
       }
     }

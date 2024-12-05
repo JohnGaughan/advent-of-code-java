@@ -51,7 +51,8 @@ public final class Year2015Day04 {
     final String input = il.fileAsString(pc);
     for (long i = 0; i < Long.MAX_VALUE; ++i) {
       final String plaintext = input + i;
-      final String ciphertext = HexFormat.of().formatHex(md5.md5(plaintext));
+      final String ciphertext = HexFormat.of()
+                                         .formatHex(md5.md5(plaintext));
       if (ciphertext.startsWith(prefix)) {
         return i;
       }

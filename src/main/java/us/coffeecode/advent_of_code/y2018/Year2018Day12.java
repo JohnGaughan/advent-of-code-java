@@ -126,10 +126,16 @@ public final class Year2018Day12 {
     final Rule[] rules;
 
     Input(final List<List<String>> groups) {
-      final String s = groups.getFirst().getFirst().substring(15);
+      final String s = groups.getFirst()
+                             .getFirst()
+                             .substring(15);
       start = new boolean[s.length()];
-      IntStream.range(0, s.length()).forEach(i -> start[i] = (s.codePointAt(i) == '#'));
-      rules = groups.get(1).stream().map(Rule::new).toArray(Rule[]::new);
+      IntStream.range(0, s.length())
+               .forEach(i -> start[i] = (s.codePointAt(i) == '#'));
+      rules = groups.get(1)
+                    .stream()
+                    .map(Rule::new)
+                    .toArray(Rule[]::new);
     }
 
   }

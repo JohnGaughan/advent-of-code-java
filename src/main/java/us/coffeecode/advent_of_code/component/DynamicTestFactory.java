@@ -52,13 +52,17 @@ public final class DynamicTestFactory {
    */
   public Collection<DynamicTest> getTests(final TestContext tc) {
     final Collection<SolverExecutable> tests = new ArrayList<>(500);
-    for (final Object impl : ac.getBeansWithAnnotation(AdventOfCodeSolution.class).values()) {
-      final AdventOfCodeSolution aoc = impl.getClass().getAnnotation(AdventOfCodeSolution.class);
+    for (final Object impl : ac.getBeansWithAnnotation(AdventOfCodeSolution.class)
+                               .values()) {
+      final AdventOfCodeSolution aoc = impl.getClass()
+                                           .getAnnotation(AdventOfCodeSolution.class);
       if (tc.matches(aoc)) {
         tests.addAll(getTests(tc, impl, SolverExecutable.class));
       }
     }
-    return tests.stream().map(t -> DynamicTest.dynamicTest(t.getDescription(), t)).toList();
+    return tests.stream()
+                .map(t -> DynamicTest.dynamicTest(t.getDescription(), t))
+                .toList();
   }
 
   /**
@@ -66,11 +70,13 @@ public final class DynamicTestFactory {
    */
   private <T extends AbstractSolverExecutable> Collection<T> getTests(final TestContext tc, final Object impl, final Class<T> execClazz) {
     final Collection<T> tests = new ArrayList<>();
-    final AdventOfCodeSolution aoc = impl.getClass().getAnnotation(AdventOfCodeSolution.class);
+    final AdventOfCodeSolution aoc = impl.getClass()
+                                         .getAnnotation(AdventOfCodeSolution.class);
     final int year = aoc.year();
     final int day = aoc.day();
     final String title = aoc.title();
-    for (final Method m : impl.getClass().getDeclaredMethods()) {
+    for (final Method m : impl.getClass()
+                              .getDeclaredMethods()) {
       m.setAccessible(true);
       final Solver solver = m.getAnnotation(Solver.class);
       if (tc.matches(solver)) {
@@ -102,8 +108,10 @@ public final class DynamicTestFactory {
    */
   public Collection<VisualizerExecutable> getTestsForVisualization(final TestContext tc) {
     final Collection<VisualizerExecutable> tests = new ArrayList<>(500);
-    for (final Object impl : ac.getBeansWithAnnotation(AdventOfCodeSolution.class).values()) {
-      final AdventOfCodeSolution aoc = impl.getClass().getAnnotation(AdventOfCodeSolution.class);
+    for (final Object impl : ac.getBeansWithAnnotation(AdventOfCodeSolution.class)
+                               .values()) {
+      final AdventOfCodeSolution aoc = impl.getClass()
+                                           .getAnnotation(AdventOfCodeSolution.class);
       if (tc.matches(aoc)) {
         tests.addAll(getTests(tc, impl, VisualizerExecutable.class));
       }

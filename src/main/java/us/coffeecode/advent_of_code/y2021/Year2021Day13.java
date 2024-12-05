@@ -113,11 +113,16 @@ public final class Year2021Day13 {
   private Input getInput(final PuzzleContext pc) {
     final List<List<String>> groups = il.groups(pc);
 
-    final Set<Point2D> points =
-      groups.getFirst().stream().map(s -> Arrays.stream(POINT_SPLIT.split(s)).mapToInt(Integer::parseInt).toArray()).map(
-        Point2D::new).collect(Collectors.toSet());
+    final Set<Point2D> points = groups.getFirst()
+                                      .stream()
+                                      .map(s -> Arrays.stream(POINT_SPLIT.split(s))
+                                                      .mapToInt(Integer::parseInt)
+                                                      .toArray())
+                                      .map(Point2D::new)
+                                      .collect(Collectors.toSet());
 
-    final List<Instruction> instructions = new ArrayList<>(groups.get(1).size());
+    final List<Instruction> instructions = new ArrayList<>(groups.get(1)
+                                                                 .size());
     for (final String line : groups.get(1)) {
       final boolean isX = line.codePointAt(11) == 'x';
       final int value = Integer.parseInt(line.substring(13));

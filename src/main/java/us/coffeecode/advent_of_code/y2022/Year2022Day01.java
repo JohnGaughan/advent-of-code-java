@@ -47,7 +47,9 @@ public class Year2022Day01 {
 
   /** Get the sum of the calories each elf carries. */
   private long[] getCaloriesPerElf(final PuzzleContext pc) {
-    final long[] elves = il.groupsAsLongs(pc, l -> l.stream().mapToLong(Long::parseLong).sum());
+    final long[] elves = il.groupsAsLongs(pc, l -> l.stream()
+                                                    .mapToLong(Long::parseLong)
+                                                    .sum());
     Arrays.sort(elves);
     return elves;
   }

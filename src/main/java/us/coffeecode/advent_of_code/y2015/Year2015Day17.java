@@ -43,8 +43,13 @@ public final class Year2015Day17 {
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     final List<List<Integer>> solutions = solutions(new ArrayList<>(), getInput(pc), pc.getInt("liters"));
-    final int minimum = solutions.stream().mapToInt(l -> l.size()).min().getAsInt();
-    return solutions.stream().filter(l -> l.size() == minimum).count();
+    final int minimum = solutions.stream()
+                                 .mapToInt(l -> l.size())
+                                 .min()
+                                 .getAsInt();
+    return solutions.stream()
+                    .filter(l -> l.size() == minimum)
+                    .count();
   }
 
   /** Find the number of solutions available for the given state. */
@@ -77,7 +82,11 @@ public final class Year2015Day17 {
   /** Get the input data for this solution. */
   private int[] getInput(final PuzzleContext pc) {
     // Important: this logic sorts the numbers.
-    return il.lines(pc).stream().mapToInt(Integer::parseInt).sorted().toArray();
+    return il.lines(pc)
+             .stream()
+             .mapToInt(Integer::parseInt)
+             .sorted()
+             .toArray();
   }
 
 }

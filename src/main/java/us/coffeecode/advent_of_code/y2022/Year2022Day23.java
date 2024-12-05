@@ -127,7 +127,9 @@ public class Year2022Day23 {
     final Collection<Point2D> elves = new HashSet<>(1 << 12);
     final List<String> input = il.lines(pc);
     for (int y = 0; y < input.size(); ++y) {
-      final int[] line = input.get(y).codePoints().toArray();
+      final int[] line = input.get(y)
+                              .codePoints()
+                              .toArray();
       for (int x = 0; x < line.length; ++x) {
         if (line[x] == '#') {
           elves.add(new Point2D(x, y));

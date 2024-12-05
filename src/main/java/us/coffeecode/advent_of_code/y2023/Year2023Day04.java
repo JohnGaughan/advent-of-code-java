@@ -43,7 +43,10 @@ public class Year2023Day04 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return il.linesAsObjects(pc, this::parse).stream().mapToLong(Card::score).sum();
+    return il.linesAsObjects(pc, this::parse)
+             .stream()
+             .mapToLong(Card::score)
+             .sum();
   }
 
   @Solver(part = 2)
@@ -55,10 +58,17 @@ public class Year2023Day04 {
     for (final Card card : cards.reversed()) {
       final int id = card.id;
       final int m = card.matches;
-      final long value = 1 + IntStream.range(id + 1, id + 1 + m).boxed().mapToLong(k -> scores.get(k).longValue()).sum();
+      final long value = 1 + IntStream.range(id + 1, id + 1 + m)
+                                      .boxed()
+                                      .mapToLong(k -> scores.get(k)
+                                                            .longValue())
+                                      .sum();
       scores.put(Integer.valueOf(id), Long.valueOf(value));
     }
-    return scores.values().stream().mapToLong(Long::longValue).sum();
+    return scores.values()
+                 .stream()
+                 .mapToLong(Long::longValue)
+                 .sum();
   }
 
   /** Match either a colon or pipe, splitting a line into exactly three pieces. */
@@ -78,7 +88,9 @@ public class Year2023Day04 {
 
   /** Convert a space-delimited list of numbers in string format into a set of integers. */
   private Set<Integer> toNumbers(final String string) {
-    return Arrays.stream(SPLIT_TOKENS.split(string.trim())).map(Integer::valueOf).collect(Collectors.toSet());
+    return Arrays.stream(SPLIT_TOKENS.split(string.trim()))
+                 .map(Integer::valueOf)
+                 .collect(Collectors.toSet());
   }
 
   private record Card(int id, int matches)

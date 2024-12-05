@@ -180,11 +180,21 @@ public final class Year2019Day20 {
   private static final int OPEN = '.';
 
   private Point2D getEntry(final PointToStringCache portals) {
-    return portals.a.entrySet().stream().filter(e -> "AA".equals(e.getValue())).findFirst().get().getKey();
+    return portals.a.entrySet()
+                    .stream()
+                    .filter(e -> "AA".equals(e.getValue()))
+                    .findFirst()
+                    .get()
+                    .getKey();
   }
 
   private Point2D getExit(final PointToStringCache portals) {
-    return portals.a.entrySet().stream().filter(e -> "ZZ".equals(e.getValue())).findFirst().get().getKey();
+    return portals.a.entrySet()
+                    .stream()
+                    .filter(e -> "ZZ".equals(e.getValue()))
+                    .findFirst()
+                    .get()
+                    .getKey();
   }
 
   /** Flip the maps so that IDs point to points in the opposite map. */

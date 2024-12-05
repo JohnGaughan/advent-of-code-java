@@ -68,13 +68,15 @@ public final class Year2020Day10 {
       for (long j = numbers[i] + 1; j <= numbers[i] + 3; ++j) {
         final Long key = Long.valueOf(j);
         if (numCombinations.containsKey(key)) {
-          newPaths += numCombinations.get(key).longValue();
+          newPaths += numCombinations.get(key)
+                                     .longValue();
         }
       }
       numCombinations.put(Long.valueOf(numbers[i]), Long.valueOf(newPaths));
     }
 
-    return numCombinations.get(Long.valueOf(0)).longValue();
+    return numCombinations.get(Long.valueOf(0))
+                          .longValue();
   }
 
   /** Prepare the input for part 2. */

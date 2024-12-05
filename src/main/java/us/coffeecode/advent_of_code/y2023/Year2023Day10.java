@@ -253,7 +253,8 @@ public class Year2023Day10 {
 
   /** Get the input, but mark the start location and replace it with its symbol. */
   private Input getInput(final PuzzleContext pc) {
-    final int[][] board = il.linesAs2dIntArray(pc, s -> s.codePoints().toArray());
+    final int[][] board = il.linesAs2dIntArray(pc, s -> s.codePoints()
+                                                         .toArray());
     int x0 = Integer.MIN_VALUE;
     int y0 = Integer.MIN_VALUE;
     outer: for (int y = 0; y < board.length; ++y) {

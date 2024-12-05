@@ -46,7 +46,8 @@ public final class Year2021Day10 {
           stack.addFirst(Integer.valueOf(codePoint));
         }
         else if (isClose(codePoint)) {
-          final int open = stack.removeFirst().intValue();
+          final int open = stack.removeFirst()
+                                .intValue();
           if (!matches(open, codePoint)) {
             if (codePoint == ')') {
               answer += 3;
@@ -78,7 +79,8 @@ public final class Year2021Day10 {
           stack.addFirst(Integer.valueOf(codePoint));
         }
         else if (isClose(codePoint)) {
-          final int open = stack.removeFirst().intValue();
+          final int open = stack.removeFirst()
+                                .intValue();
           if (!matches(open, codePoint)) {
             // Corrupt: skip it.
             continue outer;
@@ -88,7 +90,8 @@ public final class Year2021Day10 {
       // Incomplete.
       long score = 0;
       while (!stack.isEmpty()) {
-        final int open = stack.removeFirst().intValue();
+        final int open = stack.removeFirst()
+                              .intValue();
         if (open == '(') {
           score *= 5;
           ++score;
@@ -109,7 +112,8 @@ public final class Year2021Day10 {
       scores.add(Long.valueOf(score));
     }
     scores.sort(null);
-    return scores.get(scores.size() >> 1).longValue();
+    return scores.get(scores.size() >> 1)
+                 .longValue();
   }
 
   private boolean matches(final int open, final int close) {

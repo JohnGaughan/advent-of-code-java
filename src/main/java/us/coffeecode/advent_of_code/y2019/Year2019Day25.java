@@ -113,11 +113,17 @@ public final class Year2019Day25 {
    */
   private long checkWeight(final ShipMap map, final IntCode ic) {
     final Room checkpoint = map.rooms.get(CHECKPOINT);
-    final Direction dir =
-      checkpoint.directions.entrySet().stream().filter(e -> SCALE.equals(e.getValue().name)).findFirst().get().getKey();
-    ic.getInput().add(dir.getCommand());
+    final Direction dir = checkpoint.directions.entrySet()
+                                               .stream()
+                                               .filter(e -> SCALE.equals(e.getValue().name))
+                                               .findFirst()
+                                               .get()
+                                               .getKey();
+    ic.getInput()
+      .add(dir.getCommand());
     ic.exec();
-    final List<String> lines = toStrings(ic.getOutput().removeAll());
+    final List<String> lines = toStrings(ic.getOutput()
+                                           .removeAll());
     for (final String line : lines) {
       if (line.contains("robotic voice")) {
         if (line.contains("heavier")) {
@@ -144,9 +150,11 @@ public final class Year2019Day25 {
       Room next = map.rooms.get(map.items.get(item));
       navigate(map, ic, current, next);
       // Take the item.
-      ic.getInput().add(toInput(TAKE + item + SEPARATOR));
+      ic.getInput()
+        .add(toInput(TAKE + item + SEPARATOR));
       ic.exec();
-      ic.getOutput().clear();
+      ic.getOutput()
+        .clear();
       current = next;
     }
     // Navigate to the security checkout.
@@ -156,9 +164,11 @@ public final class Year2019Day25 {
   /** Navigate from one room to another, ignoring all program output. */
   private void navigate(final ShipMap map, final IntCode ic, final Room current, final Room target) {
     for (final Direction d : current.navigation.get(target.name)) {
-      ic.getInput().add(d.getCommand());
+      ic.getInput()
+        .add(d.getCommand());
       ic.exec();
-      ic.getOutput().clear();
+      ic.getOutput()
+        .clear();
     }
   }
 
@@ -169,7 +179,9 @@ public final class Year2019Day25 {
 
     {
       state.exec();
-      Room currentRoom = map.update(toStrings(state.getOutput().removeAll()), null, null);
+      Room currentRoom = map.update(toStrings(state.getOutput()
+                                                   .removeAll()),
+        null, null);
       for (final Direction d : currentRoom.directions.keySet()) {
         queue.add(new QueueEntry(currentRoom, icf.make(state), d));
       }
@@ -178,9 +190,12 @@ public final class Year2019Day25 {
     while (!queue.isEmpty()) {
       final QueueEntry processing = queue.remove();
       final IntCode ic = processing.state;
-      ic.getInput().add(processing.dir.getCommand());
+      ic.getInput()
+        .add(processing.dir.getCommand());
       ic.exec();
-      Room nextRoom = map.update(toStrings(ic.getOutput().removeAll()), processing.room, processing.dir);
+      Room nextRoom = map.update(toStrings(ic.getOutput()
+                                             .removeAll()),
+        processing.room, processing.dir);
       if (nextRoom != null) {
         for (final var entry : nextRoom.directions.entrySet()) {
           if (entry.getValue() == null) {
@@ -203,13 +218,17 @@ public final class Year2019Day25 {
     final Room start = map.rooms.get(map.startRoom);
     state.exec();
     for (final Direction d : start.navigation.get(targetRoomName)) {
-      state.getInput().add(d.getCommand());
+      state.getInput()
+           .add(d.getCommand());
       state.exec();
-      state.getOutput().clear();
+      state.getOutput()
+           .clear();
     }
-    state.getInput().add(toInput(TAKE + item + SEPARATOR));
+    state.getInput()
+         .add(toInput(TAKE + item + SEPARATOR));
     state.exec();
-    final List<String> output = toStrings(state.getOutput().removeAll());
+    final List<String> output = toStrings(state.getOutput()
+                                               .removeAll());
 
     // Definitely lethal.
     if (!PROMPT.equals(output.getLast())) {
@@ -218,11 +237,16 @@ public final class Year2019Day25 {
     }
 
     // Try moving: the magnet does not allow movement.
-    final Direction any = map.rooms.get(targetRoomName).directions.keySet().iterator().next();
-    state.getInput().add(any.getCommand());
+    final Direction any = map.rooms.get(targetRoomName).directions.keySet()
+                                                                  .iterator()
+                                                                  .next();
+    state.getInput()
+         .add(any.getCommand());
     state.exec();
-    final List<String> output2 = toStrings(state.getOutput().removeAll());
-    if ((output2.size() > 1) && output2.get(1).contains(item)) {
+    final List<String> output2 = toStrings(state.getOutput()
+                                                .removeAll());
+    if ((output2.size() > 1) && output2.get(1)
+                                       .contains(item)) {
       map.lethalItems.add(item);
       return;
     }
@@ -232,14 +256,19 @@ public final class Year2019Day25 {
 
   /** Convert a string to a format IntCode accepts as input. */
   private static long[] toInput(final String str) {
-    return str.codePoints().mapToLong(i -> i).toArray();
+    return str.codePoints()
+              .mapToLong(i -> i)
+              .toArray();
   }
 
   /** Given raw output from the program, convert it to a string array for easier parsing. */
   private List<String> toStrings(final long[] array) {
-    final String str = Arrays.stream(array).mapToInt(l -> (int) l).collect(StringBuilder::new, StringBuilder::appendCodePoint,
-      StringBuilder::append).toString();
-    return Arrays.stream(LINE_SPLIT.split(str)).toList();
+    final String str = Arrays.stream(array)
+                             .mapToInt(l -> (int) l)
+                             .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                             .toString();
+    return Arrays.stream(LINE_SPLIT.split(str))
+                 .toList();
   }
 
   private static final String TAKE = "take ";
@@ -333,7 +362,9 @@ public final class Year2019Day25 {
           for (final Map.Entry<String, List<Direction>> entry : previousRoom.navigation.entrySet()) {
             // Add a route from the new room to the existing room.
             {
-              final List<Direction> fromNewToOld = new ArrayList<>(entry.getValue().size() + 1);
+              final List<Direction> fromNewToOld = new ArrayList<>(entry.getValue()
+                                                                        .size()
+                + 1);
               fromNewToOld.add(previousDir.opposite());
               fromNewToOld.addAll(entry.getValue());
               newRoom.navigation.put(entry.getKey(), fromNewToOld);
@@ -361,7 +392,8 @@ public final class Year2019Day25 {
 
     @Override
     public String toString() {
-      return rooms.values().toString();
+      return rooms.values()
+                  .toString();
     }
   }
 
@@ -378,7 +410,10 @@ public final class Year2019Day25 {
     final String match;
 
     static Direction match(final String m) {
-      return Arrays.stream(values()).filter(d -> d.matches(m)).findFirst().get();
+      return Arrays.stream(values())
+                   .filter(d -> d.matches(m))
+                   .findFirst()
+                   .get();
     }
 
     private static final Map<Direction, Direction> OPPOSITES = Map.of(NORTH, SOUTH, SOUTH, NORTH, EAST, WEST, WEST, EAST);

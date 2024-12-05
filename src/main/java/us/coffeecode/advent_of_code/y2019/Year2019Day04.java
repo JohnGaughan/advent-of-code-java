@@ -50,7 +50,8 @@ public final class Year2019Day04 {
     final int[] bounds = il.fileAsIntsFromSplit(pc, SPLIT);
     final boolean consecutiveNotInGroupOfThree = pc.getBoolean("ConsecutiveNotInGroupOfThree");
     for (int i = bounds[0]; i < bounds[1]; ++i) {
-      final char[] digits = Integer.toString(i).toCharArray();
+      final char[] digits = Integer.toString(i)
+                                   .toCharArray();
       boolean nonDecreasing = true;
       for (int j = 1; nonDecreasing && j < digits.length; ++j) {
         nonDecreasing = digits[j] >= digits[j - 1];

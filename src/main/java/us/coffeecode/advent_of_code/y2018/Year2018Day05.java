@@ -70,7 +70,8 @@ public final class Year2018Day05 {
         stack.addFirst(Integer.valueOf(ch));
       }
       else {
-        final int top = stack.peekFirst().intValue();
+        final int top = stack.peekFirst()
+                             .intValue();
         if ((top ^ ch) == 0x20) {
           stack.removeFirst();
         }
@@ -81,7 +82,8 @@ public final class Year2018Day05 {
     }
     final int[] result = new int[stack.size()];
     for (int i = 0; i < result.length; ++i) {
-      result[i] = stack.removeLast().intValue();
+      result[i] = stack.removeLast()
+                       .intValue();
     }
     return result;
   }

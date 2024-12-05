@@ -51,8 +51,15 @@ public final class Year2020Day05 {
 
   /** Get the input data for this solution. */
   private long[] getInput(final PuzzleContext pc) {
-    return il.lines(pc).stream().mapToLong(
-      s -> Long.parseLong(s.replace('F', '0').replace('B', '1').replace('L', '0').replace('R', '1'), 2)).sorted().toArray();
+    return il.lines(pc)
+             .stream()
+             .mapToLong(s -> Long.parseLong(s.replace('F', '0')
+                                             .replace('B', '1')
+                                             .replace('L', '0')
+                                             .replace('R', '1'),
+               2))
+             .sorted()
+             .toArray();
   }
 
 }

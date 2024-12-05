@@ -33,7 +33,8 @@ public class VisualizerApplication {
   /** Program entry point. Delegate to the GUI class so Spring can initialize first and work its magic. */
   public static void main(final String[] args) {
     context = new AnnotationConfigApplicationContext(InjectionConfiguration.class);
-    context.getBean(VisualizerApplicationGui.class).initAndRunGui();
+    context.getBean(VisualizerApplicationGui.class)
+           .initAndRunGui();
   }
 
   public static void close() {

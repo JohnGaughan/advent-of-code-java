@@ -38,7 +38,10 @@ public final class Year2021Day22 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final Range3D area = new Range3D(-50, -50, -50, 50, 50, 50);
-    return calculate(il.linesAsObjects(pc, this::parse).stream().filter(c -> area.overlaps(c.range)).toList());
+    return calculate(il.linesAsObjects(pc, this::parse)
+                       .stream()
+                       .filter(c -> area.overlaps(c.range))
+                       .toList());
   }
 
   @Solver(part = 2)
@@ -60,11 +63,17 @@ public final class Year2021Day22 {
       }
       volumes.addAll(newVolumes);
     }
-    return volumes.stream().mapToLong(Volume::size).sum();
+    return volumes.stream()
+                  .mapToLong(Volume::size)
+                  .sum();
   }
 
   private Volume parse(final String line) {
-    final int[] ints = InputLoader.DIGITS.matcher(line).results().map(r -> r.group()).mapToInt(Integer::parseInt).toArray();
+    final int[] ints = InputLoader.DIGITS.matcher(line)
+                                         .results()
+                                         .map(r -> r.group())
+                                         .mapToInt(Integer::parseInt)
+                                         .toArray();
     return new Volume(new Range3D(ints[0], ints[2], ints[4], ints[1], ints[3], ints[5]), line.codePointAt(1) == 'n');
   }
 

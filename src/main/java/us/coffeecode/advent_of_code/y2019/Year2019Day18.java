@@ -48,8 +48,11 @@ public final class Year2019Day18 {
 
   private long calculate(final int[][] map) {
     final Map<Symbols, Collection<RouteSegment>> routeSegments = getRouteSegments(map);
-    final int keyCount =
-      (int) Arrays.stream(map).mapToLong(a -> Arrays.stream(a).filter(i -> ('a' <= i) && (i <= 'z')).count()).sum();
+    final int keyCount = (int) Arrays.stream(map)
+                                     .mapToLong(a -> Arrays.stream(a)
+                                                           .filter(i -> ('a' <= i) && (i <= 'z'))
+                                                           .count())
+                                     .sum();
     final Route route = getShortestRoute(routeSegments, keyCount);
     return route.distance;
   }
@@ -97,7 +100,8 @@ public final class Year2019Day18 {
         final Route next = new Route(current, segment, robot);
         final Integer cacheKey = next.getCacheKey();
         if (cache.containsKey(cacheKey)) {
-          final int oldDistance = cache.get(cacheKey).intValue();
+          final int oldDistance = cache.get(cacheKey)
+                                       .intValue();
           if (next.distance < oldDistance) {
             cache.put(cacheKey, Long.valueOf(next.distance));
           }

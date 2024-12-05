@@ -78,7 +78,9 @@ public final class Year2018Day09 {
       }
     }
 
-    return Arrays.stream(scores).max().getAsLong();
+    return Arrays.stream(scores)
+                 .max()
+                 .getAsLong();
   }
 
   /** Get the input data for this solution. */

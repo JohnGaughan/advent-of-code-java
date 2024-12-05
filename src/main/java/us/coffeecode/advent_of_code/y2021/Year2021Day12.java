@@ -116,10 +116,12 @@ public final class Year2021Day12 {
       final String b = line.get(1);
       // Add the mapping in both directions, except that start can never be a destination and end can never be a source.
       if (!END.equals(a) && !START.equals(b)) {
-        system.get(a).add(b);
+        system.get(a)
+              .add(b);
       }
       if (!END.equals(b) && !START.equals(a)) {
-        system.get(b).add(a);
+        system.get(b)
+              .add(a);
       }
     }
     return system;

@@ -42,7 +42,9 @@ public class Year2023Day15 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return Arrays.stream(il.fileAsObject(pc, s -> SPLIT.split(s))).mapToLong(this::hash).sum();
+    return Arrays.stream(il.fileAsObject(pc, s -> SPLIT.split(s)))
+                 .mapToLong(this::hash)
+                 .sum();
   }
 
   @Solver(part = 2)
@@ -56,7 +58,8 @@ public class Year2023Day15 {
       boxes.computeIfAbsent(boxId, ArrayList::new);
 
       if (tokens[1].codePointAt(0) == '-') {
-        for (final Iterator<Lens> iter = boxes.get(boxId).iterator(); iter.hasNext();) {
+        for (final Iterator<Lens> iter = boxes.get(boxId)
+                                              .iterator(); iter.hasNext();) {
           if (iter.next().lensId.equals(lensId)) {
             iter.remove();
             break;
@@ -66,7 +69,8 @@ public class Year2023Day15 {
       else /* = */ {
         final Lens adding = new Lens(lensId, Integer.parseInt(tokens[1].substring(1)));
         boolean added = false;
-        for (final ListIterator<Lens> iter = boxes.get(boxId).listIterator(); iter.hasNext();) {
+        for (final ListIterator<Lens> iter = boxes.get(boxId)
+                                                  .listIterator(); iter.hasNext();) {
           if (iter.next().lensId.equals(lensId)) {
             // Replace this lens.
             iter.remove();
@@ -77,13 +81,15 @@ public class Year2023Day15 {
         }
         if (!added) {
           // Did not replace: add to the end.
-          boxes.get(boxId).addLast(adding);
+          boxes.get(boxId)
+               .addLast(adding);
         }
       }
     }
     long answer = 0;
     for (var entry : boxes.entrySet()) {
-      final long boxNumber = 1 + entry.getKey().intValue();
+      final long boxNumber = 1 + entry.getKey()
+                                      .intValue();
       final List<Lens> lenses = entry.getValue();
       for (int i = 0; i < lenses.size(); ++i) {
         final Lens l = lenses.get(i);
@@ -112,7 +118,8 @@ public class Year2023Day15 {
 
   private int hash(final String s) {
     int hash = 0;
-    for (final int ch : s.codePoints().toArray()) {
+    for (final int ch : s.codePoints()
+                         .toArray()) {
       hash = ((hash + ch) * 17) % 256;
     }
     return hash;

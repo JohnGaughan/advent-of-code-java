@@ -63,7 +63,9 @@ public final class Year2021Day19 {
 
     // Add the first scanner.
     {
-      final UnmatchedScanner first = mapping.keySet().iterator().next();
+      final UnmatchedScanner first = mapping.keySet()
+                                            .iterator()
+                                            .next();
       processed.put(first, new Scanner(Point3D.ORIGIN, first.beacons));
       mapping.remove(first);
     }
@@ -90,14 +92,21 @@ public final class Year2021Day19 {
           }
         }
       }
-      remove.stream().forEach(mapping::remove);
+      remove.stream()
+            .forEach(mapping::remove);
     }
 
     // All scanner and beacon locations are now known. Extract the answers for both parts.
     final Collection<Point3D> beacons = new HashSet<>(1 << 10);
-    processed.values().stream().map(Scanner::beacons).forEach(beacons::addAll);
+    processed.values()
+             .stream()
+             .map(Scanner::beacons)
+             .forEach(beacons::addAll);
 
-    return new Answer(beacons.size(), distances.stream().mapToLong(Long::longValue).max().getAsLong());
+    return new Answer(beacons.size(), distances.stream()
+                                               .mapToLong(Long::longValue)
+                                               .max()
+                                               .getAsLong());
   }
 
   /** Get a mapping of scanners to other scanners that overlap it. */
@@ -120,9 +129,11 @@ public final class Year2021Day19 {
           distances.retainAll(known.distances);
           if (distances.size() >= 66) {
             mapping.putIfAbsent(known, new ArrayList<>());
-            mapping.get(known).add(testing);
+            mapping.get(known)
+                   .add(testing);
             mapping.putIfAbsent(testing, new ArrayList<>());
-            mapping.get(testing).add(known);
+            mapping.get(testing)
+                   .add(known);
             iter.remove();
             update = true;
             break;
@@ -140,7 +151,9 @@ public final class Year2021Day19 {
   private Scanner match(final Scanner matched, final UnmatchedScanner unmatched) {
     // Apply each transformation to the input points and see if they can be shifted to match the known points.
     for (final Function<Point3D, Point3D> transformation : TRANSFORMATIONS) {
-      final Collection<Point3D> transformed = unmatched.beacons.stream().map(transformation).toList();
+      final Collection<Point3D> transformed = unmatched.beacons.stream()
+                                                               .map(transformation)
+                                                               .toList();
       for (final Point3D t1 : transformed) {
         final Collection<Point3D> checked = new HashSet<>();
         for (final Point3D r1 : matched.beacons) {
@@ -149,7 +162,9 @@ public final class Year2021Day19 {
             continue;
           }
           checked.add(shift);
-          final Collection<Point3D> shifted = transformed.stream().map(p -> p.add(shift)).toList();
+          final Collection<Point3D> shifted = transformed.stream()
+                                                         .map(p -> p.add(shift))
+                                                         .toList();
           int matches = 0;
           for (final Point3D p : shifted) {
             if (matched.beacons.contains(p)) {
@@ -176,14 +191,16 @@ public final class Year2021Day19 {
 
   private UnmatchedScanner parse(final List<String> lines) {
     final List<Point3D> points = new ArrayList<>(lines.size() - 1);
-    lines.stream().skip(1).forEach(line -> {
-      final int c1 = line.indexOf(',');
-      final int c2 = line.indexOf(',', c1 + 1);
-      final int x = Integer.parseInt(line.substring(0, c1));
-      final int y = Integer.parseInt(line.substring(c1 + 1, c2));
-      final int z = Integer.parseInt(line.substring(c2 + 1));
-      points.add(new Point3D(x, y, z));
-    });
+    lines.stream()
+         .skip(1)
+         .forEach(line -> {
+           final int c1 = line.indexOf(',');
+           final int c2 = line.indexOf(',', c1 + 1);
+           final int x = Integer.parseInt(line.substring(0, c1));
+           final int y = Integer.parseInt(line.substring(c1 + 1, c2));
+           final int z = Integer.parseInt(line.substring(c2 + 1));
+           points.add(new Point3D(x, y, z));
+         });
     final Collection<BigDecimal> distances = new HashSet<>(1 << 9);
     for (int i = 0; i < points.size() - 1; ++i) {
       for (int j = i + 1; j < points.size(); ++j) {
@@ -192,7 +209,8 @@ public final class Year2021Day19 {
         final int x = (p2.getX() - p1.getX()) * (p2.getX() - p1.getX());
         final int y = (p2.getY() - p1.getY()) * (p2.getY() - p1.getY());
         final int z = (p2.getZ() - p1.getZ()) * (p2.getZ() - p1.getZ());
-        final BigDecimal d = BigDecimal.valueOf(x + y + z).sqrt(MathContext.DECIMAL64);
+        final BigDecimal d = BigDecimal.valueOf(x + y + z)
+                                       .sqrt(MathContext.DECIMAL64);
         distances.add(d.setScale(2, RoundingMode.HALF_DOWN));
       }
     }

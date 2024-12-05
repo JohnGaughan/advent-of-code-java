@@ -40,7 +40,9 @@ public class Year2024Day02 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return Arrays.stream(il.linesAs2dIntArrayFromSplit(pc, SPLIT)).filter(this::isSafe).count();
+    return Arrays.stream(il.linesAs2dIntArrayFromSplit(pc, SPLIT))
+                 .filter(this::isSafe)
+                 .count();
   }
 
   @Solver(part = 2)

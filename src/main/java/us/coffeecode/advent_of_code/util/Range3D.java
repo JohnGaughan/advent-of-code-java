@@ -142,27 +142,33 @@ public class Range3D {
   }
 
   public int[] getRangeXExclusive() {
-    return IntStream.range(_x1, _x2).toArray();
+    return IntStream.range(_x1, _x2)
+                    .toArray();
   }
 
   public int[] getRangeXInclusive() {
-    return IntStream.rangeClosed(_x1, _x2).toArray();
+    return IntStream.rangeClosed(_x1, _x2)
+                    .toArray();
   }
 
   public int[] getRangeYExclusive() {
-    return IntStream.range(_y1, _y2).toArray();
+    return IntStream.range(_y1, _y2)
+                    .toArray();
   }
 
   public int[] getRangeYInclusive() {
-    return IntStream.rangeClosed(_y1, _y2).toArray();
+    return IntStream.rangeClosed(_y1, _y2)
+                    .toArray();
   }
 
   public int[] getRangeZExclusive() {
-    return IntStream.range(_z1, _z2).toArray();
+    return IntStream.range(_z1, _z2)
+                    .toArray();
   }
 
   public int[] getRangeZInclusive() {
-    return IntStream.rangeClosed(_z1, _z2).toArray();
+    return IntStream.rangeClosed(_z1, _z2)
+                    .toArray();
   }
 
   public long sizeExclusive() {

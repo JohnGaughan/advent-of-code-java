@@ -94,7 +94,8 @@ public final class Year2017Day07 {
         names.remove(name);
       }
     }
-    return names.iterator().next();
+    return names.iterator()
+                .next();
   }
 
   private static final class Node {
@@ -124,7 +125,8 @@ public final class Year2017Day07 {
       for (final Node child : children) {
         Integer key = Integer.valueOf(child.weight);
         if (weights.containsKey(key)) {
-          int value = weights.get(key).intValue();
+          int value = weights.get(key)
+                             .intValue();
           weights.put(key, Integer.valueOf(value + 1));
         }
         else {
@@ -133,8 +135,10 @@ public final class Year2017Day07 {
       }
       // Get the weight where only one child has it.
       for (final Map.Entry<Integer, Integer> entry : weights.entrySet()) {
-        if (entry.getValue().intValue() == 1) {
-          int childWeight = entry.getKey().intValue();
+        if (entry.getValue()
+                 .intValue() == 1) {
+          int childWeight = entry.getKey()
+                                 .intValue();
           for (final Node child : children) {
             if (child.weight == childWeight) {
               return child;

@@ -87,7 +87,8 @@ public final class Year2021Day25 {
   }
 
   private Cucumber[] parse(final String line) {
-    final int[] codePoints = line.codePoints().toArray();
+    final int[] codePoints = line.codePoints()
+                                 .toArray();
     final Cucumber[] array = new Cucumber[codePoints.length];
     for (int i = 0; i < array.length; ++i) {
       array[i] = Cucumber.valueOf(codePoints[i]);

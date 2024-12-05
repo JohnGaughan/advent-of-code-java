@@ -103,7 +103,10 @@ public class Year2020Day24 {
 
   /** Count the number of black tiles in the provided coordinate space. */
   private long countBlackTiles(final Map<Point2D, Boolean> blackTiles) {
-    return blackTiles.values().stream().filter(b -> b.booleanValue()).count();
+    return blackTiles.values()
+                     .stream()
+                     .filter(b -> b.booleanValue())
+                     .count();
   }
 
   /** Initialize the coordinate space by flipping all of the grid elements in the input data. */

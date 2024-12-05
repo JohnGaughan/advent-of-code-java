@@ -70,7 +70,8 @@ public final class Year2016Day05 {
         }
         // First half of the fourth byte is the character to set.
         final int value = cipher[3] & 0xF0;
-        final char ch = Integer.toHexString(value >> 4).charAt(0);
+        final char ch = Integer.toHexString(value >> 4)
+                               .charAt(0);
         password.setCharAt(position, ch);
       }
       ++index;

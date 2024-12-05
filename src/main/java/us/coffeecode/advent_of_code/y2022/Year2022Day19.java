@@ -51,7 +51,9 @@ public class Year2022Day19 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final Collection<Blueprint> blueprints = il.linesAsObjects(pc, Blueprint::valueOf);
-    return blueprints.parallelStream().mapToLong(bp -> bp.id * score(bp, 24)).sum();
+    return blueprints.parallelStream()
+                     .mapToLong(bp -> bp.id * score(bp, 24))
+                     .sum();
   }
 
   @Solver(part = 2)
@@ -61,7 +63,9 @@ public class Year2022Day19 {
     if (blueprints.size() > 3) {
       blueprints = blueprints.subList(0, 3);
     }
-    return blueprints.parallelStream().mapToLong(bp -> score(bp, 32)).reduce(1, (a, b) -> a * b);
+    return blueprints.parallelStream()
+                     .mapToLong(bp -> score(bp, 32))
+                     .reduce(1, (a, b) -> a * b);
   }
 
   private long score(final Blueprint bp, final int timeLimit) {
@@ -86,8 +90,11 @@ public class Year2022Day19 {
         final int timeLeft = timeLimit - current.time;
         final int curRbt = current.robots[newRobot];
         final int curRes = current.resources[newRobot];
-        final int maxRes = IntStream.of(bp.resourceCosts[ORE][newRobot], bp.resourceCosts[CLAY][newRobot],
-          bp.resourceCosts[OBSIDIAN][newRobot], bp.resourceCosts[GEODE][newRobot]).max().getAsInt();
+        final int maxRes = IntStream
+                                    .of(bp.resourceCosts[ORE][newRobot], bp.resourceCosts[CLAY][newRobot],
+                                      bp.resourceCosts[OBSIDIAN][newRobot], bp.resourceCosts[GEODE][newRobot])
+                                    .max()
+                                    .getAsInt();
         if ((curRbt * timeLeft + curRes < timeLeft * maxRes) && bp.shouldBuild(newRobot, current.robots)
           && bp.hasPrerequisites(newRobot, current.robots)) {
           final int[] resources = Arrays.copyOf(current.resources, current.resources.length);

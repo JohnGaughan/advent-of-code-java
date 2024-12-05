@@ -51,13 +51,18 @@ public final class Year2015Day24 {
 
   /** Common code for getting the answer based on the number of partitions. */
   private long calculateAnswer(final PuzzleContext pc, final int partitions) {
-    return getSolutionsWithLowestCount(il.linesAsLongs(pc), partitions).stream().mapToLong(
-      a -> Arrays.stream(a).reduce(1, (x, y) -> x * y)).min().getAsLong();
+    return getSolutionsWithLowestCount(il.linesAsLongs(pc), partitions).stream()
+                                                                       .mapToLong(a -> Arrays.stream(a)
+                                                                                             .reduce(1, (x, y) -> x * y))
+                                                                       .min()
+                                                                       .getAsLong();
   }
 
   /** Get all solutions that have the lowest quantity of numbers. */
   private Collection<long[]> getSolutionsWithLowestCount(final long[] values, final int partitions) {
-    final long partitionSize = Arrays.stream(values).sum() / partitions;
+    final long partitionSize = Arrays.stream(values)
+                                     .sum()
+      / partitions;
     // Get the minimum quantity of numbers in a solution.
     int minQty = 0;
     int sum = 0;
@@ -73,7 +78,9 @@ public final class Year2015Day24 {
       for (final Iterator<long[]> iter = solutions.iterator(); iter.hasNext();) {
         final long[] used = iter.next();
         // This filters numbers in "used" from "values" - this works because numbers are unique in the input.
-        final long[] filtered = Arrays.stream(values).filter(x -> Arrays.binarySearch(used, x) < 0).toArray();
+        final long[] filtered = Arrays.stream(values)
+                                      .filter(x -> Arrays.binarySearch(used, x) < 0)
+                                      .toArray();
         // This is not required for the problem's input, but included for correctness.
         if (!canSumTo(filtered, new long[0], partitionSize)) {
           iter.remove();

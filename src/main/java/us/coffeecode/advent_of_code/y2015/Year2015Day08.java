@@ -36,8 +36,12 @@ public final class Year2015Day08 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final Collection<String> lines = il.lines(pc);
-    final long total = lines.stream().mapToLong(String::length).sum();
-    final long parsed = lines.stream().mapToLong(this::countParsedCharacters).sum();
+    final long total = lines.stream()
+                            .mapToLong(String::length)
+                            .sum();
+    final long parsed = lines.stream()
+                             .mapToLong(this::countParsedCharacters)
+                             .sum();
     return total - parsed;
   }
 
@@ -61,13 +65,19 @@ public final class Year2015Day08 {
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     final Collection<String> lines = il.lines(pc);
-    final long total = lines.stream().mapToLong(String::length).sum();
-    final long reverseParsed = lines.stream().mapToLong(this::countReverseParsedCharacters).sum();
+    final long total = lines.stream()
+                            .mapToLong(String::length)
+                            .sum();
+    final long reverseParsed = lines.stream()
+                                    .mapToLong(this::countReverseParsedCharacters)
+                                    .sum();
     return reverseParsed - total;
   }
 
   private long countReverseParsedCharacters(final String line) {
-    return 2 + line.length() + line.codePoints().filter(ch -> ((ch == '"') || (ch == '\\'))).count();
+    return 2 + line.length() + line.codePoints()
+                                   .filter(ch -> ((ch == '"') || (ch == '\\')))
+                                   .count();
   }
 
 }

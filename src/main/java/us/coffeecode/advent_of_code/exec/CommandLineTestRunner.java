@@ -55,7 +55,9 @@ public class CommandLineTestRunner {
     TC = tc;
     final MethodSelector ms =
       DiscoverySelectors.selectMethod(CommandLineTestRunner.class, "getTests", TestContext.class.getName());
-    final LauncherDiscoveryRequest ldr = LauncherDiscoveryRequestBuilder.request().selectors(ms).build();
+    final LauncherDiscoveryRequest ldr = LauncherDiscoveryRequestBuilder.request()
+                                                                        .selectors(ms)
+                                                                        .build();
     final Launcher launcher = LauncherFactory.create();
     final TestExecutionListener sgl = new AocTestExecutionListener();
     launcher.registerTestExecutionListeners(sgl);
@@ -79,7 +81,8 @@ public class CommandLineTestRunner {
 
     @Override
     public boolean supportsParameter(final ParameterContext parameterContext, final ExtensionContext extensionContext) throws ParameterResolutionException {
-      return parameterContext.getParameter().getType() == TestContext.class;
+      return parameterContext.getParameter()
+                             .getType() == TestContext.class;
     }
 
     @Override

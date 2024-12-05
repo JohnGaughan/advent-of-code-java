@@ -41,8 +41,12 @@ public final class Year2018Day23 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final Collection<Nanobot> bots = il.linesAsObjects(pc, Nanobot::new);
-    final Nanobot strongest = bots.stream().max((a, b) -> a.radius - b.radius).get();
-    final Collection<?> inRange = bots.stream().filter(b -> strongest.isInRange(b)).toList();
+    final Nanobot strongest = bots.stream()
+                                  .max((a, b) -> a.radius - b.radius)
+                                  .get();
+    final Collection<?> inRange = bots.stream()
+                                      .filter(b -> strongest.isInRange(b))
+                                      .toList();
     return inRange.size();
   }
 
@@ -56,7 +60,8 @@ public final class Year2018Day23 {
     for (final Nanobot bot : bots) {
       boolean add = true;
       for (final Nanobot bot2 : clique) {
-        if (!bot2.getNeighbors().contains(bot)) {
+        if (!bot2.getNeighbors()
+                 .contains(bot)) {
           add = false;
         }
       }
@@ -64,7 +69,10 @@ public final class Year2018Day23 {
         clique.add(bot);
       }
     }
-    return clique.stream().max((a, b) -> a.distance() - b.distance()).get().distance();
+    return clique.stream()
+                 .max((a, b) -> a.distance() - b.distance())
+                 .get()
+                 .distance();
   }
 
   private static final class Nanobot {

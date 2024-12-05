@@ -68,10 +68,13 @@ public final class Year2017Day20 {
         if (!collisions.containsKey(particle.p)) {
           collisions.put(particle.p, new HashSet<>());
         }
-        collisions.get(particle.p).add(entry.getKey());
+        collisions.get(particle.p)
+                  .add(entry.getKey());
       }
       // Check each location to see if two or more particles exist there. If so, remove them all.
-      collisions.values().stream().filter(s -> s.size() > 1);
+      collisions.values()
+                .stream()
+                .filter(s -> s.size() > 1);
       for (final Collection<Integer> collision : collisions.values()) {
         if (collision.size() > 1) {
           for (final Integer key : collision) {
@@ -108,16 +111,22 @@ public final class Year2017Day20 {
     Particle(final String input) {
       int start = input.indexOf('<') + 1;
       int end = input.indexOf('>', start);
-      p = new MutablePoint3D(
-        Arrays.stream(SEPARATOR.split(input.substring(start, end))).map(String::strip).mapToInt(Integer::parseInt).toArray());
+      p = new MutablePoint3D(Arrays.stream(SEPARATOR.split(input.substring(start, end)))
+                                   .map(String::strip)
+                                   .mapToInt(Integer::parseInt)
+                                   .toArray());
       start = input.indexOf('<', end) + 1;
       end = input.indexOf('>', start);
-      v = new MutablePoint3D(
-        Arrays.stream(SEPARATOR.split(input.substring(start, end))).map(String::strip).mapToInt(Integer::parseInt).toArray());
+      v = new MutablePoint3D(Arrays.stream(SEPARATOR.split(input.substring(start, end)))
+                                   .map(String::strip)
+                                   .mapToInt(Integer::parseInt)
+                                   .toArray());
       start = input.indexOf('<', end) + 1;
       end = input.indexOf('>', start);
-      a = new MutablePoint3D(
-        Arrays.stream(SEPARATOR.split(input.substring(start, end))).map(String::strip).mapToInt(Integer::parseInt).toArray());
+      a = new MutablePoint3D(Arrays.stream(SEPARATOR.split(input.substring(start, end)))
+                                   .map(String::strip)
+                                   .mapToInt(Integer::parseInt)
+                                   .toArray());
     }
 
     void update() {

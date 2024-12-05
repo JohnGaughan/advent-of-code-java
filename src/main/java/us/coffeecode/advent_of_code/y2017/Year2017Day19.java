@@ -118,7 +118,9 @@ public final class Year2017Day19 {
       }
       ++steps;
     }
-    final int[] codePoints = lettersFound.stream().mapToInt(Integer::intValue).toArray();
+    final int[] codePoints = lettersFound.stream()
+                                         .mapToInt(Integer::intValue)
+                                         .toArray();
     return new Result(steps, new String(codePoints, 0, codePoints.length));
   }
 

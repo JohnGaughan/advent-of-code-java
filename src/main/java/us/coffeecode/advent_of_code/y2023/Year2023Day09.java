@@ -37,15 +37,25 @@ public class Year2023Day09 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    final long[][] input = il.linesAs2dLongArray(pc, s -> Arrays.stream(SPLIT.split(s)).mapToLong(Long::parseLong).toArray());
-    return Arrays.stream(input).mapToLong(this::nextValue).sum();
+    final long[][] input = il.linesAs2dLongArray(pc, s -> Arrays.stream(SPLIT.split(s))
+                                                                .mapToLong(Long::parseLong)
+                                                                .toArray());
+    return Arrays.stream(input)
+                 .mapToLong(this::nextValue)
+                 .sum();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    final long[][] input = il.linesAs2dLongArray(pc, s -> Arrays.stream(SPLIT.split(s)).mapToLong(Long::parseLong).toArray());
-    final long[][] reversed = Arrays.stream(input).map(MyArrays::reverse).toArray(long[][]::new);
-    return Arrays.stream(reversed).mapToLong(this::nextValue).sum();
+    final long[][] input = il.linesAs2dLongArray(pc, s -> Arrays.stream(SPLIT.split(s))
+                                                                .mapToLong(Long::parseLong)
+                                                                .toArray());
+    final long[][] reversed = Arrays.stream(input)
+                                    .map(MyArrays::reverse)
+                                    .toArray(long[][]::new);
+    return Arrays.stream(reversed)
+                 .mapToLong(this::nextValue)
+                 .sum();
   }
 
   private long nextValue(final long[] values) {
@@ -56,7 +66,10 @@ public class Year2023Day09 {
     }
 
     // Next level is all zeros; the next value at the current level is simply any (equal) value at the current level.
-    if (!Arrays.stream(diffs).filter(n -> n != 0).findAny().isPresent()) {
+    if (!Arrays.stream(diffs)
+               .filter(n -> n != 0)
+               .findAny()
+               .isPresent()) {
       return values[0];
     }
 

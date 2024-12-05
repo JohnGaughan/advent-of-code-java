@@ -37,13 +37,21 @@ public class Year2023Day02 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    final List<Game> games = il.linesAsObjects(pc, this::parse).stream().filter(g -> g.isPossible()).toList();
-    return games.stream().mapToLong(g -> g.id).sum();
+    final List<Game> games = il.linesAsObjects(pc, this::parse)
+                               .stream()
+                               .filter(g -> g.isPossible())
+                               .toList();
+    return games.stream()
+                .mapToLong(g -> g.id)
+                .sum();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return il.linesAsObjects(pc, this::parse).stream().mapToLong(g -> g.getPower()).sum();
+    return il.linesAsObjects(pc, this::parse)
+             .stream()
+             .mapToLong(g -> g.getPower())
+             .sum();
   }
 
   /** Separate the game number from the hands. */
@@ -107,14 +115,24 @@ public class Year2023Day02 {
 
     /** Get whether this game is possible for the requirements in part one. */
     boolean isPossible() {
-      return hands.stream().allMatch(h -> h.isPossible());
+      return hands.stream()
+                  .allMatch(h -> h.isPossible());
     }
 
     /** Get the power of this game using the requirements in part two. */
     long getPower() {
-      long blue = hands.stream().mapToLong(h -> h.blue).max().getAsLong();
-      long green = hands.stream().mapToLong(h -> h.green).max().getAsLong();
-      long red = hands.stream().mapToLong(h -> h.red).max().getAsLong();
+      long blue = hands.stream()
+                       .mapToLong(h -> h.blue)
+                       .max()
+                       .getAsLong();
+      long green = hands.stream()
+                        .mapToLong(h -> h.green)
+                        .max()
+                        .getAsLong();
+      long red = hands.stream()
+                      .mapToLong(h -> h.red)
+                      .max()
+                      .getAsLong();
       return blue * green * red;
     }
   }

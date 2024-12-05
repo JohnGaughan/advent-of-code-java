@@ -76,8 +76,10 @@ public class Year2020Day22 {
         return new RecursiveResult(true, score(p1));
       }
       oldStates.add(currentState);
-      final int c1 = p1.remove().intValue();
-      final int c2 = p2.remove().intValue();
+      final int c1 = p1.remove()
+                       .intValue();
+      final int c2 = p2.remove()
+                       .intValue();
       // See if we need to recurse
       if ((p1.size() >= c1) && (p2.size() >= c2)) {
         // Recurse
@@ -119,7 +121,8 @@ public class Year2020Day22 {
     long score = 0;
     long multiplier = 1;
     while (!hand.isEmpty()) {
-      score += multiplier * hand.removeLast().intValue();
+      score += multiplier * hand.removeLast()
+                                .intValue();
       ++multiplier;
     }
     return score;
@@ -172,7 +175,10 @@ public class Year2020Day22 {
   }
 
   private Deque<Integer> parse(final List<String> input) {
-    return input.stream().skip(1).map(Integer::valueOf).collect(Collectors.toCollection(LinkedList::new));
+    return input.stream()
+                .skip(1)
+                .map(Integer::valueOf)
+                .collect(Collectors.toCollection(LinkedList::new));
   }
 
 }

@@ -55,7 +55,8 @@ public final class Year2016Day11 {
   private long solve(final List<Collection<Item>> input) {
     final int[] items = new int[input.size()];
     for (int i = 0; i < items.length; ++i) {
-      items[i] = input.get(i).size();
+      items[i] = input.get(i)
+                      .size();
     }
     long moves = 0;
     for (int i = 1; i < items.length; ++i) {
@@ -78,7 +79,10 @@ public final class Year2016Day11 {
         continue;
       }
       // Remove text that makes parsing more complex.
-      final String[] tokens = SPACE.split(line.replace(",", "").replace(".", "").replace("-compatible", "").replace("and ", ""));
+      final String[] tokens = SPACE.split(line.replace(",", "")
+                                              .replace(".", "")
+                                              .replace("-compatible", "")
+                                              .replace("and ", ""));
       final int floor;
       if ("first".equals(tokens[1])) {
         floor = 0;
@@ -96,7 +100,8 @@ public final class Year2016Day11 {
         throw new IllegalArgumentException("[" + line + "]");
       }
       for (int i = 5; i + 1 < tokens.length; i += 3) {
-        input.get(floor).add(new Item(Element.valueOf(tokens[i]), Device.valueOf(tokens[i + 1])));
+        input.get(floor)
+             .add(new Item(Element.valueOf(tokens[i]), Device.valueOf(tokens[i + 1])));
       }
     }
     return input;

@@ -49,7 +49,8 @@ public final class Year2016Day02 {
     Integer key = Integer.valueOf('5');
     for (final int[] sequence : il.linesAsCodePoints(pc)) {
       for (final int d : sequence) {
-        key = mapping.get(key).get(Integer.valueOf(d));
+        key = mapping.get(key)
+                     .get(Integer.valueOf(d));
       }
       code.appendCodePoint(key.intValue());
     }
@@ -79,7 +80,8 @@ public final class Year2016Day02 {
       if (!result.containsKey(key1)) {
         result.put(key1, new HashMap<>());
       }
-      result.get(key1).put(dir, key2);
+      result.get(key1)
+            .put(dir, key2);
     }
     return result;
   }

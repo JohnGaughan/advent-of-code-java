@@ -135,10 +135,14 @@ public final class Year2018Day10 {
       final int y1 = input.indexOf('<', x3) + 1;
       final int y2 = input.indexOf(',', y1);
       final int y3 = input.indexOf('>', y2);
-      x = Integer.parseInt(input.substring(x1, x2).trim());
-      y = Integer.parseInt(input.substring(x2 + 1, x3).trim());
-      dx = Integer.parseInt(input.substring(y1, y2).trim());
-      dy = Integer.parseInt(input.substring(y2 + 1, y3).trim());
+      x = Integer.parseInt(input.substring(x1, x2)
+                                .trim());
+      y = Integer.parseInt(input.substring(x2 + 1, x3)
+                                .trim());
+      dx = Integer.parseInt(input.substring(y1, y2)
+                                 .trim());
+      dy = Integer.parseInt(input.substring(y2 + 1, y3)
+                                 .trim());
     }
   }
 

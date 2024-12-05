@@ -35,10 +35,12 @@ implements TestExecutionListener {
   public void executionFinished(final TestIdentifier testIdentifier, final TestExecutionResult testExecutionResult) {
     if (testIdentifier.getType() == Type.TEST) {
       final StringBuilder result = new StringBuilder(256);
-      result.append(testIdentifier.getDisplayName()).append(" ");
+      result.append(testIdentifier.getDisplayName())
+            .append(" ");
       result.append(testExecutionResult.getStatus());
       if (testExecutionResult.getStatus() != Status.SUCCESSFUL) {
-        result.append(" ").append(testExecutionResult.getThrowable());
+        result.append(" ")
+              .append(testExecutionResult.getThrowable());
       }
       System.out.println(result);
     }

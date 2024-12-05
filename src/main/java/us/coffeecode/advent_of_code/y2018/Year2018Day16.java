@@ -65,7 +65,8 @@ public final class Year2018Day16 {
     final long[] registers = new long[] { 0, 0, 0, 0 };
     for (final long[] instruction : input.instructions) {
       final Long key = Long.valueOf(instruction[0]);
-      opcodes.get(key).apply(registers, instruction[1], instruction[2], instruction[3]);
+      opcodes.get(key)
+             .apply(registers, instruction[1], instruction[2], instruction[3]);
     }
     return registers[0];
   }
@@ -75,7 +76,8 @@ public final class Year2018Day16 {
     int count = 0;
     OpCode toAssign = null;
     for (final OpCode opCode : OpCode.values()) {
-      if ((opcodes != null) && opcodes.values().contains(opCode)) {
+      if ((opcodes != null) && opcodes.values()
+                                      .contains(opCode)) {
         continue;
       }
       final long[] registers = Arrays.copyOf(sample.registersBefore, sample.registersBefore.length);
@@ -116,7 +118,9 @@ public final class Year2018Day16 {
 
     private static long[] make(final String line, final Pattern split) {
       final String[] strs = split.split(line);
-      return Arrays.stream(strs).mapToLong(Long::parseLong).toArray();
+      return Arrays.stream(strs)
+                   .mapToLong(Long::parseLong)
+                   .toArray();
     }
 
     final List<Sample> samples = new ArrayList<>(780);
@@ -126,17 +130,21 @@ public final class Year2018Day16 {
     Input(final List<String> input) {
       // Handle four lines at a time, reading in the input for part 1.
       int idx = 0;
-      for (; input.get(idx).startsWith("Before"); idx += 4) {
-        String s0 = input.get(idx).substring(9);
+      for (; input.get(idx)
+                  .startsWith("Before"); idx += 4) {
+        String s0 = input.get(idx)
+                         .substring(9);
         s0 = s0.substring(0, s0.length() - 1);
         String s1 = input.get(idx + 1);
-        String s2 = input.get(idx + 2).substring(9);
+        String s2 = input.get(idx + 2)
+                         .substring(9);
         s2 = s2.substring(0, s2.length() - 1);
         samples.add(new Sample(make(s0, SAMPLE_SPLIT), make(s1, INSTRUCTION_SPLIT), make(s2, SAMPLE_SPLIT)));
       }
 
       // Consume blank lines
-      while (input.get(idx).isBlank()) {
+      while (input.get(idx)
+                  .isBlank()) {
         ++idx;
       }
 

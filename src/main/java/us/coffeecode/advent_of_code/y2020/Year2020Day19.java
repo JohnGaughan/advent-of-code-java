@@ -45,7 +45,8 @@ public class Year2020Day19 {
   public long calculatePart1(final PuzzleContext pc) {
     final Input input = getInput(pc);
     reduce(input.rules, Collections.singleton("0"));
-    final Pattern regex = Pattern.compile(input.rules.get("0").replace(",", ""));
+    final Pattern regex = Pattern.compile(input.rules.get("0")
+                                                     .replace(",", ""));
     return countValidMessages(input.messages, Collections.singleton(regex));
   }
 
@@ -57,8 +58,10 @@ public class Year2020Day19 {
     input.rules.remove("8");
     input.rules.remove("11");
     reduce(input.rules, Arrays.asList(new String[] { "0", "31", "42" }));
-    final String r31 = input.rules.get("31").replace(",", "");
-    final String r42 = input.rules.get("42").replace(",", "");
+    final String r31 = input.rules.get("31")
+                                  .replace(",", "");
+    final String r42 = input.rules.get("42")
+                                  .replace(",", "");
     final Collection<Pattern> patterns = new ArrayList<>();
     // match 2+ 42s, at most N-1 31s
     for (int i = 2; i < 7; ++i) {
@@ -79,9 +82,12 @@ public class Year2020Day19 {
     while (modified) {
       modified = false;
       // Find the next rule that only has nonterminals.
-      for (final Iterator<Map.Entry<String, String>> iter = rules.entrySet().iterator(); iter.hasNext();) {
+      for (final Iterator<Map.Entry<String, String>> iter = rules.entrySet()
+                                                                 .iterator(); iter.hasNext();) {
         final Map.Entry<String, String> entry = iter.next();
-        if (!skip.contains(entry.getKey()) && entry.getValue().codePoints().noneMatch(Character::isDigit)) {
+        if (!skip.contains(entry.getKey()) && entry.getValue()
+                                                   .codePoints()
+                                                   .noneMatch(Character::isDigit)) {
           // Substitute this rule in all the other rules.
           for (final Map.Entry<String, String> entry2 : rules.entrySet()) {
             final String value = entry2.getValue();
@@ -90,7 +96,8 @@ public class Year2020Day19 {
               replacement = "(" + replacement + ")";
             }
             final Pattern regex = Pattern.compile("\\b" + entry.getKey() + "\\b");
-            entry2.setValue(regex.matcher(value).replaceAll(replacement));
+            entry2.setValue(regex.matcher(value)
+                                 .replaceAll(replacement));
           }
 
           // Remove this rule.
@@ -105,7 +112,8 @@ public class Year2020Day19 {
     long count = 0;
     for (final String message : messages) {
       for (final Pattern pattern : patterns) {
-        if (pattern.matcher(message).matches()) {
+        if (pattern.matcher(message)
+                   .matches()) {
           ++count;
           break;
         }
@@ -126,7 +134,10 @@ public class Year2020Day19 {
     final Map<String, String> rules = new HashMap<>(inputRules.size() * 4 / 3);
     for (final String inputRule : inputRules) {
       final String[] tokens = RULE_KV_SPLIT.split(inputRule);
-      rules.put(tokens[0].trim(), tokens[1].trim().replace(" | ", "|").replace(' ', ',').replace("\"", ""));
+      rules.put(tokens[0].trim(), tokens[1].trim()
+                                           .replace(" | ", "|")
+                                           .replace(' ', ',')
+                                           .replace("\"", ""));
     }
     return rules;
   }

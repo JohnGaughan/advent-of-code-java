@@ -39,12 +39,16 @@ public final class Year2015Day12 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return extractNumbers(getInput(pc), false).stream().mapToLong(Integer::longValue).sum();
+    return extractNumbers(getInput(pc), false).stream()
+                                              .mapToLong(Integer::longValue)
+                                              .sum();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return extractNumbers(getInput(pc), true).stream().mapToLong(Integer::longValue).sum();
+    return extractNumbers(getInput(pc), true).stream()
+                                             .mapToLong(Integer::longValue)
+                                             .sum();
   }
 
   /** Given a general object from a JSON string, extract all of its numbers. */

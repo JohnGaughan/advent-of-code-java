@@ -53,7 +53,9 @@ public final class Year2021Day08 {
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return getInput(pc).stream().mapToLong(this::getOutputValue).sum();
+    return getInput(pc).stream()
+                       .mapToLong(this::getOutputValue)
+                       .sum();
   }
 
   private long getOutputValue(final Line line) {
@@ -92,7 +94,10 @@ public final class Year2021Day08 {
   }
 
   private int digit(final int[] array, final IntPredicate predicate) {
-    return Arrays.stream(array).filter(predicate).findFirst().getAsInt();
+    return Arrays.stream(array)
+                 .filter(predicate)
+                 .findFirst()
+                 .getAsInt();
   }
 
   /** Get whether the number of bits set in i matches the desired bit count. */
@@ -124,8 +129,12 @@ public final class Year2021Day08 {
     final List<Line> lines = new ArrayList<>(lineStr.size());
     for (final String line : lineStr) {
       final String[] ioParts = SPLIT_IO.split(line);
-      final int[] input = Arrays.stream(SPLIT_STR.split(ioParts[0])).mapToInt(this::toInt).toArray();
-      final int[] output = Arrays.stream(SPLIT_STR.split(ioParts[1])).mapToInt(this::toInt).toArray();
+      final int[] input = Arrays.stream(SPLIT_STR.split(ioParts[0]))
+                                .mapToInt(this::toInt)
+                                .toArray();
+      final int[] output = Arrays.stream(SPLIT_STR.split(ioParts[1]))
+                                 .mapToInt(this::toInt)
+                                 .toArray();
       for (final String str : SPLIT_STR.split(ioParts[1])) {
         toInt(str);
       }
@@ -138,7 +147,9 @@ public final class Year2021Day08 {
   private int toInt(final String segments) {
     // Segment a is bit 1, b is bit 2, and so on. Segments are not guaranteed to be in any order.
     int value = 0;
-    for (final int ch : segments.codePoints().map(i -> i - 'a').toArray()) {
+    for (final int ch : segments.codePoints()
+                                .map(i -> i - 'a')
+                                .toArray()) {
       value |= (1 << ch);
     }
     return value;

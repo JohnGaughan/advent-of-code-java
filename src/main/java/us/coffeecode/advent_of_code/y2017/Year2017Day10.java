@@ -50,7 +50,8 @@ public final class Year2017Day10 {
     for (int i = 0; i < bytes.length; ++i) {
       bytes[i] = (byte) hash[i];
     }
-    return HexFormat.of().formatHex(bytes);
+    return HexFormat.of()
+                    .formatHex(bytes);
   }
 
   private static final Pattern SEPARATOR = Pattern.compile(",");

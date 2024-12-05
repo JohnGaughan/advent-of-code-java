@@ -45,14 +45,21 @@ public class Year2022Day07 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final Node root = getRootNode(pc);
-    return getAllSizes(root).stream().mapToLong(Long::longValue).filter(l -> l <= 100_000).sum();
+    return getAllSizes(root).stream()
+                            .mapToLong(Long::longValue)
+                            .filter(l -> l <= 100_000)
+                            .sum();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     final Node root = getRootNode(pc);
     final long minToFree = root.totalSize() - 40_000_000;
-    return getAllSizes(root).stream().mapToLong(Long::longValue).filter(l -> l >= minToFree).min().getAsLong();
+    return getAllSizes(root).stream()
+                            .mapToLong(Long::longValue)
+                            .filter(l -> l >= minToFree)
+                            .min()
+                            .getAsLong();
   }
 
   private List<Long> getAllSizes(final Node root) {
@@ -145,7 +152,9 @@ public class Year2022Day07 {
     }
 
     Node getChild(final String _name) {
-      final Optional<Node> match = children.stream().filter(n -> n.name.equals(_name)).findFirst();
+      final Optional<Node> match = children.stream()
+                                           .filter(n -> n.name.equals(_name))
+                                           .findFirst();
       if (match.isPresent()) {
         return match.get();
       }
@@ -156,8 +165,13 @@ public class Year2022Day07 {
 
     long totalSize() {
       if (size == null) {
-        long thisNode = files.values().stream().mapToLong(Long::longValue).sum();
-        long childNodes = children.stream().mapToLong(Node::totalSize).sum();
+        long thisNode = files.values()
+                             .stream()
+                             .mapToLong(Long::longValue)
+                             .sum();
+        long childNodes = children.stream()
+                                  .mapToLong(Node::totalSize)
+                                  .sum();
         size = Long.valueOf(thisNode + childNodes);
       }
       return size.longValue();

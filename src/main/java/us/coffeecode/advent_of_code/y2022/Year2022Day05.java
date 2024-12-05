@@ -42,8 +42,10 @@ public class Year2022Day05 {
   public String calculatePart1(final PuzzleContext pc) {
     return calculate(pc, (s, m) -> {
       for (int i = 0; i < m.qty; ++i) {
-        final Integer value = s.get(m.from).removeFirst();
-        s.get(m.to).addFirst(value);
+        final Integer value = s.get(m.from)
+                               .removeFirst();
+        s.get(m.to)
+         .addFirst(value);
       }
     });
   }
@@ -53,11 +55,13 @@ public class Year2022Day05 {
     return calculate(pc, (s, m) -> {
       final Deque<Integer> buffer = new LinkedList<>();
       for (int i = 0; i < m.qty; ++i) {
-        final Integer value = s.get(m.from).removeFirst();
+        final Integer value = s.get(m.from)
+                               .removeFirst();
         buffer.addFirst(value);
       }
       while (!buffer.isEmpty()) {
-        s.get(m.to).addFirst(buffer.removeFirst());
+        s.get(m.to)
+         .addFirst(buffer.removeFirst());
       }
     });
   }
@@ -66,8 +70,11 @@ public class Year2022Day05 {
     final Input input = Input.valueOf(il.groups(pc));
     input.moves.forEach(m -> action.accept(input.state, m));
     // Convert stack heads to a string
-    return input.state.stream().mapToInt(d -> d.getFirst().intValue()).collect(StringBuilder::new, StringBuilder::appendCodePoint,
-      StringBuilder::append).toString();
+    return input.state.stream()
+                      .mapToInt(d -> d.getFirst()
+                                      .intValue())
+                      .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                      .toString();
   }
 
   private static final Pattern STACKS_SPLIT = Pattern.compile("\\s+");
@@ -83,7 +90,8 @@ public class Year2022Day05 {
     }
 
     private static List<Deque<Integer>> makeState(final List<String> group) {
-      final String[] temp = STACKS_SPLIT.split(group.getLast().trim());
+      final String[] temp = STACKS_SPLIT.split(group.getLast()
+                                                    .trim());
       final int stackCount = Integer.parseInt(temp[temp.length - 1]);
       final List<Deque<Integer>> piles = new ArrayList<>(stackCount);
 

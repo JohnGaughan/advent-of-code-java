@@ -39,7 +39,8 @@ public final class Year2018Day14 {
     final int input = il.fileAsInt(pc);
     final int[] array = generate(input << 2);
     final StringBuilder answer = new StringBuilder(recipes);
-    Arrays.stream(array, input, input + recipes).forEach(i -> answer.append(i));
+    Arrays.stream(array, input, input + recipes)
+          .forEach(i -> answer.append(i));
     return answer.toString();
   }
 

@@ -96,8 +96,10 @@ public class Year2022Day10 {
   }
 
   private String toString(final boolean[][] display) {
-    return IntStream.iterate(0, i -> i < WIDTH, i -> i + 5).map(i -> dc.toCodePoint(display, i, 4)).collect(StringBuilder::new,
-      StringBuilder::appendCodePoint, StringBuilder::append).toString();
+    return IntStream.iterate(0, i -> i < WIDTH, i -> i + 5)
+                    .map(i -> dc.toCodePoint(display, i, 4))
+                    .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                    .toString();
   }
 
 }

@@ -33,17 +33,21 @@ public final class Year2019Day09 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final IntCode state = icf.make(pc);
-    state.getInput().add(1);
+    state.getInput()
+         .add(1);
     state.exec();
-    return state.getOutput().remove();
+    return state.getOutput()
+                .remove();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     final IntCode state = icf.make(pc);
-    state.getInput().add(2);
+    state.getInput()
+         .add(2);
     state.exec();
-    return state.getOutput().remove();
+    return state.getOutput()
+                .remove();
   }
 
 }

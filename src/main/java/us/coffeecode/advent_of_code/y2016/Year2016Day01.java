@@ -105,7 +105,9 @@ public final class Year2016Day01 {
 
   /** Get the input data for this solution. */
   private Iterable<Instruction> getInput(final PuzzleContext pc) {
-    return Arrays.stream(SPLIT.split(il.fileAsString(pc))).map(Instruction::make).toList();
+    return Arrays.stream(SPLIT.split(il.fileAsString(pc)))
+                 .map(Instruction::make)
+                 .toList();
   }
 
   private static enum Heading {

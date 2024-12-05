@@ -34,7 +34,9 @@ public final class State {
    * @return an initialized state instance.
    */
   public static State load(final List<String> input) {
-    return new State(input.stream().map(Instruction::new).toArray(Instruction[]::new));
+    return new State(input.stream()
+                          .map(Instruction::new)
+                          .toArray(Instruction[]::new));
   }
 
   public final Instruction[] instructions;
@@ -71,7 +73,10 @@ public final class State {
   @Override
   public String toString() {
     final StringBuilder str = new StringBuilder();
-    str.append("IP=").append(ip).append(",Registers=").append(Arrays.toString(reg));
+    str.append("IP=")
+       .append(ip)
+       .append(",Registers=")
+       .append(Arrays.toString(reg));
     return str.toString();
   }
 

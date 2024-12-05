@@ -117,8 +117,11 @@ public class Year2023Day01 {
     for (final Map.Entry<String, Integer> entry : NUMBERS.entrySet()) {
       final String key = entry.getKey();
       final int end = offset + key.length();
-      if ((str.length() >= end) && str.substring(offset, end).equals(key)) {
-        return new Match(entry.getValue().intValue(), offset, end);
+      if ((str.length() >= end) && str.substring(offset, end)
+                                      .equals(key)) {
+        return new Match(entry.getValue()
+                              .intValue(),
+          offset, end);
       }
     }
     // No match: return nonsense value.

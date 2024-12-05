@@ -66,7 +66,8 @@ public final class Year2021Day23 {
 
       // See if this is a duplicate state. If so, skip it unless it has lower energy than last time.
       if (cache.containsKey(key)) {
-        long energy = cache.get(key).longValue();
+        long energy = cache.get(key)
+                           .longValue();
         if (state.energy >= energy) {
           continue;
         }
@@ -232,7 +233,8 @@ public final class Year2021Day23 {
         for (int y1 = 2; y1 < roomBottom; ++y1) {
           final Point2D last = new Point2D(a.targetX, y1);
           path.add(last);
-          paths.get(key).add(new Path(last, new ArrayList<>(path)));
+          paths.get(key)
+               .add(new Path(last, new ArrayList<>(path)));
         }
       }
     }
@@ -256,7 +258,8 @@ public final class Year2021Day23 {
             final Point2D last = new Point2D(x1, 1);
             pathLeft.add(last);
             if (Arrays.binarySearch(HALLWAY_STOPS, x1) >= 0) {
-              paths.get(key).add(new Path(last, new ArrayList<>(pathLeft)));
+              paths.get(key)
+                   .add(new Path(last, new ArrayList<>(pathLeft)));
             }
           }
 
@@ -266,7 +269,8 @@ public final class Year2021Day23 {
             final Point2D last = new Point2D(x1, 1);
             pathRight.add(last);
             if (Arrays.binarySearch(HALLWAY_STOPS, x1) >= 0) {
-              paths.get(key).add(new Path(last, new ArrayList<>(pathRight)));
+              paths.get(key)
+                   .add(new Path(last, new ArrayList<>(pathRight)));
             }
           }
 
@@ -288,7 +292,8 @@ public final class Year2021Day23 {
             for (int y1 = 2; y1 < roomBottom; ++y1) {
               final Point2D last = new Point2D(a.targetX, y1);
               path.add(last);
-              paths.get(key).add(new Path(last, new ArrayList<>(path)));
+              paths.get(key)
+                   .add(new Path(last, new ArrayList<>(path)));
             }
           }
         }
@@ -312,7 +317,11 @@ public final class Year2021Day23 {
     D(1_000, 9);
 
     static Amphipod valueOf(final int codePoint) {
-      return Arrays.stream(values()).filter(a -> a.name().codePointAt(0) == codePoint).findFirst().get();
+      return Arrays.stream(values())
+                   .filter(a -> a.name()
+                                 .codePointAt(0) == codePoint)
+                   .findFirst()
+                   .get();
     }
 
     public final int energy;
@@ -355,6 +364,8 @@ public final class Year2021Day23 {
 
   }
 
-  private static final int[][] PART_2_INSERT =
-    new int[][] { "  #D#C#B#A#".codePoints().toArray(), "  #D#B#A#C#".codePoints().toArray() };
+  private static final int[][] PART_2_INSERT = new int[][] { "  #D#C#B#A#".codePoints()
+                                                                          .toArray(),
+      "  #D#B#A#C#".codePoints()
+                   .toArray() };
 }

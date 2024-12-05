@@ -68,9 +68,11 @@ public final class Year2019Day15 {
         final Point2D coord = forDirection(dir, qe.point);
         if (!map.containsKey(coord)) {
           final IntCode state = icf.make(qe.state);
-          state.getInput().add(dir);
+          state.getInput()
+               .add(dir);
           state.exec();
-          final long output = state.getOutput().remove();
+          final long output = state.getOutput()
+                                   .remove();
 
           if (output == 0) {
             map.put(coord, Tile.WALL);
@@ -102,12 +104,19 @@ public final class Year2019Day15 {
     // While the maze is not filled with oxygen, expand the reach of oxygen.
     long time = 0;
     Collection<Point2D> edges = new HashSet<>();
-    edges.addAll(map.entrySet().stream().filter(e -> e.getValue() == Tile.OXYGEN).map(e -> e.getKey()).toList());
-    while (map.values().stream().anyMatch(t -> t == Tile.OPEN)) {
+    edges.addAll(map.entrySet()
+                    .stream()
+                    .filter(e -> e.getValue() == Tile.OXYGEN)
+                    .map(e -> e.getKey())
+                    .toList());
+    while (map.values()
+              .stream()
+              .anyMatch(t -> t == Tile.OPEN)) {
       ++time;
       final Collection<Point2D> newEdges = new HashSet<>(edges.size());
       for (final var iter = edges.iterator(); iter.hasNext();) {
-        for (final Point2D p : iter.next().getCardinalNeighbors()) {
+        for (final Point2D p : iter.next()
+                                   .getCardinalNeighbors()) {
           if (map.get(p) == Tile.OPEN) {
             map.put(p, Tile.OXYGEN);
             newEdges.add(p);

@@ -61,7 +61,8 @@ public final class Year2020Day07 {
 
   /** Get whether the current color bag can contain the search needle, directly or transitively. */
   private boolean checkForNeedle(final String currentColor, final Map<String, Map<String, Integer>> rules, final Set<String> positives, final Set<String> negatives) {
-    final Set<String> childColors = rules.get(currentColor).keySet();
+    final Set<String> childColors = rules.get(currentColor)
+                                         .keySet();
 
     // See if the needle is a direct descendant of the current color.
     if (childColors.contains(SEARCH_NEEDLE)) {
@@ -97,13 +98,16 @@ public final class Year2020Day07 {
   /** Count the number of bags contained by the given color of bag, including the bag itself. */
   private long countBagAndChildren(final String color, final Map<String, Map<String, Integer>> rules, final Map<String, Long> memoizer) {
     if (memoizer.containsKey(color)) {
-      return memoizer.get(color).longValue();
+      return memoizer.get(color)
+                     .longValue();
     }
 
     long count = 1;
-    for (final Map.Entry<String, Integer> child : rules.get(color).entrySet()) {
+    for (final Map.Entry<String, Integer> child : rules.get(color)
+                                                       .entrySet()) {
       final String childColor = child.getKey();
-      final int childCount = child.getValue().intValue();
+      final int childCount = child.getValue()
+                                  .intValue();
       count += childCount * countBagAndChildren(childColor, rules, memoizer);
     }
     memoizer.put(color, Long.valueOf(count));

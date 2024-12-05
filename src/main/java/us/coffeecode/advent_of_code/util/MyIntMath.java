@@ -63,7 +63,8 @@ public final class MyIntMath {
    * @return the least common multiple of the numbers.
    */
   public static int lcm(final int[] values) {
-    return Arrays.stream(values).reduce(1, MyIntMath::lcm);
+    return Arrays.stream(values)
+                 .reduce(1, MyIntMath::lcm);
   }
 
   /**
@@ -74,7 +75,9 @@ public final class MyIntMath {
    * @return the least common multiple of the numbers.
    */
   public static int lcm(final Collection<Integer> values) {
-    return values.stream().mapToInt(Integer::intValue).reduce(1, MyIntMath::lcm);
+    return values.stream()
+                 .mapToInt(Integer::intValue)
+                 .reduce(1, MyIntMath::lcm);
   }
 
 }

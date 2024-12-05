@@ -33,11 +33,14 @@ extends AbstractTests {
     // Method is private, but we can figure out how big the internal array is then stuff more values in there than can
     // fit.
     final LongQueue q = context.getBean(LongQueue.class);
-    final Field field = q.getClass().getDeclaredField("array");
+    final Field field = q.getClass()
+                         .getDeclaredField("array");
     field.setAccessible(true);
     final long[] ref = (long[]) field.get(q);
-    final long[] array = LongStream.rangeClosed(1, ref.length << 1).toArray();
-    Arrays.stream(array).forEach(l -> q.add(l));
+    final long[] array = LongStream.rangeClosed(1, ref.length << 1)
+                                   .toArray();
+    Arrays.stream(array)
+          .forEach(l -> q.add(l));
     final long[] removed = q.removeAll();
     Assertions.assertArrayEquals(array, removed);
   }
@@ -47,7 +50,8 @@ extends AbstractTests {
     // Method is private, but we can figure out how big the internal array is then stuff more values in there than can
     // fit.
     final LongQueue q = context.getBean(LongQueue.class);
-    final Field field = q.getClass().getDeclaredField("array");
+    final Field field = q.getClass()
+                         .getDeclaredField("array");
     field.setAccessible(true);
     final long[] ref = (long[]) field.get(q);
     final long[] added = new long[ref.length << 1];

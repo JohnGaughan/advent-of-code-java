@@ -63,7 +63,9 @@ public class Year2022Day12 {
     visited.put(getStart.apply(start, end), Long.valueOf(0));
     while (!visiting.isEmpty()) {
       final Point2D current = visiting.removeFirst();
-      final Long cost = Long.valueOf(visited.get(current).longValue() + 1);
+      final Long cost = Long.valueOf(visited.get(current)
+                                            .longValue()
+        + 1);
       for (final Point2D candidate : current.getCardinalNeighbors()) {
         if (candidate.isIn(map) && moveTest.test(candidate, current, map) && !visited.containsKey(candidate)) {
           if (endTest.test(candidate, end, map)) {

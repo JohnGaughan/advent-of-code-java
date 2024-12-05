@@ -163,7 +163,8 @@ public class DigitConverter {
     if (!bitsToCodePoints.containsKey(key)) {
       throw new NoSuchElementException("Character not found");
     }
-    return bitsToCodePoints.get(key).intValue();
+    return bitsToCodePoints.get(key)
+                           .intValue();
   }
 
   /**
@@ -223,7 +224,8 @@ public class DigitConverter {
     if (!bitsToCodePoints.containsKey(key)) {
       throw new NoSuchElementException("Character not found");
     }
-    return bitsToCodePoints.get(key).intValue();
+    return bitsToCodePoints.get(key)
+                           .intValue();
   }
 
   private static Long toBits(final boolean[][] array, final int x0, final int width, final int height) {
@@ -255,7 +257,8 @@ public class DigitConverter {
   private static Long toBits(final String[] letter) {
     long bitmap = 0;
     for (final String line : letter) {
-      for (int ch : line.codePoints().toArray()) {
+      for (int ch : line.codePoints()
+                        .toArray()) {
         bitmap <<= 1;
         if (!Character.isWhitespace(ch)) {
           ++bitmap;

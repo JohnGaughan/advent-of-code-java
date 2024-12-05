@@ -52,8 +52,11 @@ public class Year2022Day13 {
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    final List<JSONArray> input =
-      new ArrayList<>(il.lines(pc).stream().filter(s -> !s.isEmpty()).map(s -> new JSONArray(s)).toList());
+    final List<JSONArray> input = new ArrayList<>(il.lines(pc)
+                                                    .stream()
+                                                    .filter(s -> !s.isEmpty())
+                                                    .map(s -> new JSONArray(s))
+                                                    .toList());
     input.add(DIVIDER_1);
     input.add(DIVIDER_2);
     Collections.sort(input, this::compare);
@@ -95,8 +98,10 @@ public class Year2022Day13 {
     else if ((left instanceof Integer l) && (right instanceof JSONArray r)) {
       return compare(new JSONArray(new Integer[] { l }), r);
     }
-    final String leftClass = (left == null ? null : left.getClass().getName());
-    final String rightClass = (right == null ? null : right.getClass().getName());
+    final String leftClass = (left == null ? null : left.getClass()
+                                                        .getName());
+    final String rightClass = (right == null ? null : right.getClass()
+                                                           .getName());
     throw new IllegalArgumentException("Unhandled classes [" + leftClass + "] and [" + rightClass + "]");
   }
 

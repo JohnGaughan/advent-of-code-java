@@ -63,7 +63,8 @@ public final class MyLongMath {
    * @return the least common multiple of the numbers.
    */
   public static long lcm(final long[] values) {
-    return Arrays.stream(values).reduce(1, MyLongMath::lcm);
+    return Arrays.stream(values)
+                 .reduce(1, MyLongMath::lcm);
   }
 
   /**
@@ -74,7 +75,9 @@ public final class MyLongMath {
    * @return the least common multiple of the numbers.
    */
   public static long lcm(final Collection<Long> values) {
-    return values.stream().mapToLong(Long::longValue).reduce(1, MyLongMath::lcm);
+    return values.stream()
+                 .mapToLong(Long::longValue)
+                 .reduce(1, MyLongMath::lcm);
   }
 
 }

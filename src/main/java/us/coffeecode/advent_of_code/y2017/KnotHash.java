@@ -39,7 +39,8 @@ final class KnotHash {
   }
 
   public int[] hash(final String input) {
-    return hash(input.codePoints().toArray());
+    return hash(input.codePoints()
+                     .toArray());
   }
 
   private int[] hash(final int[] input) {

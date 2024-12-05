@@ -77,7 +77,11 @@ public final class Year2016Day15 {
     private static final Pattern NUMBERS = Pattern.compile("\\d+");
 
     static Disc make(final String input) {
-      final int[] i = NUMBERS.matcher(input).results().map(r -> r.group()).mapToInt(Integer::parseInt).toArray();
+      final int[] i = NUMBERS.matcher(input)
+                             .results()
+                             .map(r -> r.group())
+                             .mapToInt(Integer::parseInt)
+                             .toArray();
       return new Disc(i[0], i[1], i[3]);
     }
 

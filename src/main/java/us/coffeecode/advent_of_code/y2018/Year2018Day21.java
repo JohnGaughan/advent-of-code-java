@@ -48,7 +48,8 @@ public final class Year2018Day21 {
   private static final Pattern SPLIT = Pattern.compile(" ");
 
   private long calculate(final PuzzleContext pc) {
-    final long magicNumber = Long.parseLong(SPLIT.split(il.lines(pc).get(8))[1]);
+    final long magicNumber = Long.parseLong(SPLIT.split(il.lines(pc)
+                                                          .get(8))[1]);
     final boolean executeFewest = pc.getBoolean("ExecuteFewest");
     long d = 0;
     final Set<Long> seen = new HashSet<>();

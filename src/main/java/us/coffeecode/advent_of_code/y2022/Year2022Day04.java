@@ -37,12 +37,16 @@ public class Year2022Day04 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return Arrays.stream(getInput(pc)).filter(a -> a[0].containsInclusive(a[1]) || a[1].containsInclusive(a[0])).count();
+    return Arrays.stream(getInput(pc))
+                 .filter(a -> a[0].containsInclusive(a[1]) || a[1].containsInclusive(a[0]))
+                 .count();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return Arrays.stream(getInput(pc)).filter(a -> a[0].overlaps(a[1])).count();
+    return Arrays.stream(getInput(pc))
+                 .filter(a -> a[0].overlaps(a[1]))
+                 .count();
   }
 
   private Range[][] getInput(final PuzzleContext pc) {

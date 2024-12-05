@@ -57,7 +57,10 @@ public final class Year2016Day18 {
 
   private long count(final boolean[] array) {
     // Safe tiles are false, traps are true. Count safe tiles.
-    return Booleans.asList(array).stream().filter(b -> !b.booleanValue()).count();
+    return Booleans.asList(array)
+                   .stream()
+                   .filter(b -> !b.booleanValue())
+                   .count();
   }
 
   private boolean[] translate(final boolean[] input) {

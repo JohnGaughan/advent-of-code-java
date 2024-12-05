@@ -53,7 +53,8 @@ public final class Year2018Day03 {
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    final Claim[] claims = il.linesAsObjects(pc, Claim::make).toArray(Claim[]::new);
+    final Claim[] claims = il.linesAsObjects(pc, Claim::make)
+                             .toArray(Claim[]::new);
     for (int i = 0; i < claims.length; ++i) {
       boolean overlaps = false;
       for (int j = 0; j < claims.length; ++j) {
@@ -78,7 +79,11 @@ public final class Year2018Day03 {
     private static final Pattern DIGITS = Pattern.compile("\\d+");
 
     static Claim make(final String input) {
-      final int[] i = DIGITS.matcher(input).results().map(r -> r.group()).mapToInt(Integer::parseInt).toArray();
+      final int[] i = DIGITS.matcher(input)
+                            .results()
+                            .map(r -> r.group())
+                            .mapToInt(Integer::parseInt)
+                            .toArray();
       return new Claim(i[0], i[1], i[2], i[1] + i[3], i[2] + i[4]);
     }
 

@@ -54,8 +54,14 @@ public final class Year2021Day18 {
     final List<Node> nodes = il.linesAsObjects(pc, this::parse);
     for (int i = 0; i < nodes.size() - 1; ++i) {
       for (int j = i + 1; j < nodes.size(); ++j) {
-        final Node node1 = add(nodes.get(i).copy(), nodes.get(j).copy());
-        final Node node2 = add(nodes.get(j).copy(), nodes.get(i).copy());
+        final Node node1 = add(nodes.get(i)
+                                    .copy(),
+          nodes.get(j)
+               .copy());
+        final Node node2 = add(nodes.get(j)
+                                    .copy(),
+          nodes.get(i)
+               .copy());
         reduce(node1);
         reduce(node2);
         max = Math.max(max, node1.getMagnitude());
@@ -183,7 +189,8 @@ public final class Year2021Day18 {
   }
 
   private Node parse(final String line) {
-    final int[] codePoints = line.codePoints().toArray();
+    final int[] codePoints = line.codePoints()
+                                 .toArray();
     return makeNode(codePoints, 0, codePoints.length);
   }
 

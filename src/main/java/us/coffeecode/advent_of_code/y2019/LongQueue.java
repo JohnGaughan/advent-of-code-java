@@ -70,7 +70,8 @@ implements IntCodeIoQueue {
   @Override
   public void add(final long[] values) {
     ensureCapacity(size + values.length);
-    Arrays.stream(values).forEach(l -> add(l));
+    Arrays.stream(values)
+          .forEach(l -> add(l));
   }
 
   @Override

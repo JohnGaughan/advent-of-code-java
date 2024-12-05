@@ -43,8 +43,12 @@ public final class Year2021Day21 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    final int[] locations =
-      il.lines(pc).stream().map(s -> s.substring(28)).mapToInt(Integer::parseInt).map(i -> (i + 9) % 10).toArray();
+    final int[] locations = il.lines(pc)
+                              .stream()
+                              .map(s -> s.substring(28))
+                              .mapToInt(Integer::parseInt)
+                              .map(i -> (i + 9) % 10)
+                              .toArray();
     final long[] scores = new long[2];
     int winner = -1;
     int nextRoll = 0;
@@ -71,9 +75,15 @@ public final class Year2021Day21 {
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    final int[] locations = il.lines(pc).stream().map(s -> s.substring(28)).mapToInt(Integer::parseInt).toArray();
+    final int[] locations = il.lines(pc)
+                              .stream()
+                              .map(s -> s.substring(28))
+                              .mapToInt(Integer::parseInt)
+                              .toArray();
     final long[] wins = turn(new State(new int[2], Arrays.copyOf(locations, locations.length), 0), new HashMap<>(1 << 17));
-    return Arrays.stream(wins).max().getAsLong();
+    return Arrays.stream(wins)
+                 .max()
+                 .getAsLong();
   }
 
   private long[] turn(final State state, final Map<State, long[]> cache) {

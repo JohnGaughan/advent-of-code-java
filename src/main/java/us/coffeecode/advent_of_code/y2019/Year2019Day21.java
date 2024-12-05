@@ -56,10 +56,12 @@ public final class Year2019Day21 {
   private long calculate(final PuzzleContext pc, final String program) {
     final IntCode state = icf.make(pc);
     final IntCodeIoQueue input = state.getInput();
-    program.codePoints().forEach(input::add);
+    program.codePoints()
+           .forEach(input::add);
 
     state.exec();
-    final long[] output = state.getOutput().removeAll();
+    final long[] output = state.getOutput()
+                               .removeAll();
     return output[output.length - 1];
   }
 

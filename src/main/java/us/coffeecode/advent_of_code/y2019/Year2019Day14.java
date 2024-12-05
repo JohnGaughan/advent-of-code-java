@@ -74,21 +74,29 @@ public final class Year2019Day14 {
     need.put("FUEL", Long.valueOf(fuel));
     long ore = 0;
     while (!need.isEmpty()) {
-      final String product = need.keySet().iterator().next();
-      final long quantity = need.get(product).longValue();
+      final String product = need.keySet()
+                                 .iterator()
+                                 .next();
+      final long quantity = need.get(product)
+                                .longValue();
 
       // Remove the product now. It will either be satisfied with what is on hand, or will be replaced with its
       // reactants.
       need.remove(product);
 
       // See if this chemical can be completely taken care of with existing chemicals on hand.
-      if (onHand.containsKey(product) && quantity <= onHand.get(product).longValue()) {
-        onHand.put(product, Long.valueOf(onHand.get(product).longValue() - quantity));
+      if (onHand.containsKey(product) && quantity <= onHand.get(product)
+                                                           .longValue()) {
+        onHand.put(product, Long.valueOf(onHand.get(product)
+                                               .longValue()
+          - quantity));
         continue;
       }
 
       // Get the amount needed in excess of what is on hand.
-      final long needed = quantity - (onHand.containsKey(product) ? onHand.get(product).longValue() : 0);
+      final long needed = quantity - (onHand.containsKey(product) ? onHand.get(product)
+                                                                          .longValue()
+        : 0);
 
       // Get the amount created by this reaction.
       final long created = reactions.get(product).outQuantity;
@@ -111,7 +119,9 @@ public final class Year2019Day14 {
         }
         else if (need.containsKey(reactant)) {
           // We already need this reactant: combine it with the existing map entry.
-          need.put(reactant, Long.valueOf(need.get(reactant).longValue() + addQuantity));
+          need.put(reactant, Long.valueOf(need.get(reactant)
+                                              .longValue()
+            + addQuantity));
         }
         else {
           // New reactant: add a new entry to the map of what is needed.
@@ -159,9 +169,14 @@ public final class Year2019Day14 {
         if (str.length() > 0) {
           str.append(", ");
         }
-        str.append(reactantQuantities[i]).append(" ").append(reactants[i]);
+        str.append(reactantQuantities[i])
+           .append(" ")
+           .append(reactants[i]);
       }
-      str.append(" => ").append(outQuantity).append(" ").append(product);
+      str.append(" => ")
+         .append(outQuantity)
+         .append(" ")
+         .append(product);
       return str.toString();
     }
   }

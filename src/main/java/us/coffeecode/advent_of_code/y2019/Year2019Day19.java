@@ -72,9 +72,11 @@ public final class Year2019Day19 {
   private boolean check(final IntCode state, final long x, final long y) {
     // This program provides a single output, then it no longer works. Make a fresh copy each time.
     final IntCode copy = icf.make(state);
-    copy.getInput().add(new long[] { x, y });
+    copy.getInput()
+        .add(new long[] { x, y });
     copy.exec();
-    final long answer = copy.getOutput().remove();
+    final long answer = copy.getOutput()
+                            .remove();
     return answer == 1;
   }
 

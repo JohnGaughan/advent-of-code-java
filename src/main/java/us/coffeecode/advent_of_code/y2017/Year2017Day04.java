@@ -54,7 +54,9 @@ public final class Year2017Day04 {
     for (final List<String> line : il.linesAsStrings(pc, SEPARATOR)) {
       final Set<String> uniques = new HashSet<>();
       for (final String word : line) {
-        final int[] codePoints = word.codePoints().sorted().toArray();
+        final int[] codePoints = word.codePoints()
+                                     .sorted()
+                                     .toArray();
         uniques.add(new String(codePoints, 0, codePoints.length));
       }
       if (line.size() == uniques.size()) {

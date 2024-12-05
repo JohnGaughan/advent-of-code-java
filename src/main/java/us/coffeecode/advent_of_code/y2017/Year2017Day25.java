@@ -72,9 +72,12 @@ public final class Year2017Day25 {
   private static record Instruction(boolean write, int move, StateId next) {
 
     static Instruction make(final List<String> lines) {
-      String[] line0 = SEPARATOR.split(lines.getFirst().trim());
-      String[] line1 = SEPARATOR.split(lines.get(1).trim());
-      String[] line2 = SEPARATOR.split(lines.get(2).trim());
+      String[] line0 = SEPARATOR.split(lines.getFirst()
+                                            .trim());
+      String[] line1 = SEPARATOR.split(lines.get(1)
+                                            .trim());
+      String[] line2 = SEPARATOR.split(lines.get(2)
+                                            .trim());
       boolean write = '1' == line0[4].codePointAt(0);
       int move = "left.".equals(line1[6]) ? -1 : 1;
       StateId next = StateId.valueOf(line2[4].substring(0, 1));
@@ -100,7 +103,8 @@ public final class Year2017Day25 {
       final Map<StateId, State> instructions = new HashMap<>();
       for (final List<String> group : groups) {
         // Initial text describing start conditions and iterations.
-        if (group.getFirst().startsWith("Begin")) {
+        if (group.getFirst()
+                 .startsWith("Begin")) {
           String[] line0 = SEPARATOR.split(group.getFirst());
           String[] line1 = SEPARATOR.split(group.get(1));
           start = StateId.valueOf(line0[3].substring(0, 1));

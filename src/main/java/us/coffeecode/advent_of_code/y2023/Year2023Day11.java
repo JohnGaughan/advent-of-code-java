@@ -48,7 +48,8 @@ public class Year2023Day11 {
 
   /** Perform the calculation using the specified expansion factor. */
   private long calculate(final PuzzleContext pc, final long factor) {
-    final int[][] array = il.linesAs2dIntArray(pc, s -> s.codePoints().toArray());
+    final int[][] array = il.linesAs2dIntArray(pc, s -> s.codePoints()
+                                                         .toArray());
     final boolean[] rows = expandRows(array);
     final boolean[] cols = expandColumns(array);
     final List<Point2D> galaxies = new ArrayList<>(1024);
@@ -90,7 +91,8 @@ public class Year2023Day11 {
   private boolean[] expandRows(final int[][] array) {
     final boolean[] expanded = new boolean[array.length];
     for (int y = 0; y < array.length; ++y) {
-      if (Arrays.stream(array[y]).noneMatch(i -> i == '#')) {
+      if (Arrays.stream(array[y])
+                .noneMatch(i -> i == '#')) {
         expanded[y] = true;
       }
     }

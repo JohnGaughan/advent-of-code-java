@@ -39,7 +39,10 @@ public final class Year2016Day07 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return il.linesAsObjects(pc, Address::make).stream().filter(this::filterPart1).count();
+    return il.linesAsObjects(pc, Address::make)
+             .stream()
+             .filter(this::filterPart1)
+             .count();
   }
 
   private boolean filterPart1(final Address address) {
@@ -63,7 +66,10 @@ public final class Year2016Day07 {
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return il.linesAsObjects(pc, Address::make).stream().filter(this::hasSsl).count();
+    return il.linesAsObjects(pc, Address::make)
+             .stream()
+             .filter(this::hasSsl)
+             .count();
   }
 
   private boolean hasSsl(final Address address) {
@@ -75,7 +81,9 @@ public final class Year2016Day07 {
         int c = segment.codePointAt(i + 2);
         if ((a == c) && (a != b)) {
           final StringBuilder str = new StringBuilder();
-          str.appendCodePoint(b).appendCodePoint(a).appendCodePoint(b);
+          str.appendCodePoint(b)
+             .appendCodePoint(a)
+             .appendCodePoint(b);
           babs.add(str.toString());
         }
       }

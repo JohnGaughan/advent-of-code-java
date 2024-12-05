@@ -38,7 +38,11 @@ public final class Year2015Day14 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final int time = pc.getInt("time");
-    return il.linesAsObjects(pc, Rule::make).stream().mapToLong(r -> getPosition(r, time)).max().getAsLong();
+    return il.linesAsObjects(pc, Rule::make)
+             .stream()
+             .mapToLong(r -> getPosition(r, time))
+             .max()
+             .getAsLong();
   }
 
   @Solver(part = 2)
@@ -64,14 +68,20 @@ public final class Year2015Day14 {
       }
       // Increase points for each reindeer in the lead.
       for (final Map.Entry<String, Long> location : locations.entrySet()) {
-        if (location.getValue().longValue() == farthest) {
+        if (location.getValue()
+                    .longValue() == farthest) {
           final String key = location.getKey();
-          final long point = 1 + points.get(key).longValue();
+          final long point = 1 + points.get(key)
+                                       .longValue();
           points.put(key, Long.valueOf(point));
         }
       }
     }
-    return points.values().stream().mapToLong(Long::longValue).max().getAsLong();
+    return points.values()
+                 .stream()
+                 .mapToLong(Long::longValue)
+                 .max()
+                 .getAsLong();
   }
 
   /** Get a reindeer's position after a given amount of elapsed time. */

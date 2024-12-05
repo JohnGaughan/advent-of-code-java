@@ -124,7 +124,8 @@ public class Year2022Day21 {
 
     // Get constants first
     final boolean humanIsVariable = pc.getBoolean("HumanIsVariable");
-    for (final var iter = rawMonkeys.entrySet().iterator(); iter.hasNext();) {
+    for (final var iter = rawMonkeys.entrySet()
+                                    .iterator(); iter.hasNext();) {
       var entry = iter.next();
       final String[] value = entry.getValue();
       if (value.length == 1) {
@@ -141,7 +142,8 @@ public class Year2022Day21 {
 
     // Loop over the map and construct whatever nodes we can each pass, until it is empty.
     while (!rawMonkeys.isEmpty()) {
-      for (final var iter = rawMonkeys.entrySet().iterator(); iter.hasNext();) {
+      for (final var iter = rawMonkeys.entrySet()
+                                      .iterator(); iter.hasNext();) {
         var entry = iter.next();
         final String[] value = entry.getValue();
         if (monkeys.containsKey(value[0]) && monkeys.containsKey(value[2])) {
@@ -277,7 +279,10 @@ public class Year2022Day21 {
     });
 
     static Operation forString(final String str) {
-      return Arrays.stream(values()).filter(o -> o.id.equals(str)).findFirst().get();
+      return Arrays.stream(values())
+                   .filter(o -> o.id.equals(str))
+                   .findFirst()
+                   .get();
     }
 
     private static final Map<Operation, Operation> opposites = Map.of(ADD, SUB, SUB, ADD, MUL, DIV, DIV, MUL);

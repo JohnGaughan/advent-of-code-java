@@ -52,29 +52,45 @@ public class Year2022Day11 {
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     final SortedMap<Integer, Monkey> monkeys = getInput(pc);
-    final long lcm = monkeys.values().stream().mapToLong(Monkey::divisible).reduce(MyLongMath::lcm).getAsLong();
+    final long lcm = monkeys.values()
+                            .stream()
+                            .mapToLong(Monkey::divisible)
+                            .reduce(MyLongMath::lcm)
+                            .getAsLong();
     return calculate(monkeys, 10_000, n -> n % lcm);
   }
 
   private long calculate(final SortedMap<Integer, Monkey> monkeys, final long rounds, final LongUnaryOperator reduction) {
     final Map<Integer, Long> inspections = new HashMap<>();
-    monkeys.keySet().forEach(k -> inspections.put(k, Long.valueOf(0)));
+    monkeys.keySet()
+           .forEach(k -> inspections.put(k, Long.valueOf(0)));
     for (int round = 0; round < rounds; ++round) {
       for (final Monkey m : monkeys.values()) {
         for (final Long item : m.items()) {
-          final long worry = reduction.applyAsLong(m.f().applyAsLong(item.longValue()));
-          monkeys.get(m.getTarget(worry)).items().add(Long.valueOf(worry));
+          final long worry = reduction.applyAsLong(m.f()
+                                                    .applyAsLong(item.longValue()));
+          monkeys.get(m.getTarget(worry))
+                 .items()
+                 .add(Long.valueOf(worry));
         }
-        inspections.compute(m.id, (k, v) -> Long.valueOf(v.longValue() + m.items().size()));
-        m.items().clear();
+        inspections.compute(m.id, (k, v) -> Long.valueOf(v.longValue() + m.items()
+                                                                          .size()));
+        m.items()
+         .clear();
       }
     }
-    final long[] values = inspections.values().stream().mapToLong(Long::intValue).sorted().toArray();
+    final long[] values = inspections.values()
+                                     .stream()
+                                     .mapToLong(Long::intValue)
+                                     .sorted()
+                                     .toArray();
     return values[values.length - 2] * values[values.length - 1];
   }
 
   private SortedMap<Integer, Monkey> getInput(final PuzzleContext pc) {
-    return new TreeMap<>(il.groupsAsObjects(pc, Monkey::valueOf).stream().collect(Collectors.toMap(m -> m.id(), m -> m)));
+    return new TreeMap<>(il.groupsAsObjects(pc, Monkey::valueOf)
+                           .stream()
+                           .collect(Collectors.toMap(m -> m.id(), m -> m)));
   }
 
   private record Monkey(Integer id, List<Long> items, LongUnaryOperator f, LongPredicate test, Integer targetTrue,
@@ -96,8 +112,9 @@ public class Year2022Day11 {
       final Integer id = Integer.valueOf(first.substring(7, colon));
 
       final String second = lines.get(1);
-      final List<Long> items =
-        new ArrayList<>(Arrays.stream(SPLIT_ITEMS.split(second.substring(second.indexOf(':') + 2))).map(Long::valueOf).toList());
+      final List<Long> items = new ArrayList<>(Arrays.stream(SPLIT_ITEMS.split(second.substring(second.indexOf(':') + 2)))
+                                                     .map(Long::valueOf)
+                                                     .toList());
 
       final String[] third = SPLIT_SPACE.split(lines.get(2));
       final LongUnaryOperator f;

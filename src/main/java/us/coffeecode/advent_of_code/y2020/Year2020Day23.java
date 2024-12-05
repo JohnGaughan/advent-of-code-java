@@ -80,7 +80,8 @@ public class Year2020Day23 {
 
   private boolean contains(final int[] haystack, final int needle) {
     // Cannot inline this because needle cannot be made final.
-    return Arrays.stream(haystack).anyMatch(i -> i == needle);
+    return Arrays.stream(haystack)
+                 .anyMatch(i -> i == needle);
   }
 
   private static final class State {

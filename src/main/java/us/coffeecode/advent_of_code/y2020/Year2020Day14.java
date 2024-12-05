@@ -52,7 +52,10 @@ public final class Year2020Day14 {
         memory.put(Long.valueOf(((MemoryUpdate) input).address), actualValue);
       }
     }
-    return memory.values().stream().mapToLong(Long::valueOf).sum();
+    return memory.values()
+                 .stream()
+                 .mapToLong(Long::valueOf)
+                 .sum();
   }
 
   @Solver(part = 2)
@@ -64,7 +67,9 @@ public final class Year2020Day14 {
     for (final Object input : getInput(pc, s -> s)) {
       if (input instanceof String) {
         bitmask = (String) input;
-        final int bits = bitmask.replace("1", "").replace("0", "").length();
+        final int bits = bitmask.replace("1", "")
+                                .replace("0", "")
+                                .length();
         maxReplacement = 1 << bits;
       }
       else if (bitmask == null) {
@@ -106,7 +111,10 @@ public final class Year2020Day14 {
         }
       }
     }
-    return memory.values().stream().mapToLong(Long::valueOf).sum();
+    return memory.values()
+                 .stream()
+                 .mapToLong(Long::valueOf)
+                 .sum();
   }
 
   /** Get the input data for this solution. */

@@ -58,7 +58,8 @@ public final class CircularIntBuffer {
     if (str.length() == 0) {
       throw new IllegalArgumentException("Zero length string");
     }
-    buffer = str.codePoints().toArray();
+    buffer = str.codePoints()
+                .toArray();
   }
 
   /**
@@ -92,7 +93,11 @@ public final class CircularIntBuffer {
   @Override
   public String toString() {
     final StringBuilder str = new StringBuilder(buffer.length * 2 + 10);
-    str.append("[").append(pointer).append(", ").append(Arrays.toString(buffer)).append("]");
+    str.append("[")
+       .append(pointer)
+       .append(", ")
+       .append(Arrays.toString(buffer))
+       .append("]");
     return str.toString();
   }
 }

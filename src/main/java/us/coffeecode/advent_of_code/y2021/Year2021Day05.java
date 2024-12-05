@@ -51,18 +51,24 @@ public final class Year2021Day05 {
 
   private long calculate(final PuzzleContext pc, final Predicate<Segment> filter) {
     final Map<Point2D, Boolean> points = new HashMap<>(1 << 18);
-    il.linesAsObjects(pc, this::parse).stream().filter(filter).forEach(seg -> {
-      int x = seg.start.getX();
-      int y = seg.start.getY();
-      for (int i = 0; i < seg.length; ++i) {
-        final Point2D key = new Point2D(x, y);
-        points.computeIfPresent(key, (k, v) -> TRUE);
-        points.putIfAbsent(key, FALSE);
-        x += seg.dx;
-        y += seg.dy;
-      }
-    });
-    return points.values().stream().filter(b -> TRUE.equals(b)).count();
+    il.linesAsObjects(pc, this::parse)
+      .stream()
+      .filter(filter)
+      .forEach(seg -> {
+        int x = seg.start.getX();
+        int y = seg.start.getY();
+        for (int i = 0; i < seg.length; ++i) {
+          final Point2D key = new Point2D(x, y);
+          points.computeIfPresent(key, (k, v) -> TRUE);
+          points.putIfAbsent(key, FALSE);
+          x += seg.dx;
+          y += seg.dy;
+        }
+      });
+    return points.values()
+                 .stream()
+                 .filter(b -> TRUE.equals(b))
+                 .count();
   }
 
   private Segment parse(final String line) {

@@ -48,7 +48,9 @@ public class Year2022Day17 {
   private static final int LOOKBACK = 10;
 
   public long calculate(final PuzzleContext pc, final long rounds) {
-    final int[] input = il.fileAsString(pc).codePoints().toArray();
+    final int[] input = il.fileAsString(pc)
+                          .codePoints()
+                          .toArray();
     int wind = 0;
     byte[] tower = new byte[3 << 20];
     int height = 0;

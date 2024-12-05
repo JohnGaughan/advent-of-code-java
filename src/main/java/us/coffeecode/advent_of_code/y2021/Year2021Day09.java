@@ -72,7 +72,11 @@ public final class Year2021Day09 {
     }
 
     sizes.sort(null);
-    return sizes.reversed().stream().limit(3).mapToLong(Integer::intValue).reduce(1, (a, b) -> (a * b));
+    return sizes.reversed()
+                .stream()
+                .limit(3)
+                .mapToLong(Integer::intValue)
+                .reduce(1, (a, b) -> (a * b));
   }
 
   private Integer processBasinAt(final int[][] map, final Point2D point) {
@@ -81,7 +85,8 @@ public final class Year2021Day09 {
     final Set<Point2D> processing = new HashSet<>(32);
     processing.add(point);
     while (!processing.isEmpty()) {
-      final Point2D next = processing.iterator().next();
+      final Point2D next = processing.iterator()
+                                     .next();
       processed.add(next);
       processing.remove(next);
       if (next.get(map) != 9) {

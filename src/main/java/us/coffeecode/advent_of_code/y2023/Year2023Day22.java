@@ -94,18 +94,27 @@ public class Year2023Day22 {
   /** Get the bricks after they have fallen onto the ground. */
   private List<Brick> getBricks(final PuzzleContext pc) {
     // Load the input, which is a snapshot of the bricks falling in mid-air.
-    final List<Range3D> bricksInAir =
-      il.linesAsObjects(pc, s -> new Range3D(Arrays.stream(SPLIT.split(s)).mapToInt(Integer::parseInt).toArray()));
+    final List<Range3D> bricksInAir = il.linesAsObjects(pc, s -> new Range3D(Arrays.stream(SPLIT.split(s))
+                                                                                   .mapToInt(Integer::parseInt)
+                                                                                   .toArray()));
 
     // Construct a two-dimensional array that tracks the current height of each X/Y coordinate. As the bricks fall, this
     // tracks the floor of each coordinate so we know how far each brick can fall.
-    final int x_max = 1 + bricksInAir.stream().mapToInt(Range3D::getX2).max().getAsInt();
-    final int y_max = 1 + bricksInAir.stream().mapToInt(Range3D::getY2).max().getAsInt();
+    final int x_max = 1 + bricksInAir.stream()
+                                     .mapToInt(Range3D::getX2)
+                                     .max()
+                                     .getAsInt();
+    final int y_max = 1 + bricksInAir.stream()
+                                     .mapToInt(Range3D::getY2)
+                                     .max()
+                                     .getAsInt();
     final int[][] field = new int[y_max][x_max];
 
     // Build a mutable list of the bricks and sort them by Z1. Iteration order will then be by layer starting at the
     // ground and moving up.
-    final List<Brick> bricks = bricksInAir.stream().map(Brick::new).collect(Collectors.toCollection(ArrayList::new));
+    final List<Brick> bricks = bricksInAir.stream()
+                                          .map(Brick::new)
+                                          .collect(Collectors.toCollection(ArrayList::new));
     Collections.sort(bricks);
 
     // Iterate each brick and make it fall. At any point in iteration, there are no in-air bricks below the current

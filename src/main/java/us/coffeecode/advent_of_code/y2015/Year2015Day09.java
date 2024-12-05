@@ -45,13 +45,19 @@ public final class Year2015Day09 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final Map<String, Map<String, Long>> distances = getInput(pc);
-    return calculateDistances(distances).stream().mapToLong(Long::longValue).min().getAsLong();
+    return calculateDistances(distances).stream()
+                                        .mapToLong(Long::longValue)
+                                        .min()
+                                        .getAsLong();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     final Map<String, Map<String, Long>> distances = getInput(pc);
-    return calculateDistances(distances).stream().mapToLong(Long::longValue).max().getAsLong();
+    return calculateDistances(distances).stream()
+                                        .mapToLong(Long::longValue)
+                                        .max()
+                                        .getAsLong();
   }
 
   /** Calculate all unique distances. */
@@ -70,7 +76,9 @@ public final class Year2015Day09 {
     String previousLocation = null;
     for (final String location : route) {
       if (previousLocation != null) {
-        distance += distances.get(previousLocation).get(location).longValue();
+        distance += distances.get(previousLocation)
+                             .get(location)
+                             .longValue();
       }
       previousLocation = location;
     }
@@ -91,8 +99,10 @@ public final class Year2015Day09 {
       if (!distances.containsKey(tokens[1])) {
         distances.put(tokens[1], new HashMap<>());
       }
-      distances.get(tokens[0]).put(tokens[1], distance);
-      distances.get(tokens[1]).put(tokens[0], distance);
+      distances.get(tokens[0])
+               .put(tokens[1], distance);
+      distances.get(tokens[1])
+               .put(tokens[0], distance);
     }
     return distances;
   }

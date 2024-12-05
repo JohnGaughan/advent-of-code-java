@@ -72,7 +72,11 @@ public class InputLocator {
     final AnswerKey key = new AnswerKey(year, day, part);
     ensureLoaded(key);
     if (answers.containsKey(key)) {
-      return answers.get(key).keySet().stream().filter(s -> s.endsWith(".txt")).toArray(String[]::new);
+      return answers.get(key)
+                    .keySet()
+                    .stream()
+                    .filter(s -> s.endsWith(".txt"))
+                    .toArray(String[]::new);
     }
     return new String[0];
   }
@@ -94,7 +98,8 @@ public class InputLocator {
    */
   private void ensureLoaded(final AnswerKey key) {
     if (!answers.containsKey(key)) {
-      final File file = getInputBase(key.year, key.day).resolve("part" + key.part + ".answers.properties").toFile();
+      final File file = getInputBase(key.year, key.day).resolve("part" + key.part + ".answers.properties")
+                                                       .toFile();
       final Map<String, String> value = loadMap(file);
       answers.put(key, value);
     }
@@ -111,7 +116,8 @@ public class InputLocator {
    */
   private void ensureLoaded(final ParameterKey key) {
     if (!parameters.containsKey(key)) {
-      final File file = getInputBase(key.year, key.day).resolve("parameters.properties").toFile();
+      final File file = getInputBase(key.year, key.day).resolve("parameters.properties")
+                                                       .toFile();
       final Map<String, String> value = loadMap(file);
       parameters.put(key, value);
     }

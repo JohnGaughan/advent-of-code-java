@@ -124,7 +124,8 @@ public final class Year2020Day08 {
       else {
         target = Integer.valueOf(instructionNumber.intValue() + instruction.arg);
       }
-      mapping.get(target).add(instructionNumber);
+      mapping.get(target)
+             .add(instructionNumber);
     }
     return mapping;
   }

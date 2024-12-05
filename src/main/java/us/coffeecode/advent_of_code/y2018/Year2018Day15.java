@@ -210,7 +210,8 @@ public final class Year2018Day15 {
       if (!result.containsKey(end)) {
         result.put(end, new HashSet<>());
       }
-      result.get(end).add(path);
+      result.get(end)
+            .add(path);
     }
     final var firstEntry = result.firstEntry();
     return (firstEntry == null) ? Collections.emptySet() : firstEntry.getValue();
@@ -239,7 +240,8 @@ public final class Year2018Day15 {
       if (!endPointsToPaths.containsKey(p)) {
         endPointsToPaths.put(p, new HashSet<>());
       }
-      endPointsToPaths.get(p).add(path);
+      endPointsToPaths.get(p)
+                      .add(path);
     }
     // For each point, get the path that is first in reading order. Use this one. At the same time, update that path's
     // visited points to include all other paths that are equivalent to it.
@@ -248,7 +250,8 @@ public final class Year2018Day15 {
       Path path = null;
       final Set<Point2D> visited = new HashSet<>();
       for (final Path candidate : endPointsToPaths.get(endPoint)) {
-        if ((path == null) || (candidate.start().compareTo(path.start()) < 0)) {
+        if ((path == null) || (candidate.start()
+                                        .compareTo(path.start()) < 0)) {
           path = candidate;
         }
         visited.addAll(candidate.visited);
@@ -367,7 +370,8 @@ public final class Year2018Day15 {
 
     @Override
     public String toString() {
-      return force.name().substring(0, 1);
+      return force.name()
+                  .substring(0, 1);
     }
 
   }
@@ -384,7 +388,8 @@ public final class Year2018Day15 {
 
     State(final List<String> input) {
       Y = input.size();
-      X = input.getFirst().length();
+      X = input.getFirst()
+               .length();
       walls = new boolean[Y][X];
       actors = new Actor[Y][X];
       for (int y = 0; y < Y; ++y) {

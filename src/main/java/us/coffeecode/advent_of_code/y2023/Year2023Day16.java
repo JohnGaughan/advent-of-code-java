@@ -43,13 +43,15 @@ public class Year2023Day16 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    final int[][] grid = il.linesAs2dIntArray(pc, s -> s.codePoints().toArray());
+    final int[][] grid = il.linesAs2dIntArray(pc, s -> s.codePoints()
+                                                        .toArray());
     return countEnergized(grid, new Point2D(0, 0), Direction.E);
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    final int[][] grid = il.linesAs2dIntArray(pc, s -> s.codePoints().toArray());
+    final int[][] grid = il.linesAs2dIntArray(pc, s -> s.codePoints()
+                                                        .toArray());
     long answer = Long.MIN_VALUE;
     for (int y = 0; y < grid.length; ++y) {
       answer = Math.max(answer, countEnergized(grid, new Point2D(0, y), Direction.E));

@@ -53,17 +53,23 @@ public final class Year2017Day08 {
     long max = Long.MIN_VALUE;
     for (final Instruction inst : il.linesAsObjects(pc, Instruction::make)) {
       registers.putIfAbsent(inst.compLeft, DEFAULT_REGISTER_VALUE);
-      long left = registers.get(inst.compLeft).intValue();
+      long left = registers.get(inst.compLeft)
+                           .intValue();
       if (inst.comp.eval(left, inst.compRight)) {
         registers.putIfAbsent(inst.reg, DEFAULT_REGISTER_VALUE);
-        long value = registers.get(inst.reg).intValue();
+        long value = registers.get(inst.reg)
+                              .intValue();
         value += inst.amt;
         max = Math.max(value, max);
         registers.put(inst.reg, Long.valueOf(value));
       }
     }
     if (pc.getBoolean("ReturnMaxFinalValue")) {
-      return registers.values().stream().mapToLong(Long::longValue).max().getAsLong();
+      return registers.values()
+                      .stream()
+                      .mapToLong(Long::longValue)
+                      .max()
+                      .getAsLong();
     }
     return max;
   }
@@ -114,7 +120,10 @@ public final class Year2017Day08 {
     };
 
     static Comparison forSymbol(final String symbol) {
-      return Arrays.stream(values()).filter(c -> c.symbol.equals(symbol)).findFirst().get();
+      return Arrays.stream(values())
+                   .filter(c -> c.symbol.equals(symbol))
+                   .findFirst()
+                   .get();
     }
 
     private final String symbol;

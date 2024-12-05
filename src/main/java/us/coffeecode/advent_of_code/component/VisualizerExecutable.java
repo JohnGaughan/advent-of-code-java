@@ -57,16 +57,21 @@ implements Callable<Collection<IVisualizationResult>> {
       throw new IllegalArgumentException("Visualization results are null.");
     }
     else if (!(results instanceof Collection)) {
-      throw new IllegalArgumentException(
-        "Visualization results is not an instance of Collection [" + results.getClass().getName() + "].");
+      throw new IllegalArgumentException("Visualization results is not an instance of Collection [" + results.getClass()
+                                                                                                             .getName()
+        + "].");
     }
     final Collection<?> c = (Collection<?>) results;
-    if (c.stream().anyMatch(o -> o == null)) {
+    if (c.stream()
+         .anyMatch(o -> o == null)) {
       throw new IllegalArgumentException("Visualization results exist but contain at least one null value.");
     }
-    final String badClasses =
-      c.stream().filter(o -> !(o instanceof IVisualizationResult)).map(o -> o.getClass().getName()).distinct().collect(
-        Collectors.joining(", "));
+    final String badClasses = c.stream()
+                               .filter(o -> !(o instanceof IVisualizationResult))
+                               .map(o -> o.getClass()
+                                          .getName())
+                               .distinct()
+                               .collect(Collectors.joining(", "));
     if (badClasses.length() > 0) {
       throw new IllegalArgumentException(
         "Visualization results is a Collection, but contains invalid elements with classes [" + badClasses + "].");

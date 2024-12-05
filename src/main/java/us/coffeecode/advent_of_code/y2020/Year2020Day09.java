@@ -44,13 +44,22 @@ public final class Year2020Day09 {
     final long n = getPart1Answer(pc, numbers);
     int lower = 0;
     int upper = 1;
-    long sum = numbers.get(lower).longValue() + numbers.get(upper).longValue();
+    long sum = numbers.get(lower)
+                      .longValue()
+      + numbers.get(upper)
+               .longValue();
     // Alternative between growing the upper bound and shrinking the lower bound until we find a range.
     while (upper < numbers.size()) {
       if (sum == n) {
         final List<Long> range = numbers.subList(lower, upper + 1);
-        final long min = range.stream().mapToLong(Long::longValue).min().getAsLong();
-        final long max = range.stream().mapToLong(Long::longValue).max().getAsLong();
+        final long min = range.stream()
+                              .mapToLong(Long::longValue)
+                              .min()
+                              .getAsLong();
+        final long max = range.stream()
+                              .mapToLong(Long::longValue)
+                              .max()
+                              .getAsLong();
         return min + max;
       }
 
@@ -60,12 +69,14 @@ public final class Year2020Day09 {
         if (upper < numbers.size()) {
           // Technically, upper can be out of bounds here. This check will prevent an exception and allow the program to
           // return incorrect results instead.
-          sum += numbers.get(upper).longValue();
+          sum += numbers.get(upper)
+                        .longValue();
         }
       }
       else {
         // Sum is too high, let go of numbers.
-        sum -= numbers.get(lower).longValue();
+        sum -= numbers.get(lower)
+                      .longValue();
         ++lower;
       }
     }
@@ -76,7 +87,8 @@ public final class Year2020Day09 {
   private long getPart1Answer(final PuzzleContext pc, final List<Long> numbers) {
     final int window = pc.getInt("window");
     for (int i = window; i < numbers.size(); ++i) {
-      final long n = numbers.get(i).longValue();
+      final long n = numbers.get(i)
+                            .longValue();
       if (!canSum(n, numbers.subList(i - window, i))) {
         return n;
       }
@@ -88,8 +100,10 @@ public final class Year2020Day09 {
   private boolean canSum(final long n, final List<Long> numbers) {
     for (int i = 0; i < numbers.size() - 1; ++i) {
       for (int j = i + 1; j < numbers.size(); ++j) {
-        final long n_i = numbers.get(i).longValue();
-        final long n_j = numbers.get(j).longValue();
+        final long n_i = numbers.get(i)
+                                .longValue();
+        final long n_j = numbers.get(j)
+                                .longValue();
         if (n == n_i + n_j) {
           return true;
         }

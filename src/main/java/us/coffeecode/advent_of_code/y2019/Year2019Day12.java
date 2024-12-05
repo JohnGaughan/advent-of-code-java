@@ -40,7 +40,8 @@ public final class Year2019Day12 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    final Moon[] moons = il.linesAsObjects(pc, Moon::new).toArray(Moon[]::new);
+    final Moon[] moons = il.linesAsObjects(pc, Moon::new)
+                           .toArray(Moon[]::new);
     final int iterations = pc.getInt("iterations");
     for (int iteration = 0; iteration < iterations; ++iteration) {
       // Apply gravity to velocity
@@ -66,7 +67,9 @@ public final class Year2019Day12 {
         }
       }
     }
-    return Arrays.stream(moons).mapToInt(Moon::getEnergy).sum();
+    return Arrays.stream(moons)
+                 .mapToInt(Moon::getEnergy)
+                 .sum();
   }
 
   @Solver(part = 2)
@@ -76,7 +79,8 @@ public final class Year2019Day12 {
 
     for (int dimension = 0; dimension < DIMENSIONS; ++dimension) {
       // Find the period of each dimension separately.
-      final Moon[] moons = il.linesAsObjects(pc, Moon::new).toArray(Moon[]::new);
+      final Moon[] moons = il.linesAsObjects(pc, Moon::new)
+                             .toArray(Moon[]::new);
       // Make it big enough to avoid resizing later. Shaves off 20% time.
       final Set<State> seen = new HashSet<>(1 << 19);
       State state = new State(moons, dimension);
@@ -105,7 +109,9 @@ public final class Year2019Day12 {
       periods[dimension] = seen.size();
     }
 
-    return Arrays.stream(periods).limit(3).reduce(1, MyLongMath::lcm);
+    return Arrays.stream(periods)
+                 .limit(3)
+                 .reduce(1, MyLongMath::lcm);
   }
 
   /**
@@ -164,8 +170,12 @@ public final class Year2019Day12 {
     }
 
     int getEnergy() {
-      final int potential = Arrays.stream(location).map(Math::abs).sum();
-      final int kinetic = Arrays.stream(velocity).map(Math::abs).sum();
+      final int potential = Arrays.stream(location)
+                                  .map(Math::abs)
+                                  .sum();
+      final int kinetic = Arrays.stream(velocity)
+                                .map(Math::abs)
+                                .sum();
       return potential * kinetic;
     }
 

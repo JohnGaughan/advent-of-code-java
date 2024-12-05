@@ -45,14 +45,20 @@ public class Year2023Day25 {
     // Parse the input directly into the graph.
     for (final String line : il.lines(pc)) {
       final String[] tokens = SPLIT.split(line);
-      Arrays.stream(tokens).forEach(s -> graph.addVertex(s));
-      Arrays.stream(tokens).skip(1).forEach(s -> graph.addEdge(tokens[0], s));
+      Arrays.stream(tokens)
+            .forEach(s -> graph.addVertex(s));
+      Arrays.stream(tokens)
+            .skip(1)
+            .forEach(s -> graph.addEdge(tokens[0], s));
     }
 
     // Delegate to JGraphT to do the hard work.
     var cutter = new StoerWagnerMinimumCut<>(graph);
-    final long cut1 = cutter.minCut().size();
-    return (graph.vertexSet().size() - cut1) * cut1;
+    final long cut1 = cutter.minCut()
+                            .size();
+    return (graph.vertexSet()
+                 .size()
+      - cut1) * cut1;
   }
 
   /** Split each line into vertex names. */

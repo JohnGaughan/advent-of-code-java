@@ -48,8 +48,11 @@ public class Year2022Day15 {
   public long calculatePart1(final PuzzleContext pc) {
     final int y = pc.getInt("y");
     final List<Input> inputs = il.linesAsObjects(pc, Input::make);
-    final Set<Integer> beacons =
-      inputs.stream().filter(p -> y == p.beacon.getY()).mapToInt(p -> p.beacon.getX()).boxed().collect(Collectors.toSet());
+    final Set<Integer> beacons = inputs.stream()
+                                       .filter(p -> y == p.beacon.getY())
+                                       .mapToInt(p -> p.beacon.getX())
+                                       .boxed()
+                                       .collect(Collectors.toSet());
     final List<Range> ranges = new ArrayList<>();
     for (final Input input : inputs) {
       final int rowDiff = Math.abs(input.sensor.getY() - y);
@@ -68,7 +71,10 @@ public class Year2022Day15 {
         }
       }
     }
-    return Range.merge(ranges).stream().mapToLong(Range::sizeInclusive).sum();
+    return Range.merge(ranges)
+                .stream()
+                .mapToLong(Range::sizeInclusive)
+                .sum();
   }
 
   @Solver(part = 2)
@@ -77,7 +83,8 @@ public class Year2022Day15 {
 
     for (final Point2D candidate : getIntersections(pc, inputs)) {
       // If this intersection is not within any sensor's area, it is the unique solution.
-      if (inputs.stream().noneMatch(p -> p.sensor.getManhattanDistance(candidate) <= p.range)) {
+      if (inputs.stream()
+                .noneMatch(p -> p.sensor.getManhattanDistance(candidate) <= p.range)) {
         return candidate.getX() * X_MULTIPLIER + candidate.getY();
       }
     }

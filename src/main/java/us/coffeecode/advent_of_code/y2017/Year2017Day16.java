@@ -49,7 +49,9 @@ public final class Year2017Day16 {
 
   private String doIterations(final PuzzleContext pc, final int iterations) {
     final int size = pc.getInt("programs");
-    final int[] programs = IntStream.range(0, size).map(i -> i + 'a').toArray();
+    final int[] programs = IntStream.range(0, size)
+                                    .map(i -> i + 'a')
+                                    .toArray();
     final Iterable<DanceMove> input = il.fileAsObjectsFromSplit(pc, SEPARATOR, DanceMove::make);
     final List<String> cache = new ArrayList<>(48);
     for (int i = 0; i < iterations; ++i) {

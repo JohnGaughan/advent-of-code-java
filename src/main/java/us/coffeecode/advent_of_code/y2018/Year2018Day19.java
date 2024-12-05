@@ -67,7 +67,8 @@ public final class Year2018Day19 {
     for (long i = 0; i < maxIterations && -1 < state.register[state.ip_reg]
       && state.register[state.ip_reg] < state.instructions.size(); ++i) {
       final Instruction inst = state.instructions.get((int) state.register[state.ip_reg]);
-      inst.opcode().apply(state.register, inst.a(), inst.b(), inst.c());
+      inst.opcode()
+          .apply(state.register, inst.a(), inst.b(), inst.c());
       ++state.register[state.ip_reg];
     }
   }
@@ -87,7 +88,9 @@ public final class Year2018Day19 {
         ++i;
       }
     }
-    return factors.stream().mapToInt(Integer::intValue).toArray();
+    return factors.stream()
+                  .mapToInt(Integer::intValue)
+                  .toArray();
   }
 
   private int[] getAllFactors(final int[] primeFactors) {
@@ -103,6 +106,8 @@ public final class Year2018Day19 {
       }
       factors.add(Integer.valueOf(factor));
     }
-    return factors.stream().mapToInt(Integer::intValue).toArray();
+    return factors.stream()
+                  .mapToInt(Integer::intValue)
+                  .toArray();
   }
 }

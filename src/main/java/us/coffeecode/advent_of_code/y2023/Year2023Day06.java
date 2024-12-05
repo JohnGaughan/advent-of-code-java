@@ -41,18 +41,26 @@ public class Year2023Day06 {
   public long calculatePart1(final PuzzleContext pc) {
     // Get a 2D array containing only the numbers in the input. Then build races, count each race's number of
     // distance improvements, and multiply the counts together.
-    final long[][] input =
-      il.linesAs2dLongArray(pc, s -> Arrays.stream(SPLIT.split(s)).skip(1).mapToLong(Long::parseLong).toArray());
-    return IntStream.range(0, input[0].length).mapToObj(i -> new Race(input[0][i], input[1][i])).mapToLong(
-      this::countWinners).reduce(1, (a, b) -> a * b);
+    final long[][] input = il.linesAs2dLongArray(pc, s -> Arrays.stream(SPLIT.split(s))
+                                                                .skip(1)
+                                                                .mapToLong(Long::parseLong)
+                                                                .toArray());
+    return IntStream.range(0, input[0].length)
+                    .mapToObj(i -> new Race(input[0][i], input[1][i]))
+                    .mapToLong(this::countWinners)
+                    .reduce(1, (a, b) -> a * b);
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     // Get an array containing both smashed together values, then count that single race's number of ways to beat the
     // previous best distance.
-    final long[] array = il.lines(pc).stream().mapToLong(
-      s -> Long.parseLong(Arrays.stream(SPLIT.split(s)).skip(1).collect(Collectors.joining()))).toArray();
+    final long[] array = il.lines(pc)
+                           .stream()
+                           .mapToLong(s -> Long.parseLong(Arrays.stream(SPLIT.split(s))
+                                                                .skip(1)
+                                                                .collect(Collectors.joining())))
+                           .toArray();
     return countWinners(new Race(array[0], array[1]));
   }
 
@@ -62,7 +70,9 @@ public class Year2023Day06 {
    * spent holding the boat multiplied by the remaining time after letting go.
    */
   private long countWinners(final Race race) {
-    return LongStream.range(1, race.time).filter(i -> (i * (race.time - i)) > race.distance).count();
+    return LongStream.range(1, race.time)
+                     .filter(i -> (i * (race.time - i)) > race.distance)
+                     .count();
   }
 
   /** Represents one race: the time available, and the previous farthest distance traveled. */

@@ -72,7 +72,9 @@ public class Year2020Day21 {
     // Now count how many times the ingredients appear.
     long counter = 0;
     for (final String ingredient : ingredients) {
-      counter += foods.stream().filter(f -> f.ingredients.contains(ingredient)).count();
+      counter += foods.stream()
+                      .filter(f -> f.ingredients.contains(ingredient))
+                      .count();
     }
 
     return counter;
@@ -87,10 +89,14 @@ public class Year2020Day21 {
     // mapping. Remove its ingredient from the set of each other allergen's candidates.
     final SortedMap<String, String> definitive = new TreeMap<>();
     while (!mapping.isEmpty()) {
-      for (final Iterator<Map.Entry<String, Set<String>>> iter = mapping.entrySet().iterator(); iter.hasNext();) {
+      for (final Iterator<Map.Entry<String, Set<String>>> iter = mapping.entrySet()
+                                                                        .iterator(); iter.hasNext();) {
         final Map.Entry<String, Set<String>> entry = iter.next();
-        if (entry.getValue().size() == 1) {
-          final String ingredient = entry.getValue().iterator().next();
+        if (entry.getValue()
+                 .size() == 1) {
+          final String ingredient = entry.getValue()
+                                         .iterator()
+                                         .next();
           definitive.put(entry.getKey(), ingredient);
           iter.remove();
           for (final Collection<String> ingredients : mapping.values()) {
@@ -101,7 +107,9 @@ public class Year2020Day21 {
     }
 
     // We are using a sorted map that orders on the allergen, so combine the values with commas and that is the answer.
-    return definitive.values().stream().collect(Collectors.joining(","));
+    return definitive.values()
+                     .stream()
+                     .collect(Collectors.joining(","));
   }
 
   /**
@@ -116,12 +124,14 @@ public class Year2020Day21 {
         // If we have seen this allergen before, we can reduce the possible ingredients by computing the intersection of
         // ingredients.
         if (mapping.containsKey(allergen)) {
-          mapping.get(allergen).retainAll(food.ingredients);
+          mapping.get(allergen)
+                 .retainAll(food.ingredients);
         }
         // Otherwise, all ingredients in this food are possible allergens.
         else {
           mapping.put(allergen, new HashSet<>());
-          mapping.get(allergen).addAll(food.ingredients);
+          mapping.get(allergen)
+                 .addAll(food.ingredients);
         }
       }
     }
@@ -144,8 +154,10 @@ public class Year2020Day21 {
 
     static Food make(final String input) {
       final String[] parts = SPLIT_LINE.split(input.substring(0, input.length() - 1));
-      return new Food(Arrays.stream(SPLIT_INGREDIENTS.split(parts[0])).collect(Collectors.toSet()),
-        Arrays.stream(SPLIT_ALLERGENS.split(parts[1])).collect(Collectors.toSet()));
+      return new Food(Arrays.stream(SPLIT_INGREDIENTS.split(parts[0]))
+                            .collect(Collectors.toSet()),
+        Arrays.stream(SPLIT_ALLERGENS.split(parts[1]))
+              .collect(Collectors.toSet()));
     }
 
   }

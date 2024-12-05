@@ -41,7 +41,8 @@ public final class Year2019Day22 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    long[] deck = LongStream.rangeClosed(0, 10006).toArray();
+    long[] deck = LongStream.rangeClosed(0, 10006)
+                            .toArray();
     for (final Input move : il.linesAsObjects(pc, this::parse)) {
       deck = move.action.applyPartOne(deck, move.arg.intValue());
     }
@@ -60,17 +61,20 @@ public final class Year2019Day22 {
     final BigInteger position = BigInteger.valueOf(2_020);
     BigInteger a = ONE;
     BigInteger b = ZERO;
-    for (final Input move : il.linesAsObjects(pc, this::parse).reversed()) {
+    for (final Input move : il.linesAsObjects(pc, this::parse)
+                              .reversed()) {
       final BigInteger x = BigInteger.valueOf(move.arg.longValue());
       Result result = move.action.applyPartTwo(a, b, x, m);
       a = result.a;
       b = result.b;
     }
     final BigInteger spin = a.modPow(rounds, m);
-    final BigInteger t1 = spin.add(m).subtract(ONE);
+    final BigInteger t1 = spin.add(m)
+                              .subtract(ONE);
     final BigInteger t2 = a.subtract(ONE);
     BigInteger answer = spin.multiply(position);
-    answer = answer.add(b.multiply(t1).multiply(t2.modPow(m.subtract(TWO), m)));
+    answer = answer.add(b.multiply(t1)
+                         .multiply(t2.modPow(m.subtract(TWO), m)));
     answer = answer.mod(m);
     return answer.longValue();
   }
@@ -117,7 +121,11 @@ public final class Year2019Day22 {
 
       @Override
       Result applyPartTwo(final BigInteger a, final BigInteger b, final BigInteger x, final BigInteger m) {
-        return new Result(a.negate().mod(m), b.add(BigInteger.ONE).negate().mod(m));
+        return new Result(a.negate()
+                           .mod(m),
+          b.add(BigInteger.ONE)
+           .negate()
+           .mod(m));
       }
     },
     CUT {
@@ -138,7 +146,8 @@ public final class Year2019Day22 {
 
       @Override
       Result applyPartTwo(final BigInteger a, final BigInteger b, final BigInteger x, final BigInteger m) {
-        return new Result(a, b.add(x).mod(m));
+        return new Result(a, b.add(x)
+                              .mod(m));
       }
     },
     DEAL_WITH_INCREMENT {
@@ -155,7 +164,10 @@ public final class Year2019Day22 {
       @Override
       Result applyPartTwo(final BigInteger a, final BigInteger b, final BigInteger x, final BigInteger m) {
         final BigInteger temp = x.modPow(m.subtract(TWO), m);
-        return new Result(a.multiply(temp).mod(m), b.multiply(temp).mod(m));
+        return new Result(a.multiply(temp)
+                           .mod(m),
+          b.multiply(temp)
+           .mod(m));
       }
     };
 

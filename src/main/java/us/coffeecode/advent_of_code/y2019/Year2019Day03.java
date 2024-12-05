@@ -45,7 +45,8 @@ public final class Year2019Day03 {
     for (final var entry : map.entrySet()) {
       final Point2D p = entry.getKey();
       if (!p.isOrigin()) {
-        if (entry.getValue().size() > 1) {
+        if (entry.getValue()
+                 .size() > 1) {
           final int distance = p.getManhattanDistance();
           result = Math.min(distance, result);
         }
@@ -60,7 +61,10 @@ public final class Year2019Day03 {
     long result = Long.MAX_VALUE;
     for (final var distances : map.values()) {
       if (distances.size() > 1) {
-        final int steps = distances.get(Wire.A).intValue() + distances.get(Wire.B).intValue();
+        final int steps = distances.get(Wire.A)
+                                   .intValue()
+          + distances.get(Wire.B)
+                     .intValue();
         result = Math.min(steps, result);
       }
     }
@@ -113,8 +117,9 @@ public final class Year2019Day03 {
 
   /** Get the input data for this solution. */
   private List<List<Step>> getInput(final PuzzleContext pc) {
-    return il.linesAsObjects(pc,
-      s -> Arrays.stream(SPLIT.split(s)).map(t -> new Step(t.codePointAt(0), Integer.parseInt(t.substring(1)))).toList());
+    return il.linesAsObjects(pc, s -> Arrays.stream(SPLIT.split(s))
+                                            .map(t -> new Step(t.codePointAt(0), Integer.parseInt(t.substring(1))))
+                                            .toList());
   }
 
   private static enum Wire {

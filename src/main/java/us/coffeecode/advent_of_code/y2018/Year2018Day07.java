@@ -118,9 +118,12 @@ public final class Year2018Day07 {
     // Construct a reverse digraph, directed toward where we need to start. Not all nodes are defined in the input, so
     // add them all first.
     final Map<Integer, Node> nodes = new HashMap<>();
-    for (final Integer[] pair : il.lines(pc).stream().map(
-      s -> Arrays.stream(new int[] { s.codePointAt(5), s.codePointAt(36) }).boxed().toArray(Integer[]::new)).toArray(
-        Integer[][]::new)) {
+    for (final Integer[] pair : il.lines(pc)
+                                  .stream()
+                                  .map(s -> Arrays.stream(new int[] { s.codePointAt(5), s.codePointAt(36) })
+                                                  .boxed()
+                                                  .toArray(Integer[]::new))
+                                  .toArray(Integer[][]::new)) {
       nodes.computeIfAbsent(pair[0], i -> new Node(i.intValue()));
       nodes.computeIfAbsent(pair[1], i -> new Node(i.intValue()));
       nodes.get(pair[1]).targets.add(pair[0]);

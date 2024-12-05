@@ -46,7 +46,10 @@ public final class Year2020Day16 {
     final Input input = getInput(il.groups(pc));
     long errorRate = 0;
     for (int[] ticket : input.otherTickets) {
-      errorRate += Arrays.stream(ticket).map(i -> Arrays.stream(input.fields).anyMatch(f -> f.validFor(i)) ? 0 : i).sum();
+      errorRate += Arrays.stream(ticket)
+                         .map(i -> Arrays.stream(input.fields)
+                                         .anyMatch(f -> f.validFor(i)) ? 0 : i)
+                         .sum();
     }
     return errorRate;
   }
@@ -57,13 +60,20 @@ public final class Year2020Day16 {
     final Field[] fields = input.fields;
 
     // First, remove all tickets that are invalid
-    final Collection<int[]> validTickets = new ArrayList<>(input.otherTickets.stream().filter(
-      vt -> Arrays.stream(vt).allMatch(t -> Arrays.stream(fields).anyMatch(f -> f.validFor(t)))).toList());
+    final Collection<int[]> validTickets = new ArrayList<>(input.otherTickets.stream()
+                                                                             .filter(vt -> Arrays.stream(vt)
+                                                                                                 .allMatch(
+                                                                                                   t -> Arrays.stream(fields)
+                                                                                                              .anyMatch(
+                                                                                                                f -> f.validFor(
+                                                                                                                  t))))
+                                                                             .toList());
     validTickets.add(input.myTicket);
 
     // Remove field mappings that cannot be valid.
     for (final Field field : fields) {
-      validTickets.stream().forEach(ticket -> field.removeImpossibleIndices(ticket));
+      validTickets.stream()
+                  .forEach(ticket -> field.removeImpossibleIndices(ticket));
     }
 
     /*
@@ -71,10 +81,12 @@ public final class Year2020Day16 {
      * data. Find a field that has only one valid index. Remove that index from all the other fields. Repeat until every
      * field has only a single valid index: the solution.
      */
-    while (Arrays.stream(fields).anyMatch(f -> f.validIndices.size() != 1)) {
+    while (Arrays.stream(fields)
+                 .anyMatch(f -> f.validIndices.size() != 1)) {
       for (final Field f1 : fields) {
         if (f1.validIndices.size() == 1) {
-          final Integer removed = f1.validIndices.iterator().next();
+          final Integer removed = f1.validIndices.iterator()
+                                                 .next();
           for (final Field f2 : fields) {
             // Yes, use identity equality here.
             if (f1 != f2) {
@@ -89,7 +101,9 @@ public final class Year2020Day16 {
     long product = 1;
     for (Field field : fields) {
       if (field.name.startsWith("departure")) {
-        product *= input.myTicket[field.validIndices.iterator().next().intValue()];
+        product *= input.myTicket[field.validIndices.iterator()
+                                                    .next()
+                                                    .intValue()];
       }
     }
     return product;
@@ -111,18 +125,26 @@ public final class Year2020Day16 {
     final Collection<int[]> otherTickets = new ArrayList<>();
 
     for (final List<String> group : groups) {
-      if (group.getFirst().startsWith("your")) {
-        myTicket = Arrays.stream(LIST.split(group.get(1))).mapToInt(Integer::parseInt).toArray();
+      if (group.getFirst()
+               .startsWith("your")) {
+        myTicket = Arrays.stream(LIST.split(group.get(1)))
+                         .mapToInt(Integer::parseInt)
+                         .toArray();
       }
-      else if (group.getFirst().startsWith("nearby")) {
-        for (int i = 1; i < group.size(); ++i) {
-          otherTickets.add(Arrays.stream(LIST.split(group.get(i))).mapToInt(Integer::parseInt).toArray());
-        }
-      }
+      else if (group.getFirst()
+                    .startsWith("nearby")) {
+                      for (int i = 1; i < group.size(); ++i) {
+                        otherTickets.add(Arrays.stream(LIST.split(group.get(i)))
+                                               .mapToInt(Integer::parseInt)
+                                               .toArray());
+                      }
+                    }
       else {
         for (final String field : group) {
           final String[] kv = FIELD_KV.split(field);
-          final int[] value = Arrays.stream(FIELD_V.split(kv[1])).mapToInt(Integer::parseInt).toArray();
+          final int[] value = Arrays.stream(FIELD_V.split(kv[1]))
+                                    .mapToInt(Integer::parseInt)
+                                    .toArray();
           fields.add(new Field(kv[0], new Range(value[0], value[1]), new Range(value[2], value[3])));
         }
       }
@@ -185,7 +207,9 @@ public final class Year2020Day16 {
       name = n;
       range1 = r1;
       range2 = r2;
-      validIndices = IntStream.range(0, 20).boxed().collect(Collectors.toCollection(HashSet::new));
+      validIndices = IntStream.range(0, 20)
+                              .boxed()
+                              .collect(Collectors.toCollection(HashSet::new));
     }
 
     void removeImpossibleIndices(final int[] ticket) {

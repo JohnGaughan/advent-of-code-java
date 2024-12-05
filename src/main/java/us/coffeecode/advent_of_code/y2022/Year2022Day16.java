@@ -60,9 +60,13 @@ public class Year2022Day16 {
     // Visit other nodes
     long visitingPressure = 0;
     for (final var visiting : current.targets.entrySet()) {
-      if ((newVisited & visiting.getKey().longValue()) == 0) {
-        final long x = calculatePart1(valves, visiting.getKey(), newVisited | visiting.getKey().longValue(),
-          time + visiting.getValue().intValue(), timeLimit);
+      if ((newVisited & visiting.getKey()
+                                .longValue()) == 0) {
+        final long x = calculatePart1(valves, visiting.getKey(), newVisited | visiting.getKey()
+                                                                                      .longValue(),
+          time + visiting.getValue()
+                         .intValue(),
+          timeLimit);
         visitingPressure = Math.max(visitingPressure, x);
       }
     }
@@ -76,7 +80,10 @@ public class Year2022Day16 {
 
     // Get all paths and the best score for each.
     getPaths(valves, new State(0, ZERO, 0, 0), paths, new HashMap<>(1 << 16), 26);
-    final long[] keys = paths.keySet().stream().mapToLong(Long::longValue).toArray();
+    final long[] keys = paths.keySet()
+                             .stream()
+                             .mapToLong(Long::longValue)
+                             .toArray();
 
     // Get scores for all all disjoint pairs of paths
     final Set<Long> scores = new HashSet<>(1 << 12);
@@ -84,19 +91,26 @@ public class Year2022Day16 {
       for (int j = i + 1; j < keys.length; ++j) {
         // No bits in common: they did not visit any of the same nodes.
         if ((keys[i] & keys[j]) == 0) {
-          final long value1 = paths.get(Long.valueOf(keys[i])).longValue();
-          final long value2 = paths.get(Long.valueOf(keys[j])).longValue();
+          final long value1 = paths.get(Long.valueOf(keys[i]))
+                                   .longValue();
+          final long value2 = paths.get(Long.valueOf(keys[j]))
+                                   .longValue();
           scores.add(Long.valueOf(value1 + value2));
         }
       }
     }
-    return scores.stream().mapToLong(Long::longValue).max().getAsLong();
+    return scores.stream()
+                 .mapToLong(Long::longValue)
+                 .max()
+                 .getAsLong();
   }
 
   private void getPaths(final Map<Long, Valve> valves, final State state, final Map<Long, Long> paths, final Map<String, Long> seen, final int timeLimit) {
     for (final var candidate : valves.get(state.location).targets.entrySet()) {
-      final int nextTime = state.time + candidate.getValue().intValue();
-      long destination = candidate.getKey().longValue();
+      final int nextTime = state.time + candidate.getValue()
+                                                 .intValue();
+      long destination = candidate.getKey()
+                                  .longValue();
       if ((nextTime <= timeLimit) && ((state.visited & destination) == 0)) {
         final long nextVisited = (state.visited | destination);
         final Long nextPosition = candidate.getKey();
@@ -105,7 +119,8 @@ public class Year2022Day16 {
         final State next = new State(nextVisited, nextPosition, nextTime, state.score + addScore);
         final String key = next.toString();
         if (seen.containsKey(key)) {
-          final int previousScore = seen.get(key).intValue();
+          final int previousScore = seen.get(key)
+                                        .intValue();
           if (previousScore >= next.score) {
             continue;
           }
@@ -118,7 +133,8 @@ public class Year2022Day16 {
     // the other player can do so more efficiently.
     final Long key = Long.valueOf(state.visited);
     final Long value = Long.valueOf(state.score);
-    if (!paths.containsKey(key) || (paths.getOrDefault(key, ZERO).compareTo(value) < 0)) {
+    if (!paths.containsKey(key) || (paths.getOrDefault(key, ZERO)
+                                         .compareTo(value) < 0)) {
       paths.put(key, value);
     }
   }
@@ -166,7 +182,10 @@ public class Year2022Day16 {
     final Map<String, Integer> rawIdToRealId = new HashMap<>();
     final Map<Integer, Integer> flowRates = new HashMap<>();
     int counter = -1;
-    for (final String key : rawNodes.keySet().stream().sorted().toArray(String[]::new)) {
+    for (final String key : rawNodes.keySet()
+                                    .stream()
+                                    .sorted()
+                                    .toArray(String[]::new)) {
       final Integer intId = Integer.valueOf(++counter);
       rawIdToRealId.put(key, intId);
       flowRates.put(intId, rawFlow.get(key));
@@ -175,7 +194,10 @@ public class Year2022Day16 {
     // Build a new mapping of long IDs to their connected long IDs.
     final Map<Integer, int[]> connections = new HashMap<>();
     for (var entry : rawNodes.entrySet()) {
-      final int value[] = Arrays.stream(entry.getValue()).mapToInt(s -> rawIdToRealId.get(s).intValue()).toArray();
+      final int value[] = Arrays.stream(entry.getValue())
+                                .mapToInt(s -> rawIdToRealId.get(s)
+                                                            .intValue())
+                                .toArray();
       connections.put(rawIdToRealId.get(entry.getKey()), value);
     }
 
@@ -183,7 +205,8 @@ public class Year2022Day16 {
     final int[][] dist = new int[counter + 1][counter + 1];
 
     for (var entry : connections.entrySet()) {
-      final int u = entry.getKey().intValue();
+      final int u = entry.getKey()
+                         .intValue();
       Arrays.fill(dist[u], 9999);
       for (final int v : entry.getValue()) {
         dist[u][v] = 1;
@@ -245,7 +268,9 @@ public class Year2022Day16 {
           }
         }
         final Long valveKey = oldToNew.get(key);
-        valves.put(valveKey, new Valve(i, flowRates.get(key).intValue(), movements));
+        valves.put(valveKey, new Valve(i, flowRates.get(key)
+                                                   .intValue(),
+          movements));
       }
     }
     return valves;

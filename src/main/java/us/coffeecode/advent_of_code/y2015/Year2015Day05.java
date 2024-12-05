@@ -38,7 +38,10 @@ public final class Year2015Day05 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return il.lines(pc).stream().filter(this::isNicePart1).count();
+    return il.lines(pc)
+             .stream()
+             .filter(this::isNicePart1)
+             .count();
   }
 
   /** Determine if a string is nice per the requirements of part 1. */
@@ -69,7 +72,10 @@ public final class Year2015Day05 {
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return il.lines(pc).stream().filter(this::isNicePart2).count();
+    return il.lines(pc)
+             .stream()
+             .filter(this::isNicePart2)
+             .count();
   }
 
   /** Determine if a string is nice per the requirements of part 2. */
@@ -100,7 +106,8 @@ public final class Year2015Day05 {
         else {
           pairs.put(thisPair, new HashSet<>());
         }
-        pairs.get(thisPair).add(Integer.valueOf(i));
+        pairs.get(thisPair)
+             .add(Integer.valueOf(i));
       }
     }
     return pairRepeat && singleRepeat;

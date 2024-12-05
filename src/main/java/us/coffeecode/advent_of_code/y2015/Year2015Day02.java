@@ -38,7 +38,9 @@ public final class Year2015Day02 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return getInput(pc).stream().mapToLong(this::calculateWrappingPaperArea).sum();
+    return getInput(pc).stream()
+                       .mapToLong(this::calculateWrappingPaperArea)
+                       .sum();
   }
 
   /** Calculate the area needed by a single box. */
@@ -52,7 +54,9 @@ public final class Year2015Day02 {
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return getInput(pc).stream().mapToLong(this::calculateRibbonLength).sum();
+    return getInput(pc).stream()
+                       .mapToLong(this::calculateRibbonLength)
+                       .sum();
   }
 
   /** Calculate the ribbon length needed by a single box. */
@@ -72,7 +76,9 @@ public final class Year2015Day02 {
   /** Get the input data for this solution. */
   private Collection<Point3D> getInput(final PuzzleContext pc) {
     return il.linesAsObjects(pc, s -> {
-      final int[] a = Arrays.stream(SPLIT.split(s)).mapToInt(Integer::parseInt).toArray();
+      final int[] a = Arrays.stream(SPLIT.split(s))
+                            .mapToInt(Integer::parseInt)
+                            .toArray();
       return new Point3D(a[0], a[1], a[2]);
     });
   }

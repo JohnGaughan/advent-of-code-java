@@ -41,14 +41,24 @@ public final class Year2017Day24 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final Set<Chain> chains = chains(getInput(pc), (ls, c) -> c.strength() > ls.strongest);
-    return chains.stream().mapToInt(Chain::strength).max().getAsInt();
+    return chains.stream()
+                 .mapToInt(Chain::strength)
+                 .max()
+                 .getAsInt();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     final Set<Chain> chains = chains(getInput(pc), (ls, c) -> c.length() >= ls.longest);
-    final int longest = chains.stream().mapToInt(Chain::length).max().getAsInt();
-    return chains.stream().filter(c -> c.length() == longest).mapToInt(Chain::strength).max().getAsInt();
+    final int longest = chains.stream()
+                              .mapToInt(Chain::length)
+                              .max()
+                              .getAsInt();
+    return chains.stream()
+                 .filter(c -> c.length() == longest)
+                 .mapToInt(Chain::strength)
+                 .max()
+                 .getAsInt();
   }
 
   /** Recursive base case: start the chains. */
@@ -128,7 +138,9 @@ public final class Year2017Day24 {
     }
 
     int strength() {
-      return Arrays.stream(components).mapToInt(Component::strength).sum();
+      return Arrays.stream(components)
+                   .mapToInt(Component::strength)
+                   .sum();
     }
 
     @Override

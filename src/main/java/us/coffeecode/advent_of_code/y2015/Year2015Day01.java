@@ -37,7 +37,9 @@ public final class Year2015Day01 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final Collection<Direction> input = il.fileAsObjectsFromCodePoints(pc, Direction::valueOf);
-    final long ups = input.stream().filter(d -> d == Direction.UP).count();
+    final long ups = input.stream()
+                          .filter(d -> d == Direction.UP)
+                          .count();
     return (ups << 1) - input.size();
   }
 
@@ -67,7 +69,10 @@ public final class Year2015Day01 {
     DOWN(')');
 
     public static Direction valueOf(final int c) {
-      return Arrays.stream(values()).filter(d -> d.ch == c).findFirst().get();
+      return Arrays.stream(values())
+                   .filter(d -> d.ch == c)
+                   .findFirst()
+                   .get();
     }
 
     private final int ch;

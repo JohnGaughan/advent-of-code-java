@@ -63,7 +63,10 @@ enum Mode {
   };
 
   public static final Mode valueOf(final long _id) {
-    return Arrays.stream(values()).filter(m -> m.id == _id).findFirst().get();
+    return Arrays.stream(values())
+                 .filter(m -> m.id == _id)
+                 .findFirst()
+                 .get();
   }
 
   public static final Mode[] valuesOf(final long intcode) {

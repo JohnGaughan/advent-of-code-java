@@ -44,7 +44,9 @@ public class Year2022Day20 {
   }
 
   private long calculate(final PuzzleContext pc, final long multiplier, final int iterations) {
-    final long[] array = Arrays.stream(il.linesAsLongs(pc)).map(i -> i * multiplier).toArray();
+    final long[] array = Arrays.stream(il.linesAsLongs(pc))
+                               .map(i -> i * multiplier)
+                               .toArray();
     final Node[] nodes = new Node[array.length];
     Node zero = null;
     for (int i = 0; i < array.length; ++i) {

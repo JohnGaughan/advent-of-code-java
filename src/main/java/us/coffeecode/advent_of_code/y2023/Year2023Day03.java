@@ -47,7 +47,8 @@ public class Year2023Day03 {
 
     long answer = 0;
     for (final Range2D number : getNumbers(board)) {
-      if (getAdjacents(number).stream().anyMatch(p -> symbols.contains(p))) {
+      if (getAdjacents(number).stream()
+                              .anyMatch(p -> symbols.contains(p))) {
         answer += asLong(board, number);
       }
     }
@@ -63,7 +64,9 @@ public class Year2023Day03 {
     for (final Point2D gear : getSymbols(board, ch -> (ch == GEAR))) {
       final Collection<Range2D> adjacents = getAdjacents(gear, numbers);
       if (adjacents.size() == 2) {
-        answer += adjacents.stream().mapToLong(r -> asLong(board, r)).reduce(1, (a, b) -> a * b);
+        answer += adjacents.stream()
+                           .mapToLong(r -> asLong(board, r))
+                           .reduce(1, (a, b) -> a * b);
       }
     }
     return answer;
@@ -71,7 +74,8 @@ public class Year2023Day03 {
 
   /** Given a range where a number exists on the board, parse those locations as a number. */
   private long asLong(final List<String> board, final Range2D number) {
-    return Long.parseLong(board.get(number.getY1()).substring(number.getX1(), number.getX2() + 1));
+    return Long.parseLong(board.get(number.getY1())
+                               .substring(number.getX1(), number.getX2() + 1));
   }
 
   /** Get the coordinates of all symbols on the board. */
@@ -93,7 +97,9 @@ public class Year2023Day03 {
   private Set<Range2D> getNumbers(final List<String> board) {
     final Set<Range2D> numbers = new HashSet<>();
     for (int y = 0; y < board.size(); ++y) {
-      final int[] line = board.get(y).codePoints().toArray();
+      final int[] line = board.get(y)
+                              .codePoints()
+                              .toArray();
       int x = -1;
       int start = Integer.MIN_VALUE;
       boolean inNumber = false;
@@ -142,7 +148,9 @@ public class Year2023Day03 {
 
   private Set<Range2D> getAdjacents(final Point2D gear, final Collection<Range2D> numbers) {
     final Collection<Point2D> neighbors = gear.getAllNeighbors();
-    return numbers.stream().filter(r -> r.containsAnyInclusive(neighbors)).collect(Collectors.toSet());
+    return numbers.stream()
+                  .filter(r -> r.containsAnyInclusive(neighbors))
+                  .collect(Collectors.toSet());
   }
 
   /** If a board location matches this code point, it is considered empty. */

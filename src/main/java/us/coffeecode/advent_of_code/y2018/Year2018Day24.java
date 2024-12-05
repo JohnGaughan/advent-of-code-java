@@ -39,7 +39,10 @@ public final class Year2018Day24 {
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
     final Map<Force, Army> armies = getInput(pc);
-    while (armies.get(Force.IMMUNE).hasUnits() && armies.get(Force.INFECTION).hasUnits()) {
+    while (armies.get(Force.IMMUNE)
+                 .hasUnits()
+      && armies.get(Force.INFECTION)
+               .hasUnits()) {
       fight(armies);
     }
     for (final Army army : armies.values()) {
@@ -59,12 +62,21 @@ public final class Year2018Day24 {
       boostedArmies.put(Force.IMMUNE, new Army(armies.get(Force.IMMUNE), boost));
       boostedArmies.put(Force.INFECTION, new Army(armies.get(Force.INFECTION)));
 
-      int startingUnits = boostedArmies.values().stream().mapToInt(Army::getTotalUnits).sum();
+      int startingUnits = boostedArmies.values()
+                                       .stream()
+                                       .mapToInt(Army::getTotalUnits)
+                                       .sum();
 
       // Fight until one side loses or there is a stalemate
-      while (boostedArmies.get(Force.IMMUNE).hasUnits() && boostedArmies.get(Force.INFECTION).hasUnits()) {
+      while (boostedArmies.get(Force.IMMUNE)
+                          .hasUnits()
+        && boostedArmies.get(Force.INFECTION)
+                        .hasUnits()) {
         fight(boostedArmies);
-        final int endingUnits = boostedArmies.values().stream().mapToInt(Army::getTotalUnits).sum();
+        final int endingUnits = boostedArmies.values()
+                                             .stream()
+                                             .mapToInt(Army::getTotalUnits)
+                                             .sum();
         if (startingUnits == endingUnits) {
           // Abort: this is a stalemate.
           break;
@@ -73,8 +85,12 @@ public final class Year2018Day24 {
       }
 
       // Success: immune won and infection lost. Both conditions are needed to reject stalemates.
-      if (boostedArmies.get(Force.IMMUNE).hasUnits() && !boostedArmies.get(Force.INFECTION).hasUnits()) {
-        answer = boostedArmies.get(Force.IMMUNE).getTotalUnits();
+      if (boostedArmies.get(Force.IMMUNE)
+                       .hasUnits()
+        && !boostedArmies.get(Force.INFECTION)
+                         .hasUnits()) {
+        answer = boostedArmies.get(Force.IMMUNE)
+                              .getTotalUnits();
       }
     }
     return answer;
@@ -87,8 +103,10 @@ public final class Year2018Day24 {
 
   private SortedMap<Group, Group> selectTargets(final Map<Force, Army> armies) {
     final List<Group> attackers = new ArrayList<>(20);
-    attackers.addAll(armies.get(Force.IMMUNE).getActiveGroups());
-    attackers.addAll(armies.get(Force.INFECTION).getActiveGroups());
+    attackers.addAll(armies.get(Force.IMMUNE)
+                           .getActiveGroups());
+    attackers.addAll(armies.get(Force.INFECTION)
+                           .getActiveGroups());
     Collections.sort(attackers, (o1, o2) -> {
       int result = o2.getEffectivePower() - o1.getEffectivePower();
       if (result != 0) {
@@ -154,7 +172,10 @@ public final class Year2018Day24 {
 
   /** Get the input data for this solution. */
   private Map<Force, Army> getInput(final PuzzleContext pc) {
-    return il.groups(pc).stream().map(Army::new).collect(Collectors.toMap(e -> e.force, Function.identity()));
+    return il.groups(pc)
+             .stream()
+             .map(Army::new)
+             .collect(Collectors.toMap(e -> e.force, Function.identity()));
   }
 
   private static enum Force {
@@ -188,8 +209,11 @@ public final class Year2018Day24 {
     private final List<Group> groups = new ArrayList<>();
 
     Army(final List<String> input) {
-      force = input.getFirst().indexOf('m') >= 0 ? Force.IMMUNE : Force.INFECTION;
-      input.stream().skip(1).forEach(s -> groups.add(new Group(s, force)));
+      force = input.getFirst()
+                   .indexOf('m') >= 0 ? Force.IMMUNE : Force.INFECTION;
+      input.stream()
+           .skip(1)
+           .forEach(s -> groups.add(new Group(s, force)));
     }
 
     Army(final Army other) {
@@ -198,19 +222,25 @@ public final class Year2018Day24 {
 
     Army(final Army other, final int boost) {
       force = other.force;
-      other.groups.stream().forEach(g -> groups.add(new Group(g, boost)));
+      other.groups.stream()
+                  .forEach(g -> groups.add(new Group(g, boost)));
     }
 
     int getTotalUnits() {
-      return groups.stream().mapToInt(g -> g.units).sum();
+      return groups.stream()
+                   .mapToInt(g -> g.units)
+                   .sum();
     }
 
     Collection<Group> getActiveGroups() {
-      return groups.stream().filter(Group::hasUnits).toList();
+      return groups.stream()
+                   .filter(Group::hasUnits)
+                   .toList();
     }
 
     boolean hasUnits() {
-      return groups.stream().anyMatch(Group::hasUnits);
+      return groups.stream()
+                   .anyMatch(Group::hasUnits);
     }
 
     @Override
@@ -251,7 +281,9 @@ public final class Year2018Day24 {
         int parenStart = input.indexOf('(');
         int parenEnd = input.indexOf(')');
         if (parenStart > -1 && parenEnd > -1) {
-          final String str = input.substring(parenStart + 1, parenEnd).replace("to ", "").replace(",", "");
+          final String str = input.substring(parenStart + 1, parenEnd)
+                                  .replace("to ", "")
+                                  .replace(",", "");
           weakImmune = INNER_SPLIT.split(str);
         }
       }

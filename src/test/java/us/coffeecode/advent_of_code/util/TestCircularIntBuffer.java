@@ -71,7 +71,8 @@ extends AbstractTests {
   @Test
   public void testNextFromString() {
     final String input = "test";
-    final int[] inputCodePoints = input.codePoints().toArray();
+    final int[] inputCodePoints = input.codePoints()
+                                       .toArray();
     final int[] expected = new int[input.length() << 1];
     final int[] actual = new int[input.length() << 1];
     System.arraycopy(inputCodePoints, 0, expected, 0, inputCodePoints.length);

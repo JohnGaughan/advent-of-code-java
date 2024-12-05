@@ -95,7 +95,8 @@ public class Year2020Day20 {
   }
 
   private long countSeaMonsters(final Element e, final boolean[][] monster) {
-    final int size = e.getItem().size();
+    final int size = e.getItem()
+                      .size();
     final int max_x = size - monster.length;
     final int max_y = size - monster[0].length;
     long monsters = 0;
@@ -252,7 +253,8 @@ public class Year2020Day20 {
 
     // We have enough to construct a grid. The first column is completely filled in, and one row is. Add them all.
     final Element[][] grid = new Element[d][d];
-    final HasCoordinates anchor = row.getFirst().getItem();
+    final HasCoordinates anchor = row.getFirst()
+                                     .getItem();
     for (int y = 0; y < grid[0].length; ++y) {
       grid[0][y] = col.get(y);
       if (anchor == grid[0][y].item) {
@@ -613,7 +615,8 @@ public class Year2020Day20 {
     @Override
     public String toString() {
       final StringBuilder str = new StringBuilder();
-      str.append(id).append("=");
+      str.append(id)
+         .append("=");
       for (final boolean[] row : grid) {
         str.append("\n");
         for (final boolean cell : row) {

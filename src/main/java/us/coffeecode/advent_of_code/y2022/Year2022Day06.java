@@ -46,7 +46,9 @@ public class Year2022Day06 {
   private long calculate(final PuzzleContext pc, final int digits) {
     final int[] input = il.fileAsCodePoints(pc);
     for (int end = digits; end <= input.length; ++end) {
-      if (Arrays.stream(input, end - digits, end).distinct().count() == digits) {
+      if (Arrays.stream(input, end - digits, end)
+                .distinct()
+                .count() == digits) {
         return end;
       }
     }

@@ -51,7 +51,8 @@ public class Year2023Day14 {
       cycle(grid);
       final Integer key = hash(grid);
       if (cache.containsKey(key)) {
-        final int remaining = (cycles - i - 1) % (i - cache.get(key).intValue());
+        final int remaining = (cycles - i - 1) % (i - cache.get(key)
+                                                           .intValue());
         for (int j = 0; j < remaining; ++j) {
           cycle(grid);
         }
@@ -68,7 +69,9 @@ public class Year2023Day14 {
   private long score(final int[][] grid) {
     long score = 0;
     for (int y = 0; y < grid.length; ++y) {
-      score += (grid.length - y) * Arrays.stream(grid[y]).filter(i -> i == 'O').count();
+      score += (grid.length - y) * Arrays.stream(grid[y])
+                                         .filter(i -> i == 'O')
+                                         .count();
     }
     return score;
   }

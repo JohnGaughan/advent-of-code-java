@@ -39,7 +39,8 @@ public final class Year2018Day02 {
     long threes = 0;
     for (final String line : il.lines(pc)) {
       final int[] counts = new int[26];
-      for (int ch : line.codePoints().toArray()) {
+      for (int ch : line.codePoints()
+                        .toArray()) {
         ++counts[ch - 'a'];
       }
       boolean countedTwo = false;

@@ -58,7 +58,8 @@ public final class Year2015Day07 {
   private int getValue(final String wire, final Map<String, Operation> ops, final Map<String, Integer> memoizer) {
     // If this value has already been seen, use the memoized value instead.
     if (memoizer.containsKey(wire)) {
-      return memoizer.get(wire).intValue();
+      return memoizer.get(wire)
+                     .intValue();
     }
     final Operation thisOp = ops.get(wire);
     final int value;
@@ -145,7 +146,8 @@ public final class Year2015Day07 {
       // Assignment is also unary, and will have a number and no spaces.
       else if (io[0].indexOf(' ') < 0) {
         operator = Operator.ASSIGN;
-        if (NUMERIC.matcher(io[0]).matches()) {
+        if (NUMERIC.matcher(io[0])
+                   .matches()) {
           inputs.add(Integer.valueOf(io[0]));
         }
         else {
@@ -159,13 +161,15 @@ public final class Year2015Day07 {
         operator = Operator.valueOf(tokens[1]);
 
         // Add the inputs as either integers or strings.
-        if (NUMERIC.matcher(tokens[0]).matches()) {
+        if (NUMERIC.matcher(tokens[0])
+                   .matches()) {
           inputs.add(Integer.valueOf(tokens[0]));
         }
         else {
           inputs.add(tokens[0]);
         }
-        if (NUMERIC.matcher(tokens[2]).matches()) {
+        if (NUMERIC.matcher(tokens[2])
+                   .matches()) {
           inputs.add(Integer.valueOf(tokens[2]));
         }
         else {
@@ -178,8 +182,14 @@ public final class Year2015Day07 {
     @Override
     public String toString() {
       final StringBuilder str = new StringBuilder(64);
-      str.append(output).append("=(").append(operator).append(",").append(
-        operands.stream().map(Object::toString).collect(Collectors.joining(","))).append(")");
+      str.append(output)
+         .append("=(")
+         .append(operator)
+         .append(",")
+         .append(operands.stream()
+                         .map(Object::toString)
+                         .collect(Collectors.joining(",")))
+         .append(")");
       return str.toString();
     }
 

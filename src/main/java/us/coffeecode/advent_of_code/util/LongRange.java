@@ -41,7 +41,9 @@ implements Comparable<LongRange> {
    */
   public static List<LongRange> merge(final Collection<LongRange> ranges) {
     final List<LongRange> result = new ArrayList<>(ranges.size());
-    ranges.stream().filter(r -> r != null).forEach(result::add);
+    ranges.stream()
+          .filter(r -> r != null)
+          .forEach(result::add);
     Collections.sort(result);
     boolean merged = true;
     while (merged) {
@@ -128,11 +130,13 @@ implements Comparable<LongRange> {
   }
 
   public long[] getRangeXExclusive() {
-    return LongStream.range(_x1, _x2).toArray();
+    return LongStream.range(_x1, _x2)
+                     .toArray();
   }
 
   public long[] getRangeXInclusive() {
-    return LongStream.rangeClosed(_x1, _x2).toArray();
+    return LongStream.rangeClosed(_x1, _x2)
+                     .toArray();
   }
 
   public long sizeExclusive() {

@@ -43,11 +43,15 @@ public final class Year2021Day04 {
     final Input input = il.groupsAsObject(pc, this::parse);
     final Collection<Card> cards = input.cards;
     for (final int draw : input.draw) {
-      cards.stream().forEach(card -> card.mark(draw));
+      cards.stream()
+           .forEach(card -> card.mark(draw));
       // Check for a winner.
-      final SequencedCollection<Card> winners = cards.stream().filter(Card::isWinner).toList();
+      final SequencedCollection<Card> winners = cards.stream()
+                                                     .filter(Card::isWinner)
+                                                     .toList();
       if (!winners.isEmpty()) {
-        final long score = winners.getFirst().score();
+        final long score = winners.getFirst()
+                                  .score();
         return draw * score;
       }
     }
@@ -59,13 +63,17 @@ public final class Year2021Day04 {
     final Input input = il.groupsAsObject(pc, this::parse);
     final Collection<Card> cards = input.cards;
     for (final int draw : input.draw) {
-      cards.stream().forEach(card -> card.mark(draw));
+      cards.stream()
+           .forEach(card -> card.mark(draw));
       // Check for a winner.
-      final SequencedCollection<Card> winners = cards.stream().filter(Card::isWinner).toList();
+      final SequencedCollection<Card> winners = cards.stream()
+                                                     .filter(Card::isWinner)
+                                                     .toList();
       if (!winners.isEmpty()) {
         // Final remaining card won.
         if (cards.size() == 1) {
-          final long score = winners.getFirst().score();
+          final long score = winners.getFirst()
+                                    .score();
           return draw * score;
         }
         // Cull the herd so in future rounds we ignore cards that already won.
@@ -78,7 +86,10 @@ public final class Year2021Day04 {
   private static final Pattern LIST_SPLIT = Pattern.compile(",");
 
   private Input parse(final List<List<String>> groups) {
-    final int[] draw = Arrays.stream(LIST_SPLIT.split(groups.getFirst().getFirst())).mapToInt(Integer::parseInt).toArray();
+    final int[] draw = Arrays.stream(LIST_SPLIT.split(groups.getFirst()
+                                                            .getFirst()))
+                             .mapToInt(Integer::parseInt)
+                             .toArray();
     final Collection<Card> cards = new ArrayList<>(groups.size() - 1);
     for (int i = 1; i < groups.size(); ++i) {
       cards.add(new Card(groups.get(i)));
@@ -97,8 +108,11 @@ public final class Year2021Day04 {
     Card(final List<String> lines) {
       array = new int[lines.size()][];
       for (int y = 0; y < array.length; ++y) {
-        final String line = lines.get(y).trim();
-        array[y] = Arrays.stream(BOARD_SPLIT.split(line)).mapToInt(Integer::parseInt).toArray();
+        final String line = lines.get(y)
+                                 .trim();
+        array[y] = Arrays.stream(BOARD_SPLIT.split(line))
+                         .mapToInt(Integer::parseInt)
+                         .toArray();
       }
     }
 
@@ -113,7 +127,11 @@ public final class Year2021Day04 {
     }
 
     long score() {
-      return Arrays.stream(array).mapToInt(row -> Arrays.stream(row).filter(i -> i > 0).sum()).sum();
+      return Arrays.stream(array)
+                   .mapToInt(row -> Arrays.stream(row)
+                                          .filter(i -> i > 0)
+                                          .sum())
+                   .sum();
     }
 
     boolean isWinner() {

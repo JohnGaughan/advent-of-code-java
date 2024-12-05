@@ -37,7 +37,8 @@ public final class Year2018Day01 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return Arrays.stream(il.linesAsLongs(pc)).sum();
+    return Arrays.stream(il.linesAsLongs(pc))
+                 .sum();
   }
 
   @Solver(part = 2)

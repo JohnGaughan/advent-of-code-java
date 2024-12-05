@@ -64,9 +64,12 @@ public final class Year2018Day18 {
         if (cache.containsKey(hash)) {
           // Figure out where the collision is in insertion order.
           int start = 0;
-          final var iter = cache.entrySet().iterator();
+          final var iter = cache.entrySet()
+                                .iterator();
           while (iter.hasNext()) {
-            if (iter.next().getKey().equals(hash)) {
+            if (iter.next()
+                    .getKey()
+                    .equals(hash)) {
               break;
             }
             ++start;
@@ -77,7 +80,9 @@ public final class Year2018Day18 {
           for (int j = 0; j < residue; ++j) {
             iter.next();
           }
-          return iter.next().getValue().longValue();
+          return iter.next()
+                     .getValue()
+                     .longValue();
         }
         else {
           cache.put(hash, Long.valueOf(score(grid)));
@@ -168,7 +173,10 @@ public final class Year2018Day18 {
   private String toString(final int[][] grid) {
     final StringBuilder str = new StringBuilder(grid.length * (grid[0].length + 1));
     for (final int[] row : grid) {
-      str.append(Arrays.stream(row).mapToObj(Character::toString).collect(Collectors.joining())).append('\n');
+      str.append(Arrays.stream(row)
+                       .mapToObj(Character::toString)
+                       .collect(Collectors.joining()))
+         .append('\n');
     }
     return str.toString();
   }
