@@ -147,11 +147,31 @@ the technically correct algorithm given the low input sizes and run times that a
 initialize and run the unit test. If for some reason you want to run this on much larger inputs, then this method should be
 rewritten.
 
-## Day 6: ?
+## Day 6: Guard Gallivant
 
 [Year 2024, day 6][6.0]
 
-## Day 7: ?
+Today we get our first problem of navigating a grid. There is an actor that follows set rules, moving around a room until it
+leaves the area. As is typical, part one has us write a foundation for solving part two.
+
+The algorithm I wrote tracks the actor's location and facing. It keeps following the two basic movement rules laid out in the
+problem statement until one of two conditions are true. Either the actor leaves the area, or enters an infinite loop because there
+is a duplicate combination of location and facing. Given the simple rules, this guarantees the actor will repeat its movement
+forever. This simulation also returns why it stopped, which is one of those two exit conditions.
+
+For part one we simply get the results of the simulation, discard the facing data, and count the unique locations.
+
+Part two also runs the initial simulation. Then get the candidates for the new obstruction by getting the unique locations on that
+path that are _not_ the initial actor location.
+
+For each location in this set, add an obstruction. Then re-run the simulation and see if the reason it stopped is an infinite
+loop. Count those cases and return that sum as the answer.
+
+This takes a while to run, but is well under my self-imposed one second time limit. I pre-allocated a large set of "seen" moves
+during the simulation because constant resizing of the underlying hash map nearly doubled the runtime. I still think there is a
+bit of overhead hidden in the JRE, but I am not sure if I can optimize that further.
+
+## Day 7: Bridge Repair
 
 [Year 2024, day 7][7.0]
 
