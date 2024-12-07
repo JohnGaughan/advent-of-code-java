@@ -175,6 +175,27 @@ bit of overhead hidden in the JRE, but I am not sure if I can optimize that furt
 
 [Year 2024, day 7][7.0]
 
+We get our first truly recursive problem today. Given a list of long integers we need to figure out if there is any way to
+combine all of them after the colon into the first value before the colon. We are given three binary operators that can combine
+values: add, multiply, and concatenate, with the latter only being allowed in part two.
+
+Parsing the input is easy: split the line, set the test value (desired result) to the first value, and the operands are all of the
+other numbers. Long integers are required here, as they will not fit in 32 bit integers.
+
+Both solution parts use the same logic. Call into the recursive function with the equation and the allowed operators for that
+solution part.
+
+Recursive logic is fairly simple here. Maintain an accumulator, which is the result of combining everything up to whatever the
+current point is. At each step, iterate over the allowed operators and use each one to combine the accumulator with the next
+operand. If the operands are exhausted, check the accumulator against the equation's test value. If it matches, return true: this
+is the tail call and ends recursion. The recursive step short-circuits. If recursion further down the operands returns true, then
+stop: there is no need to check other operands. This makes the algorithm a depth-first search that quits as soon as it finds a
+single solution.
+
+Getting the answer is a simple series of stream operators. Get the file lines, convert each one to an equation, filter the stream
+so it only contains equations that pass the test, convert to a long stream where the value of each element is the equation's test
+value, then sum the values to get the answer.
+
 ## Day 8: ?
 
 [Year 2024, day 8][8.0]
