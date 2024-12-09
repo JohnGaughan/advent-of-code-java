@@ -65,6 +65,10 @@ public class Year2024Day07 {
     if (position >= eq.operands.length) {
       return (accumulator == eq.testValue);
     }
+    // Short-circuit: this branch is a dead end. Accumulator can only increase.
+    if (accumulator > eq.testValue) {
+      return false;
+    }
     // Try all operators at the current position
     for (final Operator op : operators) {
       final long nextAccumulator = op.apply(accumulator, eq.operands[position]);
