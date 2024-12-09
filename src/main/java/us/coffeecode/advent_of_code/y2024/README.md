@@ -196,9 +196,30 @@ Getting the answer is a simple series of stream operators. Get the file lines, c
 so it only contains equations that pass the test, convert to a long stream where the value of each element is the equation's test
 value, then sum the values to get the answer.
 
-## Day 8: ?
+## Day 8: Resonant Collinearity
 
 [Year 2024, day 8][8.0]
+
+Two days later, we get another problem about calculating grid positions. For this one, we need to find points that are in a line,
+and count the number of unique points.
+
+To start with, we parse input into a map of each frequency (character code point) to the coordinates of points that use that
+frequency. We also hang on to the input grid for bounds checking.
+
+Both algorithms start the same way: get the input and iterate over each antenna frequency. Get the antinodes for that frequency,
+and collect them into a set which ensures uniqueness. Once done, simply return the size of the set.
+
+To get the antinodes for each frequency, we first create a set of points into which will be stored antinodes for each pair of
+antennas. This ensures uniqueness at this step as well which is not strictly required, but helps keep storage from ballooning.
+Process each pair of antennas: this is where the algorithm varies between parts one and two.
+
+In both cases, get the difference in coordinates between them: delta X and delta Y. For part one we add these deltas to the first
+point, and subtract them from the second, providing two antinodes. Filter them to ensure they are within bounds, and return what
+remains.
+
+For part two we need an iterative approach. Start with the first point. If it is within bounds (it will be), add it to the
+antinodes. Add the deltas, then loop back to the bounds check. Eventually, it _will_ be out of bounds and the loop breaks. Repeat
+these exact steps for the second point, except subtract the deltas instead of adding them.
 
 ## Day 9: ?
 
