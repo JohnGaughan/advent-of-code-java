@@ -260,9 +260,21 @@ the gap, add a new gap representing that leftover space.
 Finally, we calculate the checksum similar to in part one but using different objects. Iterate through the files and multiply its
 ID by the sum of all of its file locations. Then get the sum of the stream to find the answer.
 
-## Day 10: ?
+## Day 10: Hoof It
 
 [Year 2024, day 10][10.0]
+
+Today was a quick and fun little maze navigation puzzle where I accidentally solved part two first because I did not read the
+instructions correctly.
+
+In both parts, we need to search through the puzzle input for the number zero. Each time, we need to find paths from that zero to
+the number nine, incrementing by one. This is a simple recursive function with nearly identical structure in both cases.
+
+For part one, we get the unique set of "nine" locations that can be reached from the given zero. Then, for each zero, we count
+those high points as its score and add up all of the scores. For part two, we need to count the number of unique paths even if two
+paths end at the same high point. The first method returns a set from which we get its size, the second we instead return an
+integer for each path. The difference is in the second case, visiting the same end point again will increment the counter while in
+the first case we return a duplicate location which gets discarded by the hash set.
 
 ## Day 11: ?
 
