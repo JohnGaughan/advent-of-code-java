@@ -221,9 +221,44 @@ For part two we need an iterative approach. Start with the first point. If it is
 antinodes. Add the deltas, then loop back to the bounds check. Eventually, it _will_ be out of bounds and the loop breaks. Repeat
 these exact steps for the second point, except subtract the deltas instead of adding them.
 
-## Day 9: ?
+## Day 9: Disk Fragmenter
 
 [Year 2024, day 9][9.0]
+
+This was a good one. I could picture the solution in my head, but kept going back and forth on how to express it in code and
+actually tried several solutions. Some worked, some did not. Some took a long time, the final solution is fast. Today, parts one
+and two are completely separate implementations although there are similarities. It all starts with input parsing: what should the
+data look like after reading it and before processing it?
+
+For part one, we move file system blocks from the end to the front. This means the algorithm is focused on specific locations in
+the file system, not the files themselves. I ended up creating two data structures:
+
+* A tree map containing all of the file blocks. The key is the location, and the value is the file ID. This models a sparse list
+  where many entries are missing.
+* A linked list containing the locations of all of the gaps. Since gaps will always be removed at the head of the list, this is
+  rare case where a linked list outperforms an array list.
+
+Part one works by continuously checking the location of the final file block to see if it matches the size of the file system.
+When the location is larger than the file system size, there must be a gap. Get the first gap in the list and reassign that last
+file block to that location. Remove the gap.
+
+Once complete, walk the tree map containing the file blocks using a stream operation. Multiply each key by its corresponding value
+then get the sum of the stream to find the answer.
+
+Part two works differently because files need to remain contiguous. However, the requirements simplify the algorithm a bit which
+affects input parsing slightly. We start with the last file and work our way toward the front, so we do not actually need to track
+all the files in the same structure, rearranging and sorting. Get each file and each gap as a range which holds its start and end
+blocks. Then sort the files in reverse order so iteration is easier. Gaps are stored in a tree set which has sorting built-in.
+
+The main part of the algorithm first creates a collection of defragmented files which will eventually receive every file in the
+file system. It then walks the files one by one, but in reverse due to the sorting. Then look through the gaps until one of two
+conditions is true. First, we run out of gaps that are ahead of the file and none of them were big enough. In this case, simply
+add the file to the defragmented collection. Second, we find a gap big enough. In this case, "move" the file by creating a new one
+with the same ID but whose range starts at the gap's start. Next, remove the gap. Then, if there is any remaining space left in
+the gap, add a new gap representing that leftover space.
+
+Finally, we calculate the checksum similar to in part one but using different objects. Iterate through the files and multiply its
+ID by the sum of all of its file locations. Then get the sum of the stream to find the answer.
 
 ## Day 10: ?
 
