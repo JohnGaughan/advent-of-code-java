@@ -276,9 +276,32 @@ paths end at the same high point. The first method returns a set from which we g
 integer for each path. The difference is in the second case, visiting the same end point again will increment the counter while in
 the first case we return a duplicate location which gets discarded by the hash set.
 
-## Day 11: ?
+## Day 11: Plutonian Pebbles
 
 [Year 2024, day 11][11.0]
+
+Today we get our first [memoization][11.1] problem. The input is a short series of numbers that transform according to one of
+three rules over many iterations. One of these rules splits the number in two, while the others transform it in ways that make it
+difficult to predict how it will transform in future steps. As far as I can tell, there is no way to calculate the answer directly
+and iterating through the transformations is required.
+
+The issue is with the time required. Part one uses twenty-five iterations, which does not take long with a simple brute-force
+algorithm. Part two uses seventy-five iterations, which is prohibitively time-expensive because there are hundreds of trillions of
+iterations.
+
+Memoization in this case caches program state by using the current value and number of iterations as a key into a map, where the
+value is the final count of numbers the current value will eventually split into. There must be a _lot_ of duplicated state,
+because the run time went from "gave up" to a few tens of milliseconds.
+
+The reason for including the number of iterations is simple. Let us assume the current value is `10`. If this is the final
+iteration, then there is a single number: `10`. It cannot transform, because we reached an end state. If this was instead the
+first iteration, then there must be at least two numbers because per the second rule, 10 will split into `1` and `0`.
+
+Every year has at least one problem like this, and it is a great exercise in this methodology that is not needed very often but is
+a huge benefit when it is.
+
+One final note: this is a problem where you _need_ to use long integers because many of the numbers your program needs to handle
+will not fit in 32 bits.
 
 ## Day 12: ?
 
@@ -350,6 +373,7 @@ the first case we return a duplicate location which gets discarded by the hash s
 [9.0]: https://adventofcode.com/2024/day/9
 [10.0]: https://adventofcode.com/2024/day/10
 [11.0]: https://adventofcode.com/2024/day/11
+[11.1]: https://en.wikipedia.org/wiki/Memoization
 [12.0]: https://adventofcode.com/2024/day/12
 [13.0]: https://adventofcode.com/2024/day/13
 [14.0]: https://adventofcode.com/2024/day/14
