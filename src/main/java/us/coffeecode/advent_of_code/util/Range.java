@@ -17,6 +17,7 @@
 package us.coffeecode.advent_of_code.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -36,7 +37,7 @@ implements Comparable<Range> {
    * @return a new list of disjoint ranges representing the same overall ranges as the passed-in list. This will be a
    * new list.
    */
-  public static List<Range> merge(final List<Range> ranges) {
+  public static List<Range> merge(final Collection<Range> ranges) {
     final List<Range> result = new ArrayList<>(ranges.size());
     ranges.stream()
           .filter(r -> r != null)
@@ -51,8 +52,7 @@ implements Comparable<Range> {
         final Range r3 = r1.union(r2);
         if (r3 != null) {
           result.remove(i);
-          result.remove(i);
-          result.add(i, r3);
+          result.set(i, r3);
           merged = true;
           break;
         }

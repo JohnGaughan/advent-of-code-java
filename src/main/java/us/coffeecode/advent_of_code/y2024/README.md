@@ -307,6 +307,87 @@ will not fit in 32 bits.
 
 [Year 2024, day 12][12.0]
 
+Today's puzzle has us divide a map into regions, then perform calculations on those regions based on their area and shape.
+
+The first task is to read in the input: this is done by iterating the grid and storing it in a map of code points (letters in the
+grid) to sets of points that have that letter.
+
+Next, we need to examine each set of points that share identifiers and split them into disjoint regions. If ten points are
+identified by the letter `A` but five are grouped together and do not touch the other five, they should be two separate regions.
+
+To do this, pick a point, any point. I use the first in iteration order for simplicity, but this is not important to the
+algorithm. Put it in a queue, then loop while the queue has elements. Return and move the head of the queue, then check its four
+cardinal neighbors. If any of them exist in the set of points that share the same identifier and is not already part of the
+current region, then add it to the current region and to the queue. Loop back and repeat until there are no more points that can
+be part of the current region. Repeat that until the input points are exhausted, and return the collection of regions.
+
+The final step of the common algorithm is to convert each region into a score value, then add up the scores and return it as the
+answer. This is where the two parts differ.
+
+The score for a given region is its area, or number of points, multiplied by another value that differs between parts one and two.
+Getting the size is a trivial exercise: call `Collection.size()` on the points of the region. Part one multiplies this by the
+perimeter of the region, part two by the number of sides.
+
+For part one, the perimeter is somewhat easy and straightforward to get. Iterate all of the points in the region. For each point,
+count the number of neighbors not in the region. That count is the perimeter. Consider a point on the corner: it has two external
+sides and two internal sides. In that little square, there are two units of perimeter. A point that is fully internal has zero
+units of perimeter. Similar logic for one or three sides.
+
+For part two, we need the number of sides of each region. This is a bit more complicated to calculate than the perimeter, but not
+nearly the most difficult task this event it likely to contain.
+
+Consider any of the examples. If you look at any point, it can have between zero and four borders around it. Some are interior
+points with no borders, others are lone points with four borders. This means we need to track not only the number of borders as in
+part one, but also the direction of each border.
+
+Next, consider a simple square shape. Two points on the top of the square may each have a top border, but for our purposes here,
+they are a single border of length two (or longer). Clearly, we need to identify borders, then merge them together to find the
+entire side of a shape.
+
+Finally, consider the `E` shape in the examples for part two. That shape has _three_ top (North) borders. Clearly, they are
+separate sides and should not be merged. They do not touch each other, and we can express this by saying the points' X coordinates
+may be the same, but their Y coordinates are different.
+
+On to the actual algorithm. We iterate all the points in a region, and figure out which sides of each point have borders. When we
+find a border, we create a mapping. The key is the direction of the border combined with the relevant coordinate. For North and
+South borders, this will be the Y coordinate, and for West and East, the X coordinate. We then store that key in a map, pointing
+to a collection of `Range` objects: for now, the range is the other coordinate for both the start and end.
+
+To visualize the result of this step, imagine that `E` shape from earlier. We will have something like this.
+
+North borders:
+
+    -----
+    
+     ----
+     
+     ----
+
+East borders:
+
+         |
+     |
+         |
+     |
+         |
+
+(plus south and west, not pictured)
+
+The next step the code takes is a stream operation that merges and counts the borders in one line of code, but let's consider the
+merge operation in depth.
+
+Process each map key: in the above visual, this would be the top bar of the `E`, followed by the middle, and bottom. Then the same
+for the two vertical lines of the East borders. For each collection of ranges, copy it into a list and sort the list. The natural
+ordering of `Range` is such that it puts them into integer order, since the two ends of the range start the same.
+
+Iterate through the sorted list once. At each step, look at the current and next range. If they are adjacent, remove those ranges
+and add a new, merged range. If they are not adjacent, increment the loop counter. At the end, we will have a list where each
+range is not adjacent to any other range. In the visuals above, each of the horizontal bars will be a single range. The vertical
+bars will all be separate, since they cannot be merged.
+
+Once this is done, simply count the number of ranges which correspond to sides of the region. Multiply by the size, or area, of
+the region to get the score for that region.
+
 ## Day 13: ?
 
 [Year 2024, day 13][13.0]
