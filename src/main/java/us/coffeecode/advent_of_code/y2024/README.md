@@ -303,7 +303,7 @@ a huge benefit when it is.
 One final note: this is a problem where you _need_ to use long integers because many of the numbers your program needs to handle
 will not fit in 32 bits.
 
-## Day 12: ?
+## Day 12: Garden Groups
 
 [Year 2024, day 12][12.0]
 
