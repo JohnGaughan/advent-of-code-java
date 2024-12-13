@@ -38,18 +38,18 @@ public class Year2024Day11 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return calculate(pc, 25);
+    return calculate(pc);
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return calculate(pc, 75);
+    return calculate(pc);
   }
 
-  public long calculate(final PuzzleContext pc, final int iterations) {
+  public long calculate(final PuzzleContext pc) {
     final Collection<Long> input = il.fileAsObjectsFromSplit(pc, SPLIT, Long::valueOf);
     return input.stream()
-                .mapToLong(i -> countDescendants(i, iterations, new HashMap<>(2 << 12)))
+                .mapToLong(i -> countDescendants(i, pc.getInt("iterations"), new HashMap<>(2 << 12)))
                 .sum();
   }
 

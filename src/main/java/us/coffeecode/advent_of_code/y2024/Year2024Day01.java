@@ -34,12 +34,6 @@ import us.coffeecode.advent_of_code.component.PuzzleContext;
 @Component
 public class Year2024Day01 {
 
-  private static final Pattern SPLIT = Pattern.compile("\\s+");
-
-  private static final Long ZERO = Long.valueOf(0);
-
-  private static final Long ONE = Long.valueOf(1);
-
   @Autowired
   private InputLoader il;
 
@@ -75,6 +69,12 @@ public class Year2024Day01 {
                          .toArray();
     return new Input(left, right);
   }
+
+  private static final Pattern SPLIT = Pattern.compile("\\s+");
+
+  private static final Long ZERO = Long.valueOf(0);
+
+  private static final Long ONE = Long.valueOf(1);
 
   private record Input(long[] left, long[] right) {}
 }

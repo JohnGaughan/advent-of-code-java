@@ -33,12 +33,6 @@ import us.coffeecode.advent_of_code.component.PuzzleContext;
 @Component
 public class Year2024Day03 {
 
-  private static final Pattern MATCH = Pattern.compile("mul\\(\\d+,\\d+\\)");
-
-  private static final Pattern MATCH_DO = Pattern.compile("do\\(\\)");
-
-  private static final Pattern MATCH_DONT = Pattern.compile("don't\\(\\)");
-
   @Autowired
   private InputLoader il;
 
@@ -88,10 +82,16 @@ public class Year2024Day03 {
     while (matchEnabled.find()) {
       enabled.put(Integer.valueOf(matchEnabled.start()), Boolean.TRUE);
     }
-    final Matcher matchDisaabled = MATCH_DONT.matcher(line);
-    while (matchDisaabled.find()) {
-      enabled.put(Integer.valueOf(matchDisaabled.start()), Boolean.FALSE);
+    final Matcher matchDisabled = MATCH_DONT.matcher(line);
+    while (matchDisabled.find()) {
+      enabled.put(Integer.valueOf(matchDisabled.start()), Boolean.FALSE);
     }
     return enabled;
   }
+
+  private static final Pattern MATCH = Pattern.compile("mul\\(\\d+,\\d+\\)");
+
+  private static final Pattern MATCH_DO = Pattern.compile("do\\(\\)");
+
+  private static final Pattern MATCH_DONT = Pattern.compile("don't\\(\\)");
 }

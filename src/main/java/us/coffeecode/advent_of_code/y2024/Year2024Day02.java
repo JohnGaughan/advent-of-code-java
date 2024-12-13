@@ -33,8 +33,6 @@ import us.coffeecode.advent_of_code.util.MyIntMath;
 @Component
 public class Year2024Day02 {
 
-  private static final Pattern SPLIT = Pattern.compile("\\s");
-
   @Autowired
   private InputLoader il;
 
@@ -82,4 +80,6 @@ public class Year2024Day02 {
     }
     return true;
   }
+
+  private static final Pattern SPLIT = Pattern.compile("\\s");
 }
