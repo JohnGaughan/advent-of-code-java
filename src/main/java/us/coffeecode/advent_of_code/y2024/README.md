@@ -388,9 +388,47 @@ bars will all be separate, since they cannot be merged.
 Once this is done, simply count the number of ranges which correspond to sides of the region. Multiply by the size, or area, of
 the region to get the score for that region.
 
-## Day 13: ?
+## Day 13: Claw Contraption
 
 [Year 2024, day 13][13.0]
+
+We come to our first linear algebra problem of the year today.
+
+The problem statement says there is a claw machine and we can press one of two buttons to move the claw to get a prize. Each
+button moves the claw a different amount in the X and Y dimensions. Each button has a different cost, and we need to minimize the
+cost.
+
+It turns out that minimizing the cost is a red herring: the data seems to have only one solution. This makes sense in retrospect,
+given the solution to the problem: there would be either one solution, or infinitely many with the ideal solution being trivial.
+
+Anyway, brute force is impractical for part two where the target coordinates are excessively large. We need to come up with a
+direct solution. Unfortunately, I never took linear algebra in college so this is my weak point, but Advent of Code has taught me
+enough to blunder my through it. [Year 2023, day 24][13.1] is a great example.
+
+Instead of looking at this as a sequence of button presses, look at it as solving two equations in two variables:
+
+    a * Ax + b * Bx = Px
+    a * Ay + b * By = Py
+
+Where `a` and `b` are the number of button presses for their respective buttons, which are the variables for which we need to
+solve. `Ax` and `Ay` are the coefficients for `a`, `Bx` and `By` are `b`'s coefficients. `Px` and `Py` are the coordinates of the
+prize. Everything other than `a` and `b` are constants, although these constants change between each "claw machine" or system of
+equations.
+
+From here it looks like there are multiple ways to derive the general equations for `a` and `b`. However, most of the methods use
+math that is above my level (calculus and discrete math). I tried working it out algebraically but got a huge mess that works on
+paper, but fails in code due to using integer math. Somehow, the above equations can be solved for both `a` and `b` below which is
+not what I get when I use algebra:
+
+    a = (Px * By - Py * Bx) / (By * Ax - Bx * Ay);
+    b = (Py * Ax - Px * Ay) / (By * Ax - Bx * Ay);
+
+I know this because these equations keep coming up year after year in Advent of Code. While I do not understand how to derive
+them, I can certainly plug them into code and make minor adjustments as necessary until they produce the correct answer.
+
+Apparently, this is derived from [Cramer's rule][13.2] which requires a few matrix operations. Unfortunately, my math education
+only scratched the surface of matrix operations and that was several decades ago. [Gaussian elimination][13.3] is another method
+of solving this, but again, that is above my level.
 
 ## Day 14: ?
 
@@ -457,6 +495,9 @@ the region to get the score for that region.
 [11.1]: https://en.wikipedia.org/wiki/Memoization
 [12.0]: https://adventofcode.com/2024/day/12
 [13.0]: https://adventofcode.com/2024/day/13
+[13.1]: https://adventofcode.com/2023/day/24
+[13.2]: https://en.wikipedia.org/wiki/Cramer's_rule
+[13.3]: https://en.wikipedia.org/wiki/Gaussian_elimination
 [14.0]: https://adventofcode.com/2024/day/14
 [15.0]: https://adventofcode.com/2024/day/15
 [16.0]: https://adventofcode.com/2024/day/16
