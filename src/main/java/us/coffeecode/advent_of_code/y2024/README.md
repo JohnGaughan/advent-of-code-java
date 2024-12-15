@@ -430,9 +430,46 @@ Apparently, this is derived from [Cramer's rule][13.2] which requires a few matr
 only scratched the surface of matrix operations and that was several decades ago. [Gaussian elimination][13.3] is another method
 of solving this, but again, that is above my level.
 
-## Day 14: ?
+## Day 14: Restroom Redoubt
 
 [Year 2024, day 14][14.0]
+
+Honestly, I do not like problems that require image recognition. That is a huge pain for these problems that should be solved
+quickly and in an objective manner.
+
+Thankfully, we really do not need to do that today.
+
+We model robots buzzing around a grid, and we need to calculate a heuristic about their locations after one hundred iterations of
+their movement for part one. This is very easy: we know where each robot starts, and their movement at each iteration. Rather than
+looping, this is a great opportunity to calculate it directly: multiply the iterations by the delta X and delta Y, then calculate
+the modulo with the width and height of the grid. In Java, modulo will sometimes be negative: if so, bump that coordinate up by
+the width or height as appropriate.
+
+Then we figure out which quadrant each robot is in, and get the total number of robots in each quadrant. Multiply these four
+values together to get the safety factor, which is the answer.
+
+Part two looks really annoying at first: computer code of the sort written for Advent of Code is not artificial intelligence. It
+is not meant to do image recognition. In years past there have been problems where the program generates a pixel-art image that we
+need to map to a number: not its graphical representation, but its integer value. Today's puzzle is worse: it does not tell us
+what the image is we are looking for, and the upper bound on the cycle of robot movement is the width of the grid times its
+height. The actual cycle length may be lower, but it cannot be higher.
+
+I found the answer through dumb luck of filtering states based on a heuristic that does not matter, and picked it out by sight
+when printing grid states that matched that heuristic. Success! I had the answer, and my second star for the day. Then I went back
+to the code to figure out how to automate it. This is where I stalled. I copied and pasted the image, which was a portion of the
+entire grid state, and thought about how to encode it in the solution code in a way that it could check for a match.
+
+This is when I reread the problem statement. Why did part one spend so much space talking about the safety factor? The image was
+off in one corner of the grid, not split between quadrants. Then it hit me.
+
+When so many robots are in one quadrant, that quadrant will have a large number of robots (obviously). But this means the other
+quadrants will have very few robots. Looking at a smaller example, consider two positive integers that sum to ten. Which integers
+will have the largest product? Five times five is twenty-five. A the other extreme, one times nine is nine. So if one quadrant is
+overloaded with robots and the others are sparse, their product will be lower than a more well-balanced set of quadrants.
+
+The long and short of this is the code searches for the board state with the lowest safety factor. We do not need to find the
+specific image: simply search every possible board state and check its safety factor. Find the one with the lowest safety factor,
+and return its number of iterations.
 
 ## Day 15: ?
 
