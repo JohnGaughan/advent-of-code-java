@@ -471,9 +471,62 @@ The long and short of this is the code searches for the board state with the low
 specific image: simply search every possible board state and check its safety factor. Find the one with the lowest safety factor,
 and return its number of iterations.
 
-## Day 15: ?
+## Day 15: Warehouse Woes
 
 [Year 2024, day 15][15.0]
+
+This was tricky to get right, but ultimately, not too bad.
+
+We need to model a warehouse where a robot moves around, pushing boxes. After it is done moving, we calculate a score based on the
+positions of the boxes.
+
+For part two, the entire map is stretched width-wise by a factor of two, including the boxes. This means the movement logic is
+more complicated, but the algorithm I wrote is the same for both parts. The only caveat is the board state will be different
+because the boxes use different symbols. Scoring is the same as well, although only the left half of wide boxes are used for
+scoring in part two.
+
+We start off by reading the input grid into a two-dimensional array of code points, replacing the robot with a `.` making its
+space empty. Robots are not boxes or walls. We track the robot separately as a `Point2D`. We also read the input into a list of
+`Direction` enumeration instances.
+
+From here we process each direction instruction. If the robot would move into a wall, it does not move. If it would move into an
+open space, we simply update its location.
+
+If a robot moves into a regular box, we need to keep looking in that direction until encountering an open spot or a wall, skipping
+over other boxes. If we see a wall, again do nothing. If there is an open spot, set it to be a box. Change the first box to be
+open, and update the robot's location to be where the first box was.
+
+Slightly more complicated is when the robot pushes a wide box `[]` from either the left or the right. The logic is the same,
+except we cannot simply update the head and tail of the row of boxes. We actually need to overwrite the entire row with
+alternating square brackets. Still, not too tough.
+
+The complex part is pushing wide boxes up or down. There are a few easy mistakes one can make here, which I know because I made a
+few during my own development. The first step is to get all of the locations that need to be updated, and to track if this is even
+a legal move. There could be a giant pyramid of boxes, with one corner bumping into a wall. But first, let's get the moves. I
+implemented a recursive method that gets all of the `Point2D`s to move, and stores them in a set. Early on I recognized that boxes
+could be offset such that one box pushes two others, who both push on a box in the middle. We need to look at _unique_ locations
+when figuring out which ones to move.
+
+At each step, we look at where the current point will move. If that is an open spot, then we simply add the current point to the
+set of points to move. If it is a wall, then we add `null` to the set: this indicates an invalid move. Otherwise, there is a box
+in the way. Add the current point to the move set, then make two recursive calls: one for the point in front of the current point,
+per the direction we are moving: a second call for the point either to its left or right depending on which box half it is. For
+both, we add the result of the recursive call into the current set of points and return that back to the vertical movement method.
+
+The next step is to check for a valid move: if there are any null elements then it is an invalid move, and the robot stays in the
+same location. If it is valid, then store the set of points into a list and sort it. Sorting is critical because we need to update
+the points farthest from the robot first, so later updates do not overwrite earlier ones. Since the top of the grid is `y = 0`, we
+need to sort low to high when moving up. This will process the top rows first, the bottom rows last. This is the natural ordering
+of `Point2D`, which is convenient. For moving down, we use a reverse comparator to process larger `y` values first.
+
+Simply iterate through the points. For each one, get the destination point to where it will move. `Point2D` has built-in methods
+for getting and setting values in a two-dimensional array using the point's coordinates to access the corresponding array
+location. Copy the value from the old location to the new location, then set the old location to blank (`.`). This ensures correct
+handling of internal voids in a group of boxes, as well as external edges when they are in a V-shape. Once this is done, return
+the robots new location and we are done with a vertical move.
+
+All that is left to do is score the board. Iterate the board in both directions. If we see an `O` for box or `[` for the left half
+of a wide box, then apply the scoring as per the requirement. Add up all of the scores to get the answer.
 
 ## Day 16: ?
 
