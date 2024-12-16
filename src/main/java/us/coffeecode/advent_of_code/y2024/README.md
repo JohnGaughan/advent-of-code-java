@@ -528,9 +528,34 @@ the robots new location and we are done with a vertical move.
 All that is left to do is score the board. Iterate the board in both directions. If we see an `O` for box or `[` for the left half
 of a wide box, then apply the scoring as per the requirement. Add up all of the scores to get the answer.
 
-## Day 16: ?
+## Day 16: Reindeer Maze
 
 [Year 2024, day 16][16.0]
+
+Today we get a good maze navigation problem. We need to find paths through a maze with the lowest score, using a specified
+heuristic that heavily favors not making turns rather than the shortest path. For part one, we need to find that lowest score. For
+part two we need to find all the paths that share that lowest score, then count the unique path locations between them.
+
+The overall algorithm is the same between both parts: a [BFS (breadth-first search)][16.1] algorithm that processes search states
+in order sorted by their score from low to high. It short-circuits and ends as soon as it finds a worse score. These search states
+are stored in a PriorityQueue which has built-in sorting and is pretty fast. While the search part of the algorithm is the same
+between both parts, the management of the search queue is different.
+
+Part one ends as soon as a path reaches the end state. Since the queue is sorted on score, no other path can beat the first one to
+the finish line: the best one can do is tie. All the code needs to do at this point is return that score.
+
+Part two processes the queue until it finds an end state: this is again the best score. The first time and any subsequent time it
+finds that best score at an end state, it adds the visited locations for that path to a combined set of points for all such paths.
+The answer is simply the size of that set. Once the queue encounters any state with a worse score than the best score, once that
+best score is found, no further processing is necessary as none of it will find any path that matches the best score so it breaks
+the loop.
+
+Each time it processes a maze state, it finds all valid facings for the current location. It keeps only those facings that can be
+traversed: that is, it will not move into a wall or any already-visited location. It then creates new states for those valid
+facings. If the new facing is the same as the old, it takes one step in that direction. If different, it turns.
+
+For these new states, it filter out those that have a worse score than any previous duplicate state. There is no point in
+processing those states as they can never beat or match the previous time seeing that state.
 
 ## Day 17: ?
 
@@ -591,6 +616,7 @@ of a wide box, then apply the scoring as per the requirement. Add up all of the 
 [14.0]: https://adventofcode.com/2024/day/14
 [15.0]: https://adventofcode.com/2024/day/15
 [16.0]: https://adventofcode.com/2024/day/16
+[16.1]: https://en.wikipedia.org/wiki/Breadth-first_search
 [17.0]: https://adventofcode.com/2024/day/17
 [18.0]: https://adventofcode.com/2024/day/18
 [19.0]: https://adventofcode.com/2024/day/19
