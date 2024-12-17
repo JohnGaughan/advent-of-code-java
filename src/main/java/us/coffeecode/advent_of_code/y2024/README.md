@@ -557,9 +557,79 @@ facings. If the new facing is the same as the old, it takes one step in that dir
 For these new states, it filter out those that have a worse score than any previous duplicate state. There is no point in
 processing those states as they can never beat or match the previous time seeing that state.
 
-## Day 17: ?
+## Day 17: Chronospatial Computer
 
 [Year 2024, day 17][17.0]
+
+Advent of Code throws us another difficult problem that requires some thinking outside of the box.
+
+We are given a simple model of a CPU that executes instructions with three registers. Before diving into the two parts to the
+problem, the CPU model is fairly simple to implement and is reused. It is a simple loop that executes instructions until the
+instruction pointer is out of bounds.
+
+It is worth noting right away that the problem does involve some large numbers, even if it continuously truncates them.
+Specifically, the first register, `A`, can get quite large in part two so all math needs to be done with long integers. Other than
+that, the logic to execute the program that is the problem input is rather simple. I converted as much as possible to bitwise
+operators, which are faster than the alternatives such as modulus and exponentiation by power of two. This is because the program
+may need to be executed many times in part two.
+
+For part one, we simply execute the program using the given initial register values and return the output. This is the trivial
+case that ensures the solution models the virtual CPU correctly, and can be used as a test to ensure no regression errors while
+making changes for part two.
+
+Part two is where it gets really difficult, although previous years did have similar problems. If you completed
+[year 2024, day 24: Arithmetic Logic Unit][17.1] then you should be able to look at that solution and have a head start on
+analyzing today's problem. We need to figure out which initial value for register `A` will cause the program to output its own
+instructions. Brute force algorithms will take so long as to be impractical. We need to come up with an intelligent solution that
+uses properties of the input to eliminate the vast majority of the search space.
+
+The first step toward understanding how to design a solution is to convert your program into pseudocode. Program inputs are
+different, including the program instructions, so I cannot specify exact steps here. But I noticed several key elements, and these
+appear to agree with other comments I later read on the [Adevent of Code subreddit][17.2]:
+
+* The program is a simple loop with a jump-not-zero as the final instruction, looping back to the beginning.
+* Registers `B` and `C` are set each time through the loop before being read, making their scope the inside of the loop itself.
+* Register `A`'s lowest three bits, an octal digit, are read at the start of each iteration.
+* The program seems to be performing some sort of three-bit hash algorithm, and outputting the result each time through the loop.
+* Register `A` is shifted right by three bits at the end of each iteration, removing the just-hashed bits and introducing three
+  more for the next iteration. If this is the last of the bits, then `A` will instead be zero and the program ends.
+
+In total, the program appears to be a hash algorithm that consumes three bits each time through, transforming those bits and
+adding them to the output string.
+
+Thankfully, we know the desired output string and through inspection and debugging can see how the output is constructed. Given a
+hypothetical correct value for `A`, the program works right to left, low bits to high bits, and builds the output string from left
+to right.
+
+While many of the operations work only with the lower three bits of `A` either directly or indirectly, there is a division using
+the entire value of `A` as the numerator. This means the digits in the output are not independent. Two different values of `A`
+sharing the same low three bits could produce different results for the first output digit. It is also possible that two different
+`A` values produce the same first output digit, meaning there is not a one-to-one mapping. Searching will be a little more
+complicated.
+
+The approach that worked for me is a recursive [depth-first search][17.3]. The recursive method accepts the instructions and an
+output string as parameters, and returns a set of `Long`s that produce that output string. Start off by making the recursive call
+right away, except call it with the first two characters (comma and one digit) removed from the _start_ of the output string. In
+other words, solve for the final digit first.
+
+The tail call is when there is only one digit. Iterate from zero to seven, or all three-bit integers, and run the program using
+the loop counter as the initial value of register `A`. Return all `A` values that produce the desired output.
+
+Moving up a level in the call stack, we check each value returned by the recursive call. First shift it three bits to the left.
+Then iterate as we did in the tail call, except instead of using the loop counter as the `A` register directly, merge it into the
+`A` value using a bitwise `or`. This reverses the "unpacking" of `A` that the input program performs at the end of each loop.
+Then run the program. Return all the values that produce correct subset of the output.
+
+The top-level call is matching the entire output string, and will return the full `A` register value for all values that produce
+correct output: there may be several. The problem statement instructs us to return the first one, or the one with the lowest
+value, so the stream operation uses the `min()` function to return the minimal value. Unpacking this value uses some
+exception-safe logic to get the value or return nonsense, and the algorithm is complete.
+
+Considering the brute force algorithm involves run times that include terms such as "heat death of the universe" it was nice to
+see this algorithm run in one or two milliseconds.
+
+Based on the evidence I have seen and knowing that Advent of Code generally tries to have inputs that are consistent and lack
+nasty edge cases, I strongly suspect this program will work on all inputs but I obviously cannot test that.
 
 ## Day 18: ?
 
@@ -618,6 +688,9 @@ processing those states as they can never beat or match the previous time seeing
 [16.0]: https://adventofcode.com/2024/day/16
 [16.1]: https://en.wikipedia.org/wiki/Breadth-first_search
 [17.0]: https://adventofcode.com/2024/day/17
+[17.1]: https://adventofcode.com/2021/day/24
+[17.2]: https://www.reddit.com/r/adventofcode/
+[17.3]: https://en.wikipedia.org/wiki/Depth-first_search
 [18.0]: https://adventofcode.com/2024/day/18
 [19.0]: https://adventofcode.com/2024/day/19
 [20.0]: https://adventofcode.com/2024/day/20
