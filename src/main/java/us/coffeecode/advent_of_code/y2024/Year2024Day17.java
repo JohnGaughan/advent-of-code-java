@@ -16,14 +16,13 @@
  */
 package us.coffeecode.advent_of_code.y2024;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
+import java.util.OptionalLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,97 +48,91 @@ public class Year2024Day17 {
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     final State state = getInput(pc);
-    final Collection<Long> solutions = solvePart2(state.instructions, state.program);
-    var solution = solutions.stream()
-                            .mapToLong(Long::longValue)
-                            .min();
+    final long[] solutions = solvePart2(state.instructions, state.program);
+    final OptionalLong solution = Arrays.stream(solutions)
+                                        .min();
     return solution.isPresent() ? solution.getAsLong() : Long.MIN_VALUE;
   }
 
-  private Collection<Long> solvePart2(final int[] instructions, final String needle) {
-    final Collection<Long> a_values = new HashSet<>();
+  private long[] solvePart2(final int[] instructions, final String needle) {
+    final LongStream.Builder a_values = LongStream.builder();
     // Initial case: get all solutions for the final digit
     if (needle.length() == 1) {
       for (long a = 0; a < 8; ++a) {
         if (needle.equals(exec(instructions, new long[] { a, 0, 0 }))) {
-          a_values.add(Long.valueOf(a));
+          a_values.accept(a);
         }
       }
     }
     // Recursive case: get candidate values recursively, then see what values work for each one.
     else {
       // Get all values that solve the next smaller step.
-      final Collection<Long> a_candidates = solvePart2(instructions, needle.substring(2));
+      final long[] a_candidates = solvePart2(instructions, needle.substring(2));
       // See what values solve the current step
-      for (final Long a_candidate : a_candidates) {
+      for (final long a_candidate : a_candidates) {
+        final long a_shifted = (a_candidate << 3);
         for (long i = 0; i < 8; ++i) {
           // Add the bit triplet "i" to the right of "a"
-          final long a = (a_candidate.longValue() << 3L) | i;
+          final long a = (a_shifted | i);
           if (needle.equals(exec(instructions, new long[] { a, 0, 0 }))) {
-            a_values.add(Long.valueOf(a));
+            a_values.accept(a);
           }
         }
       }
     }
-    return a_values;
+    return a_values.build()
+                   .distinct()
+                   .toArray();
   }
 
   /** Execute the program instructions using the initial register values, returning whatever the program outputs. */
-  private String exec(final int[] instructions, final long[] registers) {
+  private String exec(final int[] ins, final long[] reg) {
     int ip = 0;
-    final List<Long> output = new ArrayList<>();
-    while (ip < instructions.length) {
+    final LongStream.Builder builder = LongStream.builder();
+    while (ip < ins.length) {
       // ADV: A = A / 2^combo
-      if (instructions[ip] == 0) {
-        final long denominator = (1 << combo(instructions[ip + 1], registers));
-        registers[0] = (registers[0] / denominator);
+      if (ins[ip] == 0) {
+        reg[0] = (reg[0] >> combo(ins[ip + 1], reg));
         ip += 2;
       }
       // BXL: B ^= operand
-      else if (instructions[ip] == 1) {
-        registers[1] ^= instructions[ip + 1];
+      else if (ins[ip] == 1) {
+        reg[1] ^= ins[ip + 1];
         ip += 2;
       }
       // BST: B = combo(operand) % 8
-      else if (instructions[ip] == 2) {
-        registers[1] = combo(instructions[ip + 1], registers) & 7;
+      else if (ins[ip] == 2) {
+        reg[1] = combo(ins[ip + 1], reg) & 7;
         ip += 2;
       }
       // JNZ: if A != 0, set IP to operand
-      else if (instructions[ip] == 3) {
-        if (registers[0] == 0) {
-          ip += 2;
-        }
-        else {
-          ip = instructions[ip + 1];
-        }
+      else if (ins[ip] == 3) {
+        ip = ((reg[0] == 0) ? (ip + 2) : ins[ip + 1]);
       }
       // BXC: B ^= C
-      else if (instructions[ip] == 4) {
-        registers[1] ^= registers[2];
+      else if (ins[ip] == 4) {
+        reg[1] ^= reg[2];
         ip += 2;
       }
       // OUT: add (combo % 8) to output
-      else if (instructions[ip] == 5) {
-        output.add(Long.valueOf(combo(instructions[ip + 1], registers) & 7));
+      else if (ins[ip] == 5) {
+        builder.accept(combo(ins[ip + 1], reg) & 7);
         ip += 2;
       }
       // BDV: B = A / 2^combo
-      else if (instructions[ip] == 6) {
-        final long denominator = (1 << combo(instructions[ip + 1], registers));
-        registers[1] = (registers[0] / denominator);
+      else if (ins[ip] == 6) {
+        reg[1] = (reg[0] >> combo(ins[ip + 1], reg));
         ip += 2;
       }
-      // CDV: C =A / 2^combo
-      else if (instructions[ip] == 7) {
-        final long denominator = (1 << combo(instructions[ip + 1], registers));
-        registers[2] = (registers[0] / denominator);
+      // CDV: C = A / 2^combo
+      else if (ins[ip] == 7) {
+        reg[2] = (reg[0] >> combo(ins[ip + 1], reg));
         ip += 2;
       }
     }
-    return output.stream()
-                 .map(n -> n.toString())
-                 .collect(Collectors.joining(","));
+    return builder.build()
+                  .mapToObj(Long::toString)
+                  .collect(Collectors.joining(","));
   }
 
   /**
@@ -147,10 +140,7 @@ public class Year2024Day17 {
    * input's value.
    */
   private long combo(final int input, final long[] registers) {
-    if (input < 4) {
-      return input;
-    }
-    return registers[input - 4];
+    return (input < 4) ? input : registers[input - 4];
   }
 
   private State getInput(final PuzzleContext pc) {
