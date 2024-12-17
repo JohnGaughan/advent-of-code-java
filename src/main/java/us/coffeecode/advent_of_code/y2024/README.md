@@ -578,7 +578,7 @@ case that ensures the solution models the virtual CPU correctly, and can be used
 making changes for part two.
 
 Part two is where it gets really difficult, although previous years did have similar problems. If you completed
-[year 2024, day 24: Arithmetic Logic Unit][17.1] then you should be able to look at that solution and have a head start on
+[year 2021, day 24: Arithmetic Logic Unit][17.1] then you should be able to look at that solution and have a head start on
 analyzing today's problem. We need to figure out which initial value for register `A` will cause the program to output its own
 instructions. Brute force algorithms will take so long as to be impractical. We need to come up with an intelligent solution that
 uses properties of the input to eliminate the vast majority of the search space.
