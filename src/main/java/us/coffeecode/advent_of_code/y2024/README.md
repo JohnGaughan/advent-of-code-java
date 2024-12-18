@@ -631,9 +631,53 @@ see this algorithm run in one or two milliseconds.
 Based on the evidence I have seen and knowing that Advent of Code generally tries to have inputs that are consistent and lack
 nasty edge cases, I strongly suspect this program will work on all inputs but I obviously cannot test that.
 
-## Day 18: ?
+## Day 18: RAM Run
 
 [Year 2024, day 18][18.0]
+
+Today is another map traversal problem with a different twist which was actually quite nice. We are given a map where the walls
+change over time: each unit of time, a new wall appears. For part one we need to find the shortest path after a certain number of
+walls appear. For part two we flip it around and need to find the coordinates of the first wall to appear that makes it impossible
+to find a solution.
+
+The first step is to implement an algorithm to solve the maze. I chose a [breadth-first search][18.1] that incorporates elements
+of both [Dijkstra][18.2] and [A*][18.3]. It uses a priority queue to store traversal states, sorted by their distance from the
+start from low to high. It tracks visited nodes across all state objects. Since we process the queue favoring nodes closer to the
+start, it makes no sense to process a node a second time. At best, we can tie it for distance from start which is not an
+improvement. At each step, process a node's neighbors. If a neighbor is not in a wall and not already visited, add a new state to
+the queue for that neighbor being the current node, and the current score plus one. Then mark it as visited. This guarantees the
+lowest score at the end, and in what should be very close to the minimum number of states checked.
+
+Part one limits the input, which is an ordered list of walls that are added over time. All we need to do is get the input, limit
+it to the number of walls specified in the requirements which are different between the example and real inputs, then run the maze
+algorithm to get the answer.
+
+In true Advent of Code tradition, part one serves to tee up part two. Now we have a tested algorithm on which to build.
+
+For part two, we need to figure out which element in the input list causes the maze to be impossible to solve. Brute force would
+simply iterate the list of points, add each one, and process. This works, and even in a reasonable amount of time. On my system
+and with my inputs, the example finished in a few tens of milliseconds and the real input took around three seconds. That was good
+enough to submit my answer, but I wanted something better.
+
+Enter [binary search][18.4], which is nearly always the ideal method of finding a solution in sorted data. In this case, the data
+can be envisioned as an array with the same length as the number of points in the input. It has two elements: true and false. The
+lower elements are true because they have a solution, the higher elements are false because they do not. We need to find the
+specific point where one element is true and the next is false.
+
+The implementation is a forever loop (`while (true)`) that tracks three variables. First is the lower bound of the search
+window, starting at zero. Second is the upper bound of the search window, starting at the length of the list of points. The third
+is the current search element, which is their average. At the start of each loop iteration, create a maze and fill in the walls.
+Calculate its score. Next, set either the lower or upper bound to the current search element based on whether or not the score
+indicates successful traversal. If the current element has no path, then lower the upper bound. Otherwise, raise the lower bound.
+
+If the upper and lower bounds have a difference of one, then we have the solution: the first point to break the maze is the
+current upper search bound because the lower bound was successful and the upper bound was not. Convert that point to a string and
+return it as the answer. If the bounds are further apart, keep processing. Set the current search element to the average of the
+two bounds, and loop again.
+
+Choosing binary search over brute force linear search lowered the run time for the real input to under ten milliseconds. It
+checked twelve mazes out of approximately 3,500. Linear search checked roughly half of them, which is a lot more computational
+work.
 
 ## Day 19: ?
 
@@ -692,6 +736,10 @@ nasty edge cases, I strongly suspect this program will work on all inputs but I 
 [17.2]: https://www.reddit.com/r/adventofcode/
 [17.3]: https://en.wikipedia.org/wiki/Depth-first_search
 [18.0]: https://adventofcode.com/2024/day/18
+[18.1]: https://en.wikipedia.org/wiki/Breadth-first_search
+[18.2]: https://en.wikipedia.org/wiki/Dijkstra's_algorithm
+[18.3]: https://en.wikipedia.org/wiki/A*_search_algorithm
+[18.4]: https://en.wikipedia.org/wiki/Binary_search
 [19.0]: https://adventofcode.com/2024/day/19
 [20.0]: https://adventofcode.com/2024/day/20
 [21.0]: https://adventofcode.com/2024/day/21
