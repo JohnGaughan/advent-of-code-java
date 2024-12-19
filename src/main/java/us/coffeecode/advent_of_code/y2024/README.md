@@ -679,9 +679,47 @@ Choosing binary search over brute force linear search lowered the run time for t
 checked twelve mazes out of approximately 3,500. Linear search checked roughly half of them, which is a lot more computational
 work.
 
-## Day 19: ?
+## Day 19: Linen Layout
 
 [Year 2024, day 19][19.0]
+
+Today is an exercise in string matching and [memoization][19.1]. Generally when this is required, a solution works for part one
+but takes far too long to be feasible for part two. With today's problem, brute force is infeasible for both parts.
+
+We are given a number of different strings. One group of them represents towels, and the other represents stripes, or parts of
+towels. We need to figure out how to assemble stripes into towels.
+
+Part one asks us to determine which towels are possible to construct from the given stripes. Part two asks us how many ways there
+are to assemble the towels from the given stripes. In both cases, stripes can be used more than once.
+
+These are closely related questions, and the second can actually be used to answer the first. If there are zero permutations of
+stripes that build a towel, then that towel is not possible. However, I used separate implementations for two reasons. First, test
+cases do not share state, so it is impossible to calculate the answer to part two and leverage that for part one. Second, the
+algorithm for part one will be slightly different and definitely faster.
+
+For part one, consider a towel. Iterate through the stripes. For each one that matches the start of the towel, see if it matches
+the entire towel: if so, this towel is possible to construct so return true right away. Otherwise, make a recursive call and see
+if the remainder of the towel is possible. If no stripes match, this towel, or section of towel, is impossible to construct.
+
+This performs an exhaustive search for all permutations of stripe. However, it can take a very long time. Furthermore, towels and
+stripes repeat a lot of the same characters: there are numerous cases where two towels reach the same "remainder" state after
+matching a few stripes. In those cases, it does not make sense to repeat the matching logic because it will reach the same
+conclusion.
+
+Memoization to the rescue. Once it reaches a definite answer for a towel or portion of a towel, it stores the result in a cache.
+Then when starting to process a state, check the cache first. If the current state is a key in the map which is the cache, simply
+get the result and return it.
+
+This cache is used across all towels, too: they do use the same stripes, after all. The same substring in two different towels
+will have the same answer.
+
+Part two is virtually the same, except instead of returning right away once it knows a towel is possible or impossible, it
+continues until processing all stripes and figures out the total permutations even if the value is zero. It stores that result in
+the cache and returns it up the call stack.
+
+The only other important thing to note is that the answer for part two will be quite a bit larger than can fit in a 32-bit
+integer, necessitating the use of 64-bit integers. This also illustrates why memoization is so important, because processing that
+many states will take quite a few more years than Earth has left to live.
 
 ## Day 20: ?
 
@@ -741,6 +779,7 @@ work.
 [18.3]: https://en.wikipedia.org/wiki/A*_search_algorithm
 [18.4]: https://en.wikipedia.org/wiki/Binary_search
 [19.0]: https://adventofcode.com/2024/day/19
+[19.1]: https://en.wikipedia.org/wiki/Memoization
 [20.0]: https://adventofcode.com/2024/day/20
 [21.0]: https://adventofcode.com/2024/day/21
 [22.0]: https://adventofcode.com/2024/day/22
