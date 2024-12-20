@@ -721,9 +721,44 @@ The only other important thing to note is that the answer for part two will be q
 integer, necessitating the use of 64-bit integers. This also illustrates why memoization is so important, because processing that
 many states will take quite a few more years than Earth has left to live.
 
-## Day 20: ?
+## Day 20: Race Condition
 
 [Year 2024, day 20][20.0]
+
+Today's puzzle is a maze with no maze: there is a single path from start to finish. The path wraps around itself like a maze, but
+without branching. We need to find cheats where an entity traversing the path can skip through a wall, and the cheat saves a lot
+of time.
+
+Part one looks for cheats of length two, while part two looks for cheats of length up to twenty. The algorithm can thus be shared,
+with the difference being parameters. One key insight here from the problem requirements is that the number of path elements to
+skip ahead is a maximum: it is possible and in fact required at times to stop skipping earlier, at least for part two where
+entities are able to skip through multiple walls.
+
+We start by getting the input, which is represented as an ASCII art maze (that is not really a maze). Create a list of points
+which is the sequence of steps from the start to the finish. Search the maze for the start location, and add it as the first
+element of the path. Then iterate, finding the next path element and adding it to the path until the current element is the end.
+Now we have a list of points where the start is at index zero, and the end is at the highest index.
+
+The first part of the algorithm checks the path starting at the start up to the length of the path minus the threshold of 100.
+Continuing to check right up to the end will not produce any results, since it is impossible to skip ahead `threshold` steps at
+that point. For each loop iteration, we call the main part of the algorithm to count the number of cheats that are present using
+the current list index as its starting point. Simply add up the results of counting cheats at each step to get the total number of
+cheats which is the answer to the puzzle.
+
+Counting the number of cheats at each step is fairly straightforward. It is essentially a nested loop where we check steps in the
+maze after the current step. Furthermore, the end of each cheat must be `threshold` steps after the start of the cheat, so we can
+tighten the loop bounds a bit to avoid unnecessary processing.
+
+We get the end of the cheat path and measure the [Taxicab or Manhattan distance][20.1] between them. If this is greater than the
+desired skip distance, ignore this end point and keep going. Otherwise, get the time savings. This is the difference between the
+list indices, minus the Taxicab distance. This represents the time it would normally take to travel between the points, minus the
+time spent cheating which provides the net time. If this net time is greater than the 100 threshold, increment the cheat counter
+because this is a useful cheat. When done, return the number of cheats for this starting point.
+
+As an aside, my initial solution did more tracking of what the lengths of the cheats were, as the problem statement illustrates
+this. However, the answer does not require any of that metadata. Being able to get rid of accessory data structures and reducing
+much of the problem to primitive arithmetic saved an order of magnitude of runtime. When implementing anything in code, it helps
+to read carefully and deliver only what is actually in the requirements.
 
 ## Day 21: ?
 
@@ -781,6 +816,7 @@ many states will take quite a few more years than Earth has left to live.
 [19.0]: https://adventofcode.com/2024/day/19
 [19.1]: https://en.wikipedia.org/wiki/Memoization
 [20.0]: https://adventofcode.com/2024/day/20
+[20.1]: https://en.wikipedia.org/wiki/Taxicab_geometry
 [21.0]: https://adventofcode.com/2024/day/21
 [22.0]: https://adventofcode.com/2024/day/22
 [23.0]: https://adventofcode.com/2024/day/23
