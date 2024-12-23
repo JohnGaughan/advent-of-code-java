@@ -24,7 +24,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2024, day = 21, title = "?")
+@AdventOfCodeSolution(year = 2024, day = 21, title = "Keypad Conundrum")
 @Component
 public class Year2024Day21 {
 
@@ -33,11 +33,27 @@ public class Year2024Day21 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return Long.MIN_VALUE;
+    return il.linesAsObjects(pc, this::parse)
+             .stream()
+             .mapToLong(this::score)
+             .sum();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
     return Long.MIN_VALUE;
   }
+
+  private long score(final InputRow input) {
+    // TODO
+    return input.score * 0;
+  }
+
+  private InputRow parse(final String line) {
+    return new InputRow(line.codePoints()
+                            .toArray(),
+      Long.parseLong(line.substring(0, line.length() - 1)));
+  }
+
+  private record InputRow(int[] buttons, long score) {}
 }
