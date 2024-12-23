@@ -760,13 +760,48 @@ this. However, the answer does not require any of that metadata. Being able to g
 much of the problem to primitive arithmetic saved an order of magnitude of runtime. When implementing anything in code, it helps
 to read carefully and deliver only what is actually in the requirements.
 
-## Day 21: ?
+## Day 21: Keypad Conundrum
 
 [Year 2024, day 21][21.0]
 
-## Day 22: ?
+## Day 22: Monkey Market
 
 [Year 2024, day 22][22.0]
+
+Today's puzzle constructs a hash function and asks us to use it to perform several actions. For part one, feed each seed value to
+the hash function and iterate 2,000 rounds. Sum up the end results across all seeds. For part two, we need to step through the
+hash rounds, calculate differences between values, and find the combination across all seeds where the same difference provides
+the greatest sum.
+
+The first step is to write the code for one round of the hash function. The algorithm is fairly simple, but one important note is
+we only care about the lower 24 bits. The operands given are also all powers of two. This means we can use integer math, as well
+as bitwise operators instead of arithmetic operators. This actually does provide a significant speedup, as division (including
+modulo) is very slow. For the operators that could overflow to negative values, we can ignore that. Unlike multiplication which
+will overflow to negative values, the left shift operators do not overflow and also perform signed shift which leaves the sign bit
+alone.
+
+For part one, simply write a function that calls the first function 2,000 times. Map each seed to its hash value, and sum the
+stream.
+
+For part two, more steps are required. One thing that really helps is once a "monkey" sees a sequence of four differences, the
+result is locked in place. We will never evaluate that difference sequence again for that seed. Another key insight is that while
+a record of four integers would be a great object-oriented way to reference a sequence of differences, it becomes a performance
+problem when there are a lot of keys being created and checked for equality. Hash maps generally perform well, but this comes with
+a bit of overhead.
+
+Instead, treat each sequence of differences as a single integer. Given the range -9 to 9, we can shift this by adding 9 to get 0
+to 18. That takes five bits to hold, and with four differences, that is a total of 20 bits. That is just over a million, which is
+quite feasible to model using a simple integer array.
+
+Create the integer array, which will be initialized to all zeros. Then process each hash seed. The seed is the first value, and we
+get its score by performing modulo arithmetic to get the final decimal digit. Then iterate the rest of the way by moving the
+previous value and score into the first element in their respective two-element arrays, generate the next hash round, and get its
+score. Now we can start populating the delta value by shifting it left five bits, adding the difference in scores, and adding 9.
+
+If we are at the fourth element or later and this delta has not been seen yet, add the current score into the master array. This
+will run for all seeds, and get the total value for that difference if that is the one we pick to sell banana hiding locations.
+
+Once that is all done, simply return the largest value in the array.
 
 ## Day 23: ?
 
