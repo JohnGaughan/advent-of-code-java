@@ -803,9 +803,36 @@ will run for all seeds, and get the total value for that difference if that is t
 
 Once that is all done, simply return the largest value in the array.
 
-## Day 23: ?
+## Day 23: LAN Party
 
 [Year 2024, day 23][23.0]
+
+We finally get a graph problem, and it was a bit tricky. The common code here reads in the pairs of connected vertices and
+constructs a mapping where every vertex has a key. The value is the set of vertex names to which the key vertex is connected. From
+here, the logic diverges.
+
+For part one, we need to find all triplets where three vertices are connected to each other, and at least one of them is
+identified by a string that starts with the letter `t`. While not the most optimized algorithm, the input is small enough that a
+triply-nested loop works fine. Check all combinations of three vertices and add them to a set: this also takes care of duplicates,
+since the algorithm does not attempt to prune the search space and reduce redundancy. If we find such a triplet, check the name
+condition and if that passes, add it to the set of triplets. The answer is the size of that set.
+
+For part two, this becomes much more complicated. We need to find the largest [clique][23.1] in the graph. This means we do not
+need to find all of the cliques: an algorithm can fail to find small ones as long as it finds the largest. I settled on an
+iterative approach that definitely will not find them all.
+
+Start with a new clique for each vertex in the graph. Add that "root" vertex to the clique, then iterate through all of its
+neighbors. If that neighbor is connected to every vertex already in the clique, proceed. Iterate another nested loop through the
+same vertices as the first loop, starting after the vertex in the first loop. If those two are connected and the second vertex is
+connected to the entire clique, add them both to the clique.
+
+This essentially builds up a spider-web of vertices, finding the maximum clique that includes the root vertex. Once that is done,
+check the current clique against the largest clique found so far. If this one is larger, set it as the new largest clique. Once
+we are done iterating all vertices in the graph, return that clique formatted the way the requirements so to do so.
+
+Once again we have an `O(n^3)` algorithm, although this runs fairly quickly probably in part due to how the inner loops avoid
+redundant comparisons. Part two actually runs quite a bit faster than part one, but both are plenty quick enough that I probably
+will not perform any additional optimization.
 
 ## Day 24: ?
 
@@ -855,5 +882,7 @@ Once that is all done, simply return the largest value in the array.
 [21.0]: https://adventofcode.com/2024/day/21
 [22.0]: https://adventofcode.com/2024/day/22
 [23.0]: https://adventofcode.com/2024/day/23
+[23.1]: https://en.wikipedia.org/wiki/Clique_(graph_theory)
+[23.2]: https://jgrapht.org/
 [24.0]: https://adventofcode.com/2024/day/24
 [25.0]: https://adventofcode.com/2024/day/25
