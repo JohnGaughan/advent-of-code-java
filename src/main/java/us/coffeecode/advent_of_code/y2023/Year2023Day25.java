@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 import org.jgrapht.Graph;
 import org.jgrapht.alg.StoerWagnerMinimumCut;
 import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.DefaultUndirectedGraph;
+import org.jgrapht.graph.SimpleGraph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +40,7 @@ public class Year2023Day25 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    final Graph<String, DefaultEdge> graph = new DefaultUndirectedGraph<>(DefaultEdge.class);
+    final Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 
     // Parse the input directly into the graph.
     for (final String line : il.lines(pc)) {
