@@ -878,7 +878,7 @@ Once again we have an `O(n^3)` algorithm, although this runs fairly quickly prob
 redundant comparisons. Part two actually runs quite a bit faster than part one, but both are plenty quick enough that I probably
 will not perform any additional optimization.
 
-## Day 24: ?
+## Day 24: Crossed Wires
 
 [Year 2024, day 24][24.0]
 
