@@ -17,10 +17,14 @@
 package us.coffeecode.advent_of_code.y2024;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -45,7 +49,57 @@ public class Year2024Day24 {
 
   @Solver(part = 2)
   public String calculatePart2(final PuzzleContext pc) {
-    return "NO SOLUTION FOUND";
+    final Input input = getInput(pc);
+    final Set<String> result = new HashSet<>();
+    final String finalOutputBit = input.operations.stream()
+                                                  .map(o -> o.destination)
+                                                  .sorted(Collections.reverseOrder())
+                                                  .findFirst()
+                                                  .get();
+    for (final Operation op : input.operations) {
+      // All Z wires other than the final one must be the product of XOR.
+      if (op.destination.startsWith("z") && !finalOutputBit.equals(op.destination) && (op.operator != Operator.XOR)) {
+        result.add(op.destination);
+      }
+      // All XORs must either have a Z wire as output, or X and Y as inputs.
+      else if (!op.destination.startsWith("z") && (op.operator == Operator.XOR) && !op.operand1.startsWith("x")
+        && !op.operand1.startsWith("y") && !op.operand2.startsWith("x") && !op.operand2.startsWith("y")) {
+          result.add(op.destination);
+        }
+      // XOR gate with XY inputs and z00 is not the output must feed into another XOR gate.
+      else if ((op.operator == Operator.XOR) && !"z00".equals(op.destination)
+        && (op.operand1.startsWith("x") || op.operand1.startsWith("y"))
+        && (op.operand2.startsWith("x") || op.operand2.startsWith("y"))) {
+          boolean nextXorExists = false;
+          for (final Operation op2 : input.operations) {
+            if ((op2.operator == Operator.XOR) && (op2.operand1.equals(op.destination) || op2.operand2.equals(op.destination))) {
+              nextXorExists = true;
+              break;
+            }
+          }
+          if (!nextXorExists) {
+            result.add(op.destination);
+          }
+        }
+      // AND gates that do not have x00 and y00 as inputs must feed into an OR gate.
+      else if ((op.operator == Operator.AND) && !"x00".equals(op.operand1) && !"y00".equals(op.operand1)
+        && !"x00".equals(op.operand2) && !"y00".equals(op.operand2)) {
+          boolean nextOrExists = false;
+          for (final Operation op2 : input.operations) {
+            if ((op2.operator == Operator.OR) && (op2.operand1.equals(op.destination) || op2.operand2.equals(op.destination))) {
+              nextOrExists = true;
+              break;
+            }
+          }
+          if (!nextOrExists) {
+            result.add(op.destination);
+          }
+        }
+    }
+    return (result.size() == 8) ? result.stream()
+                                        .sorted()
+                                        .collect(Collectors.joining(","))
+      : "NO SOLUTION FOUND";
   }
 
   /** Perform a calculation of the system given the provided starting state. */

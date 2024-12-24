@@ -882,6 +882,54 @@ will not perform any additional optimization.
 
 [Year 2024, day 24][24.0]
 
+The penultimate puzzle this year is a graph that models a [CPU adder][24.1].
+
+For part one, we need to run the logic gates and see what they produce on the output wires, treating them as bits in an integer.
+This is a somewhat straightforward exercise in looping over some basic commands until they are all able to execute. Then we simply
+look at the output `z` wires and add them up to get the answer.
+
+For part two, we are given that this is, in fact, an adder, but some logic gates have their output wires swapped. We need to
+identify what those gates are, but not necessarily which ones to swap. This does make the problem simpler, although so far I have
+not been able to come up with a general solution.
+
+I manually examined the input file, looking for patterns. I was able to get most of the way toward a solution: the Wikipedia page
+linked earlier shows some of the basics. While in the real world circuits generally use NAND gates because they are simpler to
+manufacture, we can certain model adders and other circuits with other logic gates.
+
+Here is the basic pattern for each output bit:
+
+* z00 output bit = x00 XOR y00
+* z00 carry bit = x00 AND y00
+* z_n output bit = (x_n XOR y_n) XOR z_n-1's carry bit
+* z_n carry bit = (z_n-1's carry bit AND (x_n XOR y_n)) OR (x_n AND y_n)
+* final carry bit = (z_n-1's carry bit AND (x_n-1 XOR y_n-1)) OR (x_n-1 AND y_n-1)
+
+It turns out that the only swapped output wires are in the middle of the adder, which makes sense. The problem needs to be
+difficult, but not _too_ difficult. If the wrong wires have other adder sections to which they can be compared, then it is easier
+to find the incorrect pattern. Swapping wires at either end might be too difficult.
+
+There are a few rules that we can infer from the structure and use to search for incorrect output wires. Keep in mind that we only
+need to identify them: we do not need to know which ones match up for swapping, nor do we need to calculate anything. All we need
+to do is construct a sorted, comma-delimited list of incorrect output wires. The following rules will help find them.
+
+* All Z wires except the final carry bit are the output of a XOR. If a Z wire is the output of a different logic gate, then it
+  needs to be swapped.
+* Every XOR gate has X and Y wires as inputs, or has a Z wire as its output. That is an inclusive `or`: the very first XOR gate
+  meets both criteria.
+* Every XOR bit with X and Y inputs and Z is _not_ the output must feed into another XOR gate.
+* Every AND gate that does not have x00 and y00 as inputs feeds into an OR gate. It may also feed into another gate such as XOR,
+  but some OR gate will have it as an input.
+
+Searching the input for all operations that fail at least one of these conditions and storing its output wire in a set produces
+the correct answer for my input. This does not work for the example input, however.
+
+It is also possible that other real inputs violate another condition of this structure, requiring the implementation of another
+rule check. Again, this worked for my input, so I did not feel the need to implement anything beyond the bare minimum given it is
+Christmas Eve.
+
+It should be possible to write a more general-purpose algorithm that solves it for arbitrary input data structures but this works
+fine given how the real program input is structured.
+
 ## Day 25: ?
 
 [Year 2024, day 25][25.0]
@@ -928,4 +976,5 @@ will not perform any additional optimization.
 [23.0]: https://adventofcode.com/2024/day/23
 [23.1]: https://en.wikipedia.org/wiki/Clique_(graph_theory)
 [24.0]: https://adventofcode.com/2024/day/24
+[24.1]: https://en.wikipedia.org/wiki/Adder_(electronics)
 [25.0]: https://adventofcode.com/2024/day/25
