@@ -764,6 +764,50 @@ to read carefully and deliver only what is actually in the requirements.
 
 [Year 2024, day 21][21.0]
 
+Most years have a problem about generating really long string sequences using a set of rules, then figuring out some property of
+that string such as its length. This is one of those problems, and it took me a while to come up with a solution that I am not
+ashamed to share with the world.
+
+First of all, this is a tricky problem and not only because it can generate strings that are so long that it is not feasible to
+work with them. Understanding the rules and their ramifications is easy to get wrong. Figuring out what to optimize or leave alone
+can also be tricky.
+
+I started by manually creating two maps: one for the number pad, the other for the direction pad. Given a two-character string
+representing the start and end characters, what direction pad inputs are possible to go from start to end? These are static and do
+not depend on the input, so it makes sense to hard-code these. We could also implement a search algorithm to do this dynamically.
+Either way works, but this is what I chose. It is also worth noting that when traversing a keypad, zig-zags are never optimal
+because they require more movement for upstream robots. `<^^^` or `^^^<` will always be equal to or better than `^<^^` or `^^<^`
+because upstream robots make fewer movements.
+
+Another key insight is that robots always start on the `A` button. We are given in the problem statement that this is their
+initial state. Furthermore, this has to be true while executing movements as well. They will move between buttons, but will always
+end on `A` to send a command downstream. This means they start on `A` when they send the next command. This means we can split
+each button press into its own segment independent of other commands in the same string.
+
+That independence between segments is crucial, because it allows us to implement memoization. Each time we encounter the same
+segment of input at the same depth (robot number), it will _always_ have the same score. We can calculate it once and return it on
+subsequent instances of that state.
+
+The algorithm starts by calculating the score using the number pad: given each pair of start and end characters, get the one or
+more direction commands that can achieve that result. Find the one with the lowest score, and add that to the cumulative score for
+that number pad entry. When processing the string, the current character is the end key and the previous character is the start.
+The first time through, we substitute `A` as the start since there is no previous key.
+
+We then enter the recursive part of the algorithm: processing directional pads. This is structured nearly identical to the number
+pad function, except for a few minor details. If the depth is zero, then we hit the end of the road: the score is simply the
+length of the command string so we return it. Otherwise, construct a map key for the cache map (memoization). If the key already
+exists in the map, short-circuit and return the cached value. Otherwise, do basically the same thing as with the number pad,
+except here we decrement the depth by one when recursing. Once we have the answer, store it in the memoization cache for next
+time.
+
+Both parts execute identical logic, using a parameter stored in `parameters.properties` to control the depth of recursion.
+
+The version of the code currently in my repository is the third iteration. The first one did not perform well, but did return an
+answer after nearly a minute for part two. I must have messed up the memoization implementation but I was fed up and deleted that
+version. Then I rewrote it and it was faster, but ugly, and still not fast enough (several seconds). The current version is a lot
+cleaner, returns answers for both parts in milliseconds, and does not make me want to vomit by looking at it. It was quite a
+roller coaster ride getting through the challenges of this day's problem and required two complete rewrites almost from scratch.
+
 ## Day 22: Monkey Market
 
 [Year 2024, day 22][22.0]
