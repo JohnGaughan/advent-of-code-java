@@ -927,6 +927,5 @@ will not perform any additional optimization.
 [22.0]: https://adventofcode.com/2024/day/22
 [23.0]: https://adventofcode.com/2024/day/23
 [23.1]: https://en.wikipedia.org/wiki/Clique_(graph_theory)
-[23.2]: https://jgrapht.org/
 [24.0]: https://adventofcode.com/2024/day/24
 [25.0]: https://adventofcode.com/2024/day/25
