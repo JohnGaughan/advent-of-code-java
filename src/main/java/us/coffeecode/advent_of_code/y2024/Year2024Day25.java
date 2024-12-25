@@ -16,9 +16,6 @@
  */
 package us.coffeecode.advent_of_code.y2024;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,63 +33,38 @@ public class Year2024Day25 {
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    final Input input = getInput(pc);
-    return input.locks.stream()
-                      .mapToLong(l -> input.keys.stream()
-                                                .filter(k -> fits(l, k))
-                                                .count())
-                      .sum();
-  }
-
-  /** Get whether the key fits in the lock. */
-  private boolean fits(final int[] lock, final int[] key) {
-    for (int i = 0; i < lock.length; ++i) {
-      if (lock[i] + key[i] > 5) {
-        return false;
+    final long[] input = getInput(pc);
+    long result = 0;
+    for (int i = 0; i < input.length - 1; ++i) {
+      for (int j = i + 1; j < input.length; ++j) {
+        if ((input[i] & input[j]) == 0) {
+          ++result;
+        }
       }
     }
-    return true;
+    return result;
   }
 
-  /** Get the input as arrays of lock/key pin/teeth heights. */
-  private Input getInput(final PuzzleContext pc) {
-    final List<int[]> locks = new ArrayList<>(250);
-    final List<int[]> keys = new ArrayList<>(250);
-    for (final List<String> group : il.groups(pc)) {
-      final String first = group.getFirst();
-      final int rowLength = first.length();
+  /** For each group of lines, get a long that represents the # characters in its bits. */
+  private long[] getInput(final PuzzleContext pc) {
+    return il.groups(pc)
+             .stream()
+             .mapToLong(this::convert)
+             .toArray();
+  }
 
-      // Lock
-      if (first.codePointAt(0) == '#') {
-        final int[] pins = new int[rowLength];
-        for (int y = 0; y < group.size(); ++y) {
-          final String row = group.get(y);
-          for (int x = 0; x < pins.length; ++x) {
-            if (row.codePointAt(x) == '#') {
-              pins[x] = y;
-            }
-          }
+  /** Given strings that form an input group, convert them to a long where # characters indicate bits that are set. */
+  private long convert(final Iterable<String> group) {
+    long value = 0;
+    for (final String line : group) {
+      for (final int codePoint : line.codePoints()
+                                     .toArray()) {
+        value <<= 1;
+        if (codePoint == '#') {
+          ++value;
         }
-        locks.add(pins);
-      }
-
-      // Key
-      else {
-        final int[] teeth = new int[rowLength];
-        final int max = group.size() - 1;
-        for (int y = max; y >= 0; --y) {
-          final String row = group.get(y);
-          for (int x = 0; x < teeth.length; ++x) {
-            if (row.codePointAt(x) == '#') {
-              teeth[x] = max - y;
-            }
-          }
-        }
-        keys.add(teeth);
       }
     }
-    return new Input(locks, keys);
+    return value;
   }
-
-  private record Input(List<int[]> locks, List<int[]> keys) {}
 }

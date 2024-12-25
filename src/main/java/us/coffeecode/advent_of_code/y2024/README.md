@@ -937,13 +937,16 @@ fine given how the real program input is structured.
 The final puzzle is, as usual, relatively simple. We are given grids of symbols representing locks and keys, and we need to
 determine how many combinations are valid. As usual, there is no part two.
 
-Input parsing is most of the work. First, determine if it is a lock or key based on the presence of `#` in the first row. Then
-iterate up through the input block for a lock, or down for a key. The height of that pin or tooth is simply the last index that
-has a `#`. Store the heights of each pin and tooth in an integer array for that lock or key.
+Originally, I had a solution that tracked the lengths of pins and teeth that modeled the problem fairly closely. However, there is
+a shorter approach that still performs very well. What we really need to measure are how many of these patterns overlap? Given two
+keys or two locks, they certainly will because the top or bottom row will be filled in. So we do not need to treat them
+differently, as long as the performance is good.
 
-To do the calculation, we need to check every combination of lock and key. Stream the locks, and convert each one to a count of
-keys that fit. We do this by performing a nested stream operation of all keys, and filtering those that fit. Count that inner
-stream, and the outer stream is now a stream of integers. Sum that stream to get the answer.
+Read in each group of lines and convert it to a `long` integer where `#` characters represent bits that are `1`. Now the input is
+represented as a `long[]`. Simply iterate it with a nested loop and find all combinations where the bitwise and (`&`) is zero,
+indicating no overlap. Count those combinations.
+
+This will perform a similar number of comparisons as splitting the input into keys and locks, but the logic is far simpler.
 
 
 [1.0]: https://adventofcode.com/2024/day/1
