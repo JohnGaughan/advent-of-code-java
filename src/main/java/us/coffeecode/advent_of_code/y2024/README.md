@@ -930,10 +930,20 @@ Christmas Eve.
 It should be possible to write a more general-purpose algorithm that solves it for arbitrary input data structures but this works
 fine given how the real program input is structured.
 
-## Day 25: ?
+## Day 25: Code Chronicle
 
 [Year 2024, day 25][25.0]
 
+The final puzzle is, as usual, relatively simple. We are given grids of symbols representing locks and keys, and we need to
+determine how many combinations are valid. As usual, there is no part two.
+
+Input parsing is most of the work. First, determine if it is a lock or key based on the presence of `#` in the first row. Then
+iterate up through the input block for a lock, or down for a key. The height of that pin or tooth is simply the last index that
+has a `#`. Store the heights of each pin and tooth in an integer array for that lock or key.
+
+To do the calculation, we need to check every combination of lock and key. Stream the locks, and convert each one to a count of
+keys that fit. We do this by performing a nested stream operation of all keys, and filtering those that fit. Count that inner
+stream, and the outer stream is now a stream of integers. Sum that stream to get the answer.
 
 
 [1.0]: https://adventofcode.com/2024/day/1
