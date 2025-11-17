@@ -16,12 +16,10 @@
  */
 package us.coffeecode.advent_of_code;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.TestFactory;
 
+import us.coffeecode.advent_of_code.component.AocResources;
 import us.coffeecode.advent_of_code.component.DynamicTestFactory;
 import us.coffeecode.advent_of_code.component.TestContext;
 
@@ -35,10 +33,13 @@ import us.coffeecode.advent_of_code.component.TestContext;
 public class TestSolutions
 extends AbstractTests {
 
-  private final DynamicTestFactory dtf;
+  private final DynamicTestFactory testFactory;
+
+  private final AocResources resources;
 
   public TestSolutions() {
-    dtf = context.getBean(DynamicTestFactory.class);
+    testFactory = context.getBean(DynamicTestFactory.class);
+    resources = context.getBean(AocResources.class);
   }
 
   @TestFactory
@@ -91,24 +92,14 @@ extends AbstractTests {
     return tests(Integer.valueOf(2024));
   }
 
-  private DynamicContainer tests(final Integer year) {
-    return DynamicContainer.dynamicContainer("Advent of Code " + year + ": " + TITLES.get(year),
-      dtf.getTests(new TestContext(year)));
+  @TestFactory
+  public DynamicContainer year2025() {
+    return tests(Integer.valueOf(2025));
   }
 
-  private static final Map<Integer, String> TITLES = new HashMap<>();
-
-  static {
-    TITLES.put(Integer.valueOf(2015), "Make it Snow");
-    TITLES.put(Integer.valueOf(2016), "Santa v. Easter Bunny");
-    TITLES.put(Integer.valueOf(2017), "Deus ex Machina");
-    TITLES.put(Integer.valueOf(2018), "Backwards Through Time");
-    TITLES.put(Integer.valueOf(2019), "Journey Through the Solar System with IntCode");
-    TITLES.put(Integer.valueOf(2020), "Tropical Vacation");
-    TITLES.put(Integer.valueOf(2021), "Ocean Exploration");
-    TITLES.put(Integer.valueOf(2022), "Jungle Expedition");
-    TITLES.put(Integer.valueOf(2023), "Global Snow Production");
-    TITLES.put(Integer.valueOf(2024), "Finding the Chief Historian");
+  private DynamicContainer tests(final Integer year) {
+    final String title = "Advent of Code " + year + ": " + resources.getYearTitle(year);
+    return DynamicContainer.dynamicContainer(title, testFactory.getTests(new TestContext(year)));
   }
 
 }
