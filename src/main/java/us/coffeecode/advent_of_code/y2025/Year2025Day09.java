@@ -19,15 +19,15 @@ package us.coffeecode.advent_of_code.y2025;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import us.coffeecode.advent_of_code.annotation.AdventOfCodeSolution;
 import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2025, day = 9)
+//@AdventOfCodeSolution(year = 2025, day = 9)
 @Component
 public class Year2025Day09 {
 
+  @SuppressWarnings("unused")
   @Autowired
   private InputLoader il;
 

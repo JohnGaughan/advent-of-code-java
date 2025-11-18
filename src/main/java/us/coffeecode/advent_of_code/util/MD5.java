@@ -16,12 +16,11 @@
  */
 package us.coffeecode.advent_of_code.util;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.springframework.stereotype.Component;
-
-import com.google.common.base.Charsets;
 
 /**
  * This component encapsulates logic to convert a string to MD5 bytes, including exception handling and thread-safety.
@@ -33,7 +32,7 @@ public class MD5 {
 
   public byte[] md5(final String input) {
     return MD5.get()
-              .digest(input.getBytes(Charsets.US_ASCII));
+              .digest(input.getBytes(StandardCharsets.US_ASCII));
   }
 
   /** MD5 message digest. */
