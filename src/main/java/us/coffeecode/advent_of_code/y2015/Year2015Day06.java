@@ -25,7 +25,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Range2D;
 
-@AdventOfCodeSolution(year = 2015, day = 6, title = "Probably a Fire Hazard")
+@AdventOfCodeSolution(year = 2015, day = 6)
 @Component
 public final class Year2015Day06 {
 

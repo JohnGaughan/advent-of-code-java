@@ -29,7 +29,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2021, day = 20, title = "Trench Map")
+@AdventOfCodeSolution(year = 2021, day = 20)
 @Component
 public final class Year2021Day20 {
 

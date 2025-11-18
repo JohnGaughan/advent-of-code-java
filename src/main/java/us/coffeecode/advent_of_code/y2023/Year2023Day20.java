@@ -35,7 +35,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.MyLongMath;
 
-@AdventOfCodeSolution(year = 2023, day = 20, title = "Pulse Propagation")
+@AdventOfCodeSolution(year = 2023, day = 20)
 @Component
 public class Year2023Day20 {
 

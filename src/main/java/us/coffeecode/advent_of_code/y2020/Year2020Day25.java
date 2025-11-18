@@ -24,7 +24,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2020, day = 25, title = "Combo Breaker")
+@AdventOfCodeSolution(year = 2020, day = 25)
 @Component
 public class Year2020Day25 {
 

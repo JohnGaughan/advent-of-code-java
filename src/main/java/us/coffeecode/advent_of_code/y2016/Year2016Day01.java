@@ -32,7 +32,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2016, day = 1, title = "No Time for a Taxicab")
+@AdventOfCodeSolution(year = 2016, day = 1)
 @Component
 public final class Year2016Day01 {
 

@@ -35,7 +35,7 @@ import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.DigitConverter;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2021, day = 13, title = "Transparent Origami")
+@AdventOfCodeSolution(year = 2021, day = 13)
 @Component
 public final class Year2021Day13 {
 

@@ -29,7 +29,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2015, day = 3, title = "Perfectly Spherical Houses in a Vacuum")
+@AdventOfCodeSolution(year = 2015, day = 3)
 @Component
 public final class Year2015Day03 {
 

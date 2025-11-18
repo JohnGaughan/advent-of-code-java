@@ -30,7 +30,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2018, day = 20, title = "A Regular Map")
+@AdventOfCodeSolution(year = 2018, day = 20)
 @Component
 public final class Year2018Day20 {
 

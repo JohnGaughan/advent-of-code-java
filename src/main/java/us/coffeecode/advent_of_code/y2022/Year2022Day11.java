@@ -37,7 +37,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.MyLongMath;
 
-@AdventOfCodeSolution(year = 2022, day = 11, title = "Monkey in the Middle")
+@AdventOfCodeSolution(year = 2022, day = 11)
 @Component
 public class Year2022Day11 {
 

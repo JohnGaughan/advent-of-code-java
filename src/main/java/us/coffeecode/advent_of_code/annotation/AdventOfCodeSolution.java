@@ -32,6 +32,4 @@ public @interface AdventOfCodeSolution {
   int year();
 
   int day();
-
-  String title();
 }

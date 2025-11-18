@@ -36,7 +36,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Range3D;
 
-@AdventOfCodeSolution(year = 2023, day = 22, title = "Sand Slabs")
+@AdventOfCodeSolution(year = 2023, day = 22)
 @Component
 public class Year2023Day22 {
 

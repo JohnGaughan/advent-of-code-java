@@ -28,7 +28,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2015, day = 14, title = "Reindeer Olympics")
+@AdventOfCodeSolution(year = 2015, day = 14)
 @Component
 public final class Year2015Day14 {
 

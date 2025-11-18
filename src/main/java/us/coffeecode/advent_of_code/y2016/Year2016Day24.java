@@ -34,7 +34,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2016, day = 24, title = "Air Duct Spelunking")
+@AdventOfCodeSolution(year = 2016, day = 24)
 @Component
 public final class Year2016Day24 {
 

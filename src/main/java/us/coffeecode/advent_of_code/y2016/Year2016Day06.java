@@ -27,7 +27,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.function.BiIntPredicate;
 
-@AdventOfCodeSolution(year = 2016, day = 6, title = "Signals and Noise")
+@AdventOfCodeSolution(year = 2016, day = 6)
 @Component
 public final class Year2016Day06 {
 

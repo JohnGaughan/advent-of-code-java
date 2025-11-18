@@ -27,7 +27,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2019, day = 13, title = "Care Package")
+@AdventOfCodeSolution(year = 2019, day = 13)
 @Component
 public final class Year2019Day13 {
 

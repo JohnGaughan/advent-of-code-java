@@ -30,7 +30,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2020, day = 24, title = "Lobby Layout")
+@AdventOfCodeSolution(year = 2020, day = 24)
 @Component
 public class Year2020Day24 {
 

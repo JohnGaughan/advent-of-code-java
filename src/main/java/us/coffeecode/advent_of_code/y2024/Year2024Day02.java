@@ -29,7 +29,7 @@ import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.MyArrays;
 import us.coffeecode.advent_of_code.util.MyIntMath;
 
-@AdventOfCodeSolution(year = 2024, day = 2, title = "Red-Nosed Reports")
+@AdventOfCodeSolution(year = 2024, day = 2)
 @Component
 public class Year2024Day02 {
 

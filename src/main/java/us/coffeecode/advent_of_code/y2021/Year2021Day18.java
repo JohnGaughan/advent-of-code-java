@@ -26,7 +26,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2021, day = 18, title = "Snailfish")
+@AdventOfCodeSolution(year = 2021, day = 18)
 @Component
 public final class Year2021Day18 {
 

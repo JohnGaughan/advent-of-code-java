@@ -28,7 +28,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2016, day = 15, title = "Timing is Everything")
+@AdventOfCodeSolution(year = 2016, day = 15)
 @Component
 public final class Year2016Day15 {
 

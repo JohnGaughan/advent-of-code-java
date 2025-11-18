@@ -31,7 +31,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2024, day = 19, title = "Linen Layout")
+@AdventOfCodeSolution(year = 2024, day = 19)
 @Component
 public class Year2024Day19 {
 

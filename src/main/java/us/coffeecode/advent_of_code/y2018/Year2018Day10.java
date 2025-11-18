@@ -27,7 +27,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.DigitConverter;
 
-@AdventOfCodeSolution(year = 2018, day = 10, title = "The Stars Align")
+@AdventOfCodeSolution(year = 2018, day = 10)
 @Component
 public final class Year2018Day10 {
 

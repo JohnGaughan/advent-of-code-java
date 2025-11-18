@@ -31,7 +31,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.ArrayInfinitelyIterable;
 
-@AdventOfCodeSolution(year = 2019, day = 7, title = "Amplification Circuit")
+@AdventOfCodeSolution(year = 2019, day = 7)
 @Component
 public final class Year2019Day07 {
 

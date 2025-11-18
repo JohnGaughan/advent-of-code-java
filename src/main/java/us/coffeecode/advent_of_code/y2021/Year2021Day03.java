@@ -30,7 +30,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.function.BiIntPredicate;
 
-@AdventOfCodeSolution(year = 2021, day = 3, title = "Binary Diagnostic")
+@AdventOfCodeSolution(year = 2021, day = 3)
 @Component
 public final class Year2021Day03 {
 

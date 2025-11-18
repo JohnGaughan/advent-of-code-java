@@ -31,7 +31,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point3D;
 
-@AdventOfCodeSolution(year = 2018, day = 23, title = "Experimental Emergency Teleportation")
+@AdventOfCodeSolution(year = 2018, day = 23)
 @Component
 public final class Year2018Day23 {
 

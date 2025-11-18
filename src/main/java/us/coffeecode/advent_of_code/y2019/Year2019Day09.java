@@ -23,7 +23,7 @@ import us.coffeecode.advent_of_code.annotation.AdventOfCodeSolution;
 import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2019, day = 9, title = "Sensor Boost")
+@AdventOfCodeSolution(year = 2019, day = 9)
 @Component
 public final class Year2019Day09 {
 

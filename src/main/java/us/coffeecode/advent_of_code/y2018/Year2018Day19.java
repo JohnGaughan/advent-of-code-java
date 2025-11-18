@@ -30,7 +30,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.PrimeProvider;
 
-@AdventOfCodeSolution(year = 2018, day = 19, title = "Go With The Flow")
+@AdventOfCodeSolution(year = 2018, day = 19)
 @Component
 public final class Year2018Day19 {
 

@@ -25,7 +25,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.MD5;
 
-@AdventOfCodeSolution(year = 2016, day = 5, title = "How About a Nice Game of Chess?")
+@AdventOfCodeSolution(year = 2016, day = 5)
 @Component
 public final class Year2016Day05 {
 

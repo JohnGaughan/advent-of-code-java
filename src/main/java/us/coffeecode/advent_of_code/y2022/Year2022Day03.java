@@ -33,7 +33,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2022, day = 3, title = "Rucksack Reorganization")
+@AdventOfCodeSolution(year = 2022, day = 3)
 @Component
 public class Year2022Day03 {
 

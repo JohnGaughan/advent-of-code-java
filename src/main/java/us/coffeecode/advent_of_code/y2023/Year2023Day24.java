@@ -30,7 +30,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2023, day = 24, title = "Never Tell Me The Odds")
+@AdventOfCodeSolution(year = 2023, day = 24)
 @Component
 public class Year2023Day24 {
 

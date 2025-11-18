@@ -30,7 +30,7 @@ import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.DigitConverter;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2019, day = 11, title = "Space Police")
+@AdventOfCodeSolution(year = 2019, day = 11)
 @Component
 public final class Year2019Day11 {
 

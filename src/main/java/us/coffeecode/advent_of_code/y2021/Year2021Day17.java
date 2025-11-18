@@ -26,7 +26,7 @@ import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 import us.coffeecode.advent_of_code.util.Range2D;
 
-@AdventOfCodeSolution(year = 2021, day = 17, title = "Trick Shot")
+@AdventOfCodeSolution(year = 2021, day = 17)
 @Component
 public final class Year2021Day17 {
 

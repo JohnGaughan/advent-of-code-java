@@ -30,7 +30,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2015, day = 12, title = "JSAbacusFramework.io")
+@AdventOfCodeSolution(year = 2015, day = 12)
 @Component
 public final class Year2015Day12 {
 

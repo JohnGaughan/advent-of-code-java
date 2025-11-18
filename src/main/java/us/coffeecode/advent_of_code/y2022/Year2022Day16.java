@@ -33,7 +33,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2022, day = 16, title = "Proboscidea Volcanium")
+@AdventOfCodeSolution(year = 2022, day = 16)
 @Component
 public class Year2022Day16 {
 

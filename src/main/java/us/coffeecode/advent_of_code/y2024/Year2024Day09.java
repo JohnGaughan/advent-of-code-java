@@ -36,7 +36,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Range;
 
-@AdventOfCodeSolution(year = 2024, day = 9, title = "Disk Fragmenter")
+@AdventOfCodeSolution(year = 2024, day = 9)
 @Component
 public class Year2024Day09 {
 

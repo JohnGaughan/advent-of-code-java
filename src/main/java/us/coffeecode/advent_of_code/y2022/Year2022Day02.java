@@ -27,7 +27,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2022, day = 2, title = "Rock Paper Scissors")
+@AdventOfCodeSolution(year = 2022, day = 2)
 @Component
 public class Year2022Day02 {
 

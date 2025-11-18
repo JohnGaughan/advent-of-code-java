@@ -28,7 +28,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Range;
 
-@AdventOfCodeSolution(year = 2022, day = 4, title = "Camp Cleanup")
+@AdventOfCodeSolution(year = 2022, day = 4)
 @Component
 public class Year2022Day04 {
 

@@ -33,7 +33,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.MutablePoint3D;
 
-@AdventOfCodeSolution(year = 2017, day = 20, title = "Particle Swarm")
+@AdventOfCodeSolution(year = 2017, day = 20)
 @Component
 public final class Year2017Day20 {
 

@@ -29,7 +29,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.MD5;
 
-@AdventOfCodeSolution(year = 2016, day = 17, title = "Two Steps Forward")
+@AdventOfCodeSolution(year = 2016, day = 17)
 @Component
 public final class Year2016Day17 {
 

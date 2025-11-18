@@ -33,7 +33,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2019, day = 15, title = "Oxygen System")
+@AdventOfCodeSolution(year = 2019, day = 15)
 @Component
 public final class Year2019Day15 {
 

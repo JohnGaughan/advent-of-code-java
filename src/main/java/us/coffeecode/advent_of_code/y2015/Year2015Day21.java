@@ -29,7 +29,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.function.BooleanUnaryOperator;
 
-@AdventOfCodeSolution(year = 2015, day = 21, title = "RPG Simulator 20XX")
+@AdventOfCodeSolution(year = 2015, day = 21)
 @Component
 public final class Year2015Day21 {
 

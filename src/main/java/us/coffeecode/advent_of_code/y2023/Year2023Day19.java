@@ -37,7 +37,7 @@ import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Range;
 import us.coffeecode.advent_of_code.util.Range4D;
 
-@AdventOfCodeSolution(year = 2023, day = 19, title = "Aplenty")
+@AdventOfCodeSolution(year = 2023, day = 19)
 @Component
 public class Year2023Day19 {
 

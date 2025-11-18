@@ -29,7 +29,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2023, day = 18, title = "Lavaduct Lagoon")
+@AdventOfCodeSolution(year = 2023, day = 18)
 @Component
 public class Year2023Day18 {
 

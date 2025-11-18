@@ -29,7 +29,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point3D;
 
-@AdventOfCodeSolution(year = 2015, day = 2, title = "I Was Told There Would Be No Math")
+@AdventOfCodeSolution(year = 2015, day = 2)
 @Component
 public final class Year2015Day02 {
 

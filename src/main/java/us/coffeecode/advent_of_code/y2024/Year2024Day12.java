@@ -29,7 +29,7 @@ import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 import us.coffeecode.advent_of_code.util.Range;
 
-@AdventOfCodeSolution(year = 2024, day = 12, title = "Garden Groups")
+@AdventOfCodeSolution(year = 2024, day = 12)
 @Component
 public class Year2024Day12 {
 

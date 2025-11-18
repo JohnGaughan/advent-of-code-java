@@ -27,7 +27,7 @@ import us.coffeecode.advent_of_code.annotation.AdventOfCodeSolution;
 import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2019, day = 25, title = "Cryostasis")
+@AdventOfCodeSolution(year = 2019, day = 25)
 @Component
 public final class Year2019Day25 {
 

@@ -38,7 +38,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point3D;
 
-@AdventOfCodeSolution(year = 2021, day = 19, title = "Beacon Scanner")
+@AdventOfCodeSolution(year = 2021, day = 19)
 @Component
 public final class Year2021Day19 {
 

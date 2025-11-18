@@ -34,7 +34,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2022, day = 19, title = "Not Enough Minerals")
+@AdventOfCodeSolution(year = 2022, day = 19)
 @Component
 public class Year2022Day19 {
 

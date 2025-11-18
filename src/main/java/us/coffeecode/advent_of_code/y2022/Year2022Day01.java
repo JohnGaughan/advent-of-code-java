@@ -26,7 +26,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2022, day = 1, title = "Calorie Counting")
+@AdventOfCodeSolution(year = 2022, day = 1)
 @Component
 public class Year2022Day01 {
 

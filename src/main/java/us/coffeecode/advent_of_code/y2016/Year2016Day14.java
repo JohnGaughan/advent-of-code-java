@@ -35,7 +35,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.MD5;
 
-@AdventOfCodeSolution(year = 2016, day = 14, title = "One-Time Pad")
+@AdventOfCodeSolution(year = 2016, day = 14)
 @Component
 public final class Year2016Day14 {
 

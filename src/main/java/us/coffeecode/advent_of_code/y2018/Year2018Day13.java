@@ -32,7 +32,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.MutablePoint2D;
 
-@AdventOfCodeSolution(year = 2018, day = 13, title = "Mine Cart Madness")
+@AdventOfCodeSolution(year = 2018, day = 13)
 @Component
 public final class Year2018Day13 {
 

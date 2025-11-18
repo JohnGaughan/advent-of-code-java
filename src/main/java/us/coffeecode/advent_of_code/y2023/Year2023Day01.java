@@ -31,7 +31,7 @@ import us.coffeecode.advent_of_code.function.BiObjIntFunction;
 import us.coffeecode.advent_of_code.visualization.HtmlVisualizationResult;
 import us.coffeecode.advent_of_code.visualization.IVisualizationResult;
 
-@AdventOfCodeSolution(year = 2023, day = 1, title = "Trebuchet?!")
+@AdventOfCodeSolution(year = 2023, day = 1)
 @Component
 public class Year2023Day01 {
 

@@ -29,7 +29,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.MyLongMath;
 
-@AdventOfCodeSolution(year = 2019, day = 12, title = "The N-Body Problem")
+@AdventOfCodeSolution(year = 2019, day = 12)
 @Component
 public final class Year2019Day12 {
 

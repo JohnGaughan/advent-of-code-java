@@ -33,7 +33,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2023, day = 15, title = "Lens Library")
+@AdventOfCodeSolution(year = 2023, day = 15)
 @Component
 public class Year2023Day15 {
 

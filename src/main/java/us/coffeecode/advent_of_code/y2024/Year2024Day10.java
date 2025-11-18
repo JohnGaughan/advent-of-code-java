@@ -28,7 +28,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2024, day = 10, title = "Hoof It")
+@AdventOfCodeSolution(year = 2024, day = 10)
 @Component
 public class Year2024Day10 {
 

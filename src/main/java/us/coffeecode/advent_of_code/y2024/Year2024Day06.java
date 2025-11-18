@@ -30,7 +30,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2024, day = 6, title = "Guard Gallivant")
+@AdventOfCodeSolution(year = 2024, day = 6)
 @Component
 public class Year2024Day06 {
 

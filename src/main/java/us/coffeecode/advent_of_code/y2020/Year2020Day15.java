@@ -26,7 +26,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2020, day = 15, title = "Rambunctious Recitation")
+@AdventOfCodeSolution(year = 2020, day = 15)
 @Component
 public final class Year2020Day15 {
 

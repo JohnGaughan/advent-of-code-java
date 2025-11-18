@@ -24,7 +24,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2025, day = 18, title = "TBD")
+@AdventOfCodeSolution(year = 2025, day = 18)
 @Component
 public class Year2025Day18 {
 

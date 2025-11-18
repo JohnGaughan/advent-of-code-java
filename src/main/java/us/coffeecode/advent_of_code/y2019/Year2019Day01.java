@@ -24,7 +24,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2019, day = 1, title = "The Tyranny of the Rocket Equation")
+@AdventOfCodeSolution(year = 2019, day = 1)
 @Component
 public final class Year2019Day01 {
 

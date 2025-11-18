@@ -27,7 +27,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.MD5;
 
-@AdventOfCodeSolution(year = 2015, day = 4, title = "The Ideal Stocking Stuffer")
+@AdventOfCodeSolution(year = 2015, day = 4)
 @Component
 public final class Year2015Day04 {
 

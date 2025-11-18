@@ -32,7 +32,7 @@ import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.MyIntMath;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2022, day = 24, title = "Blizzard Basin")
+@AdventOfCodeSolution(year = 2022, day = 24)
 @Component
 public class Year2022Day24 {
 

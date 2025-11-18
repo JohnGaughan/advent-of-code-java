@@ -33,7 +33,7 @@ import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 import us.coffeecode.advent_of_code.util.Range2D;
 
-@AdventOfCodeSolution(year = 2023, day = 3, title = "Gear Ratios")
+@AdventOfCodeSolution(year = 2023, day = 3)
 @Component
 public class Year2023Day03 {
 

@@ -34,7 +34,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2024, day = 24, title = "Crossed Wires")
+@AdventOfCodeSolution(year = 2024, day = 24)
 @Component
 public class Year2024Day24 {
 

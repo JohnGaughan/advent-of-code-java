@@ -45,6 +45,9 @@ public final class DynamicTestFactory {
   @Autowired
   private InputLocator il;
 
+  @Autowired
+  private AocResources resources;
+
   /**
    * Get tests that match the provided {@link TestContext}. This will discover all classes in the project annotated with
    * {@link AdventOfCodeSolution} using Spring's bean discovery, then filter them as appropriate using the "matches"
@@ -74,7 +77,7 @@ public final class DynamicTestFactory {
                                          .getAnnotation(AdventOfCodeSolution.class);
     final int year = aoc.year();
     final int day = aoc.day();
-    final String title = aoc.title();
+    final String title = resources.getDayTitle(year, day);
     for (final Method m : impl.getClass()
                               .getDeclaredMethods()) {
       m.setAccessible(true);

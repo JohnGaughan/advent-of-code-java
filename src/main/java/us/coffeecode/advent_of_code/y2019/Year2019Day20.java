@@ -34,7 +34,7 @@ import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 import us.coffeecode.advent_of_code.util.Point3D;
 
-@AdventOfCodeSolution(year = 2019, day = 20, title = "Donut Maze")
+@AdventOfCodeSolution(year = 2019, day = 20)
 @Component
 public final class Year2019Day20 {
 

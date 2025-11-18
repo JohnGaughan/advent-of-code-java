@@ -27,7 +27,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2017, day = 10, title = "Knot Hash")
+@AdventOfCodeSolution(year = 2017, day = 10)
 @Component
 public final class Year2017Day10 {
 

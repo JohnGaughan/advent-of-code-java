@@ -29,7 +29,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2024, day = 11, title = "Plutonian Pebbles")
+@AdventOfCodeSolution(year = 2024, day = 11)
 @Component
 public class Year2024Day11 {
 

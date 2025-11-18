@@ -29,7 +29,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2017, day = 8, title = "I Heard You Like Registers")
+@AdventOfCodeSolution(year = 2017, day = 8)
 @Component
 public final class Year2017Day08 {
 

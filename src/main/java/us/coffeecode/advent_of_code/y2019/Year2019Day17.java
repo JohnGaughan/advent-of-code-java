@@ -30,7 +30,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2019, day = 17, title = "Set and Forget")
+@AdventOfCodeSolution(year = 2019, day = 17)
 @Component
 public final class Year2019Day17 {
 

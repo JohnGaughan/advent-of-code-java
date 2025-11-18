@@ -27,7 +27,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2015, day = 1, title = "Not Quite Lisp")
+@AdventOfCodeSolution(year = 2015, day = 1)
 @Component
 public final class Year2015Day01 {
 

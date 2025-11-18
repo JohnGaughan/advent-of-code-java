@@ -32,7 +32,7 @@ import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.function.TriPredicate;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2022, day = 12, title = "Hill Climbing Algorithm")
+@AdventOfCodeSolution(year = 2022, day = 12)
 @Component
 public class Year2022Day12 {
 

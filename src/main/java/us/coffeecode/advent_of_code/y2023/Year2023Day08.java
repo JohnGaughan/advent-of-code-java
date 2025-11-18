@@ -34,7 +34,7 @@ import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.ArrayInfinitelyIterable;
 import us.coffeecode.advent_of_code.util.MyLongMath;
 
-@AdventOfCodeSolution(year = 2023, day = 8, title = "Haunted Wasteland")
+@AdventOfCodeSolution(year = 2023, day = 8)
 @Component
 public class Year2023Day08 {
 

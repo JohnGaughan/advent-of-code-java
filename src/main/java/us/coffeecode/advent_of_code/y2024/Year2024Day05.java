@@ -33,7 +33,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2024, day = 5, title = "Print Queue")
+@AdventOfCodeSolution(year = 2024, day = 5)
 @Component
 public class Year2024Day05 {
 

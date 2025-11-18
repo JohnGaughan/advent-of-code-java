@@ -27,7 +27,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.DigitConverter;
 
-@AdventOfCodeSolution(year = 2016, day = 8, title = "Two-Factor Authentication")
+@AdventOfCodeSolution(year = 2016, day = 8)
 @Component
 public final class Year2016Day08 {
 

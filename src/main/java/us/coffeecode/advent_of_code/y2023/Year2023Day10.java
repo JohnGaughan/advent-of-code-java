@@ -32,7 +32,7 @@ import us.coffeecode.advent_of_code.util.Point2D;
 import us.coffeecode.advent_of_code.visualization.IVisualizationResult;
 import us.coffeecode.advent_of_code.visualization.StringVisualizationResult;
 
-@AdventOfCodeSolution(year = 2023, day = 10, title = "Pipe Maze")
+@AdventOfCodeSolution(year = 2023, day = 10)
 @Component
 public class Year2023Day10 {
 

@@ -35,7 +35,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2015, day = 9, title = "All in a Single Night")
+@AdventOfCodeSolution(year = 2015, day = 9)
 @Component
 public final class Year2015Day09 {
 

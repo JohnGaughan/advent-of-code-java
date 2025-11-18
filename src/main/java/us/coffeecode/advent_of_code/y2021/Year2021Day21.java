@@ -30,7 +30,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2021, day = 21, title = "Dirac Dice")
+@AdventOfCodeSolution(year = 2021, day = 21)
 @Component
 public final class Year2021Day21 {
 

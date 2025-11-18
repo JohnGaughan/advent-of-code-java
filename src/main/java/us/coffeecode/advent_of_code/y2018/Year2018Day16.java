@@ -31,7 +31,7 @@ import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 
-@AdventOfCodeSolution(year = 2018, day = 16, title = "Chronal Classification")
+@AdventOfCodeSolution(year = 2018, day = 16)
 @Component
 public final class Year2018Day16 {
 

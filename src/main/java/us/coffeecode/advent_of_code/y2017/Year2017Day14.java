@@ -28,7 +28,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2017, day = 14, title = "Disk Defragmentation")
+@AdventOfCodeSolution(year = 2017, day = 14)
 @Component
 public final class Year2017Day14 {
 

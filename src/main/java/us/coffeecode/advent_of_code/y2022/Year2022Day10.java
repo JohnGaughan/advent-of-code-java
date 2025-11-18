@@ -27,7 +27,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.DigitConverter;
 
-@AdventOfCodeSolution(year = 2022, day = 10, title = "Cathode-Ray Tube")
+@AdventOfCodeSolution(year = 2022, day = 10)
 @Component
 public class Year2022Day10 {
 

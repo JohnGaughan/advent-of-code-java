@@ -28,7 +28,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Range3D;
 
-@AdventOfCodeSolution(year = 2021, day = 22, title = "Reactor Reboot")
+@AdventOfCodeSolution(year = 2021, day = 22)
 @Component
 public final class Year2021Day22 {
 

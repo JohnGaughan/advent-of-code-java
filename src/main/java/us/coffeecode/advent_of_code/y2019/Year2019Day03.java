@@ -31,7 +31,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2019, day = 3, title = "Crossed Wires")
+@AdventOfCodeSolution(year = 2019, day = 3)
 @Component
 public final class Year2019Day03 {
 

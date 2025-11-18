@@ -32,7 +32,7 @@ import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.Point2D;
 
-@AdventOfCodeSolution(year = 2022, day = 14, title = "Regolith Reservoir")
+@AdventOfCodeSolution(year = 2022, day = 14)
 @Component
 public class Year2022Day14 {
 
