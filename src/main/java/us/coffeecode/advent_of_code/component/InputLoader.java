@@ -27,6 +27,7 @@ import java.util.SequencedCollection;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Supplier;
+import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -466,8 +467,19 @@ public class InputLoader {
    * @return an array of integers where each integer represents one line.
    */
   public int[] linesAsInts(final PuzzleContext pc) {
+    return linesAsInts(pc, Integer::parseInt);
+  }
+
+  /**
+   * Get the contents of the file by line, where each line is translated into a single integer.
+   *
+   * @param pc Puzzle context containing metadata necessary to find the relevant input file.
+   * @param mapper function used to convert a line (string) to an integer.
+   * @return an array of integers where each integer represents one line.
+   */
+  public int[] linesAsInts(final PuzzleContext pc, final ToIntFunction<String> mapper) {
     return lines(pc).stream()
-                    .mapToInt(Integer::parseInt)
+                    .mapToInt(mapper)
                     .toArray();
   }
 
