@@ -52,11 +52,38 @@ or negative infinity instead of zero for division, and methods to manage the sig
 negative. This is because modulus is a bit ambiguous with signs in computing: different platforms and programming languages have
 different semantics. In my opinion, Java chose poorly. This meant a lot of trial and error late at night.
 
-## Day 2: TBD
+## Day 2: Gift Shop
 
 [Year 2025, day 2][2.0]
 
+This was another puzzle I found a little bit tricky. Not complicated like some of the puzzles that dig deep into esoteric computer
+science algorithms, but maybe a little unclear. Turns out all we need do is determine if a string consists only of repeated
+substrings. Not contains repeats, but is _only_ repeated strings.
 
+Part one matches strings where it consists of a single substring occurring twice. This means we can find the center of the string
+and compare the two halves which is trivially easy.
+
+Part two allows two or more occurrences, which is slightly more complicated.
+
+The easy approach is to use regular expressions. While the strings contain numbers, we are not performing math on them during the
+matching phase so we can ignore the type of string contents. The following regular expressions will work for each part. Note that
+they already contain necessary escapes for Java strings:
+
+* Part one: `"^(.+)\\1{1}$"`
+* Part two: `"^(.+)\\1+$"`
+
+While this works, I wanted a more efficient approach. I like regular expressions for certain real-world tasks but not for
+programming exercises or competitions. They can trivialize the solution and often perform poorly.
+
+My solution for part one is simple. If the input string has an odd length, it is valid. Otherwise, find the midpoint of the string
+then compare the two halves. If they are identical, the string is invalid.
+
+Part two iterates token lengths starting at one and ending at half the string's length. For each token length check if its length
+evenly divides the input string's length. If it does, then get a substring of the token length from the start of the string. Check
+if the token is repeated throughout the string: if so, it is invalid. Fail fast as soon as a mismatch is found and iterate to the
+next token length. If no repeats are found, then the string is valid.
+
+This is about half the speed of regular expressions and is a bit more satisfying to implement.
 
 ## Day 3: TBD
 
