@@ -85,11 +85,33 @@ next token length. If no repeats are found, then the string is valid.
 
 This is about half the speed of regular expressions and is a bit more satisfying to implement.
 
-## Day 3: TBD
+## Day 3: Lobby
 
 [Year 2025, day 3][3.0]
 
+I found day three to be somewhat easy. Given an array of integers, find the largest number that can be formed by picking two or
+twelve of them and reading their digits in order: do not pick the largest numbers and sort big to small. Instead, consider their
+relative positions in the array when interpreting them.
 
+My intuition from part one was two-part. First, we want to start the two-digit number with the largest possible tens digit.
+Ninety-something will always be larger than eighty-something. Second, if there are two occurrences of the same largest digit in
+the array, always pick the first one. That provides more opportunities for the one's digit to be larger. Consider `9891`. If we
+pick the second `9` then that is sub-optimal because it is impossible to use `8` as the one's digit.
+
+This intuition turned out correct, and I coded up a nested loop to find the answer. Then I got to part two, where we need twelve
+digits.
+
+I was not about to copy and paste code with that many nested loops. Could recursion work here? Of course. It still has the same
+nested loop to find the first occurrence of the largest digit, but instead of stopping before the final array element, stop just
+before consuming too many digits to form a valid solution. That number of digits changes at each recursive step. At first we need
+to leave eleven digits. Once we find the first digit we then recurse with two parameter changes. First, we add the newly-consumed
+digit to the array containing used indices. Second, we reduce the number of needed digits by one.
+
+Through some quick program analysis I found that once the algorithm finds that first largest digit, it never keeps searching at
+that level. That really is the optimal choice, and can at best be tied by an occurrence later in the array which does not matter.
+In that way this recursive algorithm is really just a way to nest many loops together. Generally, we use recursive algorithms for
+exponential algorithms such as `O(2^n)`. However, this recursive algorithm is pretty much `O(n^2)`, or maybe `O(m*n^2)` if someone
+wants to factor in the number of digits needed and also wants to stretch Big-O notation slightly.
 
 ## Day 4: TBD
 
