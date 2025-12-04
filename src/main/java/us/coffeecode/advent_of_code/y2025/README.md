@@ -113,11 +113,18 @@ In that way this recursive algorithm is really just a way to nest many loops tog
 exponential algorithms such as `O(2^n)`. However, this recursive algorithm is pretty much `O(n^2)`, or maybe `O(m*n^2)` if someone
 wants to factor in the number of digits needed and also wants to stretch Big-O notation slightly.
 
-## Day 4: TBD
+## Day 4: Printing Department
 
 [Year 2025, day 4][4.0]
 
+Today's puzzle was another simple one. We need to find all grid locations that have fewer than four neighbors and return that
+quantity of locations. This is it for part one. For part two, we continually remove those locations then repeat until we reach a
+point where the algorithm makes no further updates. Then return the total number of locations removed.
 
+This is a really simple algorithm. The meat of it is in a common method that walks the 2D array and returns a set of points that
+match the puzzle criteria. Part one runs this once and returns the size of that set. Part two adds the size of that set into a
+running total then iterates the set, updating the grid to set those point locations to be blank. Then it repeats until the set is
+empty. It really is that simple.
 
 ## Day 5: TBD
 

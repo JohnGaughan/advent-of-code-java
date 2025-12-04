@@ -16,29 +16,66 @@
  */
 package us.coffeecode.advent_of_code.y2025;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import us.coffeecode.advent_of_code.annotation.AdventOfCodeSolution;
 import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
+import us.coffeecode.advent_of_code.util.Point2D;
 
-//@AdventOfCodeSolution(year = 2025, day = 4)
+@AdventOfCodeSolution(year = 2025, day = 4)
 @Component
 public class Year2025Day04 {
 
-  @SuppressWarnings("unused")
   @Autowired
   private InputLoader il;
 
   @Solver(part = 1)
   public long calculatePart1(final PuzzleContext pc) {
-    return Long.MIN_VALUE;
+    return findAccessible(il.linesAsCodePoints(pc)).size();
   }
 
   @Solver(part = 2)
   public long calculatePart2(final PuzzleContext pc) {
-    return Long.MIN_VALUE;
+    long result = 0;
+    final int[][] grid = il.linesAsCodePoints(pc);
+    while (true) {
+      final Set<Point2D> accessible = findAccessible(grid);
+      if (accessible.isEmpty()) {
+        break;
+      }
+      result += accessible.size();
+      accessible.stream()
+                .forEach(p -> p.set(grid, EMPTY));
+    }
+    return result;
   }
 
+  /** Process the grid by finding all locations that meet the puzzle criteria. */
+  public Set<Point2D> findAccessible(final int[][] grid) {
+    final Set<Point2D> accessible = new HashSet<>();
+    for (int y = 0; y < grid.length; ++y) {
+      for (int x = 0; x < grid[y].length; ++x) {
+        final Point2D p = new Point2D(x, y);
+        if ((p.get(grid) == PAPER) && (p.getAllNeighbors()
+                                        .stream()
+                                        .filter(n -> n.isIn(grid) && (n.get(grid) == PAPER))
+                                        .count() < 4)) {
+          accessible.add(p);
+        }
+      }
+    }
+    return accessible;
+  }
+
+  /** Designates a grid location occupied by paper. */
+  private static final int PAPER = '@';
+
+  /** Designates an unoccupied grid location. */
+  private static final int EMPTY = '.';
 }
