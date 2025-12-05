@@ -126,11 +126,19 @@ match the puzzle criteria. Part one runs this once and returns the size of that 
 running total then iterates the set, updating the grid to set those point locations to be blank. Then it repeats until the set is
 empty. It really is that simple.
 
-## Day 5: TBD
+## Day 5: Cafeteria
 
 [Year 2025, day 5][5.0]
 
+This was an easy one, thanks to utility code I wrote years ago. First, we parse the input into an array of primitive `long`s and
+list of the utility class `LongRange`.
 
+For part one, we simply stream the `long[]`, filter on which ones are fresh, and return the size of that stream. The `fresh()`
+method is quite simple: given an ingredient (`long`) and the ranges of freshness, iterate over those ranges and if it is contained
+in any of them return `true`. Otherwise, return `false`.
+
+Part two is even simpler. The `LongRange` class contains a static method to merge a `List<LongRange>` such that the returned list
+of ranges are all disjoint. Call that method, stream it, convert each range into its size, then sum the stream elements.
 
 ## Day 6: TBD
 
