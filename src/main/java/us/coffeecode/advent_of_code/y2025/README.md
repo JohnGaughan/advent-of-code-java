@@ -140,11 +140,13 @@ in any of them return `true`. Otherwise, return `false`.
 Part two is even simpler. The `LongRange` class contains a static method to merge a `List<LongRange>` such that the returned list
 of ranges are all disjoint. Call that method, stream it, convert each range into its size, then sum the stream elements.
 
-## Day 6: TBD
+## Day 6: Trash Compactor
 
 [Year 2025, day 6][6.0]
 
+The algorithm for today is trivially easy: stream problems, reduce them to a single number, then sum those numbers.
 
+The difficult part was parsing the input correctly without throwing any exceptions.
 
 ## Day 7: TBD
 
