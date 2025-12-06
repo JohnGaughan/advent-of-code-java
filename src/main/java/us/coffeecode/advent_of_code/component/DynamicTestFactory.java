@@ -31,7 +31,7 @@ import us.coffeecode.advent_of_code.annotation.AdventOfCodeSolution;
 import us.coffeecode.advent_of_code.annotation.Solver;
 
 /**
- * Factory for constructing dynamic tests. This works with {@link SolverExecutor} by locating solution classes and
+ * Factory for constructing dynamic tests. This works with {@link SolverExecutable} by locating solution classes and
  * creating executors for each combination of puzzle part and input. This makes it possible to implement a new test by
  * adding a new solution class if needed, then adding arbitrary input files and answers in the corresponding properties
  * files for the puzzle.
