@@ -67,17 +67,17 @@ public class Year2025Day05 {
 
   /** Parse the program input and return it in an input object. */
   private Input getInput(final PuzzleContext pc) {
-    final List<List<String>> groups = il.groups(pc);
-    final List<LongRange> ranges = groups.get(0)
-                                         .stream()
-                                         .map(RANGE_SPLIT::split)
-                                         .map(s -> new LongRange(s[0], s[1]))
-                                         .toList();
-    final long[] ingredients = groups.get(1)
-                                     .stream()
-                                     .mapToLong(Long::parseLong)
-                                     .toArray();
-    return new Input(ranges, ingredients);
+    return il.groupsAsObject(pc, groups -> {
+      return new Input(groups.get(0)
+                             .stream()
+                             .map(RANGE_SPLIT::split)
+                             .map(s -> new LongRange(s[0], s[1]))
+                             .toList(),
+        groups.get(1)
+              .stream()
+              .mapToLong(Long::parseLong)
+              .toArray());
+    });
   }
 
   /** Pattern that splits a line into two tokens representing a range. */
