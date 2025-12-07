@@ -27,6 +27,12 @@ import com.google.common.math.IntMath;
  */
 public final class MyIntMath {
 
+  /** Constant for the value 0. */
+  public static final Integer ZERO = Integer.valueOf(0);
+
+  /** Constant for the value 1. */
+  public static final Integer ONE = Integer.valueOf(1);
+
   /**
    * Get the signum of a value, indicating its sign. If negative, return -1. If positive, return 1. If zero, return 0.
    *

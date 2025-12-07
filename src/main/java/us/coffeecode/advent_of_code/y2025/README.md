@@ -148,11 +148,30 @@ The algorithm for today is trivially easy: stream problems, reduce them to a sin
 
 The difficult part was parsing the input correctly without throwing any exceptions.
 
-## Day 7: TBD
+## Day 7: Laboratories
 
 [Year 2025, day 7][7.0]
 
+This was another relatively simple one. I represent the input by recording the start location of the beam and a list of integer
+arrays representing all of the splitter locations. The parsing algorithm ignores empty lines which is not strictly required but
+might shave a millisecond off the run time.
 
+Both parts use the same algorithm, but return different data. The algorithm works by tracking a map where the key is a beam's
+location and the value is how many beams are at that location. Another way to think about the value is it answers the question
+"how many ways can a beam reach this location?"
+
+It then iterates over each line of splitters, building a new beam mapping as it goes which represents the beam state _after_ the
+current row. For each beam, see if it hit a splitter.
+
+* If it did hit a splitter, then add two new beams to the left and right of the current location. Increment the split counter.
+* Otherwise, it is not split: add the current location to the new mapping.
+
+In both instances we cannot simply add the new map entry: we must merge it because there may already be a beam at that location
+which was added in a previous loop iteration.
+
+Finally, the loop replaces the old beam mapping with the new one built up during the loop.
+
+When the input is exhausted we return both the split counter as well as the sum of all values in the map.
 
 ## Day 8: TBD
 

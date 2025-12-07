@@ -28,6 +28,16 @@ import us.coffeecode.advent_of_code.AbstractTests;
 public class TestMyLongMath
 extends AbstractTests {
 
+  @Test
+  public void test_Constant_Zero() {
+    Assertions.assertEquals(0, MyLongMath.ZERO.longValue());
+  }
+
+  @Test
+  public void test_Constant_One() {
+    Assertions.assertEquals(1, MyLongMath.ONE.longValue());
+  }
+
   // lcm(long, long)
 
   @Test

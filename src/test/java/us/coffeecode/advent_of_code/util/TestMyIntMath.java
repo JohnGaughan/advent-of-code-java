@@ -28,6 +28,16 @@ import us.coffeecode.advent_of_code.AbstractTests;
 public class TestMyIntMath
 extends AbstractTests {
 
+  @Test
+  public void test_Constant_Zero() {
+    Assertions.assertEquals(0, MyIntMath.ZERO.intValue());
+  }
+
+  @Test
+  public void test_Constant_One() {
+    Assertions.assertEquals(1, MyIntMath.ONE.intValue());
+  }
+
   // lcm(int, int)
 
   @Test

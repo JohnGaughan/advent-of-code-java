@@ -27,6 +27,12 @@ import com.google.common.math.LongMath;
  */
 public final class MyLongMath {
 
+  /** Constant for the value 0. */
+  public static final Long ZERO = Long.valueOf(0);
+
+  /** Constant for the value 1. */
+  public static final Long ONE = Long.valueOf(1);
+
   /**
    * Get the signum of a value, indicating its sign. If negative, return -1. If positive, return 1. If zero, return 0.
    *
