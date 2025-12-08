@@ -173,11 +173,36 @@ Finally, the loop replaces the old beam mapping with the new one built up during
 
 When the input is exhausted we return both the split counter as well as the sum of all values in the map.
 
-## Day 8: TBD
+## Day 8: Playground
 
 [Year 2025, day 8][8.0]
 
+This was a fun one. Today's puzzle has us building a graph piece by piece then answering a question based on its end state. At
+first it may be tempting to build an actual graph in code, but this is not necessary and can slow the runtime due to inefficiency.
 
+All we really need to know is which vertices belong to which graph. We never actually need to traverse the graph. To this end, my
+code parses the input and builds lists of both vertices and potential edges, but does not actually add those edges.
+
+Next, build graphs where each graph contains one vertex and is identified by a unique value: I chose an increasing integer for
+simplicity but anything could be used. There are two maps here to make merging easier later on:
+
+* Map of each graph ID to a set of vertices in that graph: at the start each set contains one vertex.
+* Map of each vertex to its graph ID.
+
+The main loop handles both parts by dynamically limiting the number of edges it adds. For part one there is a limit low enough
+that the algorithm cannot finish merging the subgraphs into a single graph. In actuality, it cannot even slim it down to three
+subgraphs. For part two there is effectively no limit.
+
+During the loop we iterate the edges sorted from lowest distance to highest distance. If the vertices in the edge are on disjoint
+graphs, we merge the graphs. I arbitrarily picked `p2` as belonging to the graph that gets merged into `p1`'s graph. Get `p2`'s
+graph, add all of its vertices to `p1`'s graph. Then update the second map by setting the graph ID for the old graph's vertices to
+their new graph ID.
+
+Check if there is only a single graph remaining. This is easy because the map of graph IDs to sets of vertices will have size of
+one. If so, multiply the X coordinates of both vertices on the current edge and return that value as the answer.
+
+If the loop terminates due to hitting the edge limit, then there must be at least three subgraphs. Do some stream logic to convert
+each graph to its size, sort high to low, and multiply the first three elements to get the answer for part one.
 
 ## Day 9: TBD
 
@@ -211,6 +236,7 @@ When the input is exhausted we return both the split counter as well as the sum 
 [6.0]: https://adventofcode.com/2024/day/6
 [7.0]: https://adventofcode.com/2024/day/7
 [8.0]: https://adventofcode.com/2024/day/8
+[8.1]: https://en.wikipedia.org/wiki/Kruskal%27s_algorithm
 [9.0]: https://adventofcode.com/2024/day/9
 [10.0]: https://adventofcode.com/2024/day/10
 [11.0]: https://adventofcode.com/2024/day/11
