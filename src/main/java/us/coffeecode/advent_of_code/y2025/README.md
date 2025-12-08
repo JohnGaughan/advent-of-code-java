@@ -204,6 +204,8 @@ one. If so, multiply the X coordinates of both vertices on the current edge and 
 If the loop terminates due to hitting the edge limit, then there must be at least three subgraphs. Do some stream logic to convert
 each graph to its size, sort high to low, and multiply the first three elements to get the answer for part one.
 
+Turns out that I figured out [Kruskal's algorithm][8.1] when I compared my solution to the ones in the daily reddit thread. Neat.
+
 ## Day 9: TBD
 
 [Year 2025, day 9][9.0]
