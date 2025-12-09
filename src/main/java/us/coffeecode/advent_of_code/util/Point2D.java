@@ -17,13 +17,27 @@
 package us.coffeecode.advent_of_code.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Represents a point in 2D space that is immutable.
  */
 public final class Point2D
 implements Comparable<Point2D> {
+
+  /**
+   * Construct a Point3D from a string containing a comma-delimited set of coordinates.
+   */
+  public static Point2D valueOf(final String s) {
+    final int[] parts = Arrays.stream(SPLIT.split(s.trim()))
+                              .mapToInt(Integer::parseInt)
+                              .toArray();
+    return new Point2D(parts[0], parts[1]);
+  }
+
+  private static final Pattern SPLIT = Pattern.compile(",");
 
   /** The origin point, at (0, 0). */
   public static final Point2D ORIGIN = new Point2D(0, 0);

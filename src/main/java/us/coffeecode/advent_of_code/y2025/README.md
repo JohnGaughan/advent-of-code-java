@@ -206,11 +206,53 @@ each graph to its size, sort high to low, and multiply the first three elements 
 
 Turns out that I figured out [Kruskal's algorithm][8.1] when I compared my solution to the ones in the daily reddit thread. Neat.
 
-## Day 9: TBD
+## Day 9: Movie Theater
 
 [Year 2025, day 9][9.0]
 
+Part one was fairly simple today: simply consider each pair of points, calculate the 2D area between them, and compare to the
+current maximum area. If greater, set the maximum area to the new area. Repeat until all pairs of points are exhausted, then
+return the maximum area found.
 
+Part two is a bit tricker due to the constraints. The input points trace the perimeter of a polygon where all angles are right
+angles: alternatively, all perimeter segments are either horizontal or vertical. Rectangles must be contained within the polygon,
+where the two defining corners must still be vertices of the polygon itself.
+
+I assumed there would be some neat mathematical algorithm to figure this out similar to [year 2023, day 18][9.1]. I browsed
+Wikipedia for a bit but nothing jumped out at me.
+
+The issue I saw was the size of this polygon is massive: many billions of integer points. Modeling this a naïve way such as
+flood-filling the polygon full of point objects would not be practical. Even figuring out which side of the polygon is its
+interior and exterior would be a non-trivial task.
+
+In the absence of a documented (and known to me) algorithm to make this easy, I had to figure it out. Then it clicked. If a
+rectangle is wholly-contained in the polygon, then no polygon perimeter segments can cross the rectangle's perimeter segments.
+Knowing which side of the polygon is its interior is irrelevant since what we care about is the rectangle crossing between
+interior and exterior. For that to happen we must have an intersection of line segments belonging to the rectangle and the big
+polygon.
+
+I was able to expand my part one solution by adding an additional test. First, before we even consider rectangle areas, we connect
+all adjacent vertices of the polygon into segments being careful to add the final segment that wraps back around to the start. To
+make this simple we can have a single class representing a polygon segment containing two each of X and Y coordinates where one of
+the pairs of coordinates will be the same: either X1 = X2 or Y1 = Y2. I was also careful to order them so the first coordinates is
+always equal to less than the second.
+
+Before considering area, first check that the rectangle formed from each pair of points is valid for all polygon segments. This
+checks that the polygon segment is either wholly outside of the rectangle or the two perimeters touch. This means the rectangle
+does not cross the polygon's perimeter.
+
+This is an incomplete test given a single segment: it is still possible given some goofy-looking polygons that the rectangle could
+still be outside the polygon. However, when this condition is true for _all_ segments on the polygon perimeter _also_ given that
+two vertices of the rectangle are shared with the rectangle, that nearly guarantees the rectangle does not have any portion
+outside the polygon.
+
+Note that I said "nearly." It is a very strong metric but is not a mathematical guarantee. Consider a polygon shaped like the
+letter `C` or `J`, or some other shape that has a long, thin, curved shape with two points sticking out into space. There could be
+a large rectangle between those points that is wholly _outside_ of the polygon that is larger than any rectangle contained inside
+the polygon. However, that does not appear to be the case in the input provided for this puzzle. This algorithm will fail on that
+hypothetical input.
+
+This algorithm runs very quickly, on the order of 100 ms.
 
 ## Day 10: TBD
 
@@ -230,16 +272,17 @@ Turns out that I figured out [Kruskal's algorithm][8.1] when I compared my solut
 
 
 
-[1.0]: https://adventofcode.com/2024/day/1
-[2.0]: https://adventofcode.com/2024/day/2
-[3.0]: https://adventofcode.com/2024/day/3
-[4.0]: https://adventofcode.com/2024/day/4
-[5.0]: https://adventofcode.com/2024/day/5
-[6.0]: https://adventofcode.com/2024/day/6
-[7.0]: https://adventofcode.com/2024/day/7
-[8.0]: https://adventofcode.com/2024/day/8
+[1.0]: https://adventofcode.com/2025/day/1
+[2.0]: https://adventofcode.com/2025/day/2
+[3.0]: https://adventofcode.com/2025/day/3
+[4.0]: https://adventofcode.com/2025/day/4
+[5.0]: https://adventofcode.com/2025/day/5
+[6.0]: https://adventofcode.com/2025/day/6
+[7.0]: https://adventofcode.com/2025/day/7
+[8.0]: https://adventofcode.com/2025/day/8
 [8.1]: https://en.wikipedia.org/wiki/Kruskal%27s_algorithm
-[9.0]: https://adventofcode.com/2024/day/9
-[10.0]: https://adventofcode.com/2024/day/10
-[11.0]: https://adventofcode.com/2024/day/11
-[12.0]: https://adventofcode.com/2024/day/12
+[9.0]: https://adventofcode.com/2025/day/9
+[9.1]: https://adventofcode.com/2023/day/18
+[10.0]: https://adventofcode.com/2025/day/10
+[11.0]: https://adventofcode.com/2025/day/11
+[12.0]: https://adventofcode.com/2025/day/12

@@ -28,6 +28,10 @@ import us.coffeecode.advent_of_code.AbstractTests;
 public class TestPoint2D
 extends AbstractTests {
 
+  public void testValueOf() {
+    Assertions.assertEquals(new Point2D(-7, 85), Point2D.valueOf("-7,85"));
+  }
+
   @Test
   public void testArrayConstructorNull() {
     Assertions.assertThrows(NullPointerException.class, () -> new Point2D((int[]) null));
