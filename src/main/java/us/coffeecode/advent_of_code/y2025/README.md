@@ -254,11 +254,34 @@ hypothetical input.
 
 This algorithm runs very quickly, on the order of 100 ms.
 
-## Day 10: TBD
+## Day 10: Factory
 
 [Year 2025, day 10][10.0]
 
+This was interesting and frustrating.
 
+Part one was easy enough. It makes no sense to press a button more than once, so a simple breadth-first search where we queue up
+button states in order of fewest to most button presses will easily find the answer. If there is a tie, it does not matter: we do
+not need the actual button press state, only the fewest number of buttons pressed.
+
+Part two is simply not feasible with any BFS or DFS search algorithm. There are far too many states. Instead, it is simple to
+represent each machine as a linear algebra problem where each machine can be represented as a system of linear equations like so:
+
+* 3 = b4 + b5
+* 5 = b1 + b5
+* 4 = b2 + b3 + b4
+* 7 = b0 + b1 + b3
+
+This is the translation of the first example input into a set of equations. The issue is there are many equations, some of which
+are far more complicated and they can have multiple solutions. Writing a bespoke algorithm for this is possible and I may tackle
+that in the future as I learn more about this topic, but for now, I opted to use the Z3 library which does have Java bindings.
+
+The most difficult task here was not figuring out how to represent each system of equations, but wrestling with the Z3 Java API
+which is poorly documented. There is Z3 documentation and some of it is quite good: the problem is that most of it is in Python or
+other languages that have either weak or flexible type systems combined with some subtle differences in the API.
+
+I managed to figure this out and attempted to document my code a bit better than what I had to deal with so hopefully this helps
+someone else who tries to do the same thing.
 
 ## Day 11: TBD
 
