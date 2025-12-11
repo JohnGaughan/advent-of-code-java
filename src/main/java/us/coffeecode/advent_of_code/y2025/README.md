@@ -287,7 +287,34 @@ someone else who tries to do the same thing.
 
 [Year 2025, day 11][11.0]
 
+Today is a graph puzzle where we need to count the number of paths between specific nodes in a directed graph.
 
+Part one asks us to find the number of paths between only two nodes, a simple case. Before proceeding, I decided to view a
+graphical representation of the graph in [GraphViz][11.1] to get a general idea of the characteristics of the graph. It appears
+there are no cycles, or loops, which helps simplify logic quite a bit. However, there are many routes between `you` and `out`
+despite them appearing "close" in the graph.
+
+Given the complexity of the graph I thought [DFS][11.2] might take too long even with [memoization][11.3], so I instead built a
+bottom-up algorithm that calculates the count of routes from an interior node to the end node. First, assign a route count of one
+to the end node. While the start node has no route count, loop over all of the nodes. If a node's targets all have route counts
+but it does not then add up its children's route counts and assign that sum to the node.
+
+Once the loop breaks we are guaranteed to have the number of routes from `you` to `out`. This runs extremely fast, although it
+ends up not touching most of the graph's nodes.
+
+I tried adapting this algorithm to part two where we need routes going through two specific interior nodes, but could not get it
+to work. I think the reason why is given the one-directional nature of the graph there are many nodes that point to those interior
+nodes, but not exclusively as is the case with `out`.
+
+Rather than wrestle with the bottom-up approach I decided to explore DFS with memoization. Starting at the top it finds all paths
+through the graph and tracks whether it goes through the two specific interior nodes at each step. Once it reaches `out` it
+returns either one if it passed through them both, or zero if it did not. That way it still explores the full depth of the graph
+but effectively throws out routes that are invalid.
+
+Memoization uses a key including the interior node and whether the path - at that point - went through either of the named
+interior nodes.
+
+Turns out this was also super fast, completing in several  milliseconds.
 
 ## Day 12: TBD
 
@@ -308,4 +335,7 @@ someone else who tries to do the same thing.
 [9.1]: https://adventofcode.com/2023/day/18
 [10.0]: https://adventofcode.com/2025/day/10
 [11.0]: https://adventofcode.com/2025/day/11
+[11.1]: https://www.devtoolsdaily.com/graphviz/
+[11.2]: https://en.wikipedia.org/wiki/Depth-first_search
+[11.3]: https://en.wikipedia.org/wiki/Memoization
 [12.0]: https://adventofcode.com/2025/day/12
