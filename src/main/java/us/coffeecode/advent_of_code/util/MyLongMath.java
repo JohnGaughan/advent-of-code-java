@@ -136,4 +136,24 @@ public final class MyLongMath {
                  .reduce(1, MyLongMath::lcm);
   }
 
+  /** The maximum input for the factorial function before it overflows a long. */
+  private static final long MAX_FACTORIAL_INPUT = 20;
+
+  /**
+   * Calculate the factorial of the provided long.
+   *
+   * @param value the input to the factorial.
+   * @return the calculated factorial.
+   * @throws ArithmeticException if the value is out of range.
+   */
+  public static long factorial(final long value) {
+    if ((value > MAX_FACTORIAL_INPUT) || (value < 0)) {
+      throw new ArithmeticException("Long out of range");
+    }
+    long result = 1;
+    for (long i = 1; i <= value; ++i) {
+      result *= i;
+    }
+    return result;
+  }
 }

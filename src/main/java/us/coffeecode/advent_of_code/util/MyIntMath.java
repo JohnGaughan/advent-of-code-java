@@ -136,6 +136,9 @@ public final class MyIntMath {
                  .reduce(1, MyIntMath::lcm);
   }
 
+  /** The maximum input for the factorial function before it overflows an int. */
+  private static final int MAX_FACTORIAL_INPUT = 12;
+
   /**
    * Calculate the factorial of the provided integer.
    *
@@ -144,7 +147,7 @@ public final class MyIntMath {
    * @throws ArithmeticException if the value is out of range.
    */
   public static int factorial(final int value) {
-    if ((value > 12) || (value < 0)) {
+    if ((value > MAX_FACTORIAL_INPUT) || (value < 0)) {
       throw new ArithmeticException("Integer out of range");
     }
     int result = 1;

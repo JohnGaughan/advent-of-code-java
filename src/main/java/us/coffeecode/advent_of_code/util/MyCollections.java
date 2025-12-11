@@ -107,6 +107,7 @@ public class MyCollections {
     return new PermutationCollection<>(c);
   }
 
+  /** Collection that dynamically generates permutations of another collection. */
   private static final class PermutationCollection<T>
   extends AbstractCollection<List<T>> {
 
@@ -132,6 +133,7 @@ public class MyCollections {
 
   }
 
+  /** Iterator that dynamically generates permutations each time the next() method is invoked. */
   private static class PermutationIterator<T>
   implements Iterator<List<T>> {
 

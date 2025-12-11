@@ -76,7 +76,7 @@ public class Year2023Day10 {
     }
     int[][] boardCopy = null;
     if (visual) {
-      boardCopy = MyArrays.copy(input.board);
+      boardCopy = MyArrays.deepCopyOf(input.board);
       visualResults.add(new StringVisualizationResult("Junk Pipes Removed", toString(input.board, null)));
     }
 

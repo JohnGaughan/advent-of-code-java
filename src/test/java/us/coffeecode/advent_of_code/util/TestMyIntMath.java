@@ -38,7 +38,9 @@ extends AbstractTests {
     Assertions.assertEquals(1, MyIntMath.ONE.intValue());
   }
 
+  //
   // gcd(int, int)
+  //
 
   @Test
   public void testGCD_zero_1() {
@@ -75,7 +77,9 @@ extends AbstractTests {
     Assertions.assertEquals(2, MyIntMath.gcd(2, 4));
   }
 
+  //
   // lcm(int, int)
+  //
 
   @Test
   public void testLCM_int_Negative_1() {
@@ -117,7 +121,9 @@ extends AbstractTests {
     Assertions.assertEquals(8, MyIntMath.lcm(8, 2));
   }
 
+  //
   // lcm(int[])
+  //
 
   @Test
   public void testLCM_Array_of_int_Negative_1() {
@@ -167,7 +173,9 @@ extends AbstractTests {
                                                       .toArray()));
   }
 
+  //
   // lcm(Collection<Integer>)
+  //
 
   @Test
   public void testLCM_Collection_of_Integer_Null_1() {
@@ -235,7 +243,9 @@ extends AbstractTests {
                                                         .toList()));
   }
 
+  //
   // signum(int)
+  //
 
   @Test
   public void testSignum_Zero() {
@@ -260,5 +270,34 @@ extends AbstractTests {
   @Test
   public void testSignum_MaxValue() {
     Assertions.assertEquals(1, MyIntMath.signum(Integer.MAX_VALUE));
+  }
+
+  //
+  // factorial
+  //
+
+  @Test
+  void test_factorial_1() {
+    Assertions.assertThrows(RuntimeException.class, () -> MyIntMath.factorial(-1));
+  }
+
+  @Test
+  void test_factorial_2() {
+    Assertions.assertThrows(RuntimeException.class, () -> MyIntMath.factorial(100));
+  }
+
+  @Test
+  void test_factorial_3() {
+    Assertions.assertEquals(1, MyIntMath.factorial(0));
+  }
+
+  @Test
+  void test_factorial_4() {
+    Assertions.assertEquals(1, MyIntMath.factorial(1));
+  }
+
+  @Test
+  void test_factorial_5() {
+    Assertions.assertEquals(2, MyIntMath.factorial(2));
   }
 }

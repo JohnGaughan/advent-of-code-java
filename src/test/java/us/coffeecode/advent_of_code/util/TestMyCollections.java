@@ -16,9 +16,13 @@
  */
 package us.coffeecode.advent_of_code.util;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import org.junit.jupiter.api.Assertions;
@@ -51,6 +55,32 @@ public class TestMyCollections {
   @Test
   public void test_asList_boolean_4() {
     Assertions.assertNotEquals(List.of(Boolean.TRUE), MyCollections.asList(new boolean[] { false }));
+  }
+
+  //
+  // Map<String, String> mapFromProperties(final Properties p)
+  //
+
+  private static final String PROPERTIES = "key1=value1\n" + "key2=value2";
+
+  @Test
+  public void test_mapFromProperties() throws IOException {
+    final Properties p = loadTestProperties();
+    final Map<String, String> map = MyCollections.mapFromProperties(p);
+    Assertions.assertEquals(2, p.size());
+    Assertions.assertEquals(p.size(), map.size());
+    Assertions.assertEquals(2, map.size());
+    for (final Object key : p.keySet()) {
+      Assertions.assertTrue(key instanceof String);
+      Assertions.assertTrue(map.containsKey(key));
+      Assertions.assertEquals(p.get(key), map.get(key));
+    }
+  }
+
+  private Properties loadTestProperties() throws IOException {
+    final Properties p = new Properties();
+    p.load(new StringReader(PROPERTIES));
+    return p;
   }
 
   //
@@ -120,9 +150,15 @@ public class TestMyCollections {
   }
 
   @Test
-  public void test_permutations_2() {
+  public void test_permutations_2a() {
     Assertions.assertEquals(0, MyCollections.permutations(List.of())
                                             .size());
+  }
+
+  @Test
+  public void test_permutations_2b() {
+    Assertions.assertTrue(MyCollections.permutations(List.of())
+                                       .isEmpty());
   }
 
   @Test

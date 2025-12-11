@@ -38,7 +38,9 @@ extends AbstractTests {
     Assertions.assertEquals(1, MyLongMath.ONE.longValue());
   }
 
+  //
   // gcd(long, long)
+  //
 
   @Test
   public void testGCD_zero_1() {
@@ -75,7 +77,9 @@ extends AbstractTests {
     Assertions.assertEquals(2, MyLongMath.gcd(2, 4));
   }
 
+  //
   // lcm(long, long)
+  //
 
   @Test
   public void testLCM_long_Negative_1() {
@@ -117,7 +121,9 @@ extends AbstractTests {
     Assertions.assertEquals(8, MyLongMath.lcm(8, 2));
   }
 
+  //
   // lcm(long[])
+  //
 
   @Test
   public void testLCM_Array_of_long_Negative_1() {
@@ -167,7 +173,9 @@ extends AbstractTests {
                                                         .toArray()));
   }
 
+  //
   // lcm(Collection<Long>)
+  //
 
   @Test
   public void testLCM_Collection_of_Long_Null_1() {
@@ -235,7 +243,9 @@ extends AbstractTests {
                                                           .toList()));
   }
 
+  //
   // signum(long)
+  //
 
   @Test
   public void testSignum_Zero() {
@@ -260,5 +270,34 @@ extends AbstractTests {
   @Test
   public void testSignum_MaxValue() {
     Assertions.assertEquals(1, MyLongMath.signum(Long.MAX_VALUE));
+  }
+
+  //
+  // factorial
+  //
+
+  @Test
+  void test_factorial_1() {
+    Assertions.assertThrows(RuntimeException.class, () -> MyLongMath.factorial(-1));
+  }
+
+  @Test
+  void test_factorial_2() {
+    Assertions.assertThrows(RuntimeException.class, () -> MyLongMath.factorial(100));
+  }
+
+  @Test
+  void test_factorial_3() {
+    Assertions.assertEquals(1, MyLongMath.factorial(0));
+  }
+
+  @Test
+  void test_factorial_4() {
+    Assertions.assertEquals(1, MyLongMath.factorial(1));
+  }
+
+  @Test
+  void test_factorial_5() {
+    Assertions.assertEquals(2, MyLongMath.factorial(2));
   }
 }
