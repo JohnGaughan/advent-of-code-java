@@ -316,6 +316,9 @@ interior nodes.
 
 Turns out this was also super fast, completing in several  milliseconds.
 
+Later I went back and replaced the bottom-up algorithm in part one with DFS for consistency. It even runs in fewer steps, although
+the run time is so short it does not really matter.
+
 ## Day 12: TBD
 
 [Year 2025, day 12][12.0]
