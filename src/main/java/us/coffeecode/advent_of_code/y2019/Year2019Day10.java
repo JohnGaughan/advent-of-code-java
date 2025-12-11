@@ -28,12 +28,11 @@ import java.util.TreeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.math.IntMath;
-
 import us.coffeecode.advent_of_code.annotation.AdventOfCodeSolution;
 import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
+import us.coffeecode.advent_of_code.util.MyIntMath;
 import us.coffeecode.advent_of_code.util.Point2D;
 
 @AdventOfCodeSolution(year = 2019, day = 10)
@@ -127,7 +126,7 @@ public final class Year2019Day10 {
   private Point2D getAngle(final Point2D me, final Point2D you) {
     final int dx = you.getX() - me.getX();
     final int dy = you.getY() - me.getY();
-    final int gcd = IntMath.gcd(Math.abs(dx), Math.abs(dy));
+    final int gcd = MyIntMath.gcd(Math.abs(dx), Math.abs(dy));
     return new Point2D(dx / gcd, dy / gcd);
   }
 

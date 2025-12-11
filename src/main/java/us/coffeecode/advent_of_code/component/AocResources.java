@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Maps;
+import us.coffeecode.advent_of_code.util.MyCollections;
 
 /**
  * Class responsible for loading files from the resource directory. This class uses caching and lazy loading.
@@ -71,10 +71,10 @@ public class AocResources {
                                              .toFile())) {
       Properties p = new Properties();
       p.load(in);
-      return Maps.fromProperties(p)
-                 .entrySet()
-                 .stream()
-                 .collect(Collectors.toMap(e -> km.apply(e.getKey()), e -> vm.apply(e.getValue())));
+      return MyCollections.mapFromProperties(p)
+                          .entrySet()
+                          .stream()
+                          .collect(Collectors.toMap(e -> km.apply(e.getKey()), e -> vm.apply(e.getValue())));
     }
     catch (RuntimeException ex) {
       throw ex;

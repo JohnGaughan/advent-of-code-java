@@ -17,7 +17,6 @@
 package us.coffeecode.advent_of_code.y2015;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -28,12 +27,11 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Collections2;
-
 import us.coffeecode.advent_of_code.annotation.AdventOfCodeSolution;
 import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
+import us.coffeecode.advent_of_code.util.MyCollections;
 
 @AdventOfCodeSolution(year = 2015, day = 9)
 @Component
@@ -62,9 +60,8 @@ public final class Year2015Day09 {
 
   /** Calculate all unique distances. */
   private Set<Long> calculateDistances(final Map<String, Map<String, Long>> distances) {
-    final Collection<List<String>> routes = Collections2.permutations(new ArrayList<>(distances.keySet()));
     final Set<Long> results = new HashSet<>();
-    for (final List<String> route : routes) {
+    for (final List<String> route : MyCollections.permutations(new ArrayList<>(distances.keySet()))) {
       results.add(calculateDistance(route, distances));
     }
     return results;

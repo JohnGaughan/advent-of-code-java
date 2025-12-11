@@ -19,12 +19,11 @@ package us.coffeecode.advent_of_code.y2016;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.primitives.Booleans;
-
 import us.coffeecode.advent_of_code.annotation.AdventOfCodeSolution;
 import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
+import us.coffeecode.advent_of_code.util.MyCollections;
 
 @AdventOfCodeSolution(year = 2016, day = 18)
 @Component
@@ -57,10 +56,10 @@ public final class Year2016Day18 {
 
   private long count(final boolean[] array) {
     // Safe tiles are false, traps are true. Count safe tiles.
-    return Booleans.asList(array)
-                   .stream()
-                   .filter(b -> !b.booleanValue())
-                   .count();
+    return MyCollections.asList(array)
+                        .stream()
+                        .filter(b -> !b.booleanValue())
+                        .count();
   }
 
   private boolean[] translate(final boolean[] input) {

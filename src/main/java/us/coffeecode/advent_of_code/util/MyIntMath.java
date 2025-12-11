@@ -19,8 +19,6 @@ package us.coffeecode.advent_of_code.util;
 import java.util.Arrays;
 import java.util.Collection;
 
-import com.google.common.math.IntMath;
-
 /**
  * Utility class that contains reused math functions that do not exist in core Java or in any of the libraries used by
  * this project.
@@ -50,6 +48,58 @@ public final class MyIntMath {
   }
 
   /**
+   * Calculate the greatest common divisor of two non-negative integers using the binary GCD algorithm. This requires
+   * non-negative because negative numbers can cause problems and generally aren't needed by AOC anyway.
+   *
+   * @param a first integer
+   * @param b second integer
+   * @return the GCD of the two integers.
+   */
+  public static int gcd(final int a, final int b) {
+    if (a < 0) {
+      throw new IllegalArgumentException("a < 0: " + a);
+    }
+    if (b < 0) {
+      throw new IllegalArgumentException("b < 0: " + b);
+    }
+    if (a == 0) {
+      return b;
+    }
+    if (b == 0) {
+      return a;
+    }
+
+    final int i = Integer.numberOfTrailingZeros(a);
+    final int j = Integer.numberOfTrailingZeros(b);
+    final int k = Math.min(i, j);
+
+    int _a = (a >> i);
+    int _b = (b >> j);
+
+    while (true) {
+      if ((_a & 1) != 1) {
+        throw new IllegalStateException();
+      }
+      if ((_b & 1) != 1) {
+        throw new IllegalStateException();
+      }
+      if (_a > _b) {
+        final int temp = _a;
+        _a = _b;
+        _b = temp;
+      }
+
+      _b -= _a;
+
+      if (_b == 0) {
+        return _a << k;
+      }
+
+      _b >>= Integer.numberOfTrailingZeros(_b);
+    }
+  }
+
+  /**
    * Computes the least common multiple of two numbers. These numbers must not be negative, and at most one may be zero.
    *
    * @param a the first number.
@@ -58,7 +108,7 @@ public final class MyIntMath {
    */
   public static int lcm(final int a, final int b) {
     // Division first to avoid overflow. Guaranteed not to lose precision because GCD.
-    return a / IntMath.gcd(a, b) * b;
+    return a / gcd(a, b) * b;
   }
 
   /**
@@ -86,4 +136,21 @@ public final class MyIntMath {
                  .reduce(1, MyIntMath::lcm);
   }
 
+  /**
+   * Calculate the factorial of the provided integer.
+   *
+   * @param value the input to the factorial.
+   * @return the calculated factorial.
+   * @throws ArithmeticException if the value is out of range.
+   */
+  public static int factorial(final int value) {
+    if ((value > 12) || (value < 0)) {
+      throw new ArithmeticException("Integer out of range");
+    }
+    int result = 1;
+    for (int i = 1; i <= value; ++i) {
+      result *= i;
+    }
+    return result;
+  }
 }

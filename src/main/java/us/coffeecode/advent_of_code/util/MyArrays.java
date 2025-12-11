@@ -39,6 +39,22 @@ public final class MyArrays {
   }
 
   /**
+   * Reverse elements in the provided array in-place, modifying the array parameter. Only reverse elements between the
+   * two bounds, where the start element is inclusive and the end element is exclusive.
+   *
+   * @param array the array to reverse.
+   * @param start index of the first element to swap.
+   * @param end one past the final element's index.
+   */
+  public static void reverseInPlace(final int[] array, final int start, final int end) {
+    final int[] reversed = new int[end - start];
+    for (int i = 0; i < reversed.length; ++i) {
+      reversed[reversed.length - i - 1] = array[start + i];
+    }
+    System.arraycopy(reversed, 0, array, start, reversed.length);
+  }
+
+  /**
    * Make a deep copy of the provided two-dimensional array.
    *
    * @param array the 2D array to copy.

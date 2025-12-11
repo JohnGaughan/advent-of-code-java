@@ -26,12 +26,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Sets;
-
 import us.coffeecode.advent_of_code.annotation.AdventOfCodeSolution;
 import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
+import us.coffeecode.advent_of_code.util.MyCollections;
 
 @AdventOfCodeSolution(year = 2022, day = 3)
 @Component
@@ -70,7 +69,7 @@ public class Year2022Day03 {
   }
 
   private Set<Integer> intersection(final String s) {
-    return Sets.intersection(toSet(s.substring(0, s.length() >> 1)), toSet(s.substring(s.length() >> 1, s.length())));
+    return MyCollections.intersection(toSet(s.substring(0, s.length() >> 1)), toSet(s.substring(s.length() >> 1, s.length())));
   }
 
   private long priority(final Integer i) {
@@ -87,9 +86,9 @@ public class Year2022Day03 {
   private record Group(Set<Integer> elf1, Set<Integer> elf2, Set<Integer> elf3) {
 
     Integer intersection() {
-      return Sets.intersection(elf1, Sets.intersection(elf2, elf3))
-                 .iterator()
-                 .next();
+      return MyCollections.intersection(elf1, MyCollections.intersection(elf2, elf3))
+                          .iterator()
+                          .next();
     }
   }
 

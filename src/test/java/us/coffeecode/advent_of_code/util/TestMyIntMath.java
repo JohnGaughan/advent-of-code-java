@@ -38,6 +38,43 @@ extends AbstractTests {
     Assertions.assertEquals(1, MyIntMath.ONE.intValue());
   }
 
+  // gcd(int, int)
+
+  @Test
+  public void testGCD_zero_1() {
+    Assertions.assertEquals(3, MyIntMath.gcd(0, 3));
+  }
+
+  @Test
+  public void testGCD_zero_2() {
+    Assertions.assertEquals(5, MyIntMath.gcd(5, 0));
+  }
+
+  @Test
+  public void testGCD_zero_3() {
+    Assertions.assertEquals(0, MyIntMath.gcd(0, 0));
+  }
+
+  @Test
+  public void testGCD_int_1() {
+    Assertions.assertEquals(7, MyIntMath.gcd(14, 21));
+  }
+
+  @Test
+  public void testGCD_int_2() {
+    Assertions.assertEquals(2, MyIntMath.gcd(2, 2));
+  }
+
+  @Test
+  public void testGCD_int_3() {
+    Assertions.assertEquals(2, MyIntMath.gcd(4, 2));
+  }
+
+  @Test
+  public void testGCD_int_4() {
+    Assertions.assertEquals(2, MyIntMath.gcd(2, 4));
+  }
+
   // lcm(int, int)
 
   @Test

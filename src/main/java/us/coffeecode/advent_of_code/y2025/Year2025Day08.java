@@ -27,13 +27,12 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Sets;
-
 import us.coffeecode.advent_of_code.annotation.AdventOfCodeSolution;
 import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.MyArrays;
+import us.coffeecode.advent_of_code.util.MyCollections;
 import us.coffeecode.advent_of_code.util.Point3D;
 
 @AdventOfCodeSolution(year = 2025, day = 8)
@@ -76,7 +75,7 @@ public class Year2025Day08 {
       int i = 0;
       for (final Point3D vertex : vertices) {
         final Integer id = Integer.valueOf(i);
-        graphs.put(id, Sets.newHashSet(vertex));
+        graphs.put(id, MyCollections.mutableSetOf(vertex));
         graphIds.put(vertex, id);
         ++i;
       }

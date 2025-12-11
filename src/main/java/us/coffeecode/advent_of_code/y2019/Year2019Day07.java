@@ -24,12 +24,11 @@ import java.util.stream.IntStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Collections2;
-
 import us.coffeecode.advent_of_code.annotation.AdventOfCodeSolution;
 import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
 import us.coffeecode.advent_of_code.util.ArrayInfinitelyIterable;
+import us.coffeecode.advent_of_code.util.MyCollections;
 
 @AdventOfCodeSolution(year = 2019, day = 7)
 @Component
@@ -42,9 +41,9 @@ public final class Year2019Day07 {
   public long calculatePart1(final PuzzleContext pc) {
     final IntCode original = icf.make(pc, BLOCK_UNTIL_INPUT_AVAILABLE);
     long answer = 0;
-    for (final List<Integer> phaseSettings : Collections2.permutations(IntStream.range(0, 5)
-                                                                                .mapToObj(Integer::valueOf)
-                                                                                .toList())) {
+    for (final List<Integer> phaseSettings : MyCollections.permutations(IntStream.range(0, 5)
+                                                                                 .mapToObj(Integer::valueOf)
+                                                                                 .toList())) {
       long signal = 0;
       for (Integer phaseSetting : phaseSettings) {
         final IntCode state = icf.make(original);
@@ -63,9 +62,9 @@ public final class Year2019Day07 {
   public long calculatePart2(final PuzzleContext pc) {
     final IntCode original = icf.make(pc, BLOCK_UNTIL_INPUT_AVAILABLE);
     long answer = 0;
-    for (final List<Integer> phaseSettings : Collections2.permutations(IntStream.range(5, 10)
-                                                                                .mapToObj(Integer::valueOf)
-                                                                                .toList())) {
+    for (final List<Integer> phaseSettings : MyCollections.permutations(IntStream.range(5, 10)
+                                                                                 .mapToObj(Integer::valueOf)
+                                                                                 .toList())) {
 
       // Create distinct amps and wire them together.
       // Output feeds into the next amp's output. We need to see amp 5's output though.

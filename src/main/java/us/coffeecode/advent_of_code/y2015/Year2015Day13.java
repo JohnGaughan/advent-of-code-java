@@ -24,12 +24,11 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Collections2;
-
 import us.coffeecode.advent_of_code.annotation.AdventOfCodeSolution;
 import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
+import us.coffeecode.advent_of_code.util.MyCollections;
 
 @AdventOfCodeSolution(year = 2015, day = 13)
 @Component
@@ -51,7 +50,7 @@ public class Year2015Day13 {
   /** Get the maximum happiness value. */
   private long getMaxHappiness(final Map<String, Map<String, Integer>> rules) {
     long highest = 0;
-    for (final List<String> ordering : Collections2.permutations(rules.keySet())) {
+    for (final List<String> ordering : MyCollections.permutations(rules.keySet())) {
       highest = Math.max(highest, happiness(rules, ordering));
     }
     return highest;

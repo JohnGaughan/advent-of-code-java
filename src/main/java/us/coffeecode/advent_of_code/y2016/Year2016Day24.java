@@ -26,12 +26,11 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Collections2;
-
 import us.coffeecode.advent_of_code.annotation.AdventOfCodeSolution;
 import us.coffeecode.advent_of_code.annotation.Solver;
 import us.coffeecode.advent_of_code.component.InputLoader;
 import us.coffeecode.advent_of_code.component.PuzzleContext;
+import us.coffeecode.advent_of_code.util.MyCollections;
 import us.coffeecode.advent_of_code.util.Point2D;
 
 @AdventOfCodeSolution(year = 2016, day = 24)
@@ -63,7 +62,7 @@ public final class Year2016Day24 {
       pointIds.add(Integer.valueOf(i));
     }
     long lowest = Long.MAX_VALUE;
-    for (final List<Integer> route : Collections2.permutations(pointIds)) {
+    for (final List<Integer> route : MyCollections.permutations(pointIds)) {
       int previous = 0;
       int distance = 0;
       for (Integer node : route) {
