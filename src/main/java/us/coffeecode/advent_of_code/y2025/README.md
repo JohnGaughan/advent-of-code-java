@@ -283,7 +283,7 @@ other languages that have either weak or flexible type systems combined with som
 I managed to figure this out and attempted to document my code a bit better than what I had to deal with so hopefully this helps
 someone else who tries to do the same thing.
 
-## Day 11: TBD
+## Day 11: Reactor
 
 [Year 2025, day 11][11.0]
 
