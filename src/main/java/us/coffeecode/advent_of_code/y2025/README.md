@@ -319,11 +319,22 @@ Turns out this was also super fast, completing in several  milliseconds.
 Later I went back and replaced the bottom-up algorithm in part one with DFS for consistency. It even runs in fewer steps, although
 the run time is so short it does not really matter.
 
-## Day 12: TBD
+## Day 12: Christmas Tree Farm
 
 [Year 2025, day 12][12.0]
 
+Traditionally, the final day in Advent of Code is easy compared to previous days. 2025 is no exception.
 
+I will not spoil it, other than to say there is a really easy solution _however_ there is a single input for which it does not
+work: the third region in the example input. My puzzle solution simply filters that input out during parsing then uses the easy
+solution.
+
+If you do not already know the trick here then I recommend throwing out the traditional advice against premature optimization.
+Optimize early before implementing the difficult logic then test your answer. If nothing else, you can validate your optimization
+to see if it is a decent upper bound.
+
+When I used that approach I found the answer. I checked the daily reddit thread and apparently the same thing happened to everyone
+else.
 
 [1.0]: https://adventofcode.com/2025/day/1
 [2.0]: https://adventofcode.com/2025/day/2
